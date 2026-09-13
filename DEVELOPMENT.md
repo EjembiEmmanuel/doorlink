@@ -283,6 +283,72 @@ instead of throwing — failing to "signed out" rather than crashing.
 
 ---
 
+## Session 4 — Module 5, admin catalogue CRUD (partial, by design)
+
+Scoped this to a real, fully-verified vertical slice rather than thin CRUD
+across every catalogue entity: **Manufacturers and Categories** are done.
+Models, Documents, and Compatibility admin screens are not — the `/admin`
+dashboard says so plainly (`Admin screen not built yet.` on those three
+stat tiles) rather than linking to something that doesn't exist.
+
+**Every mutation re-checks permission itself.** `/admin`'s layout gates on
+`can(session.role, 'catalogue:write')` and redirects, but Server Actions
+are directly callable regardless of which page rendered them — so
+`createManufacturerAction`, `updateManufacturerAction`,
+`deleteManufacturerAction`, and their category equivalents each call
+`requirePermission()` again before touching the database. The layout gate
+is for navigation; the actions are the actual boundary.
+
+**Delete is blocked when a row is in use, with a real reason shown.**
+Deleting a manufacturer that still has models, or a category that still
+has models or subcategories, catches Prisma's `P2003` (foreign key
+violation) and returns a specific error inline — "Cannot delete: this
+manufacturer still has product lines or models linked to it" — rather than
+either crashing or silently failing.
+
+**A real bug this surfaced, not just a design choice:** the first pass at
+verifying category deletion found that deleting a parent category with a
+child did *not* get blocked — it succeeded silently and orphaned the child
+into a top-level category. Root cause: `parentId` is an optional field, and
+Prisma's default `onDelete` for an *optional* relation is `SetNull`, unlike
+the `Restrict` default for the required relations (`Model.categoryId`, for
+instance) everywhere else in the schema. Fixed by adding an explicit
+`onDelete: Restrict` to `Category.parent` in `schema.prisma`, then
+`prisma db push` to apply it — confirmed the new constraint's delete action
+directly with `psql` (`SELECT confdeltype FROM pg_constraint ...` now
+reads `r`, not the `SetNull` default), not just by re-testing the UI.
+
+**Registration's earlier catalogue safeguard (Session 3) still holds
+here too** — nothing in these admin screens lets a `MANUFACTURER`-role
+user's own organization write directly into the `Manufacturer` catalogue
+table; that link stays admin-only and manual, on purpose.
+
+### What was verified, in a real browser and against the database directly
+
+- RBAC gating on `/admin`: signed out → redirected to `/sign-in`; signed in
+  as `customer@demo.doorlink` → redirected to `/`, no "Admin" link shown in
+  the header; signed in as `admin@demo.doorlink` → "Admin" link appears,
+  dashboard loads with counts matching `psql` directly (3 manufacturers, 4
+  categories, 5 models, 5 documents, 2 compatibility links).
+- Manufacturer CRUD: created one, confirmed it in the list; edited its name,
+  confirmed the change; attempted to delete Northgate (has product lines
+  and models) and got the in-use error with the row count unchanged;
+  deleted the unused test manufacturer and confirmed it was gone.
+- Category CRUD, including the bug above: created a parent and a child
+  with the parent selected via the dropdown, confirmed the child's row
+  shows the parent's name; attempted to delete the parent while the child
+  still pointed at it (this is what caught the `SetNull` bug); after the
+  schema fix, re-ran the same sequence and got the correct in-use error
+  instead, then deleted the child and confirmed the parent could then be
+  deleted successfully; separately confirmed deleting Smart Locks (has a
+  seeded model) is blocked the same way.
+- Test debris cleanup: the crashed first attempt at the category test left
+  two orphaned rows in the database from before the selector bug was
+  fixed — found and removed directly with `psql`, then confirmed row
+  counts were back to the original 3/4/5 baseline.
+
+---
+
 ## Status by module
 
 | # | Module | Status |
@@ -292,7 +358,7 @@ instead of throwing — failing to "signed out" rather than crashing.
 | 2 | Public website | ~30% — 6 of ~18 pages |
 | 3 | Auth and roles | RBAC matrix, guards, and dev-mode sign-in/register screens done and verified; Supabase wiring still outstanding |
 | 4 | Database architecture | Done; `db push` + seed verified against a local Postgres this session |
-| 5 | Product database | Schema done; admin CRUD outstanding |
+| 5 | Product database | Manufacturer and Category admin CRUD done and verified; Model/Document/Compatibility admin screens still outstanding |
 | 6 | Product finder | Cascade, model profile page (`/model/[id]`), and honest no-DB handling all done and verified in a browser (see Session 2) |
 | 7 | Technical library | Schema done; documents listed on the model page, download UI still outstanding (needs storage) |
 | 8 | Compatibility engine | Schema, seed, and bidirectional query done via the model page; admin UI to create/edit links outstanding |
@@ -314,9 +380,14 @@ instead of throwing — failing to "signed out" rather than crashing.
    Done and verified (Session 2) — see the follow-up under Module 6.
 5. ~~Sign-in and registration screens against the existing session interface.~~
    Done and verified (Session 3) — dev-mode only, refuses in production.
-6. Admin catalogue CRUD, then the document upload workflow (Module 29).
-7. Marketplace listing and product pages.
-8. Wire in a real auth provider (Supabase) to replace `src/lib/dev-session.ts`
+6. ~~Admin catalogue CRUD.~~ Manufacturers and Categories done and verified
+   (Session 4). Still outstanding: admin CRUD for Models, Documents, and
+   Compatibility links — the higher-value, more complex ones, deliberately
+   left for a focused pass rather than rushed alongside this one.
+7. The document upload workflow (Module 29) — blocked on Supabase storage
+   being connected; see "Still needs you, not code" below.
+8. Marketplace listing and product pages.
+9. Wire in a real auth provider (Supabase) to replace `src/lib/dev-session.ts`
    — see "Still needs you, not code" below.
 
 ## Still needs you, not code

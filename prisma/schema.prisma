@@ -260,7 +260,11 @@ model Category {
   id        String     @id @default(cuid())
   name      String     @unique
   slug      String     @unique
-  parent    Category?  @relation("CategoryTree", fields: [parentId], references: [id])
+  // Explicit Restrict — Prisma's default for an optional relation is
+  // SetNull, which would silently orphan subcategories into top-level ones
+  // on delete instead of blocking it like every other in-use catalogue
+  // relation does.
+  parent    Category?  @relation("CategoryTree", fields: [parentId], references: [id], onDelete: Restrict)
   parentId  String?
   children  Category[] @relation("CategoryTree")
   createdAt DateTime   @default(now())

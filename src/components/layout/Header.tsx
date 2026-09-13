@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { getSession } from '@/lib/auth'
+import { can } from '@/lib/rbac'
 import { devSignOutAction } from '@/lib/dev-session'
 import { MobileNavToggle } from './MobileNavToggle'
 
@@ -10,6 +11,8 @@ const NAV_LINKS = [
 
 export async function Header() {
   const session = await getSession()
+  const navLinks =
+    session && can(session.role, 'catalogue:write') ? [...NAV_LINKS, { href: '/admin', label: 'Admin' }] : NAV_LINKS
 
   return (
     <header className="relative border-b border-line bg-paper">
@@ -19,7 +22,7 @@ export async function Header() {
         </Link>
 
         <nav className="hidden items-center gap-6 md:flex">
-          {NAV_LINKS.map((link) => (
+          {navLinks.map((link) => (
             <Link key={link.href} href={link.href} className="text-sm font-medium text-graphite hover:text-signal">
               {link.label}
             </Link>
@@ -44,7 +47,7 @@ export async function Header() {
         </nav>
 
         <MobileNavToggle
-          links={NAV_LINKS}
+          links={navLinks}
           session={session ? { name: session.name } : null}
           signOutAction={devSignOutAction}
         />
