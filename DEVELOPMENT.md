@@ -216,6 +216,73 @@ missing-env-var case from finding 3:
 
 ---
 
+## Session 3 — Module 3, sign-in and registration
+
+Built the two screens Module 3 was missing, against the existing
+`getSession()` interface rather than adding a new one.
+
+**Dev-only mechanism, kept out of the provider interface.** `src/lib/
+dev-session.ts` (`'use server'`) holds three Server Actions —
+`devSignInAction`, `devRegisterAction`, `devSignOutAction` — that read and
+write the same `doorlink-dev-session` cookie `DevCookieSessionProvider`
+already read (constant factored out to `src/lib/session-cookie.ts` so both
+sides import it instead of duplicating the string). These actions are
+deliberately *not* part of the `SessionProvider` interface in `auth.ts`:
+when Supabase gets wired in, this whole file is replaced, not extended.
+Both actions refuse outright in production, same as the provider already
+did — checked with `process.env.NODE_ENV !== 'production'` in the page
+components too, so production renders `<NotConnected feature="Sign-in" />`
+instead of a form that can't do anything.
+
+**Registration doesn't touch the catalogue.** Registering as a supplier
+creates an `Organization` + `SupplierProfile` (`verified: false`, same as
+the seed). Registering as a manufacturer creates only an `Organization` —
+deliberately *not* a `Manufacturer` catalogue row. Linking a manufacturer's
+account to a verified `Manufacturer` entity is left for an admin to do
+(Module 5, still outstanding); letting a signup form create that link
+itself would let anyone inject an unverified catalogue entry, which is
+exactly what the `DataSource` provenance system exists to prevent.
+
+**A robustness fix this forced:** `Header` now calls `getSession()` on
+every single page (it needs to know whether to show "Sign in" or a name +
+sign-out button), so a database error inside `getSession()` would have
+taken down every page on the site, not just the finder. Tightened
+`DevCookieSessionProvider.getSession()` to catch a database-unreachable
+error (via the same `isDatabaseUnreachable` helper) and return `null`
+instead of throwing — failing to "signed out" rather than crashing.
+
+### What was verified, in a real browser and against the database directly
+
+- Signed in via a demo-account quick-select button on `/sign-in`; header
+  updated from "Sign in" to the account's name + "Sign out". Clicked
+  "Sign out"; header reverted. (The first pass of this test used
+  `page.waitForURL()` after already being on that URL, which no-ops — the
+  server log showed the sign-out `POST` correctly getting a `303`, so the
+  first "sign-out didn't work" reading was a test bug, not an app one;
+  re-tested waiting on the actual header content and confirmed it works.)
+- Signing in with an email that doesn't exist shows "No account found with
+  that email." inline and stays on `/sign-in` (`POST /sign-in` returned
+  `200`, not a redirect) — confirmed via the rendered DOM, since Next's own
+  built-in route announcer also uses `role="alert"`, which the first
+  Playwright selector matched ambiguously before this was narrowed down.
+- Registered one account of each of the four self-registrable roles
+  (`CUSTOMER`, `TECHNICIAN`, `SUPPLIER`, `MANUFACTURER`) and checked the
+  result directly with `psql`, not just the UI: the `TechnicianProfile` row
+  exists for the technician; `Organization` + `OrganizationMember(OWNER)`
+  exist for both the supplier and manufacturer; `SupplierProfile` exists
+  only for the supplier's organization; and — the specific thing worth
+  checking — the `Manufacturer` catalogue table has zero rows matching the
+  test manufacturer's name after registering it.
+- Registering a second account with an email already in use stays on
+  `/register` instead of creating a duplicate `User` row.
+- Signed in, then stopped Postgres mid-session with the session cookie
+  still set: `GET /` and `GET /find` both still returned `200` (header
+  fell back to "Sign in" rather than the page crashing), and
+  `/api/finder` still returned its `503` from the Session 2 fix. No
+  unhandled exceptions in the server log. Restarted Postgres afterward.
+
+---
+
 ## Status by module
 
 | # | Module | Status |
@@ -223,7 +290,7 @@ missing-env-var case from finding 3:
 | 0 | Audit and architecture | Done |
 | 1 | Design system | Core primitives done; modal, drawer, tabs, toast outstanding |
 | 2 | Public website | ~30% — 6 of ~18 pages |
-| 3 | Auth and roles | RBAC matrix and guards done; sign-in/up screens and Supabase wiring outstanding |
+| 3 | Auth and roles | RBAC matrix, guards, and dev-mode sign-in/register screens done and verified; Supabase wiring still outstanding |
 | 4 | Database architecture | Done; `db push` + seed verified against a local Postgres this session |
 | 5 | Product database | Schema done; admin CRUD outstanding |
 | 6 | Product finder | Cascade, model profile page (`/model/[id]`), and honest no-DB handling all done and verified in a browser (see Session 2) |
@@ -245,9 +312,12 @@ missing-env-var case from finding 3:
 3. ~~Model profile page `/model/[id]`.~~ Done and verified (Session 2).
 4. ~~Make `/api/finder` fail honestly when the database is unreachable.~~
    Done and verified (Session 2) — see the follow-up under Module 6.
-5. Sign-in and registration screens against the existing session interface.
+5. ~~Sign-in and registration screens against the existing session interface.~~
+   Done and verified (Session 3) — dev-mode only, refuses in production.
 6. Admin catalogue CRUD, then the document upload workflow (Module 29).
 7. Marketplace listing and product pages.
+8. Wire in a real auth provider (Supabase) to replace `src/lib/dev-session.ts`
+   — see "Still needs you, not code" below.
 
 ## Still needs you, not code
 

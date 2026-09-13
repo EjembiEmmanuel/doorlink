@@ -1,19 +1,18 @@
-'use client'
-
 import Link from 'next/link'
-import { useState } from 'react'
-import { cn } from '@/lib/utils'
+import { getSession } from '@/lib/auth'
+import { devSignOutAction } from '@/lib/dev-session'
+import { MobileNavToggle } from './MobileNavToggle'
 
 const NAV_LINKS = [
   { href: '/find', label: 'Find your part' },
   { href: '/data-sources', label: 'Data sources' },
 ]
 
-export function Header() {
-  const [open, setOpen] = useState(false)
+export async function Header() {
+  const session = await getSession()
 
   return (
-    <header className="border-b border-line bg-paper">
+    <header className="relative border-b border-line bg-paper">
       <div className="mx-auto flex h-16 max-w-shell items-center justify-between px-4">
         <Link href="/" className="text-lg font-semibold tracking-tight text-graphite">
           DoorLink
@@ -25,43 +24,31 @@ export function Header() {
               {link.label}
             </Link>
           ))}
+          {session ? (
+            <div className="flex items-center gap-3 border-l border-line pl-6">
+              <span className="text-sm text-zinc-deep">{session.name}</span>
+              <form action={devSignOutAction}>
+                <button type="submit" className="text-sm font-medium text-signal hover:text-signal-hover">
+                  Sign out
+                </button>
+              </form>
+            </div>
+          ) : (
+            <Link
+              href="/sign-in"
+              className="border-l border-line pl-6 text-sm font-medium text-signal hover:text-signal-hover"
+            >
+              Sign in
+            </Link>
+          )}
         </nav>
 
-        <button
-          type="button"
-          className="flex h-11 w-11 items-center justify-center rounded md:hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal"
-          aria-expanded={open}
-          aria-controls="mobile-nav"
-          onClick={() => setOpen((value) => !value)}
-        >
-          <span className="sr-only">{open ? 'Close menu' : 'Open menu'}</span>
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-            {open ? (
-              <path d="M4 4l12 12M16 4L4 16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-            ) : (
-              <path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-            )}
-          </svg>
-        </button>
+        <MobileNavToggle
+          links={NAV_LINKS}
+          session={session ? { name: session.name } : null}
+          signOutAction={devSignOutAction}
+        />
       </div>
-
-      {open && (
-        <nav id="mobile-nav" className="border-t border-line md:hidden">
-          <ul className="flex flex-col">
-            {NAV_LINKS.map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  className={cn('block px-4 py-3 text-sm font-medium text-graphite hover:bg-rail')}
-                  onClick={() => setOpen(false)}
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
-      )}
     </header>
   )
 }
