@@ -94,6 +94,78 @@ row is `DataSource.DEMO` and renders a caution badge.
 
 ---
 
+## Session 2
+
+**Correction to Session 1's account of itself.** Session 1's own audit said the
+workspace held only the brief and that the code below "is written but not
+compiled, not type-checked and not executed." That was optimistic in one
+respect: `prisma/schema.prisma` and the entire `src/` tree it describes were
+never actually committed. Only the config and meta files reached the repo
+(`package.json`, `next.config.mjs`, `tailwind.config.ts`, `DEVELOPMENT.md`,
+`README.md`, `.env.example`, `.gitignore`, `tsconfig.json`, `postcss.config.mjs`).
+`npx prisma generate` failed outright — there was no schema file to find — and
+`npm run typecheck` "passed" only because there was no source for `tsc` to check.
+
+Everything under `prisma/` and `src/` on this branch as of this session is a
+**good-faith reconstruction from DEVELOPMENT.md and README.md's own
+descriptions**, written this session — not a recovery of whatever the original
+Session 1 code actually contained. The architecture decisions, module scope,
+and status table above were treated as the spec. Model names, field names,
+route shapes, and component boundaries in the current code are this session's
+implementation choices, not the original ones. If the real Session 1 files
+turn up later, expect real differences, not just cosmetic ones.
+
+### What this session actually verified, and how
+
+1. **Postgres + schema + seed.** Provisioned a local PostgreSQL 16 instance,
+   pointed `DATABASE_URL`/`DIRECT_URL` at it, and ran `npx prisma db push`.
+   All 30 models created their tables cleanly with no migration errors. Ran
+   `npm run db:seed`; it completed and produced the expected row counts (5
+   users, 3 manufacturers, 4 categories, 5 models, 9 specs, 5 documents, 2
+   compatibility rows, 1 listing), checked directly with `psql`. Nothing
+   broke in this step.
+2. **Finder cascade, in an actual browser.** Ran `npm run dev` and drove the
+   five-step cascade with a real Chromium instance (Playwright), not just
+   `curl`: category → manufacturer → productLine → model → confirm. Confirmed
+   at each step that only options with a downstream match are offered — e.g.
+   choosing "Garage Door Openers" offers only Northgate as a manufacturer;
+   choosing "Smart Locks" offers only Harbrook. Also exercised the edge case
+   where a manufacturer has models in a category but no product line for it
+   (Northgate's remote): the product-line step correctly shows an empty state
+   with a working "skip" path through to the model step instead of a dead
+   end. Breadcrumb back-navigation correctly clears everything selected after
+   the target step. One unrelated issue surfaced in the browser console: a
+   404 for `/favicon.ico` — there is no favicon in the project. Cosmetic, not
+   fixed yet.
+3. **No-database behavior — a real gap, not fixed.** Unset `DATABASE_URL`/
+   `DIRECT_URL` and restarted the dev server. The site does **not** crash —
+   the shell, header, footer, and every page other than the finder's live
+   data still render — but this does not match what the README promises
+   ("the finder shows an honest 'catalogue not connected' state rather than
+   fake products"). What actually happens: `/api/finder` throws an uncaught
+   `PrismaClientInitializationError` and returns a bare 500, and the finder
+   panel falls back to the generic `<ErrorState>` ("Something went wrong /
+   Could not load options. Try again.") — the same message a real transient
+   failure would produce. There is no code today that checks
+   `isConnected('catalogue')` (no such check exists in
+   `src/lib/integrations.ts`) or renders `<NotConnected />` for the finder.
+   This is left as a known, reported gap rather than patched in the same pass
+   that was supposed to be verification, not repair.
+
+### Dependency bumps considered this session
+
+- **`vitest` 2.x → 5.x**: taken. Self-contained — no test files exist yet to
+  migrate, and no other package in this project depends on the vitest 2 API
+  surface. Resolves the one `critical` npm audit advisory.
+- **`next` 15 → 16**: not taken this session. It removes `next lint`, which
+  would require rewriting the `lint` script to call `eslint` directly and
+  adding an ESLint config and dependency that don't exist in this project
+  yet — a larger, unrelated change bundled into what should be a small
+  version bump. Left as a deliberate follow-up rather than done quietly
+  alongside the vitest bump.
+
+---
+
 ## Status by module
 
 | # | Module | Status |
