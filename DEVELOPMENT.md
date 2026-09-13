@@ -184,6 +184,36 @@ Verified in a browser against the seeded data, not just typechecked:
   instead of a 500 — this page does check, unlike `/api/finder` (see the
   no-database finding above, which was left as-is rather than fixed here).
 
+### Follow-up — `/api/finder`'s no-database gap (finding 3, above) is fixed
+
+Added `src/lib/db-errors.ts`: `isDatabaseUnreachable(error)` recognizes
+`Prisma.PrismaClientInitializationError` and the connection-shaped
+`PrismaClientKnownRequestError` codes (P1000–P1017 family — auth failure,
+can't reach server, timeout, TLS error, etc.), as opposed to a bug in a
+query. `/api/finder`'s handler now wraps its database calls in `try/catch`
+and returns `503 { error: 'catalogue_not_connected', message }` when
+`isDatabaseUnreachable` is true, instead of letting the error escape as a
+bare 500. `FinderCascade` checks for a `503` response and renders
+`<NotConnected feature="The product catalogue" />` in place of the
+options list or the confirm panel, instead of the generic `<ErrorState>`
+it used to fall back to. The model page's own catch was tightened to use
+the same helper too, so a real query bug there gets rethrown to Next's
+error handling instead of being silently relabelled "not connected."
+
+Verified two different unreachable-database scenarios, not just the
+missing-env-var case from finding 3:
+
+- **`DATABASE_URL` unset** (finding 3's original case): still 503 /
+  `<NotConnected>`, not the old bare 500.
+- **`DATABASE_URL` set but Postgres stopped** (`service postgresql stop`,
+  a closer match to a real outage than a missing env var): `curl` against
+  `/api/finder?step=category` returned the same 503 payload; a real
+  Chromium browser showed `<NotConnected>` on both the homepage finder and
+  `/model/[id]`. Restarted Postgres and re-ran the full five-step cascade
+  in the browser afterward to confirm the fix doesn't regress the working
+  case — all four categories, correct manufacturer/product-line/model
+  narrowing, and the confirm panel all still work exactly as in finding 2.
+
 ---
 
 ## Status by module
@@ -196,7 +226,7 @@ Verified in a browser against the seeded data, not just typechecked:
 | 3 | Auth and roles | RBAC matrix and guards done; sign-in/up screens and Supabase wiring outstanding |
 | 4 | Database architecture | Done; `db push` + seed verified against a local Postgres this session |
 | 5 | Product database | Schema done; admin CRUD outstanding |
-| 6 | Product finder | Cascade and model profile page (`/model/[id]`) done, verified in a browser; API's no-DB error handling still not honest (see Session 2) |
+| 6 | Product finder | Cascade, model profile page (`/model/[id]`), and honest no-DB handling all done and verified in a browser (see Session 2) |
 | 7 | Technical library | Schema done; documents listed on the model page, download UI still outstanding (needs storage) |
 | 8 | Compatibility engine | Schema, seed, and bidirectional query done via the model page; admin UI to create/edit links outstanding |
 | 9–12 | Customer / technician / supplier / manufacturer portals | Navigation and permissions defined; screens outstanding |
@@ -213,11 +243,8 @@ Verified in a browser against the seeded data, not just typechecked:
 1. ~~`npm install`, `prisma generate`, `npm run typecheck`.~~ Done (Session 1/2).
 2. ~~Provision Postgres, `prisma db push`, `npm run db:seed`.~~ Done and verified (Session 2).
 3. ~~Model profile page `/model/[id]`.~~ Done and verified (Session 2).
-4. Make `/api/finder` fail honestly when the database is unreachable —
-   catch the Prisma error and return a response the client can render as
-   `<NotConnected feature="The product catalogue" />` instead of the
-   generic error state it falls back to today. The model page already does
-   this; the finder API doesn't yet.
+4. ~~Make `/api/finder` fail honestly when the database is unreachable.~~
+   Done and verified (Session 2) — see the follow-up under Module 6.
 5. Sign-in and registration screens against the existing session interface.
 6. Admin catalogue CRUD, then the document upload workflow (Module 29).
 7. Marketplace listing and product pages.

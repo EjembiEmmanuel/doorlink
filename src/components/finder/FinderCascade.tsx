@@ -6,6 +6,7 @@ import type { DataSource } from '@prisma/client'
 import { Skeleton } from '@/components/ui/Skeleton'
 import { ErrorState } from '@/components/ui/ErrorState'
 import { EmptyState } from '@/components/ui/EmptyState'
+import { NotConnected } from '@/components/ui/NotConnected'
 import { SourceBadge } from '@/components/ui/SourceBadge'
 
 type FinderStep = 'category' | 'manufacturer' | 'productLine' | 'model' | 'confirm'
@@ -50,6 +51,7 @@ export function FinderCascade() {
   const [confirmedModel, setConfirmedModel] = useState<ConfirmedModel | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [notConnected, setNotConnected] = useState(false)
 
   useEffect(() => {
     if (step === 'confirm') return
@@ -60,23 +62,28 @@ export function FinderCascade() {
     if (selection.productLineId) params.set('productLineId', selection.productLineId)
 
     let cancelled = false
-    setLoading(true)
-    setError(null)
 
-    fetch(`/api/finder?${params.toString()}`)
-      .then((response) => {
+    async function loadOptions() {
+      setLoading(true)
+      setError(null)
+      setNotConnected(false)
+      try {
+        const response = await fetch(`/api/finder?${params.toString()}`)
+        if (response.status === 503) {
+          if (!cancelled) setNotConnected(true)
+          return
+        }
         if (!response.ok) throw new Error('Could not load options.')
-        return response.json() as Promise<{ options: Option[] }>
-      })
-      .then((data) => {
+        const data = (await response.json()) as { options: Option[] }
         if (!cancelled) setOptions(data.options)
-      })
-      .catch(() => {
+      } catch {
         if (!cancelled) setError('Could not load options. Try again.')
-      })
-      .finally(() => {
+      } finally {
         if (!cancelled) setLoading(false)
-      })
+      }
+    }
+
+    loadOptions()
 
     return () => {
       cancelled = true
@@ -130,8 +137,13 @@ export function FinderCascade() {
   async function loadConfirmation(modelId: string) {
     setLoading(true)
     setError(null)
+    setNotConnected(false)
     try {
       const response = await fetch(`/api/finder?step=confirm&modelId=${modelId}`)
+      if (response.status === 503) {
+        setNotConnected(true)
+        return
+      }
       if (!response.ok) throw new Error('Could not load this model.')
       const data = (await response.json()) as { model: ConfirmedModel }
       setConfirmedModel(data.model)
@@ -174,7 +186,14 @@ export function FinderCascade() {
         ))}
       </nav>
 
-      {step !== 'confirm' && (
+      {notConnected && (
+        <NotConnected
+          feature="The product catalogue"
+          reason="The catalogue database isn't reachable right now, so nothing can be loaded here."
+        />
+      )}
+
+      {!notConnected && step !== 'confirm' && (
         <div>
           {loading && (
             <div className="flex flex-col gap-2">
@@ -221,7 +240,7 @@ export function FinderCascade() {
         </div>
       )}
 
-      {step === 'confirm' && confirmedModel && (
+      {!notConnected && step === 'confirm' && confirmedModel && (
         <div className="flex flex-col gap-3 rounded-md border border-line p-4">
           <div className="flex items-start justify-between gap-4">
             <div>

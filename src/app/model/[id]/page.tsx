@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import type { CompatibilityConfidence, DocumentKind } from '@prisma/client'
 import { prisma } from '@/lib/prisma'
+import { isDatabaseUnreachable } from '@/lib/db-errors'
 import { isConnected } from '@/lib/integrations'
 import { formatMoney } from '@/lib/money'
 import { Badge } from '@/components/ui/Badge'
@@ -80,9 +81,13 @@ export default async function ModelProfilePage({ params }: PageProps) {
   let model: Awaited<ReturnType<typeof getModel>>
   try {
     model = await getModel(id)
-  } catch {
+  } catch (error) {
+    if (!isDatabaseUnreachable(error)) throw error
+
     // The catalogue database itself isn't reachable — an honest "not
-    // connected" state, not a crash and not a fake product page.
+    // connected" state, not a crash and not a fake product page. A real
+    // query bug isn't caught here — it's rethrown to Next.js's own error
+    // handling instead of being disguised as "not connected".
     return (
       <div className="mx-auto max-w-shell px-4 py-12">
         <NotConnected
