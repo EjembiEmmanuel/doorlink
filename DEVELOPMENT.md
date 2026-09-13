@@ -164,6 +164,26 @@ turn up later, expect real differences, not just cosmetic ones.
   version bump. Left as a deliberate follow-up rather than done quietly
   alongside the vitest bump.
 
+### Module 6 (continued) — model profile page
+
+Built `/model/[id]` — specs, documents, compatible parts (both directions of
+the `Compatibility` join, with a confidence badge), and active listings.
+Linked to it from the finder's confirm step ("View full product page").
+Verified in a browser against the seeded data, not just typechecked:
+
+- DR-700's page shows its three specs, its two documents behind a
+  `<NotConnected>` panel (storage isn't configured, so titles are listed but
+  nothing is downloadable), its `REMOTE_PAIR` link to RC-2, and correctly
+  shows no listings (none were seeded for it).
+- RC-2's page shows both of its compatibility links (`CONFIRMED` to DR-700,
+  `LIKELY` to DR-900) and its one seeded listing from Demo Door Supplies.
+- An unknown id renders the real `not-found.tsx` page with a `404` status,
+  not a crash.
+- If the catalogue database itself is unreachable, the page catches the
+  Prisma error and renders `<NotConnected feature="The product catalogue" />`
+  instead of a 500 — this page does check, unlike `/api/finder` (see the
+  no-database finding above, which was left as-is rather than fixed here).
+
 ---
 
 ## Status by module
@@ -174,11 +194,11 @@ turn up later, expect real differences, not just cosmetic ones.
 | 1 | Design system | Core primitives done; modal, drawer, tabs, toast outstanding |
 | 2 | Public website | ~30% — 6 of ~18 pages |
 | 3 | Auth and roles | RBAC matrix and guards done; sign-in/up screens and Supabase wiring outstanding |
-| 4 | Database architecture | Done, unmigrated |
+| 4 | Database architecture | Done; `db push` + seed verified against a local Postgres this session |
 | 5 | Product database | Schema done; admin CRUD outstanding |
-| 6 | Product finder | Cascade done; model profile page outstanding |
-| 7 | Technical library | Schema done; UI outstanding |
-| 8 | Compatibility engine | Schema and seed done; query service and UI outstanding |
+| 6 | Product finder | Cascade and model profile page (`/model/[id]`) done, verified in a browser; API's no-DB error handling still not honest (see Session 2) |
+| 7 | Technical library | Schema done; documents listed on the model page, download UI still outstanding (needs storage) |
+| 8 | Compatibility engine | Schema, seed, and bidirectional query done via the model page; admin UI to create/edit links outstanding |
 | 9–12 | Customer / technician / supplier / manufacturer portals | Navigation and permissions defined; screens outstanding |
 | 13–15 | Marketplace, search, checkout | Schema done; UI outstanding |
 | 16–18 | Leads, support, admin | Schema done; UI outstanding |
@@ -190,13 +210,17 @@ turn up later, expect real differences, not just cosmetic ones.
 
 ## Next actions, in order
 
-1. `npm install`, `prisma generate`, `npm run typecheck` — fix the first-pass errors.
-2. Provision Postgres, `prisma db push`, `npm run db:seed`.
-3. Model profile page `/model/[id]` — specs, documents, compatible parts, listings.
-   This is the page the whole finder points at and the highest-value screen left.
-4. Sign-in and registration screens against the existing session interface.
-5. Admin catalogue CRUD, then the document upload workflow (Module 29).
-6. Marketplace listing and product pages.
+1. ~~`npm install`, `prisma generate`, `npm run typecheck`.~~ Done (Session 1/2).
+2. ~~Provision Postgres, `prisma db push`, `npm run db:seed`.~~ Done and verified (Session 2).
+3. ~~Model profile page `/model/[id]`.~~ Done and verified (Session 2).
+4. Make `/api/finder` fail honestly when the database is unreachable —
+   catch the Prisma error and return a response the client can render as
+   `<NotConnected feature="The product catalogue" />` instead of the
+   generic error state it falls back to today. The model page already does
+   this; the finder API doesn't yet.
+5. Sign-in and registration screens against the existing session interface.
+6. Admin catalogue CRUD, then the document upload workflow (Module 29).
+7. Marketplace listing and product pages.
 
 ## Still needs you, not code
 

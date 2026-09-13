@@ -234,13 +234,21 @@ export function FinderCascade() {
             <SourceBadge source={confirmedModel.dataSource} />
           </div>
           {confirmedModel.summary && <p className="text-sm text-graphite-soft">{confirmedModel.summary}</p>}
-          <button
-            type="button"
-            onClick={() => handleBreadcrumbClick('category')}
-            className="self-start text-sm font-medium text-signal hover:text-signal-hover"
-          >
-            Not the right one? Start over
-          </button>
+          <div className="flex items-center gap-4">
+            <Link
+              href={`/model/${confirmedModel.id}`}
+              className="inline-flex h-11 items-center justify-center rounded bg-signal px-5 text-sm font-medium text-paper hover:bg-signal-hover"
+            >
+              View full product page
+            </Link>
+            <button
+              type="button"
+              onClick={() => handleBreadcrumbClick('category')}
+              className="text-sm font-medium text-signal hover:text-signal-hover"
+            >
+              Not the right one? Start over
+            </button>
+          </div>
         </div>
       )}
 
