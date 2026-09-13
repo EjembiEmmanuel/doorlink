@@ -378,6 +378,34 @@ and got the same in-use error pattern as manufacturers/categories.
 Model count was back at the 5-row baseline afterward, confirming no
 test debris was left behind this time.
 
+### Module 8 (continued) — Compatibility link admin CRUD
+
+Added `/admin/compatibility`: list, create, edit, delete. Unlike
+manufacturers, categories, and models, this is a leaf table — nothing
+references a `Compatibility` row, so delete needed no in-use check at
+all; the action comment says so explicitly rather than leaving the
+absence of that check looking like an oversight. Two validations that
+do matter here: a model can't be linked to itself (`fromModelId !==
+toModelId`, checked with a Zod `.refine()`), and the same
+`(fromModelId, toModelId, kind)` triple can't be created twice, since
+that's the schema's own unique constraint — checked explicitly first so
+the error names the actual problem instead of surfacing a raw
+constraint-violation message.
+
+Verified in a real browser and against the database: created a
+cross-manufacturer link (Veltrix's RS-40 → Harbrook's SL-200, kind
+Accessory) and confirmed it rendered correctly in the list; attempting
+the identical triple again was rejected (confirmed via the server log's
+`200` non-redirect response, same verification style as the Model
+duplicate-code case); attempting a self-link (same model both sides)
+was rejected the same way; edited the link's confidence from Likely to
+Confirmed and confirmed the change; deleted it and confirmed removal.
+Row count was back at the 2-link baseline afterward.
+
+That's four of the five catalogue entities with working admin CRUD —
+Documents is the one left, and it stays blocked on Supabase storage
+being connected (see "Still needs you, not code").
+
 ---
 
 ## Status by module
@@ -392,7 +420,7 @@ test debris was left behind this time.
 | 5 | Product database | Manufacturer, Category, and Model admin CRUD done and verified; Document/Compatibility admin screens still outstanding |
 | 6 | Product finder | Cascade, model profile page (`/model/[id]`), and honest no-DB handling all done and verified in a browser (see Session 2) |
 | 7 | Technical library | Schema done; documents listed on the model page, download UI still outstanding (needs storage) |
-| 8 | Compatibility engine | Schema, seed, and bidirectional query done via the model page; admin UI to create/edit links outstanding |
+| 8 | Compatibility engine | Schema, seed, bidirectional query, and admin CRUD (`/admin/compatibility`) all done and verified |
 | 9–12 | Customer / technician / supplier / manufacturer portals | Navigation and permissions defined; screens outstanding |
 | 13–15 | Marketplace, search, checkout | Schema done; UI outstanding |
 | 16–18 | Leads, support, admin | Schema done; UI outstanding |
@@ -411,11 +439,10 @@ test debris was left behind this time.
    Done and verified (Session 2) — see the follow-up under Module 6.
 5. ~~Sign-in and registration screens against the existing session interface.~~
    Done and verified (Session 3) — dev-mode only, refuses in production.
-6. ~~Admin catalogue CRUD.~~ Manufacturers, Categories, and Models done and
-   verified (Session 4). Still outstanding: admin CRUD for Documents and
-   Compatibility links — Documents is blocked on Supabase storage for
-   actual file upload (see item 7); Compatibility is a plain relation
-   editor and could be picked up any time.
+6. ~~Admin catalogue CRUD.~~ Manufacturers, Categories, Models, and
+   Compatibility links done and verified (Session 4). The one entity left
+   is Documents, which is blocked on Supabase storage for actual file
+   upload rather than being a design gap — see item 7.
 7. The document upload workflow (Module 29) — blocked on Supabase storage
    being connected; see "Still needs you, not code" below.
 8. Marketplace listing and product pages.

@@ -26,7 +26,7 @@ export default async function AdminOverviewPage() {
     { label: 'Categories', count: categories, href: '/admin/categories' },
     { label: 'Models', count: models, href: '/admin/models' },
     { label: 'Documents', count: documents, href: null },
-    { label: 'Compatibility links', count: compatibility, href: null },
+    { label: 'Compatibility links', count: compatibility, href: '/admin/compatibility' },
   ]
 
   return (
