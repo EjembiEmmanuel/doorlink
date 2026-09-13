@@ -509,6 +509,51 @@ entry says so rather than implying the same rigor was applied both times.
 - `CartItem` count was back at 0 afterward (the `Cart` row itself persists
   empty, same as a real user's cart would).
 
+## Session 7 — marketplace search and filtering
+
+`/marketplace` now has a keyword search plus category, manufacturer, and
+condition filters. Built as a plain server-rendered `<form method="GET">`
+— no client-side JavaScript needed, filters are just URL search params
+(`?q=...&categoryId=...&manufacturerId=...&condition=...`), and the page
+re-renders server-side against them. Keyword search matches the listing
+title, the model's name, or its model code (case-insensitive), combined
+with the other filters as AND conditions via an explicit
+`Prisma.ListingWhereInput[]` array rather than trying to merge nested
+`model: {...}` filter objects by hand, which gets error-prone once more
+than one nested condition needs to apply at once.
+
+Two different empty states, not one generic one: "No active listings yet"
+when the catalogue genuinely has nothing for sale, versus "No listings
+match your filters" with a "Clear filters" link when the problem is the
+search, not the data. Conflating those would tell a user their search
+term doesn't exist in a marketplace that actually just has zero listings
+overall, or vice versa.
+
+### What was verified, in a real browser and against the database directly
+
+Temporarily created two extra listings via the supplier UI (a Northgate
+DR-700 opener marked Refurbished, a Harbrook SL-200 lock marked New) to
+have enough spread across models, manufacturers, and conditions to
+actually test filtering against — one listing can't exercise a filter.
+Checked, against three live listings:
+
+- No filter: all three. Keyword search for the DR-700 listing's own
+  model code returned only that one.
+- Category filter (Garage Door Openers) returned only the DR-700 listing,
+  not the Remotes & Accessories or Smart Locks ones.
+- Manufacturer filter (Northgate) returned both Northgate listings (RC-2
+  and DR-700), excluding the Harbrook one.
+- Condition filter (Refurbished) returned only the one listing set to
+  that condition.
+- Combined filter (Northgate + New) returned only RC-2 — the Northgate
+  DR-700 test listing was Refurbished, so it correctly dropped out.
+- A search term matching nothing showed "No listings match your filters"
+  with a working "Clear filters" link, not the "no active listings"
+  message — and clicking it returned to the full unfiltered list.
+
+Deleted both temporary listings afterward and confirmed the listing count
+was back at the 1-row baseline via `psql` directly, not just the UI.
+
 ---
 
 ## Status by module
@@ -525,7 +570,7 @@ entry says so rather than implying the same rigor was applied both times.
 | 7 | Technical library | Schema done; documents listed on the model page, download UI still outstanding (needs storage) |
 | 8 | Compatibility engine | Schema, seed, bidirectional query, and admin CRUD (`/admin/compatibility`) all done and verified |
 | 9–12 | Customer / technician / supplier / manufacturer portals | Navigation and permissions defined; screens outstanding |
-| 13–15 | Marketplace, search, checkout | Public browse page, supplier listing CRUD, and cart (add/view/adjust/remove) done and verified; search outstanding — real payment checkout dropped from scope (the app is free to use), what "completing an order" means without payment is still an open question |
+| 13–15 | Marketplace, search, checkout | Public browse page, search/filtering, supplier listing CRUD, and cart (add/view/adjust/remove) all done and verified; real payment checkout dropped from scope (the app is free to use) — what "completing an order" means without payment is still an open question |
 | 16–18 | Leads, support, admin | Schema done; UI outstanding |
 | 19 | SEO | Metadata template and canonicals started; sitemap and JSON-LD outstanding |
 | 20–25 | Notifications, analytics, security, performance, testing, production | Foundations only |
@@ -556,10 +601,17 @@ entry says so rather than implying the same rigor was applied both times.
    any more, but because payment processing was dropped from scope
    entirely (the app is free to use). What replaces it is a product
    decision, not a connection to wait on — see "Still needs you, not code".
-10. Marketplace search/filtering — the browse page has no way to narrow
-    results yet beyond scrolling.
+10. ~~Marketplace search/filtering.~~ Keyword search plus category,
+    manufacturer, and condition filters done and verified (Session 7).
 11. Wire in a real auth provider (Supabase) to replace
-    `src/lib/dev-session.ts` — see "Still needs you, not code" below.
+    `src/lib/dev-session.ts` — deferred by the user for now (setup guide
+    given, to be completed later on desktop); see "Still needs you, not
+    code" below. Document admin CRUD and the upload workflow (Module 29)
+    stay blocked behind it too.
+12. Decide what "completing an order" means without payment processing
+    (see "Still needs you, not code"), then build whatever that turns out
+    to be — a request-to-buy flow the supplier confirms, a plain order
+    record, or something else.
 
 ## Still needs you, not code
 
