@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import type { CompatibilityConfidence, DocumentKind } from '@prisma/client'
 import { prisma } from '@/lib/prisma'
+import { getSession } from '@/lib/auth'
 import { isDatabaseUnreachable } from '@/lib/db-errors'
 import { isConnected } from '@/lib/integrations'
 import { formatMoney } from '@/lib/money'
@@ -11,6 +12,7 @@ import { SourceBadge } from '@/components/ui/SourceBadge'
 import { SpecList } from '@/components/ui/Table'
 import { EmptyState } from '@/components/ui/EmptyState'
 import { NotConnected } from '@/components/ui/NotConnected'
+import { AddToCartButton } from '@/app/cart/AddToCartButton'
 
 const DOCUMENT_KIND_LABELS: Record<DocumentKind, string> = {
   INSTALL_MANUAL: 'Installation manual',
@@ -77,6 +79,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function ModelProfilePage({ params }: PageProps) {
   const { id } = await params
+  const session = await getSession()
 
   let model: Awaited<ReturnType<typeof getModel>>
   try {
@@ -233,6 +236,15 @@ export default async function ModelProfilePage({ params }: PageProps) {
                   </p>
                   <div className="mt-2">
                     <SourceBadge source={listing.dataSource} />
+                  </div>
+                  <div className="mt-3">
+                    {session ? (
+                      <AddToCartButton listingId={listing.id} />
+                    ) : (
+                      <Link href="/sign-in" className="text-sm font-medium text-signal hover:text-signal-hover">
+                        Sign in to buy
+                      </Link>
+                    )}
                   </div>
                 </li>
               ))}

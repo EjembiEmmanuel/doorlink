@@ -461,6 +461,54 @@ which ones exist.
   just a same-account round trip.
 - Listing count was back at the 1-row baseline afterward.
 
+## Session 6 — cart
+
+Added add/remove/view for the cart: an "Add to cart" button on both
+`/marketplace` and the model page's listings section (shown only when
+signed in — signed out sees a plain "Sign in to buy" link instead of a
+form that would just reject them), `/cart` itself with per-item quantity
+controls and removal, and a running total. A cart is created lazily on
+first add (`prisma.cart.upsert`) rather than at signup — most users will
+never need one.
+
+**Checkout is checked, not built — same pattern as documents and
+finder.** `/cart` renders a real "Checkout" button only when
+`isConnected('payments')`, and `<NotConnected feature="Checkout" />`
+otherwise, which is what actually renders today since Stripe isn't
+configured. The cart itself (add, view, adjust quantity, remove) is fully
+functional independent of that — it doesn't need Stripe to be useful, only
+to complete a purchase.
+
+**Ownership check exists, but wasn't exploit-tested live like the
+supplier-listing one was — worth being explicit about the difference.**
+`updateCartItemAction` and `removeCartItemAction` both verify
+`item.cart.userId === session.userId` before touching a row, the same
+shape of check used for supplier listings. What's different: supplier
+listings have a guessable, addressable `/supplier/listings/[id]/edit` URL,
+which is what made a real cross-tenant test possible (register a second
+account, hit the first account's URL directly). Cart items have no
+equivalent addressable-by-id route — the only way to act on one is through
+a hidden form field the server itself populates from the caller's own
+cart query, and `id`s are opaque `cuid`s, not sequential. So there's no
+realistic UI path to even attempt what the supplier-listing test did.
+The ownership check is there and correct by inspection, but that's a
+weaker form of verification than actually running the attack, and this
+entry says so rather than implying the same rigor was applied both times.
+
+### What was verified, in a real browser and against the database directly
+
+- Signed out, `/marketplace` shows "Sign in to buy" instead of a cart
+  form. Signed in as `customer@demo.doorlink`, added RC-2 to the cart from
+  the marketplace grid; header updated to "Cart (1)". Added the same
+  listing again — header stayed at "Cart (1)" (one distinct line item,
+  quantity incremented), confirmed by `/cart` showing quantity 2 and a
+  $90.00 total ($45 × 2, matching the seeded listing's price).
+  Updated the quantity to 5 and confirmed the total became $225.00.
+  Removed the item and confirmed the cart returned to its empty state and
+  the header's badge disappeared.
+- `CartItem` count was back at 0 afterward (the `Cart` row itself persists
+  empty, same as a real user's cart would).
+
 ---
 
 ## Status by module
@@ -477,7 +525,7 @@ which ones exist.
 | 7 | Technical library | Schema done; documents listed on the model page, download UI still outstanding (needs storage) |
 | 8 | Compatibility engine | Schema, seed, bidirectional query, and admin CRUD (`/admin/compatibility`) all done and verified |
 | 9–12 | Customer / technician / supplier / manufacturer portals | Navigation and permissions defined; screens outstanding |
-| 13–15 | Marketplace, search, checkout | Public browse page and supplier listing CRUD done and verified; search and checkout still outstanding |
+| 13–15 | Marketplace, search, checkout | Public browse page, supplier listing CRUD, and cart (add/view/adjust/remove) done and verified; search and real checkout (needs Stripe) still outstanding |
 | 16–18 | Leads, support, admin | Schema done; UI outstanding |
 | 19 | SEO | Metadata template and canonicals started; sitemap and JSON-LD outstanding |
 | 20–25 | Notifications, analytics, security, performance, testing, production | Foundations only |
@@ -503,10 +551,13 @@ which ones exist.
 8. ~~Marketplace listing and product pages.~~ Public `/marketplace` browse
    page and supplier-scoped listing CRUD (`/supplier/listings`) done and
    verified (Session 5), including the cross-tenant ownership boundary.
-   Still outstanding: search/filtering on the marketplace page, cart, and
-   checkout (blocked on Stripe — see "Still needs you, not code").
-9. Wire in a real auth provider (Supabase) to replace `src/lib/dev-session.ts`
-   — see "Still needs you, not code" below.
+9. ~~Cart.~~ Add/view/adjust-quantity/remove done and verified (Session 6).
+   Checkout itself stays honestly not-connected until Stripe exists — see
+   item 7's counterpart in "Still needs you, not code".
+10. Marketplace search/filtering — the browse page has no way to narrow
+    results yet beyond scrolling.
+11. Wire in a real auth provider (Supabase) to replace
+    `src/lib/dev-session.ts` — see "Still needs you, not code" below.
 
 ## Still needs you, not code
 

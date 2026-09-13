@@ -2,6 +2,8 @@ import Link from 'next/link'
 import { getSession } from '@/lib/auth'
 import { can } from '@/lib/rbac'
 import { devSignOutAction } from '@/lib/dev-session'
+import { prisma } from '@/lib/prisma'
+import { isDatabaseUnreachable } from '@/lib/db-errors'
 import { MobileNavToggle } from './MobileNavToggle'
 
 const NAV_LINKS = [
@@ -10,9 +12,24 @@ const NAV_LINKS = [
   { href: '/data-sources', label: 'Data sources' },
 ]
 
+async function getCartItemCount(userId: string): Promise<number> {
+  try {
+    return await prisma.cartItem.count({ where: { cart: { userId } } })
+  } catch (error) {
+    // The header renders on every page — a cart count that can't be
+    // fetched just doesn't show a number, it doesn't take the header down.
+    if (isDatabaseUnreachable(error)) return 0
+    throw error
+  }
+}
+
 export async function Header() {
   const session = await getSession()
   const navLinks = [...NAV_LINKS]
+  if (session) {
+    const cartCount = await getCartItemCount(session.userId)
+    navLinks.push({ href: '/cart', label: cartCount > 0 ? `Cart (${cartCount})` : 'Cart' })
+  }
   if (session && can(session.role, 'listing:write:own') && session.organizationId) {
     navLinks.push({ href: '/supplier/listings', label: 'My listings' })
   }

@@ -1,18 +1,22 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { prisma } from '@/lib/prisma'
+import { getSession } from '@/lib/auth'
 import { isDatabaseUnreachable } from '@/lib/db-errors'
 import { formatMoney } from '@/lib/money'
 import { Panel, PanelBody } from '@/components/ui/Panel'
 import { SourceBadge } from '@/components/ui/SourceBadge'
 import { EmptyState } from '@/components/ui/EmptyState'
 import { NotConnected } from '@/components/ui/NotConnected'
+import { AddToCartButton } from '@/app/cart/AddToCartButton'
 
 export const metadata: Metadata = {
   title: 'Marketplace',
 }
 
 export default async function MarketplacePage() {
+  const session = await getSession()
+
   let listings
   try {
     listings = await prisma.listing.findMany({
@@ -67,6 +71,15 @@ export default async function MarketplacePage() {
                 </p>
                 <div className="mt-2">
                   <SourceBadge source={listing.dataSource} />
+                </div>
+                <div className="mt-3">
+                  {session ? (
+                    <AddToCartButton listingId={listing.id} />
+                  ) : (
+                    <Link href="/sign-in" className="text-sm font-medium text-signal hover:text-signal-hover">
+                      Sign in to buy
+                    </Link>
+                  )}
                 </div>
               </PanelBody>
             </Panel>
