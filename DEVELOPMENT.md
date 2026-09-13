@@ -632,6 +632,52 @@ rather than crashing on a listing with no organization.
 - Deleted the test listing afterward and confirmed the listing count was
   back at the 1-row baseline via `psql` directly.
 
+## Session 9 — Modules 16–18, support tickets
+
+Built the support ticket system: `/support` (a user's own tickets + "New
+ticket"), `/support/new`, `/support/[id]` (message thread + reply), and
+`/support/queue` (every ticket, admin-only). No RBAC changes needed —
+`support:read:own` (every role) and `support:write:any` (`ADMIN` only)
+already existed in the matrix from the original schema/RBAC pass and
+mapped onto this cleanly.
+
+**Ownership pattern reused, not reinvented, a fourth time now.** Same
+shape as `/my-listings` and the cart: the thread page checks
+`ticket.userId === session.userId || can(session.role, 'support:write:any')`
+before rendering anything, a mismatch renders the real `not-found.tsx`
+(not a distinguishable "forbidden"), and the mutating actions
+(`addMessageAction`, `updateTicketAction`) re-check independently of
+whatever page rendered the form — `updateTicketAction` specifically
+requires `support:write:any`, so a ticket's owner can reply but not
+change its own status or priority (that's triage, an agent's call).
+
+**A small owner-reopens-on-reply behavior**, not asked for but consistent
+with how support tools normally work: if the ticket owner replies to a
+ticket that isn't already `OPEN`, it flips back to `OPEN` automatically
+(an agent replying doesn't trigger this — only the requester coming back
+with something new should reopen it).
+
+### What was verified, in a real browser and against the database directly
+
+- Signed in as `customer@demo.doorlink`, created a ticket; got redirected
+  to its thread showing the subject and first message; confirmed the
+  ticket owner does not see the admin status/priority controls at all.
+- Confirmed the ticket appears in "Your tickets" and that a non-admin sees
+  no "All tickets (admin)" link.
+- Signed in as `admin@demo.doorlink`: the same "All tickets (admin)" link
+  now appears, `/support/queue` lists the customer's ticket with their
+  name, replying from the admin side appends to the same thread, and
+  changing status to Pending and priority to High persisted correctly.
+- Signed in as a **third, unrelated** account (`technician@demo.doorlink`,
+  neither the ticket's owner nor an admin) and hit the ticket's URL
+  directly — got a real `404`, not the ticket's content. The same account
+  hitting `/support/queue` directly was redirected to `/support`, not shown
+  an empty or partial queue.
+- Deleted the two test tickets created during verification directly via
+  `psql`, which cascade-deleted their messages too (confirmed both tables
+  back at 0 rows) — the schema's own `onDelete: Cascade` on
+  `SupportMessage.ticket`, not application code, did that.
+
 ---
 
 ## Status by module
@@ -649,7 +695,7 @@ rather than crashing on a listing with no organization.
 | 8 | Compatibility engine | Schema, seed, bidirectional query, and admin CRUD (`/admin/compatibility`) all done and verified |
 | 9–12 | Customer / technician / supplier / manufacturer portals | Navigation and permissions defined; screens outstanding |
 | 13–15 | Marketplace, search, checkout | Peer-to-peer: anyone can list (`/my-listings`, business or individual), browse/search/filter, cart, and "I'm interested" contact reveal all done and verified; real payment checkout dropped from scope entirely (the app is free to use, buyers and sellers meet up directly) |
-| 16–18 | Leads, support, admin | Schema done; UI outstanding |
+| 16–18 | Leads, support, admin | Support tickets (`/support`, `/support/[id]`, `/support/queue`) done and verified; Leads UI still outstanding — Leads was designed for the storefront model the Session 8 pivot replaced, so what it's for now needs rethinking, not just a UI |
 | 19 | SEO | Metadata template and canonicals started; sitemap and JSON-LD outstanding |
 | 20–25 | Notifications, analytics, security, performance, testing, production | Foundations only |
 | 26 | AI features | Interfaces present, honestly disconnected |
@@ -699,6 +745,19 @@ rather than crashing on a listing with no organization.
     (status, stock quantity as a count rather than "still available"),
     worth revisiting once real usage shows what a peer-to-peer seller
     actually needs.
+14. ~~Support tickets.~~ `/support`, `/support/[id]`, `/support/queue`
+    done and verified (Session 9).
+15. Leads (rest of Module 16–18) — designed for the pre-pivot storefront
+    model (a lead assigned to a supplier organization); needs a decision
+    on what it's for in a peer-to-peer marketplace before building UI for
+    it, not just a straightforward port of the schema into screens.
+16. Technician/customer/supplier/manufacturer portal screens (Module
+    9–12) — navigation and permissions were defined early on but no
+    dashboards exist yet; likely smaller now than originally scoped,
+    since `/my-listings`, `/cart`, and `/support` already cover a good
+    slice of what an individual account needs regardless of role.
+17. SEO (Module 19) — sitemap and JSON-LD still outstanding; metadata
+    template and canonicals exist from Module 2.
 
 ## Still needs you, not code
 

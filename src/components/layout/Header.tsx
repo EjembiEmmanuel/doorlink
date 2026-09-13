@@ -33,6 +33,9 @@ export async function Header() {
   if (session && can(session.role, 'listing:write:own')) {
     navLinks.push({ href: '/my-listings', label: 'My listings' })
   }
+  if (session) {
+    navLinks.push({ href: '/support', label: 'Support' })
+  }
   if (session && can(session.role, 'catalogue:write')) {
     navLinks.push({ href: '/admin', label: 'Admin' })
   }
