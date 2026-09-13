@@ -24,7 +24,7 @@ export default async function AdminOverviewPage() {
   const stats = [
     { label: 'Manufacturers', count: manufacturers, href: '/admin/manufacturers' },
     { label: 'Categories', count: categories, href: '/admin/categories' },
-    { label: 'Models', count: models, href: null },
+    { label: 'Models', count: models, href: '/admin/models' },
     { label: 'Documents', count: documents, href: null },
     { label: 'Compatibility links', count: compatibility, href: null },
   ]

@@ -347,6 +347,37 @@ table; that link stays admin-only and manual, on purpose.
   fixed — found and removed directly with `psql`, then confirmed row
   counts were back to the original 3/4/5 baseline.
 
+### Module 5 (continued) — Model admin CRUD
+
+Added `/admin/models`: list, create, edit, delete. Manufacturer and
+category are required selects; product line is optional and the form
+filters its options client-side to only the chosen manufacturer's lines
+(a plain UX convenience — the action re-validates the pairing
+server-side regardless, since the client-side filter is trivially
+bypassable). Slug auto-generates as `{manufacturer-slug}-{name}` when
+left blank, mirroring the seed's own naming convention. Model deletion
+relies on the schema's existing cascade behavior rather than needing a
+new fix: `ModelSpec`, `Document`, `Compatibility`, and `Favorite` all
+cascade-delete with their model (they're meaningless without it); `Job`
+and `Lead` null out their optional reference; `Listing` is a required
+relation with no cascade specified, so it defaults to `Restrict` —
+deleting a model that's still listed for sale is blocked, same pattern
+as manufacturers and categories.
+
+Verified in a real browser and against the database: created a model
+under Northgate / Garage Door Openers / Drive Series and confirmed it
+appeared correctly attributed in the list; attempted a second model
+with a model code already used by the same manufacturer and confirmed
+it was rejected without creating a row (`POST .../new` returned `200`,
+not a redirect — checked in the server log, since the rendered error
+text was once again obscured by the same Next.js route-announcer
+`role="alert"` collision noted in Session 3, not an app bug); edited
+the model's name and confirmed the change; deleted it and confirmed
+removal; then attempted to delete RC-2 (has a seeded active listing)
+and got the same in-use error pattern as manufacturers/categories.
+Model count was back at the 5-row baseline afterward, confirming no
+test debris was left behind this time.
+
 ---
 
 ## Status by module
@@ -358,7 +389,7 @@ table; that link stays admin-only and manual, on purpose.
 | 2 | Public website | ~30% — 6 of ~18 pages |
 | 3 | Auth and roles | RBAC matrix, guards, and dev-mode sign-in/register screens done and verified; Supabase wiring still outstanding |
 | 4 | Database architecture | Done; `db push` + seed verified against a local Postgres this session |
-| 5 | Product database | Manufacturer and Category admin CRUD done and verified; Model/Document/Compatibility admin screens still outstanding |
+| 5 | Product database | Manufacturer, Category, and Model admin CRUD done and verified; Document/Compatibility admin screens still outstanding |
 | 6 | Product finder | Cascade, model profile page (`/model/[id]`), and honest no-DB handling all done and verified in a browser (see Session 2) |
 | 7 | Technical library | Schema done; documents listed on the model page, download UI still outstanding (needs storage) |
 | 8 | Compatibility engine | Schema, seed, and bidirectional query done via the model page; admin UI to create/edit links outstanding |
@@ -380,10 +411,11 @@ table; that link stays admin-only and manual, on purpose.
    Done and verified (Session 2) — see the follow-up under Module 6.
 5. ~~Sign-in and registration screens against the existing session interface.~~
    Done and verified (Session 3) — dev-mode only, refuses in production.
-6. ~~Admin catalogue CRUD.~~ Manufacturers and Categories done and verified
-   (Session 4). Still outstanding: admin CRUD for Models, Documents, and
-   Compatibility links — the higher-value, more complex ones, deliberately
-   left for a focused pass rather than rushed alongside this one.
+6. ~~Admin catalogue CRUD.~~ Manufacturers, Categories, and Models done and
+   verified (Session 4). Still outstanding: admin CRUD for Documents and
+   Compatibility links — Documents is blocked on Supabase storage for
+   actual file upload (see item 7); Compatibility is a plain relation
+   editor and could be picked up any time.
 7. The document upload workflow (Module 29) — blocked on Supabase storage
    being connected; see "Still needs you, not code" below.
 8. Marketplace listing and product pages.
