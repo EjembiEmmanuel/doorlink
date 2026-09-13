@@ -732,6 +732,73 @@ block and the model page's `Product` block instead of raw
   test data immediately after and confirmed the original summary was
   restored.
 
+## Session 11 — Leads reimagined as "request a technician", and `/account`
+
+Picked defaults for the two roadmap items left waiting on product
+decisions (items 15–16 above) rather than leaving them blocked, per the
+user's steer to build the remaining UI to a professional standard using
+my own judgement.
+
+**Leads, redesigned for the peer-to-peer marketplace instead of ported
+from the pre-pivot schema.** The old idea — a lead assigned to a supplier
+organization for follow-up — assumed the storefront model Session 8
+replaced. What fits the current shape of the app is a public, no-signup
+"Request a technician" form (`/request-technician`): name, email, phone
+(optional), an optional model picker, and a message. Submitting one never
+requires an account, matching the low-friction, contact-by-email pattern
+`/my-listings`'s "I'm interested" already established for the
+marketplace. A technician (or admin) sees it queued at `/leads`, split
+into "Open requests" (unclaimed, contact hidden) and "Your requests"
+(claimed by this technician or their organization, contact shown, status
+editable); admins additionally see everyone else's claimed requests
+under "Claimed by others". Claiming is first-come: responding to an
+open request assigns it to the caller and reveals contact details in the
+same action; a second technician hitting the same open request after
+someone else claimed it is turned away with "Someone else already
+claimed this request" rather than silently reassigning it.
+
+**Schema change:** added `Lead.assignedUserId`/`assignedUser`, mirroring
+`Listing.organizationId`/`sellerId` — a claim belongs to either a
+technician's organization or a technician personally, the same duality
+`Listing` already uses and for the same reason: a technician doesn't
+need a registered business to pick up work. `Lead.assignedOrgId` (the
+original field) is unchanged. Added `lead:write:own` to the RBAC matrix
+(granted to `TECHNICIAN`; `ADMIN` already had `lead:write:any` from the
+original schema/RBAC pass, which now doubles as "see and claim
+anything").
+
+**`/account`, one hub instead of four speculative per-role
+dashboards.** Every signed-in account gets the same page: name, role,
+organization (if any), and cards linking to `/my-listings`, `/support`,
+and — only for roles that can handle them — `/leads`, each showing a
+real count pulled from the database rather than a static description of
+what the role "can do". This is deliberately smaller than the
+originally-scoped Module 9–12 portal screens: `/my-listings`, `/cart`,
+and `/support` already cover most of what an individual account needs
+day to day regardless of role, so `/account` is a landing point that
+surfaces those, not a fourth parallel set of screens duplicating them.
+
+### What was verified, in a real browser and against the database directly
+
+- `npm run typecheck` clean.
+- Ran a Playwright script driving five separate browser contexts: an
+  anonymous visitor submitted a request through `/request-technician` and
+  landed on the thanks page; `technician@demo.doorlink` saw it appear in
+  "Open requests" at `/leads`; `customer@demo.doorlink` (no lead
+  permission) hitting `/leads` directly was redirected away, never seeing
+  the queue; the technician clicked "Respond", which revealed the
+  requester's email in the same click and moved the request into "Your
+  requests" on reload; `admin@demo.doorlink` (`lead:write:any`) saw the
+  same now-claimed request listed under "Claimed by others"; the
+  technician changed its status to `QUALIFIED` via the inline form and
+  confirmed it persisted after a reload; `/account` for the technician
+  showed a "Requests you've claimed" card, while `/account` for the
+  customer showed listings and support cards but no leads card at all
+  (permission-gated, not just hidden by role name).
+- Confirmed via direct `psql`/Prisma query that exactly one test lead
+  existed after the run (the one the script created), then deleted it and
+  re-confirmed the `Lead` table was back to 0 rows.
+
 ---
 
 ## Status by module
@@ -747,9 +814,9 @@ block and the model page's `Product` block instead of raw
 | 6 | Product finder | Cascade, model profile page (`/model/[id]`), and honest no-DB handling all done and verified in a browser (see Session 2) |
 | 7 | Technical library | Schema done; documents listed on the model page, download UI still outstanding (needs storage) |
 | 8 | Compatibility engine | Schema, seed, bidirectional query, and admin CRUD (`/admin/compatibility`) all done and verified |
-| 9–12 | Customer / technician / supplier / manufacturer portals | Navigation and permissions defined; screens outstanding |
+| 9–12 | Customer / technician / supplier / manufacturer portals | `/account` hub (real per-account counts + links to `/my-listings`, `/support`, `/leads`) done and verified (Session 11), deliberately smaller than four separate per-role dashboards |
 | 13–15 | Marketplace, search, checkout | Peer-to-peer: anyone can list (`/my-listings`, business or individual), browse/search/filter, cart, and "I'm interested" contact reveal all done and verified; real payment checkout dropped from scope entirely (the app is free to use, buyers and sellers meet up directly) |
-| 16–18 | Leads, support, admin | Support tickets (`/support`, `/support/[id]`, `/support/queue`) done and verified; Leads UI still outstanding — Leads was designed for the storefront model the Session 8 pivot replaced, so what it's for now needs rethinking, not just a UI |
+| 16–18 | Leads, support, admin | Support tickets (`/support`, `/support/[id]`, `/support/queue`) done and verified; Leads reimagined as public "request a technician" (`/request-technician`) + claim queue (`/leads`), done and verified (Session 11) |
 | 19 | SEO | Sitemap, robots.txt, WebSite/Product JSON-LD, and canonicals on every public page all done and verified |
 | 20–25 | Notifications, analytics, security, performance, testing, production | Foundations only |
 | 26 | AI features | Interfaces present, honestly disconnected |
@@ -801,21 +868,27 @@ block and the model page's `Product` block instead of raw
     actually needs.
 14. ~~Support tickets.~~ `/support`, `/support/[id]`, `/support/queue`
     done and verified (Session 9).
-15. Leads (rest of Module 16–18) — designed for the pre-pivot storefront
-    model (a lead assigned to a supplier organization); needs a decision
-    on what it's for in a peer-to-peer marketplace before building UI for
-    it, not just a straightforward port of the schema into screens.
-16. Technician/customer/supplier/manufacturer portal screens (Module
-    9–12) — navigation and permissions were defined early on but no
-    dashboards exist yet; likely smaller now than originally scoped,
-    since `/my-listings`, `/cart`, and `/support` already cover a good
-    slice of what an individual account needs regardless of role.
+15. ~~Leads (rest of Module 16–18).~~ See item 18 below — reimagined
+    rather than ported, once a peer-to-peer-shaped design was picked.
+16. ~~Technician/customer/supplier/manufacturer portal screens (Module
+    9–12).~~ See item 19 below.
 17. ~~SEO (Module 19).~~ Sitemap, robots.txt, JSON-LD, and canonicals done
     and verified (Session 10), including a real XSS gap found and fixed
     in how JSON-LD gets embedded (see the session log).
-18. Leads and the portal screens (items 15–16 above) remain the two
-    biggest pieces of unbuilt UI, both waiting on product decisions
-    rather than being straightforward to just build.
+18. ~~Leads (rest of Module 16–18).~~ Reimagined as a public, no-signup
+    "request a technician" form (`/request-technician`) plus a
+    first-come claim queue (`/leads`) done and verified (Session 11).
+19. ~~Technician/customer/supplier/manufacturer portal screens (Module
+    9–12).~~ Built as a single `/account` hub with real per-role counts
+    and links into the pages that already exist, done and verified
+    (Session 11) — not four separate dashboards.
+20. Extend `/my-listings` to cover editing/pausing personal listings
+    smoothly now that most users will be individuals, not businesses (see
+    item 13 above, still open).
+21. Wire in a real auth provider (Supabase) to replace
+    `src/lib/dev-session.ts` — still the main remaining item waiting on
+    the user rather than a build decision; see "Still needs you, not
+    code" below.
 
 ## Still needs you, not code
 

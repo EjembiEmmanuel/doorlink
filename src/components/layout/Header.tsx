@@ -9,6 +9,7 @@ import { MobileNavToggle } from './MobileNavToggle'
 const NAV_LINKS = [
   { href: '/find', label: 'Find your part' },
   { href: '/marketplace', label: 'Marketplace' },
+  { href: '/request-technician', label: 'Request a technician' },
   { href: '/data-sources', label: 'Data sources' },
 ]
 
@@ -33,7 +34,11 @@ export async function Header() {
   if (session && can(session.role, 'listing:write:own')) {
     navLinks.push({ href: '/my-listings', label: 'My listings' })
   }
+  if (session && (can(session.role, 'lead:write:own') || can(session.role, 'lead:write:any'))) {
+    navLinks.push({ href: '/leads', label: 'Requests' })
+  }
   if (session) {
+    navLinks.push({ href: '/account', label: 'Account' })
     navLinks.push({ href: '/support', label: 'Support' })
   }
   if (session && can(session.role, 'catalogue:write')) {

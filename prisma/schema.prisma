@@ -180,6 +180,7 @@ model User {
   reviews           Review[]
   favorites         Favorite[]
   listings          Listing[]
+  assignedLeads     Lead[]
   jobs              Job[]                @relation("JobCustomer")
   supportTickets    SupportTicket[]
   supportMessages   SupportMessage[]
@@ -491,19 +492,29 @@ model Favorite {
 // Leads, jobs, support
 // ---------------------------------------------------------------------
 
+// A "request a technician" lead. Deliberately has no requester account
+// link (name/email/phone are captured in the form itself) — submitting
+// one never requires signing up, matching the low-friction, contact-by-
+// email pattern the marketplace already uses. Claimed by either a
+// technician's organization (assignedOrgId) or a technician personally
+// (assignedUserId) — the same organization-or-individual duality as
+// Listing, for the same reason: a technician doesn't need a registered
+// business to pick up work.
 model Lead {
-  id            String       @id @default(cuid())
-  name          String
-  email         String
-  phone         String?
-  message       String
-  model         Model?       @relation(fields: [modelId], references: [id])
-  modelId       String?
-  assignedOrg   Organization? @relation(fields: [assignedOrgId], references: [id])
-  assignedOrgId String?
-  status        LeadStatus   @default(NEW)
-  createdAt     DateTime     @default(now())
-  updatedAt     DateTime     @updatedAt
+  id             String        @id @default(cuid())
+  name           String
+  email          String
+  phone          String?
+  message        String
+  model          Model?        @relation(fields: [modelId], references: [id])
+  modelId        String?
+  assignedOrg    Organization? @relation(fields: [assignedOrgId], references: [id])
+  assignedOrgId  String?
+  assignedUser   User?         @relation(fields: [assignedUserId], references: [id])
+  assignedUserId String?
+  status         LeadStatus    @default(NEW)
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
 }
 
 model Job {

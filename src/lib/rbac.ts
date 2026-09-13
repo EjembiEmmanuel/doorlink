@@ -15,6 +15,7 @@ export type Permission =
   | 'job:write:own'
   | 'job:write:any'
   | 'lead:read:assigned'
+  | 'lead:write:own'
   | 'lead:write:any'
   | 'support:read:own'
   | 'support:write:any'
@@ -45,6 +46,7 @@ const MATRIX: Record<Role, Permission[]> = {
     'job:read:own',
     'job:write:own',
     'lead:read:assigned',
+    'lead:write:own',
     'support:read:own',
   ],
   SUPPLIER: [
