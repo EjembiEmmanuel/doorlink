@@ -525,7 +525,7 @@ entry says so rather than implying the same rigor was applied both times.
 | 7 | Technical library | Schema done; documents listed on the model page, download UI still outstanding (needs storage) |
 | 8 | Compatibility engine | Schema, seed, bidirectional query, and admin CRUD (`/admin/compatibility`) all done and verified |
 | 9–12 | Customer / technician / supplier / manufacturer portals | Navigation and permissions defined; screens outstanding |
-| 13–15 | Marketplace, search, checkout | Public browse page, supplier listing CRUD, and cart (add/view/adjust/remove) done and verified; search and real checkout (needs Stripe) still outstanding |
+| 13–15 | Marketplace, search, checkout | Public browse page, supplier listing CRUD, and cart (add/view/adjust/remove) done and verified; search outstanding — real payment checkout dropped from scope (the app is free to use), what "completing an order" means without payment is still an open question |
 | 16–18 | Leads, support, admin | Schema done; UI outstanding |
 | 19 | SEO | Metadata template and canonicals started; sitemap and JSON-LD outstanding |
 | 20–25 | Notifications, analytics, security, performance, testing, production | Foundations only |
@@ -552,8 +552,10 @@ entry says so rather than implying the same rigor was applied both times.
    page and supplier-scoped listing CRUD (`/supplier/listings`) done and
    verified (Session 5), including the cross-tenant ownership boundary.
 9. ~~Cart.~~ Add/view/adjust-quantity/remove done and verified (Session 6).
-   Checkout itself stays honestly not-connected until Stripe exists — see
-   item 7's counterpart in "Still needs you, not code".
+   Checkout stays behind `<NotConnected />` — not "until Stripe exists"
+   any more, but because payment processing was dropped from scope
+   entirely (the app is free to use). What replaces it is a product
+   decision, not a connection to wait on — see "Still needs you, not code".
 10. Marketplace search/filtering — the browse page has no way to narrow
     results yet beyond scrolling.
 11. Wire in a real auth provider (Supabase) to replace
@@ -561,8 +563,17 @@ entry says so rather than implying the same rigor was applied both times.
 
 ## Still needs you, not code
 
+- **Decided:** DoorLink is free to use — no Stripe, no payment processing.
+  `/cart`'s "Checkout" stays behind `<NotConnected />` not because Stripe is
+  merely unconfigured but because it's been dropped from scope entirely.
+  What "completing an order" actually means without payment (e.g. a
+  request-to-buy that a supplier confirms off-platform, versus a real free
+  checkout that just records the order) is an open product question for
+  whenever cart/order work resumes — not blocking anything today.
+- Supabase project (auth + storage) — see the step-by-step setup guide
+  given directly to the user; covers `NEXT_PUBLIC_SUPABASE_URL`,
+  `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, and can
+  also provide `DATABASE_URL`/`DIRECT_URL` for a production database.
 - Real manufacturer, model and part data, and permission to host their manuals.
-- Supplier onboarding terms and the commission rate (`SupplierProfile.commissionBps` is 0).
-- Stripe account for Connect payouts.
-- Supabase project (auth + storage) or a decision to self-host.
+- Supplier onboarding terms and the commission rate (`SupplierProfile.commissionBps` is 0) — still relevant even without Stripe, since suppliers are still distinct sellers on the platform.
 - Whether technician "verified" status requires a real accreditation check.
