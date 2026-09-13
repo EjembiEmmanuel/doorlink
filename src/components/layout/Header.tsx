@@ -30,8 +30,8 @@ export async function Header() {
     const cartCount = await getCartItemCount(session.userId)
     navLinks.push({ href: '/cart', label: cartCount > 0 ? `Cart (${cartCount})` : 'Cart' })
   }
-  if (session && can(session.role, 'listing:write:own') && session.organizationId) {
-    navLinks.push({ href: '/supplier/listings', label: 'My listings' })
+  if (session && can(session.role, 'listing:write:own')) {
+    navLinks.push({ href: '/my-listings', label: 'My listings' })
   }
   if (session && can(session.role, 'catalogue:write')) {
     navLinks.push({ href: '/admin', label: 'Admin' })

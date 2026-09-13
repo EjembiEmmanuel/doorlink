@@ -13,6 +13,7 @@ import { SpecList } from '@/components/ui/Table'
 import { EmptyState } from '@/components/ui/EmptyState'
 import { NotConnected } from '@/components/ui/NotConnected'
 import { AddToCartButton } from '@/app/cart/AddToCartButton'
+import { InterestedButton } from '@/components/marketplace/InterestedButton'
 
 const DOCUMENT_KIND_LABELS: Record<DocumentKind, string> = {
   INSTALL_MANUAL: 'Installation manual',
@@ -48,7 +49,7 @@ async function getModel(id: string) {
       listings: {
         where: { status: 'ACTIVE' },
         orderBy: { priceCents: 'asc' },
-        include: { organization: { select: { name: true } } },
+        include: { organization: { select: { name: true } }, seller: { select: { name: true } } },
       },
       compatibleFrom: {
         include: {
@@ -227,7 +228,9 @@ export default async function ModelProfilePage({ params }: PageProps) {
             <ul className="flex flex-col gap-3">
               {model.listings.map((listing) => (
                 <li key={listing.id} className="rounded-md border border-line p-4">
-                  <p className="text-sm font-medium text-graphite">{listing.organization.name}</p>
+                  <p className="text-sm font-medium text-graphite">
+                    {listing.organization?.name ?? listing.seller?.name ?? 'a DoorLink member'}
+                  </p>
                   <p className="mt-1 text-lg font-semibold text-graphite">
                     {formatMoney(listing.priceCents, listing.currency)}
                   </p>
@@ -237,9 +240,12 @@ export default async function ModelProfilePage({ params }: PageProps) {
                   <div className="mt-2">
                     <SourceBadge source={listing.dataSource} />
                   </div>
-                  <div className="mt-3">
+                  <div className="mt-3 flex flex-col items-start gap-2">
                     {session ? (
-                      <AddToCartButton listingId={listing.id} />
+                      <>
+                        <AddToCartButton listingId={listing.id} />
+                        <InterestedButton listingId={listing.id} />
+                      </>
                     ) : (
                       <Link href="/sign-in" className="text-sm font-medium text-signal hover:text-signal-hover">
                         Sign in to buy

@@ -18,16 +18,16 @@ const STATUS_TONE = {
   ARCHIVED: 'neutral',
 } as const
 
-export default async function SupplierListingsPage() {
+export default async function MyListingsPage() {
   const session = await getSession()
-  // The layout above already guarantees a session with an organizationId
-  // before this page ever renders.
-  const organizationId = session!.organizationId!
+  // The layout above already guarantees a session before this renders.
+  const userId = session!.userId
+  const organizationId = session!.organizationId
 
   let listings
   try {
     listings = await prisma.listing.findMany({
-      where: { organizationId },
+      where: organizationId ? { organizationId } : { sellerId: userId },
       orderBy: { createdAt: 'desc' },
       include: { model: { select: { name: true, modelCode: true } } },
     })
@@ -41,7 +41,7 @@ export default async function SupplierListingsPage() {
       <div className="flex items-center justify-between">
         <h2 className="text-lg font-semibold text-graphite">Your listings</h2>
         <Link
-          href="/supplier/listings/new"
+          href="/my-listings/new"
           className="inline-flex h-9 items-center justify-center rounded bg-signal px-4 text-sm font-medium text-paper hover:bg-signal-hover"
         >
           New listing
@@ -75,7 +75,7 @@ export default async function SupplierListingsPage() {
                 <Td>
                   <div className="flex items-center justify-end gap-3">
                     <Link
-                      href={`/supplier/listings/${listing.id}/edit`}
+                      href={`/my-listings/${listing.id}/edit`}
                       className="text-sm font-medium text-signal hover:text-signal-hover"
                     >
                       Edit

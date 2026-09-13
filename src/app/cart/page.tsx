@@ -4,7 +4,6 @@ import Link from 'next/link'
 import { getSession } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 import { isDatabaseUnreachable } from '@/lib/db-errors'
-import { isConnected } from '@/lib/integrations'
 import { formatMoney, sumMinorUnits } from '@/lib/money'
 import { EmptyState } from '@/components/ui/EmptyState'
 import { NotConnected } from '@/components/ui/NotConnected'
@@ -29,6 +28,7 @@ export default async function CartPage() {
               include: {
                 model: { select: { id: true, name: true, modelCode: true } },
                 organization: { select: { name: true } },
+                seller: { select: { name: true } },
               },
             },
           },
@@ -80,7 +80,7 @@ export default async function CartPage() {
                     {item.listing.title}
                   </Link>
                   <p className="text-sm text-zinc-deep">
-                    Sold by {item.listing.organization.name} ·{' '}
+                    Sold by {item.listing.organization?.name ?? item.listing.seller?.name ?? 'a DoorLink member'} ·{' '}
                     {formatMoney(item.listing.priceCents, item.listing.currency)} each
                   </p>
                 </div>
@@ -93,19 +93,11 @@ export default async function CartPage() {
             <p className="text-lg font-semibold text-graphite">Total: {formatMoney(total)}</p>
           </div>
 
-          {isConnected('payments') ? (
-            <button
-              type="button"
-              className="inline-flex h-11 w-fit items-center justify-center rounded bg-signal px-6 text-sm font-medium text-paper hover:bg-signal-hover"
-            >
-              Checkout
-            </button>
-          ) : (
-            <NotConnected
-              feature="Checkout"
-              reason="Stripe isn't configured yet, so orders can't actually be placed — this cart is fully functional, but demo-only until then."
-            />
-          )}
+          <div className="rounded-md border border-line bg-rail p-4 text-sm text-graphite-soft">
+            DoorLink doesn&apos;t have an in-app checkout — it&apos;s a peer-to-peer marketplace. Use
+            &quot;I&apos;m interested&quot; on an item to get the seller&apos;s contact details and arrange payment
+            and pickup directly with them.
+          </div>
         </div>
       )}
     </div>

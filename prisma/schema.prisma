@@ -179,6 +179,7 @@ model User {
   orders            Order[]              @relation("OrderBuyer")
   reviews           Review[]
   favorites         Favorite[]
+  listings          Listing[]
   jobs              Job[]                @relation("JobCustomer")
   supportTickets    SupportTicket[]
   supportMessages   SupportMessage[]
@@ -371,10 +372,16 @@ model Compatibility {
 // Marketplace, cart, orders
 // ---------------------------------------------------------------------
 
+// A listing is sold by either a business (organizationId) or an
+// individual peer-to-peer seller (sellerId) — never neither, enforced in
+// the create/update actions rather than at the schema level (Prisma has
+// no native "exactly one of two nullable columns" constraint).
 model Listing {
   id             String            @id @default(cuid())
-  organization   Organization      @relation(fields: [organizationId], references: [id], onDelete: Cascade)
-  organizationId String
+  organization   Organization?     @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  organizationId String?
+  seller         User?             @relation(fields: [sellerId], references: [id], onDelete: Cascade)
+  sellerId       String?
   model          Model             @relation(fields: [modelId], references: [id])
   modelId        String
   title          String

@@ -554,6 +554,84 @@ Checked, against three live listings:
 Deleted both temporary listings afterward and confirmed the listing count
 was back at the 1-row baseline via `psql` directly, not just the UI.
 
+## Session 8 — pivot to a peer-to-peer marketplace
+
+The user corrected the marketplace's whole shape: DoorLink is meant to be
+Facebook-Marketplace-like — anyone meets up and buys directly off anyone
+else — not a storefront where only businesses registered as a "Supplier"
+can sell. Two decisions came out of a direct question rather than a
+guess: **anyone signed in can list an item** (not gated behind a business
+registration), and **a buyer connects with a seller by seeing their
+contact email on request**, not through in-app messaging or a formal
+order/payment flow.
+
+**Schema change:** `Listing.organizationId` went from required to
+optional, and a new optional `Listing.sellerId` (→ `User`) was added — a
+listing is sold by exactly one of an organization (the existing business
+path) or an individual (the new peer-to-peer path), enforced in the
+create/update actions rather than at the schema level (Prisma has no
+native "exactly one of two nullable columns" constraint). Pushed with
+`prisma db push`; the existing seeded listing, which sets
+`organizationId`, needed no changes.
+
+**RBAC:** `listing:write:own` moved from `SUPPLIER`-only to every role.
+The comment in `rbac.ts` says why: this is a capability of having an
+account at all, not something a role gates.
+
+**Renamed `/supplier/listings` → `/my-listings`** (`git mv`, not a
+delete-and-recreate, so history follows the files) since the old name
+actively misdescribed what it now does. The ownership logic changed from
+"does this listing's `organizationId` match mine" to "does it match
+_either_ my `organizationId` (if I have one) _or_ my `userId` as
+`sellerId`" — a `sellerAssignment()`/`ownsListing()` pair in `actions.ts`
+that both the layout guard, the actions, and the edit page's own
+independent ownership check now share the same logic for. A user who
+happens to have a supplier organization (e.g. `supplier@demo.doorlink`)
+keeps listing through their org exactly as before; everyone else lists
+personally, automatically — no seller-type toggle in the form, it falls
+out of who's signed in.
+
+**Contact reveal, not messaging:** `src/lib/listing-contact.ts` holds one
+Server Action, `revealListingContactAction`, called directly from a
+client component's `onClick` (not wrapped in a `<form>`, since it just
+takes a listing id) rather than embedded in the page's initial HTML —
+so a signed-out visitor or a scraper can't harvest emails just by loading
+the marketplace; the email is only ever sent to the client after a
+signed-in click. For a personal listing it resolves to the seller's own
+email; for a business listing, no schema field held a contact email at
+all, so it resolves to the organization's `OWNER` member's email instead
+(one extra query, acceptable) — the button and its label
+("I'm interested") work identically either way; the caller doesn't need
+to know or care which kind of seller they're contacting.
+
+**Everywhere a listing's seller was displayed as `listing.organization.name`
+directly needed updating** now that it's optional — three sites
+(`/marketplace`, `/model/[id]`, `/cart`) all switched to
+`listing.organization?.name ?? listing.seller?.name ?? 'a DoorLink member'`
+rather than crashing on a listing with no organization.
+
+### What was verified, in a real browser and against the database directly
+
+- The old `/supplier/listings` URL now correctly `404`s (route removed,
+  not just hidden).
+- `supplier@demo.doorlink`'s existing seeded listing still shows up
+  correctly at the new `/my-listings` URL — the business path wasn't
+  broken by the change.
+- Signed in as `customer@demo.doorlink` — an account with **no**
+  organization — created a listing through `/my-listings/new`: it
+  appeared in their own list, and on the public `/marketplace` it showed
+  "Sold by Demo Customer" (their own name, not an organization).
+- Signed in as a **different** account (`technician@demo.doorlink`),
+  found that same listing on the marketplace, clicked "I'm interested",
+  and the customer's actual seeded email (`customer@demo.doorlink`)
+  appeared inline — the real cross-account contact-reveal flow, not a
+  same-account round trip.
+- Signed out, confirmed there is no "I'm interested" button rendered at
+  all (only "Sign in to buy") — contact info has no signed-out code path
+  to leak through.
+- Deleted the test listing afterward and confirmed the listing count was
+  back at the 1-row baseline via `psql` directly.
+
 ---
 
 ## Status by module
@@ -570,7 +648,7 @@ was back at the 1-row baseline via `psql` directly, not just the UI.
 | 7 | Technical library | Schema done; documents listed on the model page, download UI still outstanding (needs storage) |
 | 8 | Compatibility engine | Schema, seed, bidirectional query, and admin CRUD (`/admin/compatibility`) all done and verified |
 | 9–12 | Customer / technician / supplier / manufacturer portals | Navigation and permissions defined; screens outstanding |
-| 13–15 | Marketplace, search, checkout | Public browse page, search/filtering, supplier listing CRUD, and cart (add/view/adjust/remove) all done and verified; real payment checkout dropped from scope (the app is free to use) — what "completing an order" means without payment is still an open question |
+| 13–15 | Marketplace, search, checkout | Peer-to-peer: anyone can list (`/my-listings`, business or individual), browse/search/filter, cart, and "I'm interested" contact reveal all done and verified; real payment checkout dropped from scope entirely (the app is free to use, buyers and sellers meet up directly) |
 | 16–18 | Leads, support, admin | Schema done; UI outstanding |
 | 19 | SEO | Metadata template and canonicals started; sitemap and JSON-LD outstanding |
 | 20–25 | Notifications, analytics, security, performance, testing, production | Foundations only |
@@ -608,20 +686,30 @@ was back at the 1-row baseline via `psql` directly, not just the UI.
     given, to be completed later on desktop); see "Still needs you, not
     code" below. Document admin CRUD and the upload workflow (Module 29)
     stay blocked behind it too.
-12. Decide what "completing an order" means without payment processing
-    (see "Still needs you, not code"), then build whatever that turns out
-    to be — a request-to-buy flow the supplier confirms, a plain order
-    record, or something else.
+12. ~~Decide what "completing an order" means without payment
+    processing.~~ Answered directly by the user (Session 8): DoorLink is
+    peer-to-peer, like Facebook Marketplace — buyer and seller meet up and
+    handle the exchange themselves. Built as "anyone can list" +
+    "I'm interested reveals the seller's contact email", not a formal
+    order record. `Order`/`OrderItem` stay unused for the marketplace
+    flow; they were designed for the storefront model this replaced.
+13. Extend `/my-listings` to cover editing/pausing personal listings
+    smoothly now that most users will be individuals, not businesses —
+    today's form still shows every field the business path needed
+    (status, stock quantity as a count rather than "still available"),
+    worth revisiting once real usage shows what a peer-to-peer seller
+    actually needs.
 
 ## Still needs you, not code
 
 - **Decided:** DoorLink is free to use — no Stripe, no payment processing.
   `/cart`'s "Checkout" stays behind `<NotConnected />` not because Stripe is
   merely unconfigured but because it's been dropped from scope entirely.
-  What "completing an order" actually means without payment (e.g. a
-  request-to-buy that a supplier confirms off-platform, versus a real free
-  checkout that just records the order) is an open product question for
-  whenever cart/order work resumes — not blocking anything today.
+- **Decided (Session 8):** the marketplace is peer-to-peer, like Facebook
+  Marketplace — anyone can list, buyers and sellers meet up and handle the
+  exchange themselves, contact happens via email reveal (`/my-listings`,
+  `revealListingContactAction`), not a supplier-only storefront with a
+  formal order flow.
 - Supabase project (auth + storage) — see the step-by-step setup guide
   given directly to the user; covers `NEXT_PUBLIC_SUPABASE_URL`,
   `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, and can

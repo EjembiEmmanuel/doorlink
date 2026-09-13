@@ -21,10 +21,18 @@ export type Permission =
   | 'import:write'
   | 'admin:settings'
 
+// listing:write:own is granted to every role — DoorLink's marketplace is
+// peer-to-peer (anyone with an account can list an item, business or
+// not), not gated behind registering as a Supplier organization. What
+// still differs by role is listing:write:any (moderate anyone's listing)
+// and whether an account happens to have a supplier organization
+// attached, which changes who a listing is sold *as*, not whether it can
+// be created at all.
 const MATRIX: Record<Role, Permission[]> = {
   CUSTOMER: [
     'catalogue:read',
     'listing:read',
+    'listing:write:own',
     'order:read:own',
     'job:read:own',
     'job:write:own',
@@ -33,6 +41,7 @@ const MATRIX: Record<Role, Permission[]> = {
   TECHNICIAN: [
     'catalogue:read',
     'listing:read',
+    'listing:write:own',
     'job:read:own',
     'job:write:own',
     'lead:read:assigned',
@@ -49,6 +58,7 @@ const MATRIX: Record<Role, Permission[]> = {
     'catalogue:read',
     'catalogue:write',
     'listing:read',
+    'listing:write:own',
     'import:write',
     'support:read:own',
   ],
@@ -56,6 +66,7 @@ const MATRIX: Record<Role, Permission[]> = {
     'catalogue:read',
     'catalogue:write',
     'listing:read',
+    'listing:write:own',
     'listing:write:any',
     'order:read:any',
     'job:read:own',

@@ -24,17 +24,25 @@ const listingSchema = z.object({
   stockQty: z.coerce.number().int().min(0, 'Stock cannot be negative.'),
 })
 
-// Every action here is scoped to the caller's own organization — a
-// supplier manages their own listings, never anyone else's, and the
-// permission check plus the organizationId requirement are both
-// re-verified here regardless of which page rendered the form.
-async function assertCanManageOwnListings(): Promise<Session & { organizationId: string }> {
+// Every action here is scoped to the caller's own listings — anyone with
+// an account can manage theirs, never anyone else's, and the permission
+// check is re-verified here regardless of which page rendered the form.
+async function assertCanManageOwnListings(): Promise<Session> {
   const session = await getSession()
-  const active = requirePermission(session, 'listing:write:own')
-  if (!active.organizationId) {
-    throw new RbacError('Your account is not linked to a supplier organization.', 403)
-  }
-  return active as Session & { organizationId: string }
+  return requirePermission(session, 'listing:write:own')
+}
+
+// A listing belongs to the caller's organization if they have one (the
+// existing business/supplier path), otherwise to the caller personally —
+// no form field for this, it falls out of who's signed in.
+function sellerAssignment(session: Session): { organizationId: string } | { sellerId: string } {
+  return session.organizationId ? { organizationId: session.organizationId } : { sellerId: session.userId }
+}
+
+function ownsListing(listing: { organizationId: string | null; sellerId: string | null }, session: Session): boolean {
+  if (listing.organizationId) return listing.organizationId === session.organizationId
+  if (listing.sellerId) return listing.sellerId === session.userId
+  return false
 }
 
 function readForm(formData: FormData) {
@@ -52,7 +60,7 @@ export async function createListingAction(
   _prevState: ListingFormState,
   formData: FormData
 ): Promise<ListingFormState> {
-  let session: Session & { organizationId: string }
+  let session: Session
   try {
     session = await assertCanManageOwnListings()
   } catch (error) {
@@ -68,17 +76,17 @@ export async function createListingAction(
   try {
     await prisma.listing.create({
       data: {
-        organizationId: session.organizationId,
+        ...sellerAssignment(session),
         modelId: parsed.data.modelId,
         title: parsed.data.title,
         priceCents: toMinorUnits(parsed.data.price),
         condition: ListingCondition[parsed.data.condition],
         status: ListingStatus[parsed.data.status],
         stockQty: parsed.data.stockQty,
-        // A supplier's own listing is self-reported, never pre-verified —
-        // the same provenance boundary Session 3 drew for registration: a
-        // supplier can't mark their own data admin- or
-        // manufacturer-verified just by creating it.
+        // A seller's own listing is self-reported, never pre-verified —
+        // the same provenance boundary Session 3 drew for registration:
+        // nobody can mark their own data admin- or manufacturer-verified
+        // just by creating it.
         dataSource: DataSource.COMMUNITY_SUBMITTED,
       },
     })
@@ -87,8 +95,8 @@ export async function createListingAction(
     throw error
   }
 
-  revalidatePath('/supplier/listings')
-  redirect('/supplier/listings')
+  revalidatePath('/my-listings')
+  redirect('/my-listings')
 }
 
 export async function updateListingAction(
@@ -96,7 +104,7 @@ export async function updateListingAction(
   _prevState: ListingFormState,
   formData: FormData
 ): Promise<ListingFormState> {
-  let session: Session & { organizationId: string }
+  let session: Session
   try {
     session = await assertCanManageOwnListings()
   } catch (error) {
@@ -111,7 +119,7 @@ export async function updateListingAction(
 
   try {
     const existing = await prisma.listing.findUnique({ where: { id } })
-    if (!existing || existing.organizationId !== session.organizationId) {
+    if (!existing || !ownsListing(existing, session)) {
       return { error: 'Listing not found.' }
     }
 
@@ -131,15 +139,15 @@ export async function updateListingAction(
     throw error
   }
 
-  revalidatePath('/supplier/listings')
-  redirect('/supplier/listings')
+  revalidatePath('/my-listings')
+  redirect('/my-listings')
 }
 
 export async function deleteListingAction(
   _prevState: ListingFormState,
   formData: FormData
 ): Promise<ListingFormState> {
-  let session: Session & { organizationId: string }
+  let session: Session
   try {
     session = await assertCanManageOwnListings()
   } catch (error) {
@@ -152,7 +160,7 @@ export async function deleteListingAction(
 
   try {
     const existing = await prisma.listing.findUnique({ where: { id } })
-    if (!existing || existing.organizationId !== session.organizationId) {
+    if (!existing || !ownsListing(existing, session)) {
       return { error: 'Listing not found.' }
     }
 
@@ -165,6 +173,6 @@ export async function deleteListingAction(
     throw error
   }
 
-  revalidatePath('/supplier/listings')
-  redirect('/supplier/listings')
+  revalidatePath('/my-listings')
+  redirect('/my-listings')
 }

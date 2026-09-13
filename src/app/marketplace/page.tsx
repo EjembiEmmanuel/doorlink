@@ -12,6 +12,7 @@ import { NotConnected } from '@/components/ui/NotConnected'
 import { Input, Select } from '@/components/ui/Field'
 import { Button } from '@/components/ui/Button'
 import { AddToCartButton } from '@/app/cart/AddToCartButton'
+import { InterestedButton } from '@/components/marketplace/InterestedButton'
 
 export const metadata: Metadata = {
   title: 'Marketplace',
@@ -63,6 +64,7 @@ export default async function MarketplacePage({ searchParams }: { searchParams: 
         include: {
           model: { select: { id: true, name: true, modelCode: true } },
           organization: { select: { name: true } },
+          seller: { select: { name: true } },
         },
       }),
       prisma.category.findMany({ orderBy: { name: 'asc' }, select: { id: true, name: true } }),
@@ -83,7 +85,8 @@ export default async function MarketplacePage({ searchParams }: { searchParams: 
     <div className="mx-auto max-w-shell px-4 py-10">
       <h1 className="text-2xl font-semibold text-graphite">Marketplace</h1>
       <p className="mt-2 max-w-prose text-graphite-soft">
-        Parts and accessories listed by suppliers. Every listing shows where it comes from.
+        Parts and accessories listed by other DoorLink members and businesses — meet up and buy directly
+        from whoever's selling. Every listing shows where it comes from.
       </p>
 
       <form method="GET" className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
@@ -164,7 +167,9 @@ export default async function MarketplacePage({ searchParams }: { searchParams: 
                   >
                     {listing.title}
                   </Link>
-                  <p className="mt-1 text-sm text-zinc-deep">Sold by {listing.organization.name}</p>
+                  <p className="mt-1 text-sm text-zinc-deep">
+                    Sold by {listing.organization?.name ?? listing.seller?.name ?? 'a DoorLink member'}
+                  </p>
                   <p className="mt-2 text-lg font-semibold text-graphite">
                     {formatMoney(listing.priceCents, listing.currency)}
                   </p>
@@ -174,9 +179,12 @@ export default async function MarketplacePage({ searchParams }: { searchParams: 
                   <div className="mt-2">
                     <SourceBadge source={listing.dataSource} />
                   </div>
-                  <div className="mt-3">
+                  <div className="mt-3 flex flex-col items-start gap-2">
                     {session ? (
-                      <AddToCartButton listingId={listing.id} />
+                      <>
+                        <AddToCartButton listingId={listing.id} />
+                        <InterestedButton listingId={listing.id} />
+                      </>
                     ) : (
                       <Link href="/sign-in" className="text-sm font-medium text-signal hover:text-signal-hover">
                         Sign in to buy
