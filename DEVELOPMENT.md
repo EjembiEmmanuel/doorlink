@@ -678,6 +678,60 @@ with something new should reopen it).
   back at 0 rows) — the schema's own `onDelete: Cascade` on
   `SupportMessage.ticket`, not application code, did that.
 
+## Session 10 — Module 19, SEO
+
+Added the two Next.js App Router special files: `src/app/sitemap.ts`
+(static public routes plus every model page, generated from the
+database — degrades to just the static routes if the database is
+unreachable, rather than a 500) and `src/app/robots.ts` (disallows
+`/admin`, `/my-listings`, `/cart`, `/support`, `/sign-in`, `/register` —
+none of them are useful to a crawler without a session, and `/admin`
+doubly shouldn't be discoverable). Added a sitewide `WebSite` JSON-LD
+block in the root layout, a `Product` JSON-LD block on `/model/[id]`
+(name, sku, brand, category, description, and `offers` when active
+listings exist — a structured mirror of what the page already shows
+visibly, nothing asserted to a crawler beyond what a person looking at
+the page can already see), and `description` + `alternates.canonical`
+on the model page and every static public page. The marketplace page's
+canonical points at the bare `/marketplace` path regardless of which
+filters are in the URL, so search engines don't treat every filter
+combination as separate duplicate content.
+
+**A real XSS gap found and fixed while building this, not a
+hypothetical.** `JSON.stringify()` piped straight into
+`dangerouslySetInnerHTML` is unsafe the moment a string field can
+contain a literal `</script>` — the browser's HTML parser closes the
+script tag early and renders whatever follows as markup. `Model.summary`
+is admin/manufacturer-editable content (`/admin/models`), not something
+this codebase fully controls, so this wasn't a remote edge case. Added
+`src/lib/json-ld.ts` (`toJsonLd()`), which escapes every `<` to `<`
+before the JSON hits the page — defusing `</script>` and a stray
+`<script>` the same way — and used it in both the layout's `WebSite`
+block and the model page's `Product` block instead of raw
+`JSON.stringify`.
+
+### What was verified, in a real browser and against the database directly
+
+- `curl`'d `/sitemap.xml` and `/robots.txt` directly: the sitemap listed
+  all 5 static routes plus all 5 seeded models with correct
+  `lastmod` timestamps; robots.txt disallowed exactly the six private
+  paths and pointed at the sitemap.
+- Checked the rendered HTML of the homepage and a model page for the
+  actual `<link rel="canonical">` and `<meta name="description">` tags,
+  and extracted both JSON-LD `<script>` blocks with a real HTML parse
+  (not just a substring check) to confirm they're well-formed — RC-2's
+  page correctly included an `offers` entry matching its seeded $45.00
+  listing; DR-700's (no listings) correctly omitted `offers` entirely
+  rather than emitting an empty array.
+- **Proved the XSS fix, didn't just reason about it:** used `psql` to set
+  a real model's `summary` to `Injected payload </script><script>alert(1)
+  </script> end.`, fetched the rendered page, and confirmed the payload
+  came through as `</script><script>alert(1)</script>`
+  inside the JSON string — not as literal HTML — and that the raw
+  unescaped string does not appear anywhere in the response. Reverted the
+  test data immediately after and confirmed the original summary was
+  restored.
+
 ---
 
 ## Status by module
@@ -696,7 +750,7 @@ with something new should reopen it).
 | 9–12 | Customer / technician / supplier / manufacturer portals | Navigation and permissions defined; screens outstanding |
 | 13–15 | Marketplace, search, checkout | Peer-to-peer: anyone can list (`/my-listings`, business or individual), browse/search/filter, cart, and "I'm interested" contact reveal all done and verified; real payment checkout dropped from scope entirely (the app is free to use, buyers and sellers meet up directly) |
 | 16–18 | Leads, support, admin | Support tickets (`/support`, `/support/[id]`, `/support/queue`) done and verified; Leads UI still outstanding — Leads was designed for the storefront model the Session 8 pivot replaced, so what it's for now needs rethinking, not just a UI |
-| 19 | SEO | Metadata template and canonicals started; sitemap and JSON-LD outstanding |
+| 19 | SEO | Sitemap, robots.txt, WebSite/Product JSON-LD, and canonicals on every public page all done and verified |
 | 20–25 | Notifications, analytics, security, performance, testing, production | Foundations only |
 | 26 | AI features | Interfaces present, honestly disconnected |
 
@@ -756,8 +810,12 @@ with something new should reopen it).
     dashboards exist yet; likely smaller now than originally scoped,
     since `/my-listings`, `/cart`, and `/support` already cover a good
     slice of what an individual account needs regardless of role.
-17. SEO (Module 19) — sitemap and JSON-LD still outstanding; metadata
-    template and canonicals exist from Module 2.
+17. ~~SEO (Module 19).~~ Sitemap, robots.txt, JSON-LD, and canonicals done
+    and verified (Session 10), including a real XSS gap found and fixed
+    in how JSON-LD gets embedded (see the session log).
+18. Leads and the portal screens (items 15–16 above) remain the two
+    biggest pieces of unbuilt UI, both waiting on product decisions
+    rather than being straightforward to just build.
 
 ## Still needs you, not code
 

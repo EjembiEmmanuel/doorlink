@@ -1,6 +1,11 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { FinderCascade } from '@/components/finder/FinderCascade'
 import { Panel, PanelBody, PanelHeader } from '@/components/ui/Panel'
+
+export const metadata: Metadata = {
+  alternates: { canonical: '/' },
+}
 
 export default function HomePage() {
   return (

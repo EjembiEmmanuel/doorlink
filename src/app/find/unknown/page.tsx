@@ -4,6 +4,8 @@ import { Panel, PanelBody } from '@/components/ui/Panel'
 
 export const metadata: Metadata = {
   title: "I don't know my model",
+  description: 'How to identify a garage door opener, motor, or lock without knowing its model number.',
+  alternates: { canonical: '/find/unknown' },
 }
 
 const TIPS = [

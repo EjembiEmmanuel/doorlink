@@ -5,6 +5,7 @@ import { SkipLink } from '@/components/layout/SkipLink'
 import { DemoBanner } from '@/components/layout/DemoBanner'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
+import { toJsonLd } from '@/lib/json-ld'
 import './globals.css'
 
 const plexSans = IBM_Plex_Sans({
@@ -35,10 +36,18 @@ export const metadata: Metadata = {
     'Product identification, technical documentation, compatible parts, suppliers and technicians for the garage door, roller shutter, motor and locking industry.',
 }
 
+const websiteJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'DoorLink',
+  url: siteUrl,
+}
+
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={`${plexSans.variable} ${plexMono.variable}`}>
       <body className="flex min-h-screen flex-col bg-paper font-sans text-graphite antialiased">
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: toJsonLd(websiteJsonLd) }} />
         <SkipLink />
         <DemoBanner />
         <Header />

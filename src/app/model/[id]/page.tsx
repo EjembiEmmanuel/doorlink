@@ -6,6 +6,7 @@ import { prisma } from '@/lib/prisma'
 import { getSession } from '@/lib/auth'
 import { isDatabaseUnreachable } from '@/lib/db-errors'
 import { isConnected } from '@/lib/integrations'
+import { toJsonLd } from '@/lib/json-ld'
 import { formatMoney } from '@/lib/money'
 import { Badge } from '@/components/ui/Badge'
 import { SourceBadge } from '@/components/ui/SourceBadge'
@@ -72,7 +73,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   try {
     const model = await getModel(id)
     if (!model) return { title: 'Model not found' }
-    return { title: `${model.name} · ${model.manufacturer.name}` }
+    return {
+      title: `${model.name} · ${model.manufacturer.name}`,
+      description:
+        model.summary ??
+        `${model.name} (${model.modelCode}) by ${model.manufacturer.name} — specifications, documents, and compatible parts.`,
+      alternates: { canonical: `/model/${model.id}` },
+    }
   } catch {
     return { title: 'Model' }
   }
@@ -123,8 +130,32 @@ export default async function ModelProfilePage({ params }: PageProps) {
 
   const storageConnected = isConnected('storage')
 
+  // Mirrors what the page already shows visibly (including the DataSource
+  // badge) — nothing here is asserted to a crawler that a person looking
+  // at the page couldn't already see for themselves.
+  const productJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: model.name,
+    sku: model.modelCode,
+    brand: { '@type': 'Brand', name: model.manufacturer.name },
+    category: model.category.name,
+    ...(model.summary ? { description: model.summary } : {}),
+    ...(model.listings.length > 0
+      ? {
+          offers: model.listings.map((listing) => ({
+            '@type': 'Offer',
+            price: (listing.priceCents / 100).toFixed(2),
+            priceCurrency: listing.currency,
+            availability: 'https://schema.org/InStock',
+          })),
+        }
+      : {}),
+  }
+
   return (
     <div className="mx-auto max-w-shell px-4 py-10">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: toJsonLd(productJsonLd) }} />
       <nav aria-label="Breadcrumb" className="mb-4 text-sm text-zinc-deep">
         <Link href="/find" className="hover:text-signal">
           Finder

@@ -4,6 +4,8 @@ import { SourceBadge } from '@/components/ui/SourceBadge'
 
 export const metadata: Metadata = {
   title: 'Data sources',
+  description: "How DoorLink labels where every catalogue record comes from, and what each label means.",
+  alternates: { canonical: '/data-sources' },
 }
 
 const SOURCES: { source: DataSource; description: string }[] = [

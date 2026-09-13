@@ -4,6 +4,8 @@ import { Panel, PanelBody, PanelHeader } from '@/components/ui/Panel'
 
 export const metadata: Metadata = {
   title: 'Find your part',
+  description: 'Work through category, manufacturer, and model to identify your garage door, motor, or lock.',
+  alternates: { canonical: '/find' },
 }
 
 export default function FindPage() {

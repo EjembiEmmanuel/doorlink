@@ -16,6 +16,11 @@ import { InterestedButton } from '@/components/marketplace/InterestedButton'
 
 export const metadata: Metadata = {
   title: 'Marketplace',
+  description: 'Parts and accessories listed by other DoorLink members and businesses — browse and buy directly.',
+  // Points at the bare path regardless of which filters are applied, so
+  // search engines don't treat every filter combination as separate
+  // duplicate content.
+  alternates: { canonical: '/marketplace' },
 }
 
 const CONDITIONS: { value: ListingCondition; label: string }[] = [
