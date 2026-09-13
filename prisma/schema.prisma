@@ -1,0 +1,605 @@
+// DoorLink — relational schema.
+// Provenance is a first-class concern: every catalogue record carries a
+// DataSource so the UI can render an honest caution badge instead of
+// pretending demo or imported data is verified (brief rules 28, 35).
+// Money is stored as integer minor units throughout — no float drift in
+// a multi-vendor marketplace.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// ---------------------------------------------------------------------
+// Enums
+// ---------------------------------------------------------------------
+
+enum Role {
+  CUSTOMER
+  TECHNICIAN
+  SUPPLIER
+  MANUFACTURER
+  ADMIN
+}
+
+enum OrgType {
+  SUPPLIER
+  MANUFACTURER
+  TECHNICIAN_COMPANY
+}
+
+enum OrgMemberRole {
+  OWNER
+  STAFF
+}
+
+// Where a catalogue record actually came from. Rendered by <SourceBadge />
+// wherever the record appears — never inferred, never hidden.
+enum DataSource {
+  DEMO
+  MANUFACTURER_VERIFIED
+  ADMIN_VERIFIED
+  COMMUNITY_SUBMITTED
+  IMPORTED
+}
+
+enum DocumentKind {
+  INSTALL_MANUAL
+  USER_MANUAL
+  WIRING_DIAGRAM
+  PARTS_LIST
+  SPEC_SHEET
+  WARRANTY
+  SERVICE_BULLETIN
+}
+
+enum CompatibilityKind {
+  REPLACEMENT_PART
+  ACCESSORY
+  REMOTE_PAIR
+  CONTROL_BOARD_MATCH
+  MOTOR_MATCH
+}
+
+enum CompatibilityConfidence {
+  CONFIRMED
+  LIKELY
+  UNCONFIRMED
+}
+
+enum ListingCondition {
+  NEW
+  REFURBISHED
+  USED
+}
+
+enum ListingStatus {
+  DRAFT
+  ACTIVE
+  PAUSED
+  SOLD_OUT
+  ARCHIVED
+}
+
+enum OrderStatus {
+  PENDING_PAYMENT
+  PAID
+  FULFILLING
+  PARTIALLY_SHIPPED
+  SHIPPED
+  COMPLETED
+  CANCELLED
+  REFUNDED
+}
+
+enum OrderItemStatus {
+  PENDING
+  CONFIRMED
+  SHIPPED
+  DELIVERED
+  CANCELLED
+  REFUNDED
+}
+
+enum LeadStatus {
+  NEW
+  CONTACTED
+  QUALIFIED
+  CONVERTED
+  CLOSED
+}
+
+enum JobStatus {
+  REQUESTED
+  SCHEDULED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+enum SupportStatus {
+  OPEN
+  PENDING
+  RESOLVED
+  CLOSED
+}
+
+enum SupportPriority {
+  LOW
+  NORMAL
+  HIGH
+  URGENT
+}
+
+enum NotificationType {
+  ORDER_UPDATE
+  LEAD_ASSIGNED
+  DOCUMENT_UPDATED
+  SUPPORT_REPLY
+  SYSTEM
+}
+
+enum ImportJobStatus {
+  PENDING
+  VALIDATING
+  STAGED
+  APPLIED
+  REJECTED
+}
+
+enum ImportRowStatus {
+  PENDING
+  VALID
+  INVALID
+  APPLIED
+}
+
+// ---------------------------------------------------------------------
+// Identity and organisations
+// ---------------------------------------------------------------------
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String
+  role      Role     @default(CUSTOMER)
+  phone     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  memberships       OrganizationMember[]
+  technicianProfile TechnicianProfile?
+  addresses         Address[]
+  cart              Cart?
+  orders            Order[]              @relation("OrderBuyer")
+  reviews           Review[]
+  favorites         Favorite[]
+  jobs              Job[]                @relation("JobCustomer")
+  supportTickets    SupportTicket[]
+  supportMessages   SupportMessage[]
+  notifications     Notification[]
+  auditLogs         AuditLog[]
+}
+
+model Organization {
+  id        String   @id @default(cuid())
+  name      String
+  type      OrgType
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  members         OrganizationMember[]
+  supplierProfile SupplierProfile?
+  manufacturer    Manufacturer?
+  listings        Listing[]
+  orderItems      OrderItem[]
+  jobs            Job[]                @relation("JobOrganization")
+  leads           Lead[]
+  importJobs      ImportJob[]
+}
+
+model OrganizationMember {
+  id             String        @id @default(cuid())
+  organization   Organization  @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  organizationId String
+  user           User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId         String
+  role           OrgMemberRole @default(STAFF)
+  createdAt      DateTime      @default(now())
+
+  @@unique([organizationId, userId])
+}
+
+model TechnicianProfile {
+  id          String   @id @default(cuid())
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      String   @unique
+  verified    Boolean  @default(false)
+  serviceArea String?
+  bio         String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  jobs Job[] @relation("JobTechnician")
+}
+
+model SupplierProfile {
+  id             String       @id @default(cuid())
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  organizationId String       @unique
+  commissionBps  Int          @default(0)
+  verified       Boolean      @default(false)
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+}
+
+// ---------------------------------------------------------------------
+// Catalogue tree
+// ---------------------------------------------------------------------
+
+model Manufacturer {
+  id             String        @id @default(cuid())
+  organization   Organization? @relation(fields: [organizationId], references: [id])
+  organizationId String?       @unique
+  name           String        @unique
+  slug           String        @unique
+  dataSource     DataSource    @default(DEMO)
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  productLines ProductLine[]
+  models       Model[]
+}
+
+model Category {
+  id        String     @id @default(cuid())
+  name      String     @unique
+  slug      String     @unique
+  parent    Category?  @relation("CategoryTree", fields: [parentId], references: [id])
+  parentId  String?
+  children  Category[] @relation("CategoryTree")
+  createdAt DateTime   @default(now())
+
+  models Model[]
+}
+
+model ProductLine {
+  id             String       @id @default(cuid())
+  manufacturer   Manufacturer @relation(fields: [manufacturerId], references: [id], onDelete: Cascade)
+  manufacturerId String
+  name           String
+  slug           String
+  dataSource     DataSource   @default(DEMO)
+  createdAt      DateTime     @default(now())
+
+  models Model[]
+
+  @@unique([manufacturerId, slug])
+}
+
+// The catalogue leaf: an opener, motor, remote, lock, or spare part.
+// Every finder cascade ends here.
+model Model {
+  id             String       @id @default(cuid())
+  manufacturer   Manufacturer @relation(fields: [manufacturerId], references: [id])
+  manufacturerId String
+  category       Category     @relation(fields: [categoryId], references: [id])
+  categoryId     String
+  productLine    ProductLine? @relation(fields: [productLineId], references: [id])
+  productLineId  String?
+  name           String
+  modelCode      String
+  slug           String       @unique
+  summary        String?
+  dataSource     DataSource   @default(DEMO)
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  specs          ModelSpec[]
+  documents      Document[]
+  listings       Listing[]
+  compatibleFrom Compatibility[] @relation("CompatFrom")
+  compatibleTo   Compatibility[] @relation("CompatTo")
+  favorites      Favorite[]
+  jobs           Job[]
+  leads          Lead[]
+
+  @@unique([manufacturerId, modelCode])
+}
+
+model ModelSpec {
+  id        String  @id @default(cuid())
+  model     Model   @relation(fields: [modelId], references: [id], onDelete: Cascade)
+  modelId   String
+  label     String
+  value     String
+  unit      String?
+  sortOrder Int     @default(0)
+}
+
+// ---------------------------------------------------------------------
+// Technical library
+// ---------------------------------------------------------------------
+
+// supersedesId forms a revision chain so an old installation keeps its
+// correct manual instead of being shown the current one.
+model Document {
+  id           String       @id @default(cuid())
+  model        Model        @relation(fields: [modelId], references: [id], onDelete: Cascade)
+  modelId      String
+  kind         DocumentKind
+  title        String
+  fileKey      String
+  version      String       @default("1")
+  dataSource   DataSource   @default(DEMO)
+  supersedes   Document?    @relation("DocumentRevision", fields: [supersedesId], references: [id])
+  supersedesId String?      @unique
+  supersededBy Document?    @relation("DocumentRevision")
+  createdAt    DateTime     @default(now())
+}
+
+// ---------------------------------------------------------------------
+// Compatibility engine — a join table, never hardcoded in a component.
+// Queried in both directions via compatibleFrom / compatibleTo.
+// ---------------------------------------------------------------------
+
+model Compatibility {
+  id          String                  @id @default(cuid())
+  fromModel   Model                   @relation("CompatFrom", fields: [fromModelId], references: [id], onDelete: Cascade)
+  fromModelId String
+  toModel     Model                   @relation("CompatTo", fields: [toModelId], references: [id], onDelete: Cascade)
+  toModelId   String
+  kind        CompatibilityKind
+  confidence  CompatibilityConfidence @default(UNCONFIRMED)
+  dataSource  DataSource              @default(DEMO)
+  note        String?
+  createdAt   DateTime                @default(now())
+
+  @@unique([fromModelId, toModelId, kind])
+}
+
+// ---------------------------------------------------------------------
+// Marketplace, cart, orders
+// ---------------------------------------------------------------------
+
+model Listing {
+  id             String            @id @default(cuid())
+  organization   Organization      @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  organizationId String
+  model          Model             @relation(fields: [modelId], references: [id])
+  modelId        String
+  title          String
+  priceCents     Int
+  currency       String            @default("AUD")
+  condition      ListingCondition  @default(NEW)
+  status         ListingStatus     @default(DRAFT)
+  stockQty       Int               @default(0)
+  dataSource     DataSource        @default(DEMO)
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @updatedAt
+
+  cartItems  CartItem[]
+  orderItems OrderItem[]
+  reviews    Review[]
+}
+
+model Cart {
+  id        String     @id @default(cuid())
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String     @unique
+  items     CartItem[]
+  updatedAt DateTime   @updatedAt
+}
+
+model CartItem {
+  id        String  @id @default(cuid())
+  cart      Cart    @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  cartId    String
+  listing   Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  listingId String
+  quantity  Int     @default(1)
+
+  @@unique([cartId, listingId])
+}
+
+// OrderItem carries its own orgId and status so a multi-vendor basket
+// fulfils per seller instead of as one monolithic order.
+model Order {
+  id                 String      @id @default(cuid())
+  buyer              User        @relation("OrderBuyer", fields: [buyerId], references: [id])
+  buyerId            String
+  status             OrderStatus @default(PENDING_PAYMENT)
+  totalCents         Int
+  currency           String      @default("AUD")
+  shippingAddress    Address?    @relation(fields: [shippingAddressId], references: [id])
+  shippingAddressId  String?
+  createdAt          DateTime    @default(now())
+  updatedAt          DateTime    @updatedAt
+
+  items OrderItem[]
+}
+
+model OrderItem {
+  id             String          @id @default(cuid())
+  order          Order           @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  orderId        String
+  listing        Listing         @relation(fields: [listingId], references: [id])
+  listingId      String
+  organization   Organization    @relation(fields: [organizationId], references: [id])
+  organizationId String
+  quantity       Int
+  unitPriceCents Int
+  status         OrderItemStatus @default(PENDING)
+}
+
+model Address {
+  id        String   @id @default(cuid())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  line1     String
+  line2     String?
+  suburb    String
+  state     String
+  postcode  String
+  country   String   @default("AU")
+  createdAt DateTime @default(now())
+
+  orders Order[]
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  listing   Listing  @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  listingId String
+  author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  authorId  String
+  rating    Int
+  body      String?
+  createdAt DateTime @default(now())
+
+  @@unique([listingId, authorId])
+}
+
+model Favorite {
+  id        String   @id @default(cuid())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  model     Model    @relation(fields: [modelId], references: [id], onDelete: Cascade)
+  modelId   String
+  createdAt DateTime @default(now())
+
+  @@unique([userId, modelId])
+}
+
+// ---------------------------------------------------------------------
+// Leads, jobs, support
+// ---------------------------------------------------------------------
+
+model Lead {
+  id            String       @id @default(cuid())
+  name          String
+  email         String
+  phone         String?
+  message       String
+  model         Model?       @relation(fields: [modelId], references: [id])
+  modelId       String?
+  assignedOrg   Organization? @relation(fields: [assignedOrgId], references: [id])
+  assignedOrgId String?
+  status        LeadStatus   @default(NEW)
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+}
+
+model Job {
+  id             String             @id @default(cuid())
+  technician     TechnicianProfile? @relation("JobTechnician", fields: [technicianId], references: [id])
+  technicianId   String?
+  organization   Organization?      @relation("JobOrganization", fields: [organizationId], references: [id])
+  organizationId String?
+  customer       User?              @relation("JobCustomer", fields: [customerId], references: [id])
+  customerId     String?
+  model          Model?             @relation(fields: [modelId], references: [id])
+  modelId        String?
+  description    String
+  status         JobStatus          @default(REQUESTED)
+  scheduledAt    DateTime?
+  createdAt      DateTime           @default(now())
+  updatedAt      DateTime           @updatedAt
+}
+
+model SupportTicket {
+  id        String          @id @default(cuid())
+  user      User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  subject   String
+  status    SupportStatus   @default(OPEN)
+  priority  SupportPriority @default(NORMAL)
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+
+  messages SupportMessage[]
+}
+
+model SupportMessage {
+  id        String        @id @default(cuid())
+  ticket    SupportTicket @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+  ticketId  String
+  sender    User          @relation(fields: [senderId], references: [id])
+  senderId  String
+  body      String
+  createdAt DateTime      @default(now())
+}
+
+// ---------------------------------------------------------------------
+// Notifications, audit log, staged imports, platform settings
+// ---------------------------------------------------------------------
+
+model Notification {
+  id        String           @id @default(cuid())
+  user      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  type      NotificationType
+  title     String
+  body      String
+  readAt    DateTime?
+  createdAt DateTime         @default(now())
+}
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  actor      User?    @relation(fields: [actorId], references: [id])
+  actorId    String?
+  action     String
+  entityType String
+  entityId   String
+  metadata   Json?
+  createdAt  DateTime @default(now())
+}
+
+// Nothing reaches the catalogue until an ImportJob is APPLIED — rows are
+// staged and validated first.
+model ImportJob {
+  id             String          @id @default(cuid())
+  organization   Organization?   @relation(fields: [organizationId], references: [id])
+  organizationId String?
+  kind           String
+  status         ImportJobStatus @default(PENDING)
+  fileKey        String
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+
+  rows ImportRow[]
+}
+
+model ImportRow {
+  id          String          @id @default(cuid())
+  importJob   ImportJob       @relation(fields: [importJobId], references: [id], onDelete: Cascade)
+  importJobId String
+  rowNumber   Int
+  rawData     Json
+  status      ImportRowStatus @default(PENDING)
+  errors      Json?
+}
+
+model PlatformSetting {
+  key       String   @id
+  value     Json
+  updatedAt DateTime @updatedAt
+}
+
+// Idempotency record for inbound webhooks (Stripe, Resend, ...).
+model WebhookEvent {
+  id          String    @id @default(cuid())
+  provider    String
+  externalId  String
+  payload     Json
+  processedAt DateTime?
+  createdAt   DateTime  @default(now())
+
+  @@unique([provider, externalId])
+}
