@@ -406,6 +406,61 @@ That's four of the five catalogue entities with working admin CRUD —
 Documents is the one left, and it stays blocked on Supabase storage
 being connected (see "Still needs you, not code").
 
+## Session 5 — Modules 13–15, marketplace listing and product pages
+
+Built both halves: a public browse page (`/marketplace`, showing only
+`ACTIVE` listings) and supplier-side listing management
+(`/supplier/listings` — list, create, edit, delete), scoped to the
+signed-in supplier's own organization.
+
+**The provenance boundary from Session 3 extends here too.** A supplier
+creating their own listing cannot choose its `DataSource` — it's hardcoded
+to `COMMUNITY_SUBMITTED` in the action, never exposed as a form field.
+Letting a supplier mark their own listing `ADMIN_VERIFIED` or
+`MANUFACTURER_VERIFIED` would be self-attested verification, which is
+exactly what the whole `DataSource` system exists to prevent. This is the
+same shape of decision as "registering as a manufacturer doesn't create a
+`Manufacturer` catalogue row" — a different entity, the same principle.
+
+**Two layers of ownership enforcement, not one.** `/supplier`'s layout
+gates on `can(session.role, 'listing:write:own') && session.organizationId`
+and redirects otherwise — but as with `/admin`, Server Actions are
+directly callable regardless of which page rendered them, so
+`createListingAction`, `updateListingAction`, and `deleteListingAction`
+each re-check both the permission and the organization requirement via
+`assertCanManageOwnListings()`, and update/delete additionally verify the
+target listing's `organizationId` actually matches the caller's before
+touching it. The edit *page* does the same ownership check before ever
+rendering the form (not just the action) — a supplier can't view another
+supplier's listing pre-filled into an edit form even read-only, and a
+mismatch renders the real `not-found.tsx`, not a distinguishable
+"forbidden" response, so probing listing ids can't be used to enumerate
+which ones exist.
+
+### What was verified, in a real browser and against the database directly
+
+- Public `/marketplace` shows the seeded RC-2 listing (Demo Door Supplies,
+  $45.00) with no sign-in required.
+- Signed in as `supplier@demo.doorlink`: header shows "My listings" and
+  not "Admin" (confirming the nav computation is permission-specific, not
+  a blanket "any signed-in user" check); `/supplier/listings` shows their
+  own seeded listing.
+- Created a listing for Northgate's DR-700, status Active: appeared in
+  both the supplier's own list and the public marketplace immediately.
+  Edited it to Paused: disappeared from the public marketplace but stayed
+  visible in the supplier's own list (status filtering, not deletion).
+  Deleted it: gone from both.
+- Signed in as `customer@demo.doorlink` and confirmed `/supplier/listings`
+  redirects to `/` (customers don't have `listing:write:own`).
+- Registered a **second, brand-new** supplier account through `/register`
+  and confirmed it starts with zero listings, then tried to load the
+  *first* supplier's seeded listing's edit URL directly
+  (`/supplier/listings/demo-listing-rc-2/edit`) while signed in as the
+  second supplier — got a real `404`, not the listing's data and not a
+  permission page. This is the actual cross-tenant boundary test, not
+  just a same-account round trip.
+- Listing count was back at the 1-row baseline afterward.
+
 ---
 
 ## Status by module
@@ -422,7 +477,7 @@ being connected (see "Still needs you, not code").
 | 7 | Technical library | Schema done; documents listed on the model page, download UI still outstanding (needs storage) |
 | 8 | Compatibility engine | Schema, seed, bidirectional query, and admin CRUD (`/admin/compatibility`) all done and verified |
 | 9–12 | Customer / technician / supplier / manufacturer portals | Navigation and permissions defined; screens outstanding |
-| 13–15 | Marketplace, search, checkout | Schema done; UI outstanding |
+| 13–15 | Marketplace, search, checkout | Public browse page and supplier listing CRUD done and verified; search and checkout still outstanding |
 | 16–18 | Leads, support, admin | Schema done; UI outstanding |
 | 19 | SEO | Metadata template and canonicals started; sitemap and JSON-LD outstanding |
 | 20–25 | Notifications, analytics, security, performance, testing, production | Foundations only |
@@ -445,7 +500,11 @@ being connected (see "Still needs you, not code").
    upload rather than being a design gap — see item 7.
 7. The document upload workflow (Module 29) — blocked on Supabase storage
    being connected; see "Still needs you, not code" below.
-8. Marketplace listing and product pages.
+8. ~~Marketplace listing and product pages.~~ Public `/marketplace` browse
+   page and supplier-scoped listing CRUD (`/supplier/listings`) done and
+   verified (Session 5), including the cross-tenant ownership boundary.
+   Still outstanding: search/filtering on the marketplace page, cart, and
+   checkout (blocked on Stripe — see "Still needs you, not code").
 9. Wire in a real auth provider (Supabase) to replace `src/lib/dev-session.ts`
    — see "Still needs you, not code" below.
 

@@ -6,13 +6,19 @@ import { MobileNavToggle } from './MobileNavToggle'
 
 const NAV_LINKS = [
   { href: '/find', label: 'Find your part' },
+  { href: '/marketplace', label: 'Marketplace' },
   { href: '/data-sources', label: 'Data sources' },
 ]
 
 export async function Header() {
   const session = await getSession()
-  const navLinks =
-    session && can(session.role, 'catalogue:write') ? [...NAV_LINKS, { href: '/admin', label: 'Admin' }] : NAV_LINKS
+  const navLinks = [...NAV_LINKS]
+  if (session && can(session.role, 'listing:write:own') && session.organizationId) {
+    navLinks.push({ href: '/supplier/listings', label: 'My listings' })
+  }
+  if (session && can(session.role, 'catalogue:write')) {
+    navLinks.push({ href: '/admin', label: 'Admin' })
+  }
 
   return (
     <header className="relative border-b border-line bg-paper">
