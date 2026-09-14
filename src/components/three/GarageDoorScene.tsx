@@ -3,7 +3,12 @@
 import { useRef } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { Environment, OrbitControls, RoundedBox, Sky } from '@react-three/drei'
+import { EffectComposer, DepthOfField, ToneMapping } from '@react-three/postprocessing'
+import { ToneMappingMode } from 'postprocessing'
 import * as THREE from 'three'
+import { House } from './House'
+import { Garden } from './Garden'
+import { Birds } from './Birds'
 
 const PANEL_COUNT = 4
 const DOOR_WIDTH = 3.2
@@ -17,6 +22,19 @@ const PANEL_DEPTH = 0.14
 const LIFT_HEIGHT = DOOR_HEIGHT + 0.9
 const FLOOR_Y = -DOOR_HEIGHT / 2 - 0.42
 const SUN_POSITION: [number, number, number] = [8, 5, 6]
+const JAMB_WIDTH = 0.3
+const WALL_Z = PANEL_DEPTH / 2 + 0.03
+const WALL_TOP_Y = DOOR_HEIGHT / 2 + (LIFT_HEIGHT + 0.6)
+
+function SunGlow() {
+  const direction = new THREE.Vector3(...SUN_POSITION).normalize().multiplyScalar(40)
+  return (
+    <mesh position={direction.toArray()}>
+      <sphereGeometry args={[2.2, 16, 16]} />
+      <meshBasicMaterial color="#fff6dd" toneMapped={false} />
+    </mesh>
+  )
+}
 
 function HardwareBracket({ x }: { x: number }) {
   return (
@@ -117,25 +135,23 @@ function Panel({ index, isOpen, color }: { index: number; isOpen: boolean; color
 }
 
 function Facade() {
-  const jambWidth = 0.3
-  const wallZ = PANEL_DEPTH / 2 + 0.03
   const height = DOOR_HEIGHT + LIFT_HEIGHT + 0.6
   const y = FLOOR_Y + height / 2
-  const jambX = DOOR_WIDTH / 2 + jambWidth / 2
+  const jambX = DOOR_WIDTH / 2 + JAMB_WIDTH / 2
   const wallMaterial = <meshStandardMaterial color="#E4E2DC" roughness={0.94} envMapIntensity={0.35} />
 
   return (
     <group>
-      <mesh position={[-jambX, y, wallZ]} castShadow receiveShadow>
-        <boxGeometry args={[jambWidth, height, 0.4]} />
+      <mesh position={[-jambX, y, WALL_Z]} castShadow receiveShadow>
+        <boxGeometry args={[JAMB_WIDTH, height, 0.4]} />
         {wallMaterial}
       </mesh>
-      <mesh position={[jambX, y, wallZ]} castShadow receiveShadow>
-        <boxGeometry args={[jambWidth, height, 0.4]} />
+      <mesh position={[jambX, y, WALL_Z]} castShadow receiveShadow>
+        <boxGeometry args={[JAMB_WIDTH, height, 0.4]} />
         {wallMaterial}
       </mesh>
-      <mesh position={[0, DOOR_HEIGHT / 2 + (LIFT_HEIGHT + 0.6) / 2, wallZ]} castShadow receiveShadow>
-        <boxGeometry args={[DOOR_WIDTH + jambWidth * 2, LIFT_HEIGHT + 0.6, 0.4]} />
+      <mesh position={[0, WALL_TOP_Y - (LIFT_HEIGHT + 0.6) / 2, WALL_Z]} castShadow receiveShadow>
+        <boxGeometry args={[DOOR_WIDTH + JAMB_WIDTH * 2, LIFT_HEIGHT + 0.6, 0.4]} />
         {wallMaterial}
       </mesh>
     </group>
@@ -147,10 +163,12 @@ export function GarageDoorScene({ isOpen }: { isOpen: boolean }) {
     <Canvas
       shadows="soft"
       dpr={[1, 1.5]}
-      gl={{ antialias: true, toneMapping: THREE.ACESFilmicToneMapping, toneMappingExposure: 1.1 }}
+      gl={{ antialias: true }}
       camera={{ position: [3.4, 1.5, 4.6], fov: 32 }}
     >
       <Sky sunPosition={SUN_POSITION} turbidity={4} rayleigh={1.2} mieCoefficient={0.02} mieDirectionalG={0.9} />
+      <SunGlow />
+      <Birds />
       <fog attach="fog" args={['#cfd8e3', 9, 21]} />
 
       {/* Baked once (frames=1), not per-frame — gives the dark steel and
@@ -176,6 +194,7 @@ export function GarageDoorScene({ isOpen }: { isOpen: boolean }) {
       <directionalLight position={[-5, 3, -3]} intensity={0.28} color="#cbd9ff" />
 
       <Facade />
+      <House jambOuterX={DOOR_WIDTH / 2 + JAMB_WIDTH} wallTopY={WALL_TOP_Y} wallZ={WALL_Z} floorY={FLOOR_Y} doorWidth={DOOR_WIDTH} />
       {Array.from({ length: PANEL_COUNT }, (_, i) => (
         <Panel key={i} index={i} isOpen={isOpen} color="#2C3033" />
       ))}
@@ -184,6 +203,18 @@ export function GarageDoorScene({ isOpen }: { isOpen: boolean }) {
         <planeGeometry args={[16, 16]} />
         <meshStandardMaterial color="#d9d5cb" roughness={0.96} envMapIntensity={0.25} />
       </mesh>
+      <Garden doorWidth={DOOR_WIDTH} floorY={FLOOR_Y} />
+
+      {/* Tone mapping deliberately lives here, last in the effect chain,
+          instead of on the renderer (gl.toneMapping) — the renderer's own
+          tone mapping runs before DepthOfField captures the scene, which
+          clamps bright pixels to 0-1 first and makes the sky/sun bloom
+          into a blown-out white smear once blurred. Applying it after
+          DoF keeps the blur working on proper HDR data. */}
+      <EffectComposer>
+        <DepthOfField focusDistance={5.7} focusRange={2.8} bokehScale={3} />
+        <ToneMapping mode={ToneMappingMode.ACES_FILMIC} />
+      </EffectComposer>
 
       <OrbitControls
         target={[0, 0.7, 0]}
