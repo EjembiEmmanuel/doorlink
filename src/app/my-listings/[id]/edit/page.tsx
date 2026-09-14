@@ -1,4 +1,4 @@
-import { notFound } from 'next/navigation'
+import { notFound, redirect } from 'next/navigation'
 import { getSession } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 import { isDatabaseUnreachable } from '@/lib/db-errors'
@@ -10,8 +10,8 @@ type PageProps = { params: Promise<{ id: string }> }
 export default async function EditListingPage({ params }: PageProps) {
   const { id } = await params
   const session = await getSession()
-  // The layout above already guarantees a session exists.
-  const { userId, organizationId } = session!
+  if (!session) redirect('/sign-in')
+  const { userId, organizationId } = session
 
   let listing, models
   try {

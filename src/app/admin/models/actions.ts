@@ -7,7 +7,7 @@ import { DataSource, Prisma } from '@prisma/client'
 import { prisma } from '@/lib/prisma'
 import { getSession } from '@/lib/auth'
 import { requirePermission, RbacError } from '@/lib/rbac'
-import { isDatabaseUnreachable } from '@/lib/db-errors'
+import { isDatabaseUnreachable, isRecordNotFound } from '@/lib/db-errors'
 import { slugify } from '@/lib/slug'
 
 export type ModelFormState = { error?: string }
@@ -155,6 +155,7 @@ export async function updateModelAction(
       },
     })
   } catch (error) {
+    if (isRecordNotFound(error)) return { error: 'This model no longer exists.' }
     if (isDatabaseUnreachable(error)) return { error: 'The catalogue database is not reachable right now.' }
     throw error
   }
@@ -180,6 +181,7 @@ export async function deleteModelAction(_prevState: ModelFormState, formData: Fo
     if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2003') {
       return { error: 'Cannot delete: this model still has active listings. Remove or reassign them first.' }
     }
+    if (isRecordNotFound(error)) return { error: 'This model no longer exists.' }
     if (isDatabaseUnreachable(error)) return { error: 'The catalogue database is not reachable right now.' }
     throw error
   }

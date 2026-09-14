@@ -7,7 +7,7 @@ import { CompatibilityConfidence, CompatibilityKind, DataSource } from '@prisma/
 import { prisma } from '@/lib/prisma'
 import { getSession } from '@/lib/auth'
 import { requirePermission, RbacError } from '@/lib/rbac'
-import { isDatabaseUnreachable } from '@/lib/db-errors'
+import { isDatabaseUnreachable, isRecordNotFound } from '@/lib/db-errors'
 
 export type CompatibilityFormState = { error?: string }
 
@@ -123,6 +123,7 @@ export async function updateCompatibilityAction(
       },
     })
   } catch (error) {
+    if (isRecordNotFound(error)) return { error: 'This compatibility link no longer exists.' }
     if (isDatabaseUnreachable(error)) return { error: 'The catalogue database is not reachable right now.' }
     throw error
   }
@@ -150,6 +151,7 @@ export async function deleteCompatibilityAction(
     // categories, and models, there is no "still in use" failure mode here.
     await prisma.compatibility.delete({ where: { id } })
   } catch (error) {
+    if (isRecordNotFound(error)) return { error: 'This compatibility link no longer exists.' }
     if (isDatabaseUnreachable(error)) return { error: 'The catalogue database is not reachable right now.' }
     throw error
   }

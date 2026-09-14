@@ -22,3 +22,12 @@ export function isDatabaseUnreachable(error: unknown): boolean {
   }
   return false
 }
+
+// Prisma throws P2025 when an update/delete targets a row that's already
+// gone (a stale page, or a second admin deleting it first) — a real,
+// reachable outcome under concurrent edits, not a bug, so callers should
+// turn it into a normal form error rather than letting it surface as an
+// unhandled exception.
+export function isRecordNotFound(error: unknown): boolean {
+  return error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2025'
+}

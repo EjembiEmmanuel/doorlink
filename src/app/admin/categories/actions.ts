@@ -7,7 +7,7 @@ import { Prisma } from '@prisma/client'
 import { prisma } from '@/lib/prisma'
 import { getSession } from '@/lib/auth'
 import { requirePermission, RbacError } from '@/lib/rbac'
-import { isDatabaseUnreachable } from '@/lib/db-errors'
+import { isDatabaseUnreachable, isRecordNotFound } from '@/lib/db-errors'
 import { slugify } from '@/lib/slug'
 
 export type CategoryFormState = { error?: string }
@@ -99,6 +99,7 @@ export async function updateCategoryAction(
       data: { name: parsed.data.name, slug, parentId: parsed.data.parentId || null },
     })
   } catch (error) {
+    if (isRecordNotFound(error)) return { error: 'This category no longer exists.' }
     if (isDatabaseUnreachable(error)) return { error: 'The catalogue database is not reachable right now.' }
     throw error
   }
@@ -127,6 +128,7 @@ export async function deleteCategoryAction(
     if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2003') {
       return { error: 'Cannot delete: this category still has models or subcategories linked to it.' }
     }
+    if (isRecordNotFound(error)) return { error: 'This category no longer exists.' }
     if (isDatabaseUnreachable(error)) return { error: 'The catalogue database is not reachable right now.' }
     throw error
   }

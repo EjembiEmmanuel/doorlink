@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { redirect } from 'next/navigation'
 import { getSession } from '@/lib/auth'
 import { can } from '@/lib/rbac'
 import { prisma } from '@/lib/prisma'
@@ -22,9 +23,9 @@ const STATUS_TONE = {
 
 export default async function SupportPage() {
   const session = await getSession()
-  // The layout above already guarantees a session.
-  const userId = session!.userId
-  const isSupportAdmin = can(session!.role, 'support:write:any')
+  if (!session) redirect('/sign-in')
+  const userId = session.userId
+  const isSupportAdmin = can(session.role, 'support:write:any')
 
   let tickets
   try {

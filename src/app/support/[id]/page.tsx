@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { notFound } from 'next/navigation'
+import { notFound, redirect } from 'next/navigation'
 import { getSession } from '@/lib/auth'
 import { can } from '@/lib/rbac'
 import { prisma } from '@/lib/prisma'
@@ -25,8 +25,8 @@ const STATUS_TONE = {
 export default async function SupportTicketPage({ params }: PageProps) {
   const { id } = await params
   const session = await getSession()
-  // The layout above already guarantees a session.
-  const isSupportAdmin = can(session!.role, 'support:write:any')
+  if (!session) redirect('/sign-in')
+  const isSupportAdmin = can(session.role, 'support:write:any')
 
   let ticket
   try {
@@ -43,7 +43,7 @@ export default async function SupportTicketPage({ params }: PageProps) {
 
   // Not found rather than a permission error — a user shouldn't be able
   // to tell the difference between "doesn't exist" and "isn't yours".
-  if (!ticket || (ticket.userId !== session!.userId && !isSupportAdmin)) notFound()
+  if (!ticket || (ticket.userId !== session.userId && !isSupportAdmin)) notFound()
 
   return (
     <div className="flex flex-col gap-6">

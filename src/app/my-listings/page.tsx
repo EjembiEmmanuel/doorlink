@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { redirect } from 'next/navigation'
 import { getSession } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 import { isDatabaseUnreachable } from '@/lib/db-errors'
@@ -20,9 +21,9 @@ const STATUS_TONE = {
 
 export default async function MyListingsPage() {
   const session = await getSession()
-  // The layout above already guarantees a session before this renders.
-  const userId = session!.userId
-  const organizationId = session!.organizationId
+  if (!session) redirect('/sign-in')
+  const userId = session.userId
+  const organizationId = session.organizationId
 
   let listings
   try {

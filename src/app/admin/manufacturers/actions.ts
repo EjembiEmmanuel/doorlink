@@ -7,7 +7,7 @@ import { DataSource, Prisma } from '@prisma/client'
 import { prisma } from '@/lib/prisma'
 import { getSession } from '@/lib/auth'
 import { requirePermission, RbacError } from '@/lib/rbac'
-import { isDatabaseUnreachable } from '@/lib/db-errors'
+import { isDatabaseUnreachable, isRecordNotFound } from '@/lib/db-errors'
 import { slugify } from '@/lib/slug'
 
 export type ManufacturerFormState = { error?: string }
@@ -100,6 +100,7 @@ export async function updateManufacturerAction(
       data: { name: parsed.data.name, slug, dataSource: DataSource[parsed.data.dataSource] },
     })
   } catch (error) {
+    if (isRecordNotFound(error)) return { error: 'This manufacturer no longer exists.' }
     if (isDatabaseUnreachable(error)) return { error: 'The catalogue database is not reachable right now.' }
     throw error
   }
@@ -128,6 +129,7 @@ export async function deleteManufacturerAction(
     if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2003') {
       return { error: 'Cannot delete: this manufacturer still has product lines or models linked to it.' }
     }
+    if (isRecordNotFound(error)) return { error: 'This manufacturer no longer exists.' }
     if (isDatabaseUnreachable(error)) return { error: 'The catalogue database is not reachable right now.' }
     throw error
   }

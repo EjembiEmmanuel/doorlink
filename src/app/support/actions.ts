@@ -7,7 +7,7 @@ import { SupportPriority, SupportStatus } from '@prisma/client'
 import { prisma } from '@/lib/prisma'
 import { getSession, type Session } from '@/lib/auth'
 import { requireSession, requirePermission, can, RbacError } from '@/lib/rbac'
-import { isDatabaseUnreachable } from '@/lib/db-errors'
+import { isDatabaseUnreachable, isRecordNotFound } from '@/lib/db-errors'
 
 export type SupportFormState = { error?: string }
 
@@ -143,6 +143,7 @@ export async function updateTicketAction(
       data: { status: SupportStatus[parsed.data.status], priority: SupportPriority[parsed.data.priority] },
     })
   } catch (error) {
+    if (isRecordNotFound(error)) return { error: 'This ticket no longer exists.' }
     if (isDatabaseUnreachable(error)) return { error: 'The support database is not reachable right now.' }
     throw error
   }
