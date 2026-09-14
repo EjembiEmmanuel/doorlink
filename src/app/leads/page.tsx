@@ -7,20 +7,13 @@ import { isDatabaseUnreachable } from '@/lib/db-errors'
 import { NotConnected } from '@/components/ui/NotConnected'
 import { EmptyState } from '@/components/ui/EmptyState'
 import { Badge } from '@/components/ui/Badge'
+import { LEAD_STATUS_TONE } from '@/lib/labels'
 import { RespondButton } from './RespondButton'
 import { UpdateLeadStatus } from './UpdateLeadStatus'
 
 export const metadata: Metadata = {
   title: 'Requests',
 }
-
-const STATUS_TONE = {
-  NEW: 'signal',
-  CONTACTED: 'caution',
-  QUALIFIED: 'caution',
-  CONVERTED: 'good',
-  CLOSED: 'neutral',
-} as const
 
 export default async function LeadsPage() {
   const session = await getSession()
@@ -75,7 +68,7 @@ export default async function LeadsPage() {
                       </p>
                     )}
                   </div>
-                  <Badge tone={STATUS_TONE[lead.status]}>{lead.status}</Badge>
+                  <Badge tone={LEAD_STATUS_TONE[lead.status]}>{lead.status}</Badge>
                 </div>
                 <div className="mt-3">
                   <RespondButton leadId={lead.id} />
@@ -110,7 +103,7 @@ export default async function LeadsPage() {
                       {lead.phone && <span> · {lead.phone}</span>}
                     </p>
                   </div>
-                  <Badge tone={STATUS_TONE[lead.status]}>{lead.status}</Badge>
+                  <Badge tone={LEAD_STATUS_TONE[lead.status]}>{lead.status}</Badge>
                 </div>
                 <div className="mt-3">
                   <UpdateLeadStatus leadId={lead.id} status={lead.status} />
@@ -134,7 +127,7 @@ export default async function LeadsPage() {
                 <div key={lead.id} className="rounded-md border border-line p-4">
                   <div className="flex items-start justify-between gap-4">
                     <p className="font-medium text-graphite">{lead.message}</p>
-                    <Badge tone={STATUS_TONE[lead.status]}>{lead.status}</Badge>
+                    <Badge tone={LEAD_STATUS_TONE[lead.status]}>{lead.status}</Badge>
                   </div>
                 </div>
               ))}

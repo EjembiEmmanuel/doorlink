@@ -233,6 +233,7 @@ async function main() {
       {
         modelId: northgateOpener.id,
         kind: DocumentKind.INSTALL_MANUAL,
+        slug: 'dr-700-installation-guide',
         title: 'DR-700 installation guide',
         fileKey: 'demo/dr-700-install.pdf',
         dataSource: DataSource.DEMO,
@@ -240,6 +241,7 @@ async function main() {
       {
         modelId: northgateOpener.id,
         kind: DocumentKind.WIRING_DIAGRAM,
+        slug: 'dr-700-wiring-diagram',
         title: 'DR-700 wiring diagram',
         fileKey: 'demo/dr-700-wiring.pdf',
         dataSource: DataSource.DEMO,
@@ -247,6 +249,7 @@ async function main() {
       {
         modelId: northgateOpenerPro.id,
         kind: DocumentKind.INSTALL_MANUAL,
+        slug: 'dr-900-installation-guide',
         title: 'DR-900 installation guide',
         fileKey: 'demo/dr-900-install.pdf',
         dataSource: DataSource.DEMO,
@@ -254,6 +257,7 @@ async function main() {
       {
         modelId: veltrixMotor.id,
         kind: DocumentKind.INSTALL_MANUAL,
+        slug: 'rs-40-installation-guide',
         title: 'RS-40 installation guide',
         fileKey: 'demo/rs-40-install.pdf',
         dataSource: DataSource.DEMO,
@@ -261,6 +265,7 @@ async function main() {
       {
         modelId: harbrookLock.id,
         kind: DocumentKind.USER_MANUAL,
+        slug: 'sl-200-user-manual',
         title: 'SL-200 user manual',
         fileKey: 'demo/sl-200-manual.pdf',
         dataSource: DataSource.DEMO,

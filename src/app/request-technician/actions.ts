@@ -4,6 +4,7 @@ import { redirect } from 'next/navigation'
 import { z } from 'zod'
 import { prisma } from '@/lib/prisma'
 import { isDatabaseUnreachable } from '@/lib/db-errors'
+import { makeReference } from '@/lib/reference'
 
 export type RequestFormState = { error?: string }
 
@@ -34,6 +35,7 @@ export async function createLeadAction(_prevState: RequestFormState, formData: F
   try {
     await prisma.lead.create({
       data: {
+        reference: makeReference('LEAD'),
         name: parsed.data.name,
         email: parsed.data.email,
         phone: parsed.data.phone || null,

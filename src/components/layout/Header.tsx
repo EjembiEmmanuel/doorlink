@@ -9,6 +9,7 @@ import { AccountMenu } from './AccountMenu'
 
 const NAV_LINKS = [
   { href: '/find', label: 'Find your part' },
+  { href: '/manuals', label: 'Manuals' },
   { href: '/marketplace', label: 'Marketplace' },
   { href: '/request-technician', label: 'Request a technician' },
   { href: '/data-sources', label: 'Data sources' },

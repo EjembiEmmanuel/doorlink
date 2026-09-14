@@ -13,18 +13,9 @@ import { SourceBadge } from '@/components/ui/SourceBadge'
 import { SpecList } from '@/components/ui/Table'
 import { EmptyState } from '@/components/ui/EmptyState'
 import { NotConnected } from '@/components/ui/NotConnected'
+import { DOCUMENT_KIND_LABELS } from '@/lib/labels'
 import { AddToCartButton } from '@/app/cart/AddToCartButton'
 import { InterestedButton } from '@/components/marketplace/InterestedButton'
-
-const DOCUMENT_KIND_LABELS: Record<DocumentKind, string> = {
-  INSTALL_MANUAL: 'Installation manual',
-  USER_MANUAL: 'User manual',
-  WIRING_DIAGRAM: 'Wiring diagram',
-  PARTS_LIST: 'Parts list',
-  SPEC_SHEET: 'Spec sheet',
-  WARRANTY: 'Warranty',
-  SERVICE_BULLETIN: 'Service bulletin',
-}
 
 const CONFIDENCE_TONE: Record<CompatibilityConfidence, 'good' | 'signal' | 'caution'> = {
   CONFIRMED: 'good',
