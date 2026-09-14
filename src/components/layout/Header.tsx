@@ -15,6 +15,7 @@ import { AccountMenu } from './AccountMenu'
 // that are.
 const NAV_LINKS = [
   { href: '/request-technician', label: 'Find a professional' },
+  { href: '/configure', label: 'Design a door' },
   { href: '/find', label: 'Door systems' },
   { href: '/manuals', label: 'Manuals' },
   { href: '/marketplace', label: 'Parts' },
@@ -64,6 +65,7 @@ export async function Header() {
       label: notificationCount > 0 ? `Notifications (${notificationCount})` : 'Notifications',
     })
     accountLinks.push({ href: '/cart', label: cartCount > 0 ? `Cart (${cartCount})` : 'Cart' })
+    accountLinks.push({ href: '/saved', label: 'Saved' })
     accountLinks.push({ href: '/account', label: 'Account' })
     if (can(session.role, 'listing:write:own')) {
       accountLinks.push({ href: '/my-listings', label: 'My listings' })

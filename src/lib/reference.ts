@@ -18,7 +18,7 @@ function randomCode(length: number): string {
   return out
 }
 
-export type ReferenceKind = 'LEAD' | 'JOB' | 'TXN' | 'PAYOUT'
+export type ReferenceKind = 'LEAD' | 'JOB' | 'TXN' | 'PAYOUT' | 'CFG'
 
 export function makeReference(kind: ReferenceKind, length = 7): string {
   return `DL-${kind}-${randomCode(length)}`

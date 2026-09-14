@@ -12,12 +12,12 @@ import { Garden } from './Garden'
 import { Birds } from './Birds'
 import { GarageInterior } from './GarageInterior'
 
-const PANEL_COUNT = 4
 const DOOR_WIDTH = 3.2
 const DOOR_HEIGHT = 2.6
 const PANEL_GAP = 0.03
-const PANEL_HEIGHT = (DOOR_HEIGHT - PANEL_GAP * (PANEL_COUNT - 1)) / PANEL_COUNT
 const PANEL_DEPTH = 0.14
+/** Used for the parts of the scene that are sized once, not per-config. */
+const NOMINAL_PANEL_COUNT = 4
 // How far a panel travels once fully "open" — enough to clear the frame's
 // header, which is sized to match so the panels read as sliding up into
 // the ceiling rather than just vanishing.
@@ -78,12 +78,12 @@ function GarageDoorOpener() {
   )
 }
 
-function HardwareBracket({ x }: { x: number }) {
+function HardwareBracket({ x, color = '#b7bbc0' }: { x: number; color?: string }) {
   return (
     <group position={[x, 0, PANEL_DEPTH / 2 + 0.006]}>
       <mesh castShadow>
         <boxGeometry args={[0.1, 0.08, 0.018]} />
-        <meshStandardMaterial color="#b7bbc0" roughness={0.35} metalness={0.75} envMapIntensity={1.2} />
+        <meshStandardMaterial color={color} roughness={0.35} metalness={0.75} envMapIntensity={1.2} />
       </mesh>
       <mesh position={[0, 0, 0.013]} rotation={[Math.PI / 2, 0, 0]} castShadow>
         <cylinderGeometry args={[0.026, 0.026, 0.026, 16]} />
@@ -93,15 +93,31 @@ function HardwareBracket({ x }: { x: number }) {
   )
 }
 
-function Panel({ index, isOpen, color }: { index: number; isOpen: boolean; color: string }) {
+export interface DoorLook {
+  color: string
+  hardwareColor: string
+  panelCount: number
+  /** 'flush' | 'raised' | 'ribbed' */
+  profile: string
+  /** 'none' | 'top-row' | 'top-row-wide' */
+  windows: string
+  /** Roughness/metalness come from the chosen finish. */
+  roughness: number
+  metalness: number
+}
+
+function Panel({ index, isOpen, look }: { index: number; isOpen: boolean; look: DoorLook }) {
   const ref = useRef<THREE.Group>(null)
-  const restY = index * (PANEL_HEIGHT + PANEL_GAP) - DOOR_HEIGHT / 2 + PANEL_HEIGHT / 2
+  const panelCount = look.panelCount
+  const panelHeight = (DOOR_HEIGHT - PANEL_GAP * (panelCount - 1)) / panelCount
+  const color = look.color
+  const restY = index * (panelHeight + PANEL_GAP) - DOOR_HEIGHT / 2 + panelHeight / 2
   const progress = useRef(0)
 
   // A real sectional door folds bottom-first on the way up and top-first
   // on the way down; staggering each panel's damping start approximates
   // that without simulating the actual curved track.
-  const order = isOpen ? index : PANEL_COUNT - 1 - index
+  const order = isOpen ? index : panelCount - 1 - index
 
   useFrame((_, delta) => {
     if (!ref.current) return
@@ -117,36 +133,75 @@ function Panel({ index, isOpen, color }: { index: number; isOpen: boolean; color
   // profile, and it's built as actual geometry here so real shadow
   // mapping defines its edges, rather than a painted-on line.
   const embossWidth = DOOR_WIDTH - 0.34
-  const embossHeight = PANEL_HEIGHT - 0.14
+  const embossHeight = panelHeight - 0.14
 
   return (
     <group ref={ref} position={[0, restY, 0]}>
-      <RoundedBox args={[DOOR_WIDTH, PANEL_HEIGHT, PANEL_DEPTH]} radius={0.016} smoothness={4} castShadow receiveShadow>
-        <meshStandardMaterial color={color} roughness={0.55} metalness={0.16} envMapIntensity={0.5} />
-      </RoundedBox>
-
       <RoundedBox
-        args={[embossWidth, embossHeight, 0.03]}
-        radius={0.014}
-        smoothness={3}
-        position={[0, 0, PANEL_DEPTH / 2 + 0.014]}
+        args={[DOOR_WIDTH, panelHeight, PANEL_DEPTH]}
+        radius={0.016}
+        smoothness={4}
         castShadow
         receiveShadow
       >
-        <meshStandardMaterial color={color} roughness={0.48} metalness={0.2} envMapIntensity={0.6} />
+        <meshStandardMaterial
+          color={color}
+          roughness={look.roughness}
+          metalness={look.metalness}
+          envMapIntensity={0.5}
+        />
       </RoundedBox>
 
+      {/* A flush door has no stamping at all; ribbed gets a run of
+          shallow horizontal lines instead of one raised field. */}
+      {look.profile === 'raised' && (
+        <RoundedBox
+          args={[embossWidth, embossHeight, 0.03]}
+          radius={0.014}
+          smoothness={3}
+          position={[0, 0, PANEL_DEPTH / 2 + 0.014]}
+          castShadow
+          receiveShadow
+        >
+          <meshStandardMaterial
+            color={color}
+            roughness={Math.max(0.05, look.roughness - 0.07)}
+            metalness={look.metalness + 0.04}
+            envMapIntensity={0.6}
+          />
+        </RoundedBox>
+      )}
+
+      {look.profile === 'ribbed' &&
+        [-0.3, -0.1, 0.1, 0.3].map((offset) => (
+          <mesh key={offset} position={[0, offset * panelHeight, PANEL_DEPTH / 2 + 0.006]} castShadow>
+            <boxGeometry args={[DOOR_WIDTH - 0.12, panelHeight * 0.13, 0.012]} />
+            <meshStandardMaterial
+              color={color}
+              roughness={look.roughness}
+              metalness={look.metalness}
+              envMapIntensity={0.5}
+            />
+          </mesh>
+        ))}
+
       {/* Panel-to-panel seam highlight, the one real horizontal joint a stacked sectional door actually has */}
-      <mesh position={[0, PANEL_HEIGHT / 2 - 0.01, PANEL_DEPTH / 2 + 0.002]}>
+      <mesh position={[0, panelHeight / 2 - 0.01, PANEL_DEPTH / 2 + 0.002]}>
         <boxGeometry args={[DOOR_WIDTH, 0.014, 0.008]} />
         <meshStandardMaterial color="#000000" transparent opacity={0.28} />
       </mesh>
 
-      {index === PANEL_COUNT - 1 && (
+      {index === panelCount - 1 && look.windows !== 'none' && (
         <group position={[0, 0, PANEL_DEPTH / 2 + 0.014 + 0.016]}>
-          {[-1, -0.34, 0.34, 1].map((x) => (
-            <mesh key={x} position={[x * (DOOR_WIDTH / 2 - 0.52), 0, 0]}>
-              <planeGeometry args={[0.4, embossHeight - 0.14]} />
+          {(look.windows === 'top-row-wide'
+            ? [-1.25, -0.75, -0.25, 0.25, 0.75, 1.25]
+            : [-1, -0.34, 0.34, 1]
+          ).map((x) => (
+            <mesh
+              key={x}
+              position={[x * (DOOR_WIDTH / 2 - 0.52) * (look.windows === 'top-row-wide' ? 0.8 : 1), 0, 0]}
+            >
+              <planeGeometry args={[look.windows === 'top-row-wide' ? 0.3 : 0.4, embossHeight - 0.14]} />
               <meshPhysicalMaterial
                 color="#dce6f0"
                 emissive="#bcd3e6"
@@ -163,8 +218,8 @@ function Panel({ index, isOpen, color }: { index: number; isOpen: boolean; color
       )}
 
       {/* Roller/hinge hardware sits on the flat stile outside the raised field, not on top of it */}
-      <HardwareBracket x={-DOOR_WIDTH / 2 + 0.1} />
-      <HardwareBracket x={DOOR_WIDTH / 2 - 0.1} />
+      <HardwareBracket x={-DOOR_WIDTH / 2 + 0.1} color={look.hardwareColor} />
+      <HardwareBracket x={DOOR_WIDTH / 2 - 0.1} color={look.hardwareColor} />
 
       {index === 1 && (
         <mesh position={[DOOR_WIDTH / 2 - 0.74, 0, PANEL_DEPTH / 2 + 0.014 + 0.02]} castShadow>
@@ -199,7 +254,6 @@ function Facade() {
     </group>
   )
 }
-
 
 /**
  * The camera half of the reveal.
@@ -263,15 +317,32 @@ function CameraDirector({ isOpen }: { isOpen: boolean }) {
   )
 }
 
+export const DEFAULT_LOOK: DoorLook = {
+  color: '#2C3033',
+  hardwareColor: '#b7bbc0',
+  panelCount: NOMINAL_PANEL_COUNT,
+  profile: 'raised',
+  windows: 'top-row',
+  roughness: 0.55,
+  metalness: 0.16,
+}
+
 export interface GarageDoorSceneProps {
   isOpen: boolean
+  /** How the door itself looks. Omitted, it renders the house default. */
+  look?: DoorLook
   /** The line the opening door reveals. Passed in so the scene stays a
    *  scene and the copy stays with the page that owns it. */
   revealHeadline: string
   revealWordmark: string
 }
 
-export function GarageDoorScene({ isOpen, revealHeadline, revealWordmark }: GarageDoorSceneProps) {
+export function GarageDoorScene({
+  isOpen,
+  look = DEFAULT_LOOK,
+  revealHeadline,
+  revealWordmark,
+}: GarageDoorSceneProps) {
   return (
     <Canvas
       shadows="soft"
@@ -279,7 +350,13 @@ export function GarageDoorScene({ isOpen, revealHeadline, revealWordmark }: Gara
       gl={{ antialias: true }}
       camera={{ position: [3.4, 1.5, 4.6], fov: 32 }}
     >
-      <Sky sunPosition={SUN_POSITION} turbidity={4} rayleigh={1.2} mieCoefficient={0.02} mieDirectionalG={0.9} />
+      <Sky
+        sunPosition={SUN_POSITION}
+        turbidity={4}
+        rayleigh={1.2}
+        mieCoefficient={0.02}
+        mieDirectionalG={0.9}
+      />
       <SunGlow />
       <Birds />
       <fog attach="fog" args={['#cfd8e3', 9, 21]} />
@@ -288,7 +365,13 @@ export function GarageDoorScene({ isOpen, revealHeadline, revealWordmark }: Gara
           hardware real sky-tinted reflections instead of flat diffuse
           color, without any external HDR asset or per-frame render cost. */}
       <Environment resolution={128} frames={1}>
-        <Sky sunPosition={SUN_POSITION} turbidity={4} rayleigh={1.2} mieCoefficient={0.02} mieDirectionalG={0.9} />
+        <Sky
+          sunPosition={SUN_POSITION}
+          turbidity={4}
+          rayleigh={1.2}
+          mieCoefficient={0.02}
+          mieDirectionalG={0.9}
+        />
       </Environment>
 
       <ambientLight intensity={0.22} />
@@ -307,7 +390,13 @@ export function GarageDoorScene({ isOpen, revealHeadline, revealWordmark }: Gara
       <directionalLight position={[-5, 3, -3]} intensity={0.28} color="#cbd9ff" />
 
       <Facade />
-      <House jambOuterX={DOOR_WIDTH / 2 + JAMB_WIDTH} wallTopY={WALL_TOP_Y} wallZ={WALL_Z} floorY={FLOOR_Y} doorWidth={DOOR_WIDTH} />
+      <House
+        jambOuterX={DOOR_WIDTH / 2 + JAMB_WIDTH}
+        wallTopY={WALL_TOP_Y}
+        wallZ={WALL_Z}
+        floorY={FLOOR_Y}
+        doorWidth={DOOR_WIDTH}
+      />
       <GarageDoorOpener />
       <GarageInterior
         isOpen={isOpen}
@@ -319,8 +408,8 @@ export function GarageDoorScene({ isOpen, revealHeadline, revealWordmark }: Gara
         headline={revealHeadline}
         wordmark={revealWordmark}
       />
-      {Array.from({ length: PANEL_COUNT }, (_, i) => (
-        <Panel key={i} index={i} isOpen={isOpen} color="#2C3033" />
+      {Array.from({ length: look.panelCount }, (_, i) => (
+        <Panel key={i} index={i} isOpen={isOpen} look={look} />
       ))}
 
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, FLOOR_Y, 0]} receiveShadow>

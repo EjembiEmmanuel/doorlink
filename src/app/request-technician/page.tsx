@@ -3,6 +3,7 @@ import { prisma } from '@/lib/prisma'
 import { getSession } from '@/lib/auth'
 import { isDatabaseUnreachable } from '@/lib/db-errors'
 import { NotConnected } from '@/components/ui/NotConnected'
+import { describeSpec, parseSpec, specAsBrief } from '@/lib/configurator/options'
 import { RequestForm } from './RequestForm'
 
 export const metadata: Metadata = {
@@ -12,8 +13,29 @@ export const metadata: Metadata = {
   alternates: { canonical: '/request-technician' },
 }
 
-export default async function RequestTechnicianPage() {
+type PageProps = { searchParams: Promise<{ spec?: string }> }
+
+export default async function RequestTechnicianPage({ searchParams }: PageProps) {
+  const { spec } = await searchParams
   const session = await getSession()
+
+  // A door designed in the configurator arrives as a spec in the query
+  // string. It is re-parsed here rather than trusted, and it prefills the
+  // form rather than submitting anything on the customer's behalf — they
+  // still read it and press the button.
+  let prefill: { title: string; message: string } | undefined
+  if (spec) {
+    try {
+      const parsed = parseSpec(JSON.parse(spec))
+      const type = describeSpec(parsed)[0]?.value ?? 'garage door'
+      prefill = {
+        title: `New ${type.toLowerCase()} garage door — supply and install`,
+        message: `I've designed a door in the Doorlink configurator and would like a price to supply and install it.\n\n${specAsBrief(parsed)}\n\nThese are Doorlink's generic options rather than a specific product, so let me know the nearest equivalent you can supply.`,
+      }
+    } catch {
+      prefill = undefined
+    }
+  }
 
   let serviceCategories
   let models
@@ -49,6 +71,7 @@ export default async function RequestTechnicianPage() {
       </header>
 
       <RequestForm
+        prefill={prefill}
         signedIn={Boolean(session)}
         serviceCategories={serviceCategories.map((c) => ({
           id: c.id,

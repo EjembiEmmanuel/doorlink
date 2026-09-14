@@ -82,7 +82,7 @@ export default async function HomePage() {
                 Find a door professional
               </Link>
               <Link
-                href="/find"
+                href="/configure"
                 className="inline-flex h-12 items-center rounded border border-line bg-paper px-6 text-sm font-medium text-graphite transition-colors hover:bg-rail"
               >
                 Explore door systems
@@ -152,9 +152,14 @@ export default async function HomePage() {
               )}
             </Pillar>
 
-            <Pillar href="/find" eyebrow="Products" title="Explore door systems" cta="Identify your product">
-              Work out which door, motor or controller you actually have — by model code, or by answering a few
-              questions about what you can see on it. Then see what is compatible.
+            <Pillar href="/configure" eyebrow="Products" title="Explore door systems" cta="Design a door">
+              Pick a door type, size, colour and finish and watch it change on the house — then send the
+              specification to technicians for a price. Or work out which door, motor or controller you already
+              have with{' '}
+              <Link href="/find" className="font-medium text-signal hover:text-signal-hover">
+                Find your part
+              </Link>
+              .
             </Pillar>
 
             <Pillar href="/manuals" eyebrow="Knowledge" title="User manuals" cta="Search the library">

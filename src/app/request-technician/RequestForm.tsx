@@ -26,10 +26,13 @@ export function RequestForm({
   serviceCategories,
   models,
   signedIn,
+  prefill,
 }: {
   serviceCategories: Option[]
   models: Option[]
   signedIn: boolean
+  /** Arrives when someone came here from a saved door configuration. */
+  prefill?: { title: string; message: string }
 }) {
   const [state, formAction, isPending] = useActionState(createLeadAction, initialState)
 
@@ -52,7 +55,7 @@ export function RequestForm({
         </Field>
 
         <Field label="Job title" htmlFor="title" hint="A short summary, e.g. “Roller door won’t close fully”.">
-          <Input id="title" name="title" required maxLength={120} />
+          <Input id="title" name="title" required maxLength={120} defaultValue={prefill?.title ?? ''} />
         </Field>
 
         <Field
@@ -60,7 +63,14 @@ export function RequestForm({
           htmlFor="message"
           hint="The more detail, the more accurate the quotes. Include what happens, any noises, and when it started."
         >
-          <Textarea id="message" name="message" required rows={6} minLength={20} />
+          <Textarea
+            id="message"
+            name="message"
+            required
+            rows={6}
+            minLength={20}
+            defaultValue={prefill?.message ?? ''}
+          />
         </Field>
 
         <Field
