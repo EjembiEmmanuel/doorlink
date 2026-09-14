@@ -914,6 +914,90 @@ exists.
   a page's scroll — confirmed the footer's own links render fully above
   the fixed tab bar rather than being clipped underneath it.
 
+## Session 13 — 3D realism pass, and decluttering the header
+
+Direct feedback on Session 12: make the 3D "more realistic and just
+better," and make the interface "easier to follow." Treated as two
+separate, concrete jobs rather than vague polish.
+
+**3D realism.** `GarageDoorScene.tsx` went from flat boxes and a CSS
+gradient to: `RoundedBox` panel geometry (soft edges catch light the way
+real rolled steel does, not the hard edges of a CSS-shaped box); a second
+ribbed groove per panel plus a thin highlight line, echoing an actual
+sectional door's corrugated profile instead of one flat seam; small
+roller/hinge hardware brackets at each panel's edges (a real mechanism
+has visible fixings, a flat slab doesn't); real shadow mapping
+(`castShadow`/`receiveShadow` everywhere, a shadow-casting directional
+light) replacing the blurred `ContactShadows` blob from Session 12; a
+procedural `Sky` (drei's atmospheric-scattering shader, not an image —
+no external asset to fail to load) plus distance fog for a real horizon
+instead of a flat two-stop CSS gradient; warm key light / cool fill light
+in place of one flat ambient wash; and ACES filmic tone mapping so
+highlights roll off instead of clipping to flat white. The window insets
+switched from a flat emissive material to `meshPhysicalMaterial` with
+`clearcoat`/`transmission` for an actual glass-like look.
+
+**A real timing bug surfaced while verifying this, not a regression in
+the scene itself.** An early screenshot came back completely blank —
+not just low-contrast this time, empty — while a screenshot taken
+seconds later after clicking the open/close button looked correct.
+Suspected a shader-compile stall specific to `Sky` (an atmospheric
+scattering shader, more expensive to compile than a flat material)
+running under this sandbox's software-rendered WebGL (SwiftShader, no
+GPU here), which is far slower at first-use shader compilation than a
+real GPU. Confirmed by screenshotting the same page at 3, 6, and 9
+seconds after load with no interaction in between — 3 seconds was
+already fully correct and identical to 6 and 9 — so the first blank
+capture was a one-off (most likely a Fast Refresh reload mid-capture
+while a file was still being edited), not a reproducible defect;
+recorded here rather than silently dropped since "blank first frame"
+is exactly the kind of thing worth being able to rule back in if a real
+user ever reports it.
+
+**Decluttering the header.** Signed in, the desktop header had grown to
+up to 9 items in one row (4 public links + Cart, My listings, Requests,
+Account, Support, Admin, the user's name, and Sign out) — exactly the
+kind of thing that makes an interface hard to follow, not because any
+one link is wrong but because nothing is prioritized. Added
+`AccountMenu.tsx`: the public nav (Find your part, Marketplace, Request
+a technician, Data sources) stays exactly as visible as before, but
+every account-specific destination now lives behind a single "[Name] ▾"
+trigger, opening a dropdown (Cart, Account, My listings, Requests,
+Support, Admin — each still permission-gated exactly as before) with a
+`framer-motion` open/close transition — the first real use of that
+dependency, installed back in Session 12 but unused until now. Closes on
+Escape and on an outside click. The mobile hamburger menu is deliberately
+untouched: on a phone there's no crowded single row to protect, and the
+bottom tab bar from Session 12 already surfaces the few things worth one
+tap.
+
+**A "how it works" section** was added to the homepage, directly below
+the 3D hero: three short numbered steps (Identify → Compare & connect →
+Get it sorted) giving a first-time visitor a one-glance map of what the
+site actually does, since DoorLink is genuinely three things (a product
+finder, a marketplace, and a technician-request flow) and nothing on the
+page previously said so in one place.
+
+### What was verified, in a real browser and against the database directly
+
+- `npm run typecheck` clean.
+- Screenshotted the new 3D scene at three points in time (3s/6s/9s after
+  load, no interaction) to rule the blank-first-frame timing issue in or
+  out, as described above — confirmed stable and correct at all three.
+- Ran a signed-in Playwright pass (as `technician@demo.doorlink`) across
+  `/`, `/find`, `/marketplace`, `/request-technician`, `/data-sources`,
+  `/leads`, `/account`, `/my-listings`, and `/support` — all `200`, zero
+  page errors.
+- Directly tested the account menu's interaction contract: opened it,
+  confirmed "Sign out" was visible, clicked an unrelated element on the
+  page, and confirmed the menu closed — not just eyeballed from a
+  screenshot.
+- Screenshotted the mobile hamburger menu (as `admin@demo.doorlink`) and
+  confirmed it still lists every item it did before (public links, Cart,
+  Account, My listings, Requests, Support, Admin) plus the name/sign-out
+  row — the header refactor only changed desktop's presentation, not
+  what's reachable on mobile.
+
 ---
 
 ## Status by module

@@ -5,6 +5,7 @@ import { devSignOutAction } from '@/lib/dev-session'
 import { prisma } from '@/lib/prisma'
 import { isDatabaseUnreachable } from '@/lib/db-errors'
 import { MobileNavToggle } from './MobileNavToggle'
+import { AccountMenu } from './AccountMenu'
 
 const NAV_LINKS = [
   { href: '/find', label: 'Find your part' },
@@ -26,24 +27,28 @@ async function getCartItemCount(userId: string): Promise<number> {
 
 export async function Header() {
   const session = await getSession()
-  const navLinks = [...NAV_LINKS]
+  const accountLinks: { href: string; label: string }[] = []
+
   if (session) {
     const cartCount = await getCartItemCount(session.userId)
-    navLinks.push({ href: '/cart', label: cartCount > 0 ? `Cart (${cartCount})` : 'Cart' })
+    accountLinks.push({ href: '/cart', label: cartCount > 0 ? `Cart (${cartCount})` : 'Cart' })
+    accountLinks.push({ href: '/account', label: 'Account' })
+    if (can(session.role, 'listing:write:own')) {
+      accountLinks.push({ href: '/my-listings', label: 'My listings' })
+    }
+    if (can(session.role, 'lead:write:own') || can(session.role, 'lead:write:any')) {
+      accountLinks.push({ href: '/leads', label: 'Requests' })
+    }
+    accountLinks.push({ href: '/support', label: 'Support' })
+    if (can(session.role, 'catalogue:write')) {
+      accountLinks.push({ href: '/admin', label: 'Admin' })
+    }
   }
-  if (session && can(session.role, 'listing:write:own')) {
-    navLinks.push({ href: '/my-listings', label: 'My listings' })
-  }
-  if (session && (can(session.role, 'lead:write:own') || can(session.role, 'lead:write:any'))) {
-    navLinks.push({ href: '/leads', label: 'Requests' })
-  }
-  if (session) {
-    navLinks.push({ href: '/account', label: 'Account' })
-    navLinks.push({ href: '/support', label: 'Support' })
-  }
-  if (session && can(session.role, 'catalogue:write')) {
-    navLinks.push({ href: '/admin', label: 'Admin' })
-  }
+
+  // The mobile hamburger still shows everything flat — on a phone there's
+  // no crowded single row to protect, and the bottom tab bar already
+  // covers the handful of destinations worth one tap.
+  const mobileLinks = [...NAV_LINKS, ...accountLinks]
 
   return (
     <header className="relative border-b border-line bg-paper">
@@ -53,20 +58,13 @@ export async function Header() {
         </Link>
 
         <nav className="hidden items-center gap-6 md:flex">
-          {navLinks.map((link) => (
+          {NAV_LINKS.map((link) => (
             <Link key={link.href} href={link.href} className="text-sm font-medium text-graphite hover:text-signal">
               {link.label}
             </Link>
           ))}
           {session ? (
-            <div className="flex items-center gap-3 border-l border-line pl-6">
-              <span className="text-sm text-zinc-deep">{session.name}</span>
-              <form action={devSignOutAction}>
-                <button type="submit" className="text-sm font-medium text-signal hover:text-signal-hover">
-                  Sign out
-                </button>
-              </form>
-            </div>
+            <AccountMenu name={session.name} links={accountLinks} signOutAction={devSignOutAction} />
           ) : (
             <Link
               href="/sign-in"
@@ -78,7 +76,7 @@ export async function Header() {
         </nav>
 
         <MobileNavToggle
-          links={navLinks}
+          links={mobileLinks}
           session={session ? { name: session.name } : null}
           signOutAction={devSignOutAction}
         />

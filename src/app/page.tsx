@@ -39,6 +39,34 @@ export default function HomePage() {
         <DoorHero3DClientOnly />
       </div>
 
+      <div className="mb-12 grid gap-4 sm:grid-cols-3">
+        {[
+          {
+            step: '1',
+            title: 'Identify',
+            body: 'Tell us your model, or answer a few quick questions if you don’t know it.',
+          },
+          {
+            step: '2',
+            title: 'Compare & connect',
+            body: 'See compatible parts and documents, or browse the marketplace for one nearby.',
+          },
+          {
+            step: '3',
+            title: 'Get it sorted',
+            body: 'Request a technician, or message a seller directly — no accounts, no middleman.',
+          },
+        ].map((item) => (
+          <div key={item.step} className="rounded-md border border-line p-5">
+            <span className="flex h-7 w-7 items-center justify-center rounded-full bg-graphite text-xs font-semibold text-paper">
+              {item.step}
+            </span>
+            <p className="mt-3 font-medium text-graphite">{item.title}</p>
+            <p className="mt-1 text-sm text-zinc-deep">{item.body}</p>
+          </div>
+        ))}
+      </div>
+
       <Panel className="mb-12">
         <PanelHeader>
           <h2 className="text-sm font-semibold uppercase tracking-wide text-zinc-deep">Find your product</h2>
