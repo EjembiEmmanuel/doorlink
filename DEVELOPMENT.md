@@ -1423,7 +1423,7 @@ Worth recording because none of them would have shown up in a typecheck:
    `shrink-0` was wider than a 390px viewport and refused to wrap, so it
    pushed the whole page instead.
 
-### Verification
+### How the marketplace was verified
 
 - Walked the entire flow in a real browser as two signed-in users:
   posted a job, quoted $480 as the technician, compared and hired as the
@@ -1437,6 +1437,79 @@ Worth recording because none of them would have shown up in a typecheck:
   clean after the manuals fix.
 - `npm run typecheck`, `npx vitest run` (8 passing), and `npm run build`
   all green.
+
+### Admin: the commission rate, actually changeable (`d1fbf1a`)
+
+The rate already lived in `PlatformSetting` rather than in code, but
+nothing could change it — which is the half of "admin-configurable" that
+matters. `/admin/settings` now does, showing the arithmetic: type 12.5
+and the page works it out on a $500 job before you save. Every change
+writes an AuditLog row with the old rate, the new one, and who made it,
+shown as a change history under the form.
+
+It is gated on `admin:settings`, not the `catalogue:write` the rest of
+/admin uses. A manufacturer can edit the catalogue and has no business
+changing what Doorlink charges technicians — verified by signing in as
+one and being redirected away from both the page and its nav link.
+
+`/admin/marketplace` gives oversight of requests, jobs, disputes and the
+recorded splits, and says plainly that those are amounts Doorlink has
+*recorded*, not collected.
+
+### Technician profiles and verification (`b6f3a45`)
+
+A technician could quote but had nothing to quote *as*. `/my-profile` is
+their side; `/technicians/[id]` is what a customer comparing quotes sees.
+
+Verification is the part that needed care, because "Verified by Doorlink"
+is exactly the kind of badge people read as more than it is:
+
+- A technician can submit and withdraw. Nothing they do reaches VERIFIED.
+- The only path to VERIFIED in the codebase is an admin pressing a button
+  on `/admin/verification`, behind `admin:settings`. Every decision is
+  audit-logged, and a rejection with no reason is refused — it leaves the
+  technician nothing to fix.
+- The public badge has two states, not five. "Documents submitted" is the
+  technician's business; to a customer it reads as almost-verified.
+- Next to a verified badge the page says what was actually checked: that
+  an admin matched the supplied licence and insurance details to the
+  account, that Doorlink is not a licensing authority, and that it has
+  not audited the issuer.
+- A certification a technician types in is labelled "Stated by the
+  technician" until an admin has looked. Typing a certificate's name into
+  a box is a claim, not a check.
+
+Job matching on the board is set membership against the postcodes and
+services the technician entered themselves — not a model, not a
+prediction, and described to them in those words. Matching jobs sort
+first with a badge saying why; nothing is hidden from anyone.
+
+### Messaging and in-app notifications (`e42097a`)
+
+A customer could get five quotes and had no way to ask any of them a
+question; a technician could be hired and nothing told them.
+
+Threads are one per quote and one per job, and a technician can only open
+one on a lead they have actually quoted — otherwise the job board is a
+way to message every customer on the platform. Threads carry a display
+name and nothing else: no contact detail is read or rendered anywhere in
+`src/lib/messaging.ts`, because messaging must not become the way around
+Doorlink withholding phone numbers until a job is agreed. Unread counts
+derive from each participant's `lastReadAt` rather than being stored, so
+they cannot drift. An admin gets a 404 on someone else's thread, same as
+anyone else.
+
+Notifications are written in the same transaction as the thing they are
+about, so an accepted quote and the technician being told are one event
+or neither — but `notify()` swallows a database outage rather than
+unwinding the caller's work, because a hire must not be rolled back
+because a notification write failed.
+
+Email and push are both in the brief and neither is connected.
+`/notifications` says so in those words rather than offering per-channel
+toggles that would imply the channels exist. `push` joined the
+integrations registry so it reports like everything else.
+
 
 ---
 
@@ -1539,17 +1612,15 @@ Worth recording because none of them would have shown up in a typecheck:
 23. ~~The services marketplace: quotes, hiring, jobs, reviews and the
     commission engine.~~ Done and verified end to end in a browser
     (Session 17). Money is recorded, never moved.
-24. The admin screen for the commission rate. The rate is already stored
-    in `PlatformSetting` and read at quote time, so nothing is hard-coded
-    — but there is no UI to change it yet, which is half of what the
-    brief asked for.
-25. Worker profiles and onboarding: services offered, service areas,
-    availability, certifications, and submitting documents for
-    verification. Until this exists the job board cannot match a
-    technician to a suburb, and `VerificationStatus` can only be moved by
-    hand.
-26. Messaging between a customer and a technician (`Conversation`,
-    `Message` and attachments are already in the schema, with no UI).
+24. ~~The admin screen for the commission rate.~~ `/admin/settings` done
+    and verified (Session 17), with an audited change history.
+25. ~~Worker profiles and onboarding.~~ `/my-profile`, the public
+    `/technicians/[id]`, and the `/admin/verification` queue all done and
+    verified (Session 17). Availability (`WorkerAvailability`) is the one
+    part of this still unbuilt — the schema is there, the UI is not.
+26. ~~Messaging between a customer and a technician.~~ `/messages` done
+    and verified (Session 17). Attachments are still unbuilt: they need
+    storage, same blocker as document upload.
 27. The payments module: a Stripe service abstraction kept isolated
     behind one interface, so the marketplace keeps working untouched when
     no keys are present. Nothing may report a payment as taken until a
