@@ -36,6 +36,25 @@ function UserIcon() {
   )
 }
 
+function BookIcon() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+      <path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H10v14H5.5A1.5 1.5 0 0 1 4 16.5v-11Z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
+      <path d="M18 5.5A1.5 1.5 0 0 0 16.5 4H12v14h4.5a1.5 1.5 0 0 0 1.5-1.5v-11Z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
+    </svg>
+  )
+}
+
+function JobIcon() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+      <rect x="3.5" y="7.5" width="15" height="10" rx="1.5" stroke="currentColor" strokeWidth="1.6" />
+      <path d="M8.5 7.5V6a1.5 1.5 0 0 1 1.5-1.5h2A1.5 1.5 0 0 1 13.5 6v1.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+      <path d="M3.5 11.5h15" stroke="currentColor" strokeWidth="1.6" />
+    </svg>
+  )
+}
+
 // A persistent bottom tab bar, the pattern people expect from an installed
 // app rather than a website — the hamburger menu (MobileNavToggle) still
 // covers everything else, this just surfaces the handful of destinations
@@ -44,11 +63,18 @@ function UserIcon() {
 export async function MobileTabBar() {
   const session = await getSession()
 
+  // Signed in, the fourth tab is the work you have on rather than the
+  // shop — a technician opens this app between jobs, not to browse.
   const tabs = [
     { href: '/', label: 'Home', icon: <HomeIcon /> },
     { href: '/find', label: 'Find', icon: <SearchIcon /> },
-    { href: '/marketplace', label: 'Market', icon: <BagIcon /> },
-    session ? { href: '/account', label: 'Account', icon: <UserIcon /> } : { href: '/sign-in', label: 'Sign in', icon: <UserIcon /> },
+    { href: '/manuals', label: 'Manuals', icon: <BookIcon /> },
+    session
+      ? { href: '/jobs', label: 'Jobs', icon: <JobIcon /> }
+      : { href: '/marketplace', label: 'Market', icon: <BagIcon /> },
+    session
+      ? { href: '/account', label: 'Account', icon: <UserIcon /> }
+      : { href: '/sign-in', label: 'Sign in', icon: <UserIcon /> },
   ]
 
   return (
@@ -62,7 +88,7 @@ export async function MobileTabBar() {
           <li key={tab.href} className="flex-1">
             <Link
               href={tab.href}
-              className="flex flex-col items-center gap-0.5 px-2 py-2.5 text-graphite-soft transition-colors hover:text-signal"
+              className="flex flex-col items-center gap-0.5 px-1 py-2.5 text-graphite-soft transition-colors hover:text-signal"
             >
               {tab.icon}
               <span className="text-[11px] font-medium">{tab.label}</span>

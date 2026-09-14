@@ -29,10 +29,22 @@ async function main() {
     update: {},
     create: { email: 'technician@demo.doorlink', name: 'Demo Technician', role: Role.TECHNICIAN },
   })
+  // The demo profile is seed-owned, so re-running the seed refreshes it
+  // rather than leaving a half-populated row from an older schema behind.
+  const demoTechnicianProfile = {
+    verified: false,
+    businessName: 'Demo Door Services',
+    businessPhone: '0455 010 220',
+    headline: 'Roller doors, sectional doors and automatic gates',
+    serviceArea: 'Brisbane metro',
+    baseSuburb: 'Brisbane',
+    baseState: 'QLD',
+    yearsExperience: 9,
+  }
   await prisma.technicianProfile.upsert({
     where: { userId: technicianUser.id },
-    update: {},
-    create: { userId: technicianUser.id, verified: false, serviceArea: 'Brisbane metro' },
+    update: demoTechnicianProfile,
+    create: { userId: technicianUser.id, ...demoTechnicianProfile },
   })
 
   const supplierUser = await prisma.user.upsert({

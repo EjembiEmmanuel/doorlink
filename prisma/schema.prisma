@@ -370,6 +370,9 @@ model TechnicianProfile {
   verifiedAt  DateTime?
 
   businessName String?
+  // The number a technician puts on the side of the van, which is often
+  // not the number on their personal account record.
+  businessPhone String?
   abn          String?
   avatarUrl    String?
   headline     String?

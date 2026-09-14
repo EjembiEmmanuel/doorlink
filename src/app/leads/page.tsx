@@ -1,140 +1,197 @@
 import type { Metadata } from 'next'
 import { redirect } from 'next/navigation'
+import { LeadStatus, QuoteStatus } from '@prisma/client'
 import { getSession } from '@/lib/auth'
 import { can } from '@/lib/rbac'
 import { prisma } from '@/lib/prisma'
 import { isDatabaseUnreachable } from '@/lib/db-errors'
+import { currentCommissionBps } from '@/lib/commission-settings'
+import { QUOTABLE_LEAD_STATUSES } from '@/lib/marketplace'
+import { formatBudgetRange, formatMoney } from '@/lib/money'
 import { NotConnected } from '@/components/ui/NotConnected'
 import { EmptyState } from '@/components/ui/EmptyState'
 import { Badge } from '@/components/ui/Badge'
-import { LEAD_STATUS_TONE } from '@/lib/labels'
-import { RespondButton } from './RespondButton'
-import { UpdateLeadStatus } from './UpdateLeadStatus'
+import { LEAD_STATUS_LABELS, LEAD_STATUS_TONE, QUOTE_STATUS_LABELS, QUOTE_STATUS_TONE, URGENCY_LABELS, URGENCY_TONE } from '@/lib/labels'
+import { QuoteForm } from './QuoteForm'
 
 export const metadata: Metadata = {
-  title: 'Requests',
+  title: 'Job board',
 }
 
-export default async function LeadsPage() {
+export default async function JobBoardPage() {
   const session = await getSession()
-  if (!session || !(can(session.role, 'lead:write:own') || can(session.role, 'lead:write:any'))) {
-    redirect('/')
-  }
+  if (!session || !can(session.role, 'marketplace:quote')) redirect('/')
 
-  let leads
+  let openLeads
+  let myQuotes
+  let commissionRateBps
   try {
-    leads = await prisma.lead.findMany({
-      orderBy: { createdAt: 'desc' },
-      include: { model: { select: { name: true, modelCode: true } } },
-    })
+    ;[openLeads, myQuotes, commissionRateBps] = await Promise.all([
+      prisma.lead.findMany({
+        where: {
+          status: { in: QUOTABLE_LEAD_STATUSES },
+          // A technician never sees their own request on the board they
+          // quote from.
+          NOT: { customerId: session.userId },
+        },
+        orderBy: [{ urgency: 'asc' }, { createdAt: 'desc' }],
+        include: {
+          serviceCategory: { select: { name: true } },
+          model: { select: { name: true, modelCode: true } },
+          _count: { select: { quotes: true } },
+          quotes: { where: { workerId: session.userId }, select: { id: true, amountCents: true, message: true, status: true } },
+        },
+        take: 50,
+      }),
+      prisma.quote.findMany({
+        where: { workerId: session.userId },
+        orderBy: { updatedAt: 'desc' },
+        include: {
+          lead: { select: { id: true, reference: true, title: true, message: true, status: true, suburb: true, state: true } },
+        },
+        take: 50,
+      }),
+      currentCommissionBps(),
+    ])
   } catch (error) {
     if (!isDatabaseUnreachable(error)) throw error
-    return <NotConnected feature="Requests" reason="Can't load requests right now." />
+    return <NotConnected feature="The job board" reason="Can't reach the database right now." />
   }
-
-  const canSeeAll = can(session.role, 'lead:write:any')
-  const mine = leads.filter(
-    (lead) =>
-      (lead.assignedOrgId && lead.assignedOrgId === session.organizationId) ||
-      (lead.assignedUserId && lead.assignedUserId === session.userId)
-  )
-  const open = leads.filter((lead) => !lead.assignedOrgId && !lead.assignedUserId)
-  const others = canSeeAll ? leads.filter((lead) => !mine.includes(lead) && !open.includes(lead)) : []
 
   return (
     <div className="flex flex-col gap-10">
-      <div>
-        <h1 className="text-xl font-semibold text-graphite">Requests</h1>
-        <p className="mt-1 text-sm text-zinc-deep">
-          "Request a technician" submissions. Respond to claim one — contact details only show up
-          once you have.
+      <header>
+        <h1 className="text-xl font-semibold text-graphite">Job board</h1>
+        <p className="mt-1 max-w-prose text-sm text-zinc-deep">
+          Open requests from customers. Send a quote to be considered — the customer chooses who to
+          hire, and only then do you exchange contact details.
         </p>
-      </div>
+      </header>
 
       <section className="flex flex-col gap-4">
-        <h2 className="text-sm font-semibold uppercase tracking-wide text-zinc-deep">Open requests</h2>
-        {open.length === 0 ? (
-          <EmptyState title="No open requests" description="Everything's been claimed." />
+        <h2 className="text-sm font-semibold uppercase tracking-wide text-zinc-deep">
+          Open jobs ({openLeads.length})
+        </h2>
+
+        {openLeads.length === 0 ? (
+          <EmptyState
+            title="No open jobs right now"
+            description="New customer requests will appear here as they're posted."
+          />
         ) : (
-          <div className="flex flex-col gap-3">
-            {open.map((lead) => (
-              <div key={lead.id} className="rounded-md border border-line p-4">
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <p className="font-medium text-graphite">{lead.message}</p>
-                    {lead.model && (
-                      <p className="mt-1 text-sm text-zinc-deep">
-                        {lead.model.modelCode} — {lead.model.name}
-                      </p>
-                    )}
+          <ul className="flex flex-col gap-4">
+            {openLeads.map((lead) => {
+              const mine = lead.quotes[0]
+              const budget = formatBudgetRange(lead.budgetMinCents, lead.budgetMaxCents)
+              const location = [lead.suburb, lead.state, lead.postcode].filter(Boolean).join(' ')
+
+              return (
+                <li key={lead.id} className="rounded-md border border-line bg-paper p-5">
+                  <div className="flex flex-wrap items-start justify-between gap-3">
+                    <div className="min-w-0">
+                      <p className="font-medium text-graphite">{lead.title ?? lead.message.slice(0, 80)}</p>
+                      <p className="mt-1 font-code text-micro text-zinc-deep">{lead.reference}</p>
+                    </div>
+                    <div className="flex shrink-0 flex-wrap gap-2">
+                      <Badge tone={URGENCY_TONE[lead.urgency]}>{URGENCY_LABELS[lead.urgency]}</Badge>
+                      <Badge tone={LEAD_STATUS_TONE[lead.status]}>{LEAD_STATUS_LABELS[lead.status]}</Badge>
+                    </div>
                   </div>
-                  <Badge tone={LEAD_STATUS_TONE[lead.status]}>{lead.status}</Badge>
-                </div>
-                <div className="mt-3">
-                  <RespondButton leadId={lead.id} />
-                </div>
-              </div>
-            ))}
-          </div>
+
+                  <p className="mt-3 whitespace-pre-wrap text-sm text-graphite-soft">{lead.message}</p>
+
+                  <dl className="mt-3 flex flex-wrap gap-x-6 gap-y-1 text-sm text-zinc-deep">
+                    {lead.serviceCategory && (
+                      <div>
+                        <dt className="inline font-medium text-graphite-soft">Service: </dt>
+                        <dd className="inline">{lead.serviceCategory.name}</dd>
+                      </div>
+                    )}
+                    {location && (
+                      <div>
+                        <dt className="inline font-medium text-graphite-soft">Location: </dt>
+                        <dd className="inline">{location}</dd>
+                      </div>
+                    )}
+                    {budget && (
+                      <div>
+                        <dt className="inline font-medium text-graphite-soft">Budget: </dt>
+                        <dd className="inline">{budget}</dd>
+                      </div>
+                    )}
+                    {lead.preferredTiming && (
+                      <div>
+                        <dt className="inline font-medium text-graphite-soft">Prefers: </dt>
+                        <dd className="inline">{lead.preferredTiming}</dd>
+                      </div>
+                    )}
+                    {lead.model && (
+                      <div>
+                        <dt className="inline font-medium text-graphite-soft">Product: </dt>
+                        <dd className="inline font-code">{lead.model.modelCode}</dd>
+                      </div>
+                    )}
+                    <div>
+                      <dt className="inline font-medium text-graphite-soft">Quotes so far: </dt>
+                      <dd className="inline">{lead._count.quotes}</dd>
+                    </div>
+                  </dl>
+
+                  {/* Contact details are deliberately absent until the
+                      customer accepts a quote — the board shows the work,
+                      not the person. */}
+                  <details className="mt-4 border-t border-line pt-4" open={Boolean(mine)}>
+                    <summary className="cursor-pointer text-sm font-medium text-signal hover:text-signal-hover">
+                      {mine ? `Your quote: ${formatMoney(mine.amountCents)} — edit` : 'Send a quote'}
+                    </summary>
+                    <div className="mt-4">
+                      <QuoteForm
+                        leadId={lead.id}
+                        commissionRateBps={commissionRateBps}
+                        existing={mine ? { amountCents: mine.amountCents, message: mine.message } : null}
+                      />
+                    </div>
+                  </details>
+                </li>
+              )
+            })}
+          </ul>
         )}
       </section>
 
       <section className="flex flex-col gap-4">
-        <h2 className="text-sm font-semibold uppercase tracking-wide text-zinc-deep">Your requests</h2>
-        {mine.length === 0 ? (
-          <EmptyState title="You haven't claimed any requests yet" />
+        <h2 className="text-sm font-semibold uppercase tracking-wide text-zinc-deep">
+          Your quotes ({myQuotes.length})
+        </h2>
+
+        {myQuotes.length === 0 ? (
+          <EmptyState title="You haven't quoted on anything yet" />
         ) : (
-          <div className="flex flex-col gap-3">
-            {mine.map((lead) => (
-              <div key={lead.id} className="rounded-md border border-line p-4">
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <p className="font-medium text-graphite">{lead.message}</p>
-                    {lead.model && (
-                      <p className="mt-1 text-sm text-zinc-deep">
-                        {lead.model.modelCode} — {lead.model.name}
-                      </p>
-                    )}
-                    <p className="mt-1 text-sm text-graphite">
-                      Contact {lead.name}:{' '}
-                      <a href={`mailto:${lead.email}`} className="font-medium text-signal hover:text-signal-hover">
-                        {lead.email}
-                      </a>
-                      {lead.phone && <span> · {lead.phone}</span>}
+          <ul className="flex flex-col gap-3">
+            {myQuotes.map((quote) => (
+              <li key={quote.id} className="rounded-md border border-line bg-paper p-4">
+                <div className="flex flex-wrap items-start justify-between gap-3">
+                  <div className="min-w-0">
+                    <p className="font-medium text-graphite">
+                      {quote.lead.title ?? quote.lead.message.slice(0, 80)}
                     </p>
+                    <p className="mt-1 font-code text-micro text-zinc-deep">{quote.lead.reference}</p>
                   </div>
-                  <Badge tone={LEAD_STATUS_TONE[lead.status]}>{lead.status}</Badge>
+                  <div className="flex shrink-0 items-center gap-3">
+                    <span className="font-medium text-graphite">{formatMoney(quote.amountCents)}</span>
+                    <Badge tone={QUOTE_STATUS_TONE[quote.status]}>{QUOTE_STATUS_LABELS[quote.status]}</Badge>
+                  </div>
                 </div>
-                <div className="mt-3">
-                  <UpdateLeadStatus leadId={lead.id} status={lead.status} />
-                </div>
-              </div>
+                {quote.status === QuoteStatus.ACCEPTED && (
+                  <p className="mt-2 text-sm text-good">
+                    Accepted — this job is now in your jobs list.
+                  </p>
+                )}
+              </li>
             ))}
-          </div>
+          </ul>
         )}
       </section>
-
-      {canSeeAll && (
-        <section className="flex flex-col gap-4">
-          <h2 className="text-sm font-semibold uppercase tracking-wide text-zinc-deep">
-            Claimed by others
-          </h2>
-          {others.length === 0 ? (
-            <EmptyState title="Nothing claimed by anyone else" />
-          ) : (
-            <div className="flex flex-col gap-3">
-              {others.map((lead) => (
-                <div key={lead.id} className="rounded-md border border-line p-4">
-                  <div className="flex items-start justify-between gap-4">
-                    <p className="font-medium text-graphite">{lead.message}</p>
-                    <Badge tone={LEAD_STATUS_TONE[lead.status]}>{lead.status}</Badge>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-        </section>
-      )}
     </div>
   )
 }

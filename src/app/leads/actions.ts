@@ -2,112 +2,136 @@
 
 import { revalidatePath } from 'next/cache'
 import { z } from 'zod'
-import { LeadStatus } from '@prisma/client'
+import { LeadStatus, QuoteStatus } from '@prisma/client'
 import { prisma } from '@/lib/prisma'
 import { getSession, type Session } from '@/lib/auth'
 import { can, requireSession, RbacError } from '@/lib/rbac'
-import { isDatabaseUnreachable } from '@/lib/db-errors'
+import { isDatabaseUnreachable, isRecordNotFound } from '@/lib/db-errors'
+import { isQuotable } from '@/lib/marketplace'
+import { toMinorUnits } from '@/lib/money'
 
-export type LeadContactResult = { name?: string; email?: string; phone?: string | null; error?: string }
-export type LeadStatusFormState = { error?: string }
+export type QuoteFormState = { error?: string; ok?: boolean }
 
-function claimedByCaller(lead: { assignedOrgId: string | null; assignedUserId: string | null }, session: Session) {
-  if (lead.assignedOrgId) return lead.assignedOrgId === session.organizationId
-  if (lead.assignedUserId) return lead.assignedUserId === session.userId
-  return false
+async function requireQuoter(): Promise<Session> {
+  const session = requireSession(await getSession())
+  if (!can(session.role, 'marketplace:quote')) {
+    throw new RbacError('Only technicians can quote on jobs.', 403)
+  }
+  return session
 }
 
-// Claiming a lead reveals its contact details and, on the first claim,
-// moves it from "open" to "yours" — a lead already claimed by someone
-// else stays hidden from everyone but them and admins.
-export async function respondToLeadAction(leadId: string): Promise<LeadContactResult> {
-  let session: Session
-  try {
-    session = requireSession(await getSession())
-  } catch (error) {
-    if (error instanceof RbacError) return { error: 'Sign in as a technician to respond.' }
-    throw error
-  }
-
-  if (!can(session.role, 'lead:write:own') && !can(session.role, 'lead:write:any')) {
-    return { error: 'Only technicians can respond to requests.' }
-  }
-
-  try {
-    const lead = await prisma.lead.findUnique({ where: { id: leadId } })
-    if (!lead) return { error: 'Request not found.' }
-
-    const alreadyMine = claimedByCaller(lead, session)
-    const unclaimed = !lead.assignedOrgId && !lead.assignedUserId
-
-    if (!alreadyMine && !unclaimed && !can(session.role, 'lead:write:any')) {
-      return { error: 'Someone else already claimed this request.' }
-    }
-
-    if (unclaimed) {
-      await prisma.lead.update({
-        where: { id: leadId },
-        data: {
-          ...(session.organizationId ? { assignedOrgId: session.organizationId } : { assignedUserId: session.userId }),
-          status: LeadStatus.CONTACTED,
-        },
-      })
-      revalidatePath('/leads')
-    }
-
-    return { name: lead.name, email: lead.email, phone: lead.phone }
-  } catch (error) {
-    if (isDatabaseUnreachable(error)) return { error: 'The request database is not reachable right now.' }
-    throw error
-  }
-}
-
-const STATUSES = ['NEW', 'CONTACTED', 'QUALIFIED', 'CONVERTED', 'CLOSED'] as const
-
-const statusSchema = z.object({
+const quoteSchema = z.object({
   leadId: z.string().trim().min(1),
-  status: z.enum(STATUSES),
+  amount: z.coerce.number().positive('Enter a quote amount greater than zero.'),
+  message: z.string().trim().min(10, 'Tell the customer what your quote covers (at least 10 characters).'),
+  estimatedDurationMinutes: z.coerce.number().int().positive().optional(),
+  availableFrom: z.string().trim().optional(),
 })
 
-export async function updateLeadStatusAction(
-  _prevState: LeadStatusFormState,
+export async function submitQuoteAction(
+  _prevState: QuoteFormState,
   formData: FormData
-): Promise<LeadStatusFormState> {
+): Promise<QuoteFormState> {
   let session: Session
   try {
-    session = requireSession(await getSession())
+    session = await requireQuoter()
   } catch (error) {
-    if (error instanceof RbacError) return { error: 'Sign in required.' }
+    if (error instanceof RbacError) return { error: error.message }
     throw error
   }
 
-  if (!can(session.role, 'lead:write:own') && !can(session.role, 'lead:write:any')) {
-    return { error: 'Not permitted.' }
-  }
+  const rawDuration = String(formData.get('estimatedDurationMinutes') ?? '').trim()
+  const rawAvailable = String(formData.get('availableFrom') ?? '').trim()
 
-  const parsed = statusSchema.safeParse({
+  const parsed = quoteSchema.safeParse({
     leadId: formData.get('leadId'),
-    status: formData.get('status'),
+    amount: formData.get('amount'),
+    message: formData.get('message'),
+    estimatedDurationMinutes: rawDuration.length > 0 ? rawDuration : undefined,
+    availableFrom: rawAvailable.length > 0 ? rawAvailable : undefined,
   })
-  if (!parsed.success) return { error: 'Check the form and try again.' }
+
+  if (!parsed.success) {
+    return { error: parsed.error.issues[0]?.message ?? 'Check the form and try again.' }
+  }
 
   try {
     const lead = await prisma.lead.findUnique({ where: { id: parsed.data.leadId } })
     if (!lead) return { error: 'Request not found.' }
-
-    if (!claimedByCaller(lead, session) && !can(session.role, 'lead:write:any')) {
-      return { error: 'Request not found.' }
+    if (!isQuotable(lead.status)) return { error: 'This request is no longer accepting quotes.' }
+    if (lead.customerId && lead.customerId === session.userId) {
+      return { error: 'You cannot quote on your own request.' }
     }
 
-    await prisma.lead.update({
-      where: { id: parsed.data.leadId },
-      data: { status: LeadStatus[parsed.data.status] },
+    // One quote per worker per lead, enforced by a unique constraint in
+    // the schema. Re-submitting updates the existing quote rather than
+    // erroring — a technician revising their price is normal, and
+    // stacking duplicates would make the customer's comparison useless.
+    await prisma.quote.upsert({
+      where: { leadId_workerId: { leadId: lead.id, workerId: session.userId } },
+      update: {
+        amountCents: toMinorUnits(parsed.data.amount),
+        message: parsed.data.message,
+        estimatedDurationMinutes: parsed.data.estimatedDurationMinutes ?? null,
+        availableFrom: parsed.data.availableFrom ? new Date(parsed.data.availableFrom) : null,
+        status: QuoteStatus.PENDING,
+      },
+      create: {
+        leadId: lead.id,
+        workerId: session.userId,
+        amountCents: toMinorUnits(parsed.data.amount),
+        message: parsed.data.message,
+        estimatedDurationMinutes: parsed.data.estimatedDurationMinutes ?? null,
+        availableFrom: parsed.data.availableFrom ? new Date(parsed.data.availableFrom) : null,
+      },
     })
+
+    if (lead.status === LeadStatus.NEW || lead.status === LeadStatus.OPEN_FOR_QUOTES) {
+      await prisma.lead.update({ where: { id: lead.id }, data: { status: LeadStatus.QUOTED } })
+    }
   } catch (error) {
-    if (isDatabaseUnreachable(error)) return { error: 'The request database is not reachable right now.' }
+    if (isRecordNotFound(error)) return { error: 'Request not found.' }
+    if (isDatabaseUnreachable(error)) return { error: 'The database is not reachable right now.' }
     throw error
   }
 
   revalidatePath('/leads')
-  return {}
+  return { ok: true }
+}
+
+export async function withdrawQuoteAction(
+  _prevState: QuoteFormState,
+  formData: FormData
+): Promise<QuoteFormState> {
+  let session: Session
+  try {
+    session = await requireQuoter()
+  } catch (error) {
+    if (error instanceof RbacError) return { error: error.message }
+    throw error
+  }
+
+  const quoteId = String(formData.get('quoteId') ?? '')
+  if (!quoteId) return { error: 'Missing quote.' }
+
+  try {
+    const quote = await prisma.quote.findUnique({ where: { id: quoteId } })
+    // Ownership re-checked here regardless of which page rendered the
+    // form, and a mismatch reports "not found" rather than "forbidden"
+    // so it leaks nothing about other people's quotes.
+    if (!quote || quote.workerId !== session.userId) return { error: 'Quote not found.' }
+    if (quote.status !== QuoteStatus.PENDING) return { error: 'That quote can no longer be withdrawn.' }
+
+    await prisma.quote.update({
+      where: { id: quote.id },
+      data: { status: QuoteStatus.WITHDRAWN, respondedAt: new Date() },
+    })
+  } catch (error) {
+    if (isRecordNotFound(error)) return { error: 'Quote not found.' }
+    if (isDatabaseUnreachable(error)) return { error: 'The database is not reachable right now.' }
+    throw error
+  }
+
+  revalidatePath('/leads')
+  return { ok: true }
 }

@@ -17,6 +17,11 @@ export type Permission =
   | 'lead:read:assigned'
   | 'lead:write:own'
   | 'lead:write:any'
+  // Seeing the open job board and quoting on it. Separate from
+  // lead:write:* because "can bid for work" and "can administer other
+  // people's requests" are genuinely different powers.
+  | 'marketplace:quote'
+  | 'marketplace:hire'
   | 'support:read:own'
   | 'support:write:any'
   | 'import:write'
@@ -37,6 +42,7 @@ const MATRIX: Record<Role, Permission[]> = {
     'order:read:own',
     'job:read:own',
     'job:write:own',
+    'marketplace:hire',
     'support:read:own',
   ],
   TECHNICIAN: [
@@ -47,6 +53,8 @@ const MATRIX: Record<Role, Permission[]> = {
     'job:write:own',
     'lead:read:assigned',
     'lead:write:own',
+    'marketplace:quote',
+    'marketplace:hire',
     'support:read:own',
   ],
   SUPPLIER: [
@@ -54,6 +62,7 @@ const MATRIX: Record<Role, Permission[]> = {
     'listing:read',
     'listing:write:own',
     'order:read:any',
+    'marketplace:hire',
     'support:read:own',
   ],
   MANUFACTURER: [
@@ -62,6 +71,7 @@ const MATRIX: Record<Role, Permission[]> = {
     'listing:read',
     'listing:write:own',
     'import:write',
+    'marketplace:hire',
     'support:read:own',
   ],
   ADMIN: [
@@ -75,6 +85,8 @@ const MATRIX: Record<Role, Permission[]> = {
     'job:write:any',
     'lead:read:assigned',
     'lead:write:any',
+    'marketplace:quote',
+    'marketplace:hire',
     'support:read:own',
     'support:write:any',
     'import:write',

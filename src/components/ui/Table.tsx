@@ -31,9 +31,15 @@ export interface SpecListItem {
   unit?: string
 }
 
-export function SpecList({ items }: { items: SpecListItem[] }) {
+/**
+ * `columns` exists because this list is used in two very different
+ * places: the full-width spec table on a product page, where two columns
+ * read well, and a ~288px sidebar, where two columns wrap a reference
+ * like DL-JOB-0RE2Z9F onto three lines.
+ */
+export function SpecList({ items, columns = 2 }: { items: SpecListItem[]; columns?: 1 | 2 }) {
   return (
-    <dl className="grid grid-cols-1 gap-x-6 gap-y-3 sm:grid-cols-2">
+    <dl className={cn('grid grid-cols-1 gap-x-6 gap-y-3', columns === 2 && 'sm:grid-cols-2')}>
       {items.map((item) => (
         <div key={item.label} className="flex items-baseline justify-between gap-4 border-b border-line pb-2">
           <dt className="text-sm text-zinc-deep">{item.label}</dt>

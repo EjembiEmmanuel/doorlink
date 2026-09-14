@@ -173,7 +173,10 @@ export default async function ManualsPage({ searchParams }: { searchParams: Sear
                             {formatFileSize(doc.fileSizeBytes) && ` · ${formatFileSize(doc.fileSizeBytes)}`}
                           </p>
                         </div>
-                        <div className="flex shrink-0 flex-wrap gap-2">
+                        {/* No shrink-0 here: these two badges together are wider than a
+                            phone, and refusing to shrink made the whole page
+                            scroll sideways rather than wrapping them. */}
+                        <div className="flex flex-wrap gap-2">
                           <Badge tone="neutral">{DOCUMENT_KIND_LABELS[doc.kind]}</Badge>
                           <Badge tone={DOCUMENT_ORIGIN_TONE[doc.origin]}>
                             {DOCUMENT_ORIGIN_LABELS[doc.origin]}
