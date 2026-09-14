@@ -145,6 +145,14 @@ rating.
 the work and the suburb and never the phone number. Please do not surface
 contact info on lead cards to make them feel richer.
 
+**The sign-in screen has no password field.** Authentication is a
+dev-only stand-in (`src/lib/dev-session.ts`): a plain cookie, no
+passwords, and it refuses to run in production. Supabase auth is the
+intended provider and is not connected. Please style `/sign-in` and
+`/register` as the real thing, but do not add a password input, a
+"forgot password" link, or social buttons — none of them would do
+anything, and the screen currently explains what it is.
+
 **The demo banner** (`components/layout/DemoBanner.tsx`) says the build
 mixes real manufacturer documents with invented sample data. It must
 stay visible while that is true.
