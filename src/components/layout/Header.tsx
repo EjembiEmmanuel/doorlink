@@ -74,8 +74,10 @@ export async function Header() {
     if (can(session.role, 'marketplace:quote')) {
       accountLinks.push({ href: '/leads', label: 'Job board' })
       accountLinks.push({ href: '/my-profile', label: 'Trade profile' })
+      accountLinks.push({ href: '/earnings', label: 'Earnings' })
     }
     accountLinks.push({ href: '/jobs', label: 'Jobs' })
+    accountLinks.push({ href: '/account/subscription', label: 'Subscription' })
     accountLinks.push({ href: '/support', label: 'Support' })
     if (can(session.role, 'catalogue:write')) {
       accountLinks.push({ href: '/admin', label: 'Admin' })

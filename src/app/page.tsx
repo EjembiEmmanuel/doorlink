@@ -38,7 +38,14 @@ async function landingFigures() {
     return { manuals, manufacturers, services, commissionBps, plans, available: true as const }
   } catch (error) {
     if (!isDatabaseUnreachable(error)) throw error
-    return { manuals: 0, manufacturers: 0, services: 0, commissionBps: null, plans: [], available: false as const }
+    return {
+      manuals: 0,
+      manufacturers: 0,
+      services: 0,
+      commissionBps: null,
+      plans: [],
+      available: false as const,
+    }
   }
 }
 
@@ -64,8 +71,8 @@ export default async function HomePage() {
               One platform.
             </h1>
             <p className="mt-5 text-lg text-graphite-soft">
-              Garage doors, gates, shutters and access systems — find the technician, the manual and the
-              part, in the one place.
+              Garage doors, gates, shutters and access systems — find the technician, the manual and the part,
+              in the one place.
             </p>
             <div className="mt-7 flex flex-wrap gap-3">
               <Link
@@ -91,10 +98,7 @@ export default async function HomePage() {
           How it works
           --------------------------------------------------------------- */}
       <section className="mx-auto max-w-shell px-4 py-16 sm:py-20">
-        <SectionHeading
-          eyebrow="How it works"
-          title="Post the job. Compare the quotes. Pick who does it."
-        />
+        <SectionHeading eyebrow="How it works" title="Post the job. Compare the quotes. Pick who does it." />
         <ol className="mt-8 grid gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-4">
           {[
             {
@@ -141,16 +145,16 @@ export default async function HomePage() {
               title="Find a professional"
               cta="Post a job"
             >
-              Garage door repairs, gate automation, motor replacement, remote programming, roller
-              shutters, emergency callouts.{' '}
+              Garage door repairs, gate automation, motor replacement, remote programming, roller shutters,
+              emergency callouts.{' '}
               {figures.available && figures.services > 0 && (
                 <>{figures.services} service categories, and technicians quote against your postcode.</>
               )}
             </Pillar>
 
             <Pillar href="/find" eyebrow="Products" title="Explore door systems" cta="Identify your product">
-              Work out which door, motor or controller you actually have — by model code, or by
-              answering a few questions about what you can see on it. Then see what is compatible.
+              Work out which door, motor or controller you actually have — by model code, or by answering a few
+              questions about what you can see on it. Then see what is compatible.
             </Pillar>
 
             <Pillar href="/manuals" eyebrow="Knowledge" title="User manuals" cta="Search the library">
@@ -158,8 +162,8 @@ export default async function HomePage() {
               searchable by the text inside them — not just their titles.{' '}
               {figures.available && figures.manuals > 0 && (
                 <>
-                  {figures.manuals} documents from {figures.manufacturers} manufacturers so far, each
-                  labelled with where it came from.
+                  {figures.manuals} documents from {figures.manufacturers} manufacturers so far, each labelled
+                  with where it came from.
                 </>
               )}
             </Pillar>
@@ -174,8 +178,8 @@ export default async function HomePage() {
         <SectionHeading eyebrow="Why Doorlink" title="Built the way this trade actually works." />
         <div className="mt-8 grid gap-x-10 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
           <Reason title="Your number stays yours">
-            The job board shows the work and the suburb. Contact details are exchanged at the moment
-            you agree to work together, and not before.
+            The job board shows the work and the suburb. Contact details are exchanged at the moment you agree
+            to work together, and not before.
           </Reason>
           <Reason title="Prices you can check">
             {figures.commissionBps === null
@@ -183,21 +187,20 @@ export default async function HomePage() {
               : `Doorlink takes ${formatCommissionRate(figures.commissionBps)} of a completed job, deducted from the amount the technician quotes — and they see exactly what they receive before they send it.`}
           </Reason>
           <Reason title="Reviews that mean something">
-            A review can only be written by the customer of a job that actually reached completion on
-            Doorlink. There is no other way for one to exist.
+            A review can only be written by the customer of a job that actually reached completion on Doorlink.
+            There is no other way for one to exist.
           </Reason>
           <Reason title="Verification that says what it is">
-            A verified badge means a Doorlink admin matched a technician&apos;s licence and insurance
-            details to their account. It does not mean Doorlink is a licensing authority, and the
-            profile says so.
+            A verified badge means a Doorlink admin matched a technician&apos;s licence and insurance details to
+            their account. It does not mean Doorlink is a licensing authority, and the profile says so.
           </Reason>
           <Reason title="Documents with their provenance attached">
             Every manual is labelled with whether it is the manufacturer&apos;s own file, a third-party
             write-up, or something we cannot vouch for. A technician relying on it sees that first.
           </Reason>
           <Reason title="Made for a phone in a driveway">
-            Large touch targets, a bottom tab bar, and an installable app — because this gets used
-            outdoors, often one-handed, often with gloves on.
+            Large touch targets, a bottom tab bar, and an installable app — because this gets used outdoors,
+            often one-handed, often with gloves on.
           </Reason>
         </div>
       </section>
@@ -230,9 +233,9 @@ export default async function HomePage() {
               ))}
             </div>
             <p className="mt-6 max-w-prose text-sm text-zinc-deep">
-              Subscriptions are not live. No payment provider is connected, so nothing here can be
-              bought yet, and a plan with no price is a plan whose price has not been decided —
-              it is not a number we are hiding.
+              Subscriptions are not live. No payment provider is connected, so nothing here can be bought yet,
+              and a plan with no price is a plan whose price has not been decided — it is not a number we are
+              hiding.
             </p>
           </div>
         </section>

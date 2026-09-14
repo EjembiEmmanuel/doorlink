@@ -1179,6 +1179,10 @@ model Transaction {
   status            TransactionStatus @default(PENDING)
   provider          String?
   providerRef       String?
+  // When the provider confirmed the money actually arrived. Null on
+  // every transaction that has not been through a verified webhook,
+  // which is the only thing that sets it.
+  paidAt            DateTime?
   failureReason     String?
 
   createdAt         DateTime          @default(now())
