@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { FinderCascade } from '@/components/finder/FinderCascade'
 import { Panel, PanelBody, PanelHeader } from '@/components/ui/Panel'
+import { DoorHero3DClientOnly } from '@/components/three/DoorHero3DClientOnly'
 
 export const metadata: Metadata = {
   alternates: { canonical: '/' },
@@ -10,14 +11,32 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <div className="mx-auto max-w-shell px-4 py-10 sm:py-16">
-      <div className="mb-10 max-w-prose">
-        <h1 className="text-display font-semibold tracking-tight text-graphite sm:text-display-lg">
-          Everything for your door, in one place.
-        </h1>
-        <p className="mt-4 text-lg text-graphite-soft">
-          Identify your garage door, roller shutter, motor or lock, then find the manual, the
-          compatible parts and the people who can fit them.
-        </p>
+      <div className="mb-12 grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
+        <div className="max-w-prose">
+          <h1 className="text-display font-semibold tracking-tight text-graphite sm:text-display-lg">
+            Everything for your door, in one place.
+          </h1>
+          <p className="mt-4 text-lg text-graphite-soft">
+            Identify your garage door, roller shutter, motor or lock, then find the manual, the
+            compatible parts and the people who can fit them.
+          </p>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <Link
+              href="/find"
+              className="rounded-full bg-signal px-5 py-2.5 text-sm font-medium text-paper transition-colors hover:bg-signal-hover"
+            >
+              Find your part
+            </Link>
+            <Link
+              href="/request-technician"
+              className="rounded-full border border-line px-5 py-2.5 text-sm font-medium text-graphite transition-colors hover:bg-rail"
+            >
+              Request a technician
+            </Link>
+          </div>
+        </div>
+
+        <DoorHero3DClientOnly />
       </div>
 
       <Panel className="mb-12">

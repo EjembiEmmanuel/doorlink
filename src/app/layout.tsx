@@ -1,10 +1,13 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import type { ReactNode } from 'react'
 import { IBM_Plex_Mono, IBM_Plex_Sans } from 'next/font/google'
 import { SkipLink } from '@/components/layout/SkipLink'
 import { DemoBanner } from '@/components/layout/DemoBanner'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
+import { MobileTabBar } from '@/components/layout/MobileTabBar'
+import { InstallPrompt } from '@/components/layout/InstallPrompt'
+import { ServiceWorkerRegister } from '@/components/layout/ServiceWorkerRegister'
 import { toJsonLd } from '@/lib/json-ld'
 import './globals.css'
 
@@ -34,6 +37,19 @@ export const metadata: Metadata = {
   },
   description:
     'Product identification, technical documentation, compatible parts, suppliers and technicians for the garage door, roller shutter, motor and locking industry.',
+  manifest: '/manifest.webmanifest',
+  appleWebApp: {
+    capable: true,
+    title: 'DoorLink',
+    statusBarStyle: 'default',
+  },
+}
+
+export const viewport: Viewport = {
+  themeColor: '#1B1D1F',
+  viewportFit: 'cover',
+  width: 'device-width',
+  initialScale: 1,
 }
 
 const websiteJsonLd = {
@@ -55,6 +71,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           {children}
         </main>
         <Footer />
+        <MobileTabBar />
+        <InstallPrompt />
+        <ServiceWorkerRegister />
       </body>
     </html>
   )

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>You're offline · DoorLink</title>
+    <style>
+      body {
+        margin: 0;
+        display: flex;
+        min-height: 100vh;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        background: #fafaf9;
+        color: #1b1d1f;
+        font-family: system-ui, sans-serif;
+        text-align: center;
+      }
+      div { max-width: 24rem; }
+      h1 { font-size: 1.25rem; margin-bottom: 0.5rem; }
+      p { color: #5a6068; line-height: 1.5; }
+      button {
+        margin-top: 1.25rem;
+        padding: 0.6rem 1.25rem;
+        border-radius: 999px;
+        border: none;
+        background: #1b4fa8;
+        color: #fafaf9;
+        font-size: 0.9rem;
+        font-weight: 500;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <h1>You're offline</h1>
+      <p>
+        DoorLink couldn't reach the network. This page is a static fallback, not a cached copy of
+        the site — nothing here is out-of-date data pretending to be current.
+      </p>
+      <button onclick="location.reload()">Try again</button>
+    </div>
+  </body>
+</html>

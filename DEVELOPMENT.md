@@ -799,6 +799,121 @@ surfaces those, not a fourth parallel set of screens duplicating them.
   existed after the run (the one the script created), then deleted it and
   re-confirmed the `Lead` table was back to 0 rows.
 
+## Session 12 — a 3D hero, and taking the app mobile
+
+The user asked for more "wow" — something interactive and 3D — plus a
+more app-like, engaging experience on a phone, and asked about the App
+Store. Confirmed two decisions up front (`AskUserQuestion`): a real 3D
+centerpiece rather than CSS-only depth effects, and "installable PWA"
+plus "App Store downloadable" for mobile.
+
+**A real interactive 3D garage door on the homepage**, not a video or a
+static render. Added `three`, `@react-three/fiber`, and `@react-three/drei`
+(`--legacy-peer-deps`, since `@react-three/fiber`'s peer range hadn't
+caught up to React 19.3 yet — a real but harmless version-range lag, not
+an actual incompatibility). `src/components/three/GarageDoorScene.tsx`
+builds a four-panel sectional door procedurally (boxes, not an imported
+model): drag to orbit, and an "Open the door"/"Close the door" button
+lifts the panels up behind a facade header that occludes them — the same
+z-buffer trick a real compositing shot would use, not a scripted
+animation pretending panels vanish. Panels are staggered per-index
+(`THREE.MathUtils.damp`) so they don't move in lockstep, approximating —
+not simulating — how a real sectional door folds. `DoorHero3D.tsx` wraps
+it with real WebGL feature detection (`canvas.getContext('webgl')`) and
+falls back to a static illustration rather than a blank canvas on
+devices without it; the dynamic import with `ssr: false` had to live in
+its own client-only wrapper (`DoorHero3DClientOnly.tsx`) since
+`next/dynamic(..., { ssr: false })` isn't allowed directly inside a
+Server Component, which the homepage is.
+
+**A real rendering bug found and fixed during this, not styling
+polish.** The first pass rendered nothing visible — not broken, just
+invisible: the door's panel color (`#cdd2d6`) was close enough to the
+sky-gradient background that a dark charcoal door on a light background
+had accidentally become a light door on a light background. Confirmed it
+was a contrast problem and not a broken pipeline by temporarily dropping
+a solid red test cube into the scene — it rendered fine, proving the
+canvas, camera, and lighting all worked — then recolored the door to the
+brand's own powder-coat charcoal (`#2C3033`, from `tailwind.config.ts`)
+and warmed the facade for contrast, rather than picking an arbitrary
+color.
+
+**PWA: installable, with an honest offline story.** Added
+`src/app/manifest.ts` (Next's special manifest route), a shared icon
+generator (`src/lib/app-icon.tsx`, using `next/og`'s `ImageResponse` to
+draw a "D" monogram at request time — no external image tool needed) and
+`icon.tsx`/`apple-icon.tsx`/`icons/[size]/route.tsx`/
+`icons/maskable/[size]/route.tsx` so the manifest, favicon, and iOS
+home-screen icon all render from the one source. `public/sw.js` is
+deliberately minimal, on purpose: it does not cache pages or API
+responses, because DoorLink's whole design philosophy is that nothing
+pretends to be live or verified when it isn't — caching a marketplace
+listing page would mean serving stale listings while offline with no
+indication they're stale. Its only job is a `fetch` handler on
+navigation requests (satisfying Chrome's installability requirement) and
+falling back to a static, honestly-worded `public/offline.html` (says
+outright "this page is a static fallback, not a cached copy of the
+site") when the network is actually down. `InstallPrompt.tsx` listens for
+Chrome/Android's `beforeinstallprompt` and offers a real install button;
+iOS Safari has no equivalent API, so on iOS it honestly says "tap Share,
+then Add to Home Screen" rather than pretending to trigger something
+that doesn't exist there. `MobileTabBar.tsx` adds a persistent bottom
+tab bar (Home/Find/Market/Account) below `sm`, the pattern people expect
+from an installed app rather than a website — the existing hamburger menu
+still covers everything else.
+
+**App Store / native wrapper: scaffolded, explicitly not completed.**
+DoorLink is server-rendered (database-backed pages, Server Actions) —
+it can't become a static-exported Capacitor bundle the way most
+"Capacitor apps" work. The honest path is a native WebView shell pointed
+at the real deployed site (`capacitor.config.ts`'s `server.url`), so
+every request still hits the live Next.js server; nothing gets bundled
+or faked as working offline. Added `@capacitor/core` and `@capacitor/cli`
+as dependencies and a documented `capacitor.config.ts`, but did not run
+`npx cap add ios` or `npx cap add android` — both need a real deployed
+URL to point at (still blocked on the Supabase/hosting step the user is
+doing later) and platform SDKs this sandbox doesn't have (Xcode requires
+macOS; no Android SDK is installed here, only a bare JDK and Gradle).
+See "Still needs you, not code" for the concrete runbook once hosting
+exists.
+
+### What was verified, in a real browser and against the database directly
+
+- `npm run typecheck` clean.
+- Found and fixed a real infrastructure gap while testing, unrelated to
+  this session's own changes: the sandbox's local Postgres cluster
+  (`pg_lsclusters` showed it `down`, a stale PID file from a prior
+  container) wasn't running, so `/find` was correctly showing
+  `<NotConnected>` rather than lying about it — exactly the behavior
+  Session 2 built. Restarted it (`pg_ctlcluster 16 main start`) and
+  confirmed all prior data was intact (5 models, 10 users, 1 listing,
+  0 leads — the last of those matching Session 11's cleanup exactly),
+  not a fresh empty database.
+- Screenshotted the 3D hero at desktop and mobile viewports in both the
+  closed and open states via a real headless Chromium session (software
+  WebGL/SwiftShader, since this sandbox has no GPU) — confirmed the door
+  is visible, the "Open the door" button lifts the panels behind the
+  header convincingly (floor visible through the opening once open), and
+  the button's own label swaps to "Close the door".
+- Ran a Playwright pass across `/`, `/find`, `/marketplace`, a real
+  model page, `/request-technician`, `/data-sources`, and `/sign-in` on
+  a mobile viewport checking for console/page errors after the layout,
+  footer, and manifest changes — zero errors. The one 404 the first pass
+  hit was a bug in the test script itself (it reused a model's `slug` as
+  its `id` — `/model/[id]` looks up by `id`, not `slug` — a fresh find
+  against the database confirmed the model existed and the correct URL
+  returned `200`), not a regression in the app.
+- Confirmed `/manifest.webmanifest`, `/icon`, `/apple-icon`,
+  `/icons/192`, `/icons/512`, `/icons/maskable/192`,
+  `/icons/maskable/512`, `/sw.js`, and `/offline.html` all return `200`,
+  and that the rendered homepage's `<head>` actually contains the
+  `<link rel="manifest">`, `<link rel="icon">`, and
+  `<link rel="apple-touch-icon">` tags Next generated from those files —
+  not just that the routes exist in isolation.
+- Screenshotted the mobile tab bar at both the top and the true bottom of
+  a page's scroll — confirmed the footer's own links render fully above
+  the fixed tab bar rather than being clipped underneath it.
+
 ---
 
 ## Status by module
@@ -889,6 +1004,13 @@ surfaces those, not a fourth parallel set of screens duplicating them.
     `src/lib/dev-session.ts` — still the main remaining item waiting on
     the user rather than a build decision; see "Still needs you, not
     code" below.
+22. ~~A "wow"/interactive homepage element, and a more app-like mobile
+    experience.~~ 3D hero (`/`), installable PWA (manifest, icons,
+    offline fallback, install prompt, mobile bottom tab bar) all done
+    and verified (Session 12). The App Store/Play Store wrapper is
+    scaffolded (`capacitor.config.ts`) but not buildable yet — it needs
+    a real deployed URL and platform SDKs neither of which exist in this
+    sandbox; see "Native app (iOS/Android)" below for the exact runbook.
 
 ## Still needs you, not code
 
@@ -907,3 +1029,22 @@ surfaces those, not a fourth parallel set of screens duplicating them.
 - Real manufacturer, model and part data, and permission to host their manuals.
 - Supplier onboarding terms and the commission rate (`SupplierProfile.commissionBps` is 0) — still relevant even without Stripe, since suppliers are still distinct sellers on the platform.
 - Whether technician "verified" status requires a real accreditation check.
+- **Native app (iOS/Android) — the runbook, once hosting exists:**
+  1. Deploy the Next.js app somewhere public (Vercel is the natural fit;
+     it needs the same `DATABASE_URL` already in use, plus Supabase env
+     vars once that's connected) and set `NEXT_PUBLIC_SITE_URL` to that
+     real URL — `capacitor.config.ts` reads it directly.
+  2. **Android** (no Mac needed): install Android Studio on your own
+     machine (free), then from the project run `npx cap add android`
+     followed by `npx cap open android` — that opens the generated
+     project in Android Studio, where "Build > Generate Signed Bundle"
+     produces what the Play Store wants. A $25 one-time Google Play
+     Developer account is the only cost.
+  3. **iOS**: needs a Mac with Xcode installed (or a Mac-in-the-cloud CI
+     service if you don't have one) plus a $99/year Apple Developer
+     account. Once you have both: `npx cap add ios`, then
+     `npx cap open ios` opens the generated project in Xcode for
+     archiving and submission through App Store Connect.
+  4. Either build is just a WebView shell around step 1's real URL — no
+     app logic lives in the native project, so there's nothing in it to
+     keep in sync beyond re-running `npx cap sync` if the config changes.
