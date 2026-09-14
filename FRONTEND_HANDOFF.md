@@ -46,6 +46,26 @@ Commands: `npm run dev`, `npm run build`, `npm run typecheck`,
 `npm test`. All four pass on `main` as handed over — please keep them
 passing.
 
+**Two things about running it on Replit.**
+
+Replit detects Next.js, infers a Vercel project, and offers to port the
+app into its own `PNPM_WORKSPACE` stack. **Decline.** That is a framework
+migration, not an import: it moves the real application into
+`.migration-backup/` and leaves an empty workspace scaffold at the root.
+It has already happened twice. There is a `.replit` in the repo telling
+Replit how to run the project as it is — npm, Next.js, port 3000 — so it
+should not need to guess. After importing, confirm the file tree has
+`src/app/`, `prisma/`, `next.config.mjs` and this file. If it instead
+shows `pnpm-workspace.yaml` and an `artifacts/` folder, the port ran and
+the import needs redoing.
+
+And: **do not run `npm run build` while `npm run dev` is running.** They
+share `.next`, the build overwrites the chunks dev is serving, and then
+every script 404s — nothing hydrates, and the app looks completely normal
+while every button on it is dead. It presents as a baffling UI bug rather
+than a build problem. If interactivity stops for no reason: stop dev,
+`rm -rf .next`, start dev again.
+
 ---
 
 ## 2. What is actually wired up
@@ -243,7 +263,33 @@ not code" sections at the end are the quick version.
 
 ---
 
-## 8. What would help most
+## 8. Claude is working in parallel — how we avoid collisions
+
+Backend and feature work continues on `main` while you have the UI
+branch out. To keep the merge clean, Claude is staying **additive in the
+visual layer**:
+
+- **Claude will not touch** `src/components/ui/`, `tailwind.config.ts`,
+  or the markup of screens that already exist. Those are yours for the
+  duration.
+- **Claude will add** new routes, new `src/lib/` modules, and new server
+  actions. New screens are built from the existing primitives, so they
+  inherit your improvements to `Button`, `Field`, `Panel` and the rest
+  automatically.
+- **The one file we may both edit** is a nav list — `Header.tsx`'s
+  `NAV_LINKS`/`accountLinks`, `MobileTabBar.tsx`'s `tabs`, and
+  `admin/layout.tsx`'s `ADMIN_NAV`. If you restructure navigation, expect
+  a one-array conflict there and keep the entries; they are
+  permission-gated and dropping one hides a working screen from the role
+  that needs it.
+
+If you find a screen that is not in this document, it was added after
+your branch was cut. It will be using the primitives correctly but will
+not have had your eye on it — worth a pass before you call it done.
+
+---
+
+## 9. What would help most
 
 In rough order of value:
 
