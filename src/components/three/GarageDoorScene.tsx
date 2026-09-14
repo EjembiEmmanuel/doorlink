@@ -36,6 +36,48 @@ function SunGlow() {
   )
 }
 
+// Mounted just below the header's bottom edge so it's naturally occluded
+// by the closed door (same z-depth trick the header itself uses to hide
+// raised panels) and only comes into view through the opening once the
+// door lifts — a real garage always has one of these, and its absence
+// was the single biggest tell that the "open" shot was an empty box.
+function GarageDoorOpener() {
+  const railY = DOOR_HEIGHT / 2 - 0.05
+  const railLength = 2.2
+  const frontZ = WALL_Z - 0.15
+  const ceilingY = railY + 0.5
+  return (
+    <group>
+      {/* A visible interior ceiling gives the rail and motor something to
+          hang from — without it they read as floating in an empty void
+          rather than mounted inside an actual room. */}
+      <mesh
+        rotation={[Math.PI / 2, 0, 0]}
+        position={[0, ceilingY, frontZ - railLength / 2 - 0.2]}
+        receiveShadow
+      >
+        <planeGeometry args={[3.4, railLength + 1]} />
+        <meshStandardMaterial color="#c7c9cc" roughness={1} />
+      </mesh>
+
+      <mesh position={[0, railY, frontZ - railLength / 2]} castShadow>
+        <boxGeometry args={[0.1, 0.1, railLength]} />
+        <meshStandardMaterial color="#26282a" roughness={0.5} metalness={0.4} envMapIntensity={0.6} />
+      </mesh>
+      <mesh position={[0, railY - 0.18, frontZ - 0.28]} castShadow>
+        <boxGeometry args={[0.46, 0.28, 0.55]} />
+        <meshStandardMaterial color="#dcdcda" roughness={0.6} metalness={0.1} />
+      </mesh>
+      {[-0.7, 0].map((offset) => (
+        <mesh key={offset} position={[0, (railY + ceilingY) / 2, frontZ + offset]}>
+          <boxGeometry args={[0.05, ceilingY - railY, 0.05]} />
+          <meshStandardMaterial color="#5a5d60" roughness={0.6} metalness={0.3} />
+        </mesh>
+      ))}
+    </group>
+  )
+}
+
 function HardwareBracket({ x }: { x: number }) {
   return (
     <group position={[x, 0, PANEL_DEPTH / 2 + 0.006]}>
@@ -79,7 +121,7 @@ function Panel({ index, isOpen, color }: { index: number; isOpen: boolean; color
 
   return (
     <group ref={ref} position={[0, restY, 0]}>
-      <RoundedBox args={[DOOR_WIDTH, PANEL_HEIGHT, PANEL_DEPTH]} radius={0.016} smoothness={3} castShadow receiveShadow>
+      <RoundedBox args={[DOOR_WIDTH, PANEL_HEIGHT, PANEL_DEPTH]} radius={0.016} smoothness={4} castShadow receiveShadow>
         <meshStandardMaterial color={color} roughness={0.55} metalness={0.16} envMapIntensity={0.5} />
       </RoundedBox>
 
@@ -195,6 +237,7 @@ export function GarageDoorScene({ isOpen }: { isOpen: boolean }) {
 
       <Facade />
       <House jambOuterX={DOOR_WIDTH / 2 + JAMB_WIDTH} wallTopY={WALL_TOP_Y} wallZ={WALL_Z} floorY={FLOOR_Y} doorWidth={DOOR_WIDTH} />
+      <GarageDoorOpener />
       {Array.from({ length: PANEL_COUNT }, (_, i) => (
         <Panel key={i} index={i} isOpen={isOpen} color="#2C3033" />
       ))}
@@ -203,7 +246,7 @@ export function GarageDoorScene({ isOpen }: { isOpen: boolean }) {
         <planeGeometry args={[16, 16]} />
         <meshStandardMaterial color="#d9d5cb" roughness={0.96} envMapIntensity={0.25} />
       </mesh>
-      <Garden doorWidth={DOOR_WIDTH} floorY={FLOOR_Y} />
+      <Garden doorWidth={DOOR_WIDTH} floorY={FLOOR_Y} wallZ={WALL_Z} />
 
       {/* Tone mapping deliberately lives here, last in the effect chain,
           instead of on the renderer (gl.toneMapping) — the renderer's own
@@ -212,7 +255,7 @@ export function GarageDoorScene({ isOpen }: { isOpen: boolean }) {
           into a blown-out white smear once blurred. Applying it after
           DoF keeps the blur working on proper HDR data. */}
       <EffectComposer>
-        <DepthOfField focusDistance={5.7} focusRange={2.8} bokehScale={3} />
+        <DepthOfField focusDistance={5.7} focusRange={5.5} bokehScale={1.5} />
         <ToneMapping mode={ToneMappingMode.ACES_FILMIC} />
       </EffectComposer>
 
