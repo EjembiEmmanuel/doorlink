@@ -1056,6 +1056,162 @@ element on a real door.
   render correctly at phone width, and that the one-time environment
   bake didn't introduce a large, visible load delay.
 
+## Session 15 — a house and garden around the door, and a full codebase audit
+
+Two explicit asks: put the door in an actual scene (a house, sun, birds,
+garden, backdrop softly blurred so the door stays the clear subject), and
+"go thoroughly through the code and check for any errors."
+
+### The scene
+
+Added `House.tsx` (two wing walls starting just outside the door's own
+jambs — never overlapping the door's footprint, so there's no z-fighting
+between the two — a pitched roof spanning the full width, two windows,
+a chimney), `Garden.tsx` (lawn either side of the existing concrete
+driveway apron, raised 0.003 units to avoid z-fighting with it, plus
+bushes and flower beds), and `Birds.tsx` (three small silhouettes on
+slow circular flight paths). Added a real sun (drei's procedural `Sky`
+already draws one, plus an explicit unlit glow sphere along the same sun
+direction for a more definite highlight) and switched from
+`@react-three/drei`'s `ContactShadows` blur to actual depth-of-field via
+`@react-three/postprocessing`, focused on the door with the house/garden/
+sky falling out of focus behind it.
+
+**A real, fully-blown-out-white rendering bug, not a styling choice.**
+The first working version of the DoF pass rendered the entire background
+as flat white — sky, roof, everything. Diagnosed by disabling
+`DepthOfField` entirely first (confirming the underlying scene was
+correctly lit and colored without it) then re-adding it: the renderer's
+own `gl.toneMapping = ACESFilmicToneMapping` was tone-mapping (clamping
+to 0-1) every frame *before* `DepthOfField` captured it for blurring, so
+the blur was operating on already-clipped, blown highlights instead of
+proper HDR data — spreading white instead of a soft sky. Fixed by
+removing tone mapping from the renderer entirely and adding a
+`<ToneMapping mode={ACES_FILMIC}>` effect *inside* the same
+`EffectComposer`, positioned after `DepthOfField` in the chain, so tone
+mapping is the last thing applied to the final composited image rather
+than something baked into the intermediate blur input.
+
+**The DoF focus itself needed the library's newer API, not the one most
+examples still show.** The commonly-documented `focusDistance`/
+`focalLength` props (normalized 0-1 / deprecated) produced a uniformly
+soft image with no real point of sharpness. Checked the installed
+`postprocessing` package's own type definitions directly rather than
+guessing further, which named `focusDistance`/`focusRange` in actual
+world units as the current, non-deprecated API (`focalLength` is
+explicitly marked deprecated in the JSDoc). Computed the real distance
+from the fixed camera position to the door (~5.7 units) and used that
+directly — the door is now genuinely sharp with the house and garden
+softly out of focus behind it, confirmed by comparing crops before and
+after the fix.
+
+**Birds were invisible, not broken.** They rendered — confirmed by
+capturing repeated frames over time and finding a bird in one of them —
+but their original flight height (4-5 units) sat entirely above what the
+camera's ~32° FOV framing on the door actually shows (roughly y -0.9 to
+y 2.3 at this distance, worked out from the fixed camera distance and
+FOV, not guessed). Lowered their orbit height and radius and enlarged
+them slightly so they show up as part of normal viewing rather than a
+one-in-eight-screenshots rarity.
+
+### The audit
+
+Ran a systematic pass rather than a spot check: a dependency
+vulnerability check (`npm audit`), a grep sweep for common smells
+(`console.log`, `any`, `TODO`, empty catches — none found), a read-through
+of every `'use server'` action file, a check that every page/route
+touching Prisma follows the established
+`isDatabaseUnreachable`-degrades-gracefully pattern (all of them do), and
+— critically — an actual production build (`npm run build`), which
+catches a category of bug `npm run typecheck` and `npm run dev` both
+miss.
+
+**A real production build failure, not a hypothetical.** The build
+crashed prerendering `/support`: `TypeError: Cannot read properties of
+null (reading 'userId')`. Root cause: several pages
+(`support/page.tsx`, `support/[id]/page.tsx`, `my-listings/page.tsx`,
+`my-listings/[id]/edit/page.tsx`) read `session!.userId` — a non-null
+assertion — commented "the layout above already guarantees a session,"
+trusting the parent layout's own `if (!session) redirect(...)` instead
+of re-checking. That's true for a real request, but not during Next's
+static-generation build pass, where these specific pages get invoked
+without that same guarantee holding, so the assertion was live during a
+`next build`, not just a theoretical gap. Fixed all four by replacing the
+assertion with the same explicit `if (!session) redirect('/sign-in')`
+guard every OTHER page in the app already uses (`/leads`, `/account`,
+`/my-listings/new` never had this problem, because they never trusted a
+parent layout to have already handled it) — consistent with the
+project's own established discipline that every layer re-verifies its
+own assumptions independently, which this was the one place violating.
+
+**A smaller, related gap fixed across five files.** Every admin CRUD
+action's `delete` handler caught `P2003` (foreign-key constraint) but
+not `P2025` (record already gone), and every `update` handler didn't
+handle "record not found" at all — an update or delete against a
+since-deleted row (two admins, or a stale page) would throw an uncaught
+Prisma exception instead of a normal form error. Added
+`isRecordNotFound()` to `src/lib/db-errors.ts` and wired it into
+`admin/categories`, `admin/manufacturers`, `admin/models`,
+`admin/compatibility`, and `support`'s `updateTicketAction` — the same
+"turn a real, reachable outcome into an honest message" principle the
+`isDatabaseUnreachable` pattern already applies everywhere else.
+
+**Noted but not changed:** `npm audit` reports 5 vulnerabilities (4
+moderate, 1 high) — all transitive, all in build-time/dev-only tooling
+(PostCSS, bundled inside Next.js's own build pipeline; `uuid`, pulled in
+by `@capacitor/cli`'s `xcode` dependency, only relevant if the native-app
+step from Session 12 is ever run). Fixing either requires
+`npm audit fix --force`, which would bump Next.js to 16.x or Capacitor's
+CLI to a new major version — real breaking changes affecting a
+currently-working app, not something to do silently as part of an audit.
+Also noted: no root `error.tsx` exists, so an unhandled exception
+anywhere falls back to Next's default error page rather than a branded
+one — not a bug (the app already works without it), just a polish gap
+worth a future session if it comes up again.
+
+There is one narrower, lower-severity gap left deliberately unfixed:
+every admin "create" action checks for a slug/code clash with a
+`findUnique`/`findFirst` immediately before `.create()`, which is not
+atomic — two admins submitting the exact same slug at the exact same
+moment could both pass that check and the second `.create()` would throw
+an uncaught `P2002` (unique constraint) error, the same failure shape as
+the bugs just fixed above. Left alone because it needs simultaneous
+action from two trusted, permission-gated admin accounts on the identical
+value to ever manifest — real, but narrow enough that fixing the
+concrete, demonstrated build-breaking bug and its close relatives took
+priority over hardening a race window nobody has hit.
+
+### What was verified, in a real browser, a real production build, and against the database directly
+
+- `npm run typecheck` clean throughout.
+- `npm run build` — the actual test that caught the bug — failed once
+  (proving the bug was real, not theoretical), then passed cleanly after
+  the fix: all 35 routes generated successfully, confirmed by re-running
+  the full build a second time after a later edit to make sure nothing
+  in between had reintroduced the problem.
+- Grepped the entire `src/` tree for the `session!` pattern after fixing
+  the four known instances — zero remaining.
+- Screenshotted the new scene (closed and open) confirming the door
+  reads sharp against a visibly blurred house, garden and sky — not just
+  "no crash," an actual visual comparison against the pre-fix blown-out
+  and pre-tuning uniformly-soft versions.
+- Re-ran the full signed-in Playwright regression across every page
+  touched this session or previously built, plus a dedicated runtime
+  check hitting `/support`, `/support/[id]` (with a real ticket actually
+  created through the UI, not a fabricated ID), and `/my-listings` as a
+  signed-in customer — all `200`, zero page errors. The first version of
+  this check had its own bug (a URL-matching regex that matched
+  `/support/new` as if it were a real ticket ID, the same class of test
+  mistake logged back in Session 9) — caught by noticing the "created
+  ticket" URL was suspicious, fixed the regex, re-ran, and confirmed a
+  real ticket ID.
+- Confirmed via direct Prisma queries that the test ticket created during
+  that check (in fact created *twice*, once by each version of the test
+  script — the buggy regex hadn't stopped the real server-side action
+  from running, just from being observed correctly) was fully cleaned up
+  afterward, and that every table's row count matched the exact baseline
+  from before this session started.
+
 ---
 
 ## Status by module
