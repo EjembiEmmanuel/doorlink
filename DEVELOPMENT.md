@@ -1511,6 +1511,70 @@ toggles that would imply the channels exist. `push` joined the
 integrations registry so it reports like everything else.
 
 
+
+### Session 18 — the audit against the brief, and the phases that were missing
+
+Re-read the brief end to end against the codebase. Five things it asks
+for did not exist at all, and all five were built:
+
+**The reveal (Phase 2).** The line behind the opening garage door. Drawn
+inside the 3D scene, so the door panels genuinely occlude it and the
+camera gives it parallax — an HTML overlay could not be hidden behind the
+door, which is the cheap popup the brief rules out. Text painted to a 2D
+canvas rather than loaded through drei's `<Text>`, because troika fetches
+its typeface from a font CDN at runtime and a hero that loses its
+headline to a blocked request is not a hero. Looking at it turned up
+three things reasoning about it would not have: the garage was a floating
+billboard (now a room), auto-rotate left the reveal edge-on (the camera
+now eases front-on and pulls *back*, keeping the house in frame), and the
+opener motor hung across the line being revealed.
+
+**The landing page (Phase 2).** It was still the old parts-finder page.
+Rebuilt to the brief's structure with the brief's positioning. Every
+figure on it is read from the database; if one cannot be read, the
+sentence that needs it is not rendered.
+
+**Payments (Phase 6).** `src/lib/payments/` — provider-agnostic types, a
+Stripe adapter that is the only file in the codebase naming Stripe, a
+ledger where every state change writes a TransactionEvent, and a webhook
+route that is the sole path to marking money as moved. The adapter throws
+rather than working: the SDK is not installed and no keys exist, and each
+method carries the exact call that replaces it. There is no unsigned test
+path, because a test route into the code that marks transactions PAID is
+a production route waiting to be found.
+
+**Subscriptions and feature gating (Phase 7).** `/plans`,
+`/account/subscription`, and an entitlements module. The gate is built
+and switched off: which features are premium lives in `PlatformSetting`,
+not in code, so it can be decided later without a rebuild. Nothing is
+locked behind a subscription nobody can buy.
+
+**The configurator (Phase 3).** `/configure`, with the homepage's 3D
+scene parameterised rather than duplicated. The options are Doorlink's
+own generic vocabulary, not any manufacturer's range, and the page says
+so — a configurator is precisely where "do not invent manufacturer
+specifications" gets broken.
+
+Also this session: the brand is spelled Doorlink throughout, as the brief
+spells it; `RevealCard` no longer ships content at opacity 0 in the
+server HTML (a reader with JavaScript off was getting blank sections);
+and `prettier.config.js` records the house style so a stray global
+prettier run cannot convert a file to double quotes and semicolons.
+
+### Still not built, and known
+
+- Universal search across products, manuals, technicians and services
+  (§26). Each area searches itself; there is no one box.
+- Onboarding flows for customers and workers (§28).
+- Admin screens for users, reports, disputes and subscriptions, and the
+  platform metrics panel (§19). Catalogue, marketplace, verification and
+  settings exist.
+- Worker availability (`WorkerAvailability` has a schema, no UI).
+- Message attachments and the report/safety flow (§17) — attachments are
+  blocked on storage, the same blocker as document upload.
+- Worker replies to reviews (`WorkerReview.workerReply` has a column, no
+  UI).
+
 ---
 
 ## Status by module
