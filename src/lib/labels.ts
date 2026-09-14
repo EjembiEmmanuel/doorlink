@@ -37,7 +37,7 @@ export const DOCUMENT_ORIGIN_LABELS: Record<DocumentOrigin, string> = {
   MANUFACTURER_ORIGINAL: "Manufacturer's original",
   THIRD_PARTY_GUIDE: 'Third-party guide',
   COMMUNITY_CONTRIBUTED: 'Community contributed',
-  DOORLINK_AUTHORED: 'Written by DoorLink',
+  DOORLINK_AUTHORED: 'Written by Doorlink',
   UNKNOWN: 'Origin unknown',
 }
 
@@ -133,7 +133,7 @@ export const VERIFICATION_LABELS: Record<VerificationStatus, string> = {
   UNVERIFIED: 'Not verified',
   SUBMITTED: 'Documents submitted',
   IN_REVIEW: 'In review',
-  VERIFIED: 'Verified by DoorLink',
+  VERIFIED: 'Verified by Doorlink',
   REJECTED: 'Verification rejected',
 }
 

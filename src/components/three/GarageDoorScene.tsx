@@ -1,14 +1,16 @@
 'use client'
 
 import { useRef } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
+import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { Environment, OrbitControls, RoundedBox, Sky } from '@react-three/drei'
+import type { OrbitControls as OrbitControlsImpl } from 'three-stdlib'
 import { EffectComposer, DepthOfField, ToneMapping } from '@react-three/postprocessing'
 import { ToneMappingMode } from 'postprocessing'
 import * as THREE from 'three'
 import { House } from './House'
 import { Garden } from './Garden'
 import { Birds } from './Birds'
+import { GarageInterior } from './GarageInterior'
 
 const PANEL_COUNT = 4
 const DOOR_WIDTH = 3.2
@@ -25,6 +27,12 @@ const SUN_POSITION: [number, number, number] = [8, 5, 6]
 const JAMB_WIDTH = 0.3
 const WALL_Z = PANEL_DEPTH / 2 + 0.03
 const WALL_TOP_Y = DOOR_HEIGHT / 2 + (LIFT_HEIGHT + 0.6)
+// The back of the garage. Deep enough that the headline and the wordmark
+// sit at visibly different distances from the camera, which is what
+// produces parallax between them as the view orbits.
+const BACK_WALL_Z = WALL_Z - 3.1
+// Matches the rail/motor mount so the opener hangs from a real ceiling.
+const CEILING_Y = DOOR_HEIGHT / 2 + 0.45
 
 function SunGlow() {
   const direction = new THREE.Vector3(...SUN_POSITION).normalize().multiplyScalar(40)
@@ -42,30 +50,22 @@ function SunGlow() {
 // door lifts — a real garage always has one of these, and its absence
 // was the single biggest tell that the "open" shot was an empty box.
 function GarageDoorOpener() {
-  const railY = DOOR_HEIGHT / 2 - 0.05
+  // Hung close under the ceiling, where a real opener actually mounts.
+  // It used to sit lower, where it cut across the line the door reveals.
+  const railY = CEILING_Y - 0.3
   const railLength = 2.2
   const frontZ = WALL_Z - 0.15
-  const ceilingY = railY + 0.5
+  const ceilingY = CEILING_Y
   return (
     <group>
-      {/* A visible interior ceiling gives the rail and motor something to
-          hang from — without it they read as floating in an empty void
-          rather than mounted inside an actual room. */}
-      <mesh
-        rotation={[Math.PI / 2, 0, 0]}
-        position={[0, ceilingY, frontZ - railLength / 2 - 0.2]}
-        receiveShadow
-      >
-        <planeGeometry args={[3.4, railLength + 1]} />
-        <meshStandardMaterial color="#c7c9cc" roughness={1} />
-      </mesh>
-
+      {/* The ceiling itself is part of GarageInterior now — the rail and
+          motor just hang from it. */}
       <mesh position={[0, railY, frontZ - railLength / 2]} castShadow>
         <boxGeometry args={[0.1, 0.1, railLength]} />
         <meshStandardMaterial color="#26282a" roughness={0.5} metalness={0.4} envMapIntensity={0.6} />
       </mesh>
-      <mesh position={[0, railY - 0.18, frontZ - 0.28]} castShadow>
-        <boxGeometry args={[0.46, 0.28, 0.55]} />
+      <mesh position={[0, railY - 0.14, frontZ - 0.28]} castShadow>
+        <boxGeometry args={[0.42, 0.24, 0.5]} />
         <meshStandardMaterial color="#dcdcda" roughness={0.6} metalness={0.1} />
       </mesh>
       {[-0.7, 0].map((offset) => (
@@ -200,7 +200,78 @@ function Facade() {
   )
 }
 
-export function GarageDoorScene({ isOpen }: { isOpen: boolean }) {
+
+/**
+ * The camera half of the reveal.
+ *
+ * While the door is shut the view drifts slowly around the facade. As it
+ * opens, the allowed azimuth range closes in on straight-on — which
+ * carries the camera there without wresting control away, because a
+ * person mid-drag keeps dragging, just within a narrowing arc. Closing
+ * the door relaxes the range and the drift resumes.
+ *
+ * Done this way rather than by animating the camera directly so that the
+ * user's own input and the reveal never fight over the same value.
+ */
+const CLOSED_RADIUS = 5.8
+// Pulls back rather than pushing in: the reveal is the point, but so is
+// the house it is set in, and filling the frame with the opening throws
+// the property away.
+const OPEN_RADIUS = 7.4
+
+function CameraDirector({ isOpen }: { isOpen: boolean }) {
+  const controls = useRef<OrbitControlsImpl>(null)
+  const closeness = useRef(0)
+  const { camera } = useThree()
+
+  useFrame((_, delta) => {
+    const instance = controls.current
+    if (!instance) return
+
+    closeness.current = THREE.MathUtils.damp(closeness.current, isOpen ? 1 : 0, 1.8, delta)
+    const t = closeness.current
+
+    const target = instance.target
+    const offset = camera.position.clone().sub(target)
+    const desired = THREE.MathUtils.lerp(CLOSED_RADIUS, OPEN_RADIUS, t)
+    offset.setLength(THREE.MathUtils.damp(offset.length(), desired, 2.4, delta))
+    camera.position.copy(target).add(offset)
+
+    const openArc = THREE.MathUtils.lerp(Math.PI / 2.3, 0.2, t)
+    instance.minAzimuthAngle = -openArc
+    instance.maxAzimuthAngle = openArc
+
+    // Level out a little too: looking slightly down into the garage reads
+    // better than looking up at the lintel.
+    instance.minPolarAngle = THREE.MathUtils.lerp(Math.PI / 2 - 0.45, Math.PI / 2 - 0.26, t)
+    instance.maxPolarAngle = THREE.MathUtils.lerp(Math.PI / 2 + 0.12, Math.PI / 2 + 0.02, t)
+    instance.autoRotateSpeed = 0.6 * (1 - t)
+    instance.update()
+  })
+
+  return (
+    <OrbitControls
+      ref={controls}
+      target={[0, 0.55, 0]}
+      enablePan={false}
+      enableZoom={false}
+      autoRotate
+      autoRotateSpeed={0.6}
+      enableDamping
+      dampingFactor={0.08}
+    />
+  )
+}
+
+export interface GarageDoorSceneProps {
+  isOpen: boolean
+  /** The line the opening door reveals. Passed in so the scene stays a
+   *  scene and the copy stays with the page that owns it. */
+  revealHeadline: string
+  revealWordmark: string
+}
+
+export function GarageDoorScene({ isOpen, revealHeadline, revealWordmark }: GarageDoorSceneProps) {
   return (
     <Canvas
       shadows="soft"
@@ -238,6 +309,16 @@ export function GarageDoorScene({ isOpen }: { isOpen: boolean }) {
       <Facade />
       <House jambOuterX={DOOR_WIDTH / 2 + JAMB_WIDTH} wallTopY={WALL_TOP_Y} wallZ={WALL_Z} floorY={FLOOR_Y} doorWidth={DOOR_WIDTH} />
       <GarageDoorOpener />
+      <GarageInterior
+        isOpen={isOpen}
+        backWallZ={BACK_WALL_Z}
+        frontZ={WALL_Z}
+        floorY={FLOOR_Y}
+        ceilingY={CEILING_Y}
+        doorWidth={DOOR_WIDTH}
+        headline={revealHeadline}
+        wordmark={revealWordmark}
+      />
       {Array.from({ length: PANEL_COUNT }, (_, i) => (
         <Panel key={i} index={i} isOpen={isOpen} color="#2C3033" />
       ))}
@@ -259,19 +340,7 @@ export function GarageDoorScene({ isOpen }: { isOpen: boolean }) {
         <ToneMapping mode={ToneMappingMode.ACES_FILMIC} />
       </EffectComposer>
 
-      <OrbitControls
-        target={[0, 0.7, 0]}
-        enablePan={false}
-        enableZoom={false}
-        autoRotate
-        autoRotateSpeed={0.6}
-        enableDamping
-        dampingFactor={0.08}
-        minPolarAngle={Math.PI / 2 - 0.45}
-        maxPolarAngle={Math.PI / 2 + 0.12}
-        minAzimuthAngle={-Math.PI / 2.3}
-        maxAzimuthAngle={Math.PI / 2.3}
-      />
+      <CameraDirector isOpen={isOpen} />
     </Canvas>
   )
 }

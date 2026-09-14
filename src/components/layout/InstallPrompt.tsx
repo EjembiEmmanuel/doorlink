@@ -78,12 +78,12 @@ export function InstallPrompt() {
     <div className="fixed inset-x-0 bottom-16 z-20 mx-auto flex max-w-sm items-center justify-between gap-3 rounded-xl border border-line bg-paper px-4 py-3 shadow-lg sm:bottom-4 sm:left-4 sm:right-auto sm:mx-0">
       {showIosHint ? (
         <p className="text-sm text-graphite">
-          Install DoorLink: tap <span className="font-medium">Share</span>, then{' '}
+          Install Doorlink: tap <span className="font-medium">Share</span>, then{' '}
           <span className="font-medium">Add to Home Screen</span>.
         </p>
       ) : (
         <>
-          <p className="text-sm text-graphite">Install DoorLink for quicker, full-screen access.</p>
+          <p className="text-sm text-graphite">Install Doorlink for quicker, full-screen access.</p>
           <button
             type="button"
             onClick={handleInstall}

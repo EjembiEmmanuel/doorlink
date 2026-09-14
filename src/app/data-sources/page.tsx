@@ -4,7 +4,7 @@ import { SourceBadge } from '@/components/ui/SourceBadge'
 
 export const metadata: Metadata = {
   title: 'Data sources',
-  description: "How DoorLink labels where every catalogue record comes from, and what each label means.",
+  description: "How Doorlink labels where every catalogue record comes from, and what each label means.",
   alternates: { canonical: '/data-sources' },
 }
 
@@ -15,7 +15,7 @@ const SOURCES: { source: DataSource; description: string }[] = [
   },
   {
     source: 'ADMIN_VERIFIED',
-    description: 'Checked and confirmed by DoorLink staff against a primary source.',
+    description: 'Checked and confirmed by Doorlink staff against a primary source.',
   },
   {
     source: 'COMMUNITY_SUBMITTED',
@@ -36,7 +36,7 @@ export default function DataSourcesPage() {
     <div className="mx-auto max-w-prose px-4 py-12">
       <h1 className="text-2xl font-semibold text-graphite">Where this data comes from</h1>
       <p className="mt-3 text-graphite-soft">
-        Every catalogue record on DoorLink carries a label saying where it came from. Nothing is
+        Every catalogue record on Doorlink carries a label saying where it came from. Nothing is
         presented as verified unless it actually is.
       </p>
 

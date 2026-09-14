@@ -29,7 +29,7 @@ const TRANSITION_PROMPTS: Partial<Record<JobStatus, string>> = {
   IN_PROGRESS: 'This tells the customer you are on site and have started.',
   COMPLETED: 'Only mark this complete once the work is genuinely finished — the customer is asked to review it next.',
   CANCELLED: 'Cancelling is final. Say why, so there is a record both sides can read.',
-  DISPUTED: 'Describe what has gone wrong. A DoorLink admin reviews disputes before a job can move again.',
+  DISPUTED: 'Describe what has gone wrong. A Doorlink admin reviews disputes before a job can move again.',
 }
 
 // Which transitions need more than a confirmation before they are safe

@@ -30,6 +30,10 @@ function HeroFallback() {
   )
 }
 
+// The line the door reveals. It lives here rather than inside the scene
+// so the 3D code stays about geometry and lighting.
+const REVEAL_HEADLINE = 'App developed for automated doors and gates.'
+
 export function DoorHero3D() {
   const [isOpen, setIsOpen] = useState(false)
   const [supported, setSupported] = useState<boolean | null>(null)
@@ -47,7 +51,11 @@ export function DoorHero3D() {
       {supported === null ? (
         <div className="absolute inset-0 animate-pulse bg-slate-200/70" />
       ) : (
-        <GarageDoorScene isOpen={isOpen} />
+        <GarageDoorScene
+          isOpen={isOpen}
+          revealHeadline={REVEAL_HEADLINE}
+          revealWordmark="DOORLINK"
+        />
       )}
 
       <p className="absolute left-4 top-4 rounded-full bg-paper/80 px-3 py-1 text-micro font-medium text-graphite-soft backdrop-blur">
@@ -57,7 +65,9 @@ export function DoorHero3D() {
       <button
         type="button"
         onClick={() => setIsOpen((value) => !value)}
-        className="absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full bg-graphite/90 px-5 py-2.5 text-sm font-medium text-paper shadow-lg backdrop-blur transition hover:bg-graphite"
+        // Bottom-right, not centred: centred, it sat straight across the
+        // line the door reveals.
+        className="absolute bottom-4 right-4 rounded-full bg-graphite/90 px-5 py-2.5 text-sm font-medium text-paper shadow-lg backdrop-blur transition hover:bg-graphite"
       >
         {isOpen ? 'Close the door' : 'Open the door'}
       </button>

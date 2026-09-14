@@ -251,7 +251,7 @@ export default async function ModelProfilePage({ params }: PageProps) {
               {model.listings.map((listing) => (
                 <li key={listing.id} className="rounded-md border border-line p-4">
                   <p className="text-sm font-medium text-graphite">
-                    {listing.organization?.name ?? listing.seller?.name ?? 'a DoorLink member'}
+                    {listing.organization?.name ?? listing.seller?.name ?? 'a Doorlink member'}
                   </p>
                   <p className="mt-1 text-lg font-semibold text-graphite">
                     {formatMoney(listing.priceCents, listing.currency)}

@@ -80,7 +80,7 @@ export default async function CartPage() {
                     {item.listing.title}
                   </Link>
                   <p className="text-sm text-zinc-deep">
-                    Sold by {item.listing.organization?.name ?? item.listing.seller?.name ?? 'a DoorLink member'} ·{' '}
+                    Sold by {item.listing.organization?.name ?? item.listing.seller?.name ?? 'a Doorlink member'} ·{' '}
                     {formatMoney(item.listing.priceCents, item.listing.currency)} each
                   </p>
                 </div>
@@ -94,7 +94,7 @@ export default async function CartPage() {
           </div>
 
           <div className="rounded-md border border-line bg-rail p-4 text-sm text-graphite-soft">
-            DoorLink doesn&apos;t have an in-app checkout — it&apos;s a peer-to-peer marketplace. Use
+            Doorlink doesn&apos;t have an in-app checkout — it&apos;s a peer-to-peer marketplace. Use
             &quot;I&apos;m interested&quot; on an item to get the seller&apos;s contact details and arrange payment
             and pickup directly with them.
           </div>

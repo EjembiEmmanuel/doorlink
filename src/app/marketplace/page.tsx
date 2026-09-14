@@ -16,7 +16,7 @@ import { InterestedButton } from '@/components/marketplace/InterestedButton'
 
 export const metadata: Metadata = {
   title: 'Marketplace',
-  description: 'Parts and accessories listed by other DoorLink members and businesses — browse and buy directly.',
+  description: 'Parts and accessories listed by other Doorlink members and businesses — browse and buy directly.',
   // Points at the bare path regardless of which filters are applied, so
   // search engines don't treat every filter combination as separate
   // duplicate content.
@@ -90,7 +90,7 @@ export default async function MarketplacePage({ searchParams }: { searchParams: 
     <div className="mx-auto max-w-shell px-4 py-10">
       <h1 className="text-2xl font-semibold text-graphite">Marketplace</h1>
       <p className="mt-2 max-w-prose text-graphite-soft">
-        Parts and accessories listed by other DoorLink members and businesses — meet up and buy directly
+        Parts and accessories listed by other Doorlink members and businesses — meet up and buy directly
         from whoever's selling. Every listing shows where it comes from.
       </p>
 
@@ -173,7 +173,7 @@ export default async function MarketplacePage({ searchParams }: { searchParams: 
                     {listing.title}
                   </Link>
                   <p className="mt-1 text-sm text-zinc-deep">
-                    Sold by {listing.organization?.name ?? listing.seller?.name ?? 'a DoorLink member'}
+                    Sold by {listing.organization?.name ?? listing.seller?.name ?? 'a Doorlink member'}
                   </p>
                   <p className="mt-2 text-lg font-semibold text-graphite">
                     {formatMoney(listing.priceCents, listing.currency)}

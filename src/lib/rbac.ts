@@ -27,7 +27,7 @@ export type Permission =
   | 'import:write'
   | 'admin:settings'
 
-// listing:write:own is granted to every role — DoorLink's marketplace is
+// listing:write:own is granted to every role — Doorlink's marketplace is
 // peer-to-peer (anyone with an account can list an item, business or
 // not), not gated behind registering as a Supplier organization. What
 // still differs by role is listing:write:any (moderate anyone's listing)

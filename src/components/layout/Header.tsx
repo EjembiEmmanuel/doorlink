@@ -9,12 +9,15 @@ import { unreadMessageCount } from '@/lib/messaging'
 import { MobileNavToggle } from './MobileNavToggle'
 import { AccountMenu } from './AccountMenu'
 
+// Four destinations, named the way the landing page names them. "Data
+// sources" moved to the footer: it matters, but it is not something
+// someone arrives wanting, and a five-item row was crowding the ones
+// that are.
 const NAV_LINKS = [
-  { href: '/find', label: 'Find your part' },
+  { href: '/request-technician', label: 'Find a professional' },
+  { href: '/find', label: 'Door systems' },
   { href: '/manuals', label: 'Manuals' },
-  { href: '/marketplace', label: 'Marketplace' },
-  { href: '/request-technician', label: 'Request a technician' },
-  { href: '/data-sources', label: 'Data sources' },
+  { href: '/marketplace', label: 'Parts' },
 ]
 
 /**
@@ -88,7 +91,7 @@ export async function Header() {
     <header className="relative border-b border-line bg-paper">
       <div className="mx-auto flex h-16 max-w-shell items-center justify-between px-4">
         <Link href="/" className="text-lg font-semibold tracking-tight text-graphite">
-          DoorLink
+          Doorlink
         </Link>
 
         <nav className="hidden items-center gap-6 md:flex">

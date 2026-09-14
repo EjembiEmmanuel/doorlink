@@ -110,7 +110,7 @@ function CommissionPreview({
   if (!amountCents || amountCents <= 0) {
     return (
       <p className="rounded-md border border-line bg-rail p-3 text-sm text-graphite-soft">
-        DoorLink&apos;s commission is {formatCommissionRate(commissionRateBps)} of the job value, taken
+        Doorlink&apos;s commission is {formatCommissionRate(commissionRateBps)} of the job value, taken
         from the amount you quote.
       </p>
     )
@@ -125,7 +125,7 @@ function CommissionPreview({
       </div>
       <div className="mt-1 flex justify-between">
         <dt className="text-graphite-soft">
-          DoorLink commission ({formatCommissionRate(split.commissionRateBps)})
+          Doorlink commission ({formatCommissionRate(split.commissionRateBps)})
         </dt>
         <dd className="text-graphite">−{formatMoney(split.commissionCents)}</dd>
       </div>

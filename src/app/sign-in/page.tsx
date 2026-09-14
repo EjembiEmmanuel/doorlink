@@ -14,7 +14,7 @@ export default function SignInPage() {
     <div className="mx-auto max-w-sm px-4 py-16">
       <h1 className="text-2xl font-semibold text-graphite">Sign in</h1>
       <p className="mt-2 text-sm text-graphite-soft">
-        DoorLink doesn&apos;t have a real authentication provider connected yet. Sign-in here uses a
+        Doorlink doesn&apos;t have a real authentication provider connected yet. Sign-in here uses a
         development-only session, not a password.
       </p>
 
