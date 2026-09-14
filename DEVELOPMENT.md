@@ -1212,6 +1212,94 @@ priority over hardening a race window nobody has hit.
   afterward, and that every table's row count matched the exact baseline
   from before this session started.
 
+## Session 16 — fixing the garden, the blur, the birds, and a couple of glitches Session 15 introduced
+
+Direct follow-up: "more realistic garden, less blur, better garage,
+better aspects overall nicer interface and experience." Two of the four
+asks turned into bug fixes for regressions from Session 15's own pass,
+not just further polish — worth being explicit about since they're a
+useful reminder that "add more detail" and "make it look right" aren't
+the same task.
+
+**Less blur:** `DepthOfField`'s `bokehScale` dropped from 3 to 1.5 and
+`focusRange` widened from 2.8 to 5.5 — the house and garden are now
+clearly visible with only a gentle softness, instead of the heavy blur
+Session 15 tuned in.
+
+**The garden had a real regression, not just "more realism" left on the
+table.** Session 15's bushes and hedges were positioned at z~1.0-1.5 —
+closer to the camera than the door itself (z~0.1). At this camera's
+fairly tight framing, anything nearer than the focal subject reads
+*larger*, not smaller, so the landscaping was looming oversized and
+getting cropped at the frame edges instead of sitting as modest
+background planting. Fixed by giving `Garden` a `wallZ` prop and pulling
+every foundation element (hedge, flower row, bushes) back to hug the
+actual house wall (`wallZ + 0.25` to `wallZ + 0.4`) instead of drifting
+toward the driveway. Added mowed-stripe lawn (alternating green shades,
+the cheapest real "someone mows this" cue), a foundation hedge, a
+flower row, and two full trees (trunk + layered canopy) for scale and
+depth, all sized down from the first draft.
+
+**The birds had a real, reproducible rendering glitch, not a styling
+preference.** Screenshotted with the door open and found two small
+black "X" shapes hanging in the sky where birds should be. Root cause:
+each bird was two separate thin box meshes rotated to form wing
+"planks," flapped by rotating each independently — a design that, from
+certain viewing angles (camera orbit × bird flight angle × flap phase,
+three moving variables at once), can present the two planks crossing
+each other and reading as a plain X instead of a V. Reducing the flap
+amplitude first (0.35 → 0.12) didn't fix it — confirmed by
+re-screenshotting — because the crossing was a property of the
+two-separate-mesh geometry, not the animation range. Replaced the whole
+approach with a single flattened, stretched sphere per bird (one
+continuous mesh, gently rolled rather than flapped) — a shape that
+cannot glitch into a crossing artifact from any angle because there's
+nothing separate left to cross.
+
+**Better garage:** `RoundedBox` smoothness bumped from 3 to 4 for
+cleaner curves on the panel edges. Added a garage door opener (rail,
+motor unit, and mounting struts) mounted just below the header's bottom
+edge — occluded by the closed door the same way the header hides
+raised panels, so it only comes into view through the opening once the
+door lifts, which was the single biggest tell that the "open" shot
+revealed an empty box rather than an actual garage interior. Also added
+a visible interior ceiling plane so the rail and motor have something
+to visually hang from, rather than floating in an undefined white void.
+
+**Nicer interface:** added `RevealCard` (`src/components/ui/RevealCard.tsx`),
+a small `framer-motion` wrapper that fades/slides a card in the first
+time it scrolls into view and lifts it slightly on hover — applied to
+the homepage's three "how it works" steps and its two bottom link
+cards. Added tactile `active:scale-[0.97]` feedback to the shared
+`Button` component, which every button in the app already uses, so this
+one small change reaches every button sitewide rather than needing to
+be repeated per page.
+
+### What was verified, in a real browser, against the database, and by direct comparison
+
+- `npm run typecheck` clean.
+- Screenshotted the door closed and open before and after every fix in
+  this session, not just after — confirmed the oversized-garden and
+  X-shaped-bird issues were real by seeing them, then confirmed each fix
+  by seeing them gone, rather than reasoning about the code changes in
+  the abstract.
+- Specifically re-screenshotted the birds after only reducing flap
+  amplitude (the cheaper fix) and confirmed the X still appeared before
+  concluding the geometry itself needed to change, rather than assuming
+  the first plausible fix had worked.
+- Re-ran the full signed-in Playwright regression across every page in
+  the app plus the account-menu and mobile-hamburger checks — all `200`,
+  zero errors, after the scene and homepage changes.
+- Screenshotted the homepage at a 390px mobile viewport and confirmed
+  the door, garden proportions, and bottom tab bar all still render
+  correctly at phone width.
+- Scrolled the homepage and screenshotted the reveal cards in their
+  settled (post-animation) state to confirm they end up fully visible
+  and correctly styled, not stuck invisible mid-transition.
+- Confirmed via direct Prisma query that every table's row count matched
+  the exact baseline from before this session (no test data leaked by
+  the read-only verification scripts used this time).
+
 ---
 
 ## Status by module
