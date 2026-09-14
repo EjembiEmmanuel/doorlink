@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { FinderCascade } from '@/components/finder/FinderCascade'
 import { Panel, PanelBody, PanelHeader } from '@/components/ui/Panel'
 import { DoorHero3DClientOnly } from '@/components/three/DoorHero3DClientOnly'
+import { RevealCard } from '@/components/ui/RevealCard'
 
 export const metadata: Metadata = {
   alternates: { canonical: '/' },
@@ -56,14 +57,14 @@ export default function HomePage() {
             title: 'Get it sorted',
             body: 'Request a technician, or message a seller directly — no accounts, no middleman.',
           },
-        ].map((item) => (
-          <div key={item.step} className="rounded-md border border-line p-5">
+        ].map((item, i) => (
+          <RevealCard key={item.step} delay={i * 0.08} className="rounded-md border border-line bg-paper p-5">
             <span className="flex h-7 w-7 items-center justify-center rounded-full bg-graphite text-xs font-semibold text-paper">
               {item.step}
             </span>
             <p className="mt-3 font-medium text-graphite">{item.title}</p>
             <p className="mt-1 text-sm text-zinc-deep">{item.body}</p>
-          </div>
+          </RevealCard>
         ))}
       </div>
 
@@ -77,18 +78,22 @@ export default function HomePage() {
       </Panel>
 
       <div className="grid gap-4 sm:grid-cols-2">
-        <Link href="/find/unknown" className="block rounded-md border border-line p-5 hover:border-signal">
-          <p className="font-medium text-graphite">Don&apos;t know your model?</p>
-          <p className="mt-1 text-sm text-zinc-deep">
-            Answer a few questions about what you can see on the door instead.
-          </p>
-        </Link>
-        <Link href="/data-sources" className="block rounded-md border border-line p-5 hover:border-signal">
-          <p className="font-medium text-graphite">Where this data comes from</p>
-          <p className="mt-1 text-sm text-zinc-deep">
-            Every record is labelled with its source — nothing here pretends to be verified.
-          </p>
-        </Link>
+        <RevealCard>
+          <Link href="/find/unknown" className="block rounded-md border border-line p-5 transition-colors hover:border-signal">
+            <p className="font-medium text-graphite">Don&apos;t know your model?</p>
+            <p className="mt-1 text-sm text-zinc-deep">
+              Answer a few questions about what you can see on the door instead.
+            </p>
+          </Link>
+        </RevealCard>
+        <RevealCard delay={0.08}>
+          <Link href="/data-sources" className="block rounded-md border border-line p-5 transition-colors hover:border-signal">
+            <p className="font-medium text-graphite">Where this data comes from</p>
+            <p className="mt-1 text-sm text-zinc-deep">
+              Every record is labelled with its source — nothing here pretends to be verified.
+            </p>
+          </Link>
+        </RevealCard>
       </div>
     </div>
   )
