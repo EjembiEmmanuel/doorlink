@@ -53,7 +53,12 @@ export function calculateSplit(grossCents: number, commissionRateBps: number): C
   }
 }
 
+/**
+ * Basis points as a percentage, with no trailing zeros: 1000 -> "10%",
+ * 1250 -> "12.5%", 1255 -> "12.55%". Showing "12.50%" next to "10%" in
+ * the same list reads as two different kinds of number.
+ */
 export function formatCommissionRate(bps: number): string {
-  const percent = bps / 100
-  return `${Number.isInteger(percent) ? percent : percent.toFixed(2)}%`
+  const percent = (bps / 100).toFixed(2).replace(/\.?0+$/, '')
+  return `${percent}%`
 }

@@ -56,8 +56,12 @@ describe('formatCommissionRate', () => {
     expect(formatCommissionRate(0)).toBe('0%')
   })
 
-  it('keeps two decimals for fractional rates', () => {
-    expect(formatCommissionRate(1250)).toBe('12.50%')
+  it('keeps only the decimals a rate actually has', () => {
+    // "12.50%" sitting next to "10%" in the same list reads as two
+    // different kinds of number, so trailing zeros are trimmed.
+    expect(formatCommissionRate(1250)).toBe('12.5%')
+    expect(formatCommissionRate(1255)).toBe('12.55%')
     expect(formatCommissionRate(1)).toBe('0.01%')
+    expect(formatCommissionRate(10)).toBe('0.1%')
   })
 })
