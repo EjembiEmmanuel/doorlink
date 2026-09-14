@@ -7,7 +7,11 @@ roller shutter, motor and locking industry.
 ## Stack
 
 Next.js 15 (App Router) · TypeScript · Tailwind · PostgreSQL via Prisma ·
-Supabase-ready auth and storage · Stripe-ready marketplace payments · Vercel-compatible.
+Supabase-ready auth and storage · Vercel-compatible.
+
+DoorLink is free to use, with a peer-to-peer marketplace — anyone with an
+account can list a part for sale, and buyers connect with sellers directly
+(contact reveal, not a payment checkout) to arrange the exchange themselves.
 
 ## Getting started
 
