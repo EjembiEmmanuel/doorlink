@@ -998,6 +998,64 @@ page previously said so in one place.
   row — the header refactor only changed desktop's presentation, not
   what's reachable on mobile.
 
+## Session 14 — a second realism pass on the 3D door
+
+Direct follow-up: "I still want the 3d to be better." Session 13's pass
+improved lighting and shadows but the panels themselves were still flat
+boxes with painted-on lines standing in for detail — the actual geometry
+hadn't changed. This pass replaced the illusion with the real thing.
+
+**Embossed panels are now real geometry, not a painted line.** Each
+panel got a second, smaller `RoundedBox` — the classic "raised panel"
+sectional-door profile — physically inset from the panel's stile/rail
+border and protruding slightly forward. Real shadow mapping now defines
+its edges on its own; nothing is painted on to fake the look. The old
+two-groove overlay is gone, replaced by one thin seam line at the actual
+panel-to-panel joint (the one real seam a stacked sectional door has).
+Hardware brackets moved outward from `±(DOOR_WIDTH/2 - 0.32)` to
+`±(DOOR_WIDTH/2 - 0.1)` so they sit on the flat stile beside the raised
+field instead of overlapping it — on a real door the hardware isn't
+mounted on top of the embossed panel.
+
+**Environment reflections, baked once, not per-frame.** Added drei's
+`<Environment resolution={128} frames={1}>` fed by a second, offscreen
+instance of the same procedural `Sky` used for the background —
+`frames={1}` bakes it a single time at mount rather than every frame, so
+this is a one-time cost, not an ongoing one. Every `meshStandardMaterial`
+in the scene now picks up real sky-tinted reflections automatically
+(three.js applies `scene.environment` globally) instead of showing flat
+diffuse color with no sense of a reflective surface at all — most
+noticeable on the hardware brackets and window glass, which read as
+genuinely metal/glass now rather than matte-colored shapes.
+
+**Material tuning to match:** panel metalness dropped from 0.35 to
+0.16 (real powder-coated steel is a matte-satin polymer coating, not
+shiny bare metal — the previous value read more like polished metal than
+a painted door) with roughness raised to 0.55; hardware brackets kept
+higher metalness (0.75–0.85) since they're the one genuinely bare-metal
+element on a real door.
+
+### What was verified, in a real browser and against the database directly
+
+- `npm run typecheck` clean.
+- Screenshotted the scene cropped tightly to just the canvas, both closed
+  and open, at 4 seconds after load (longer than Session 13's timing
+  investigation called for, specifically to give the environment bake and
+  shadow-map compilation time to finish under this sandbox's
+  software-rendered WebGL) — confirmed the embossed panels, hardware
+  brackets, and seam line all render correctly with no blank-frame
+  repeat of Session 13's transient issue.
+- Re-ran the full signed-in Playwright regression across `/`, `/find`,
+  `/marketplace`, `/request-technician`, `/data-sources`, `/leads`,
+  `/account`, `/my-listings`, and `/support`, plus the account-menu
+  open/outside-click-closes check and the mobile hamburger content
+  check — all still passing, zero errors, after the scene changes.
+- Screenshotted the homepage at a 390px mobile viewport and measured
+  page load time (1.85s to `networkidle` in this software-rendered
+  sandbox) — confirmed the embossed geometry and reflections still
+  render correctly at phone width, and that the one-time environment
+  bake didn't introduce a large, visible load delay.
+
 ---
 
 ## Status by module

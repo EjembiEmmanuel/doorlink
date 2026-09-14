@@ -2,7 +2,7 @@
 
 import { useRef } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
-import { OrbitControls, RoundedBox, Sky } from '@react-three/drei'
+import { Environment, OrbitControls, RoundedBox, Sky } from '@react-three/drei'
 import * as THREE from 'three'
 
 const PANEL_COUNT = 4
@@ -16,17 +16,18 @@ const PANEL_DEPTH = 0.14
 // the ceiling rather than just vanishing.
 const LIFT_HEIGHT = DOOR_HEIGHT + 0.9
 const FLOOR_Y = -DOOR_HEIGHT / 2 - 0.42
+const SUN_POSITION: [number, number, number] = [8, 5, 6]
 
 function HardwareBracket({ x }: { x: number }) {
   return (
     <group position={[x, 0, PANEL_DEPTH / 2 + 0.006]}>
       <mesh castShadow>
-        <boxGeometry args={[0.12, 0.09, 0.02]} />
-        <meshStandardMaterial color="#b7bbc0" roughness={0.35} metalness={0.75} />
+        <boxGeometry args={[0.1, 0.08, 0.018]} />
+        <meshStandardMaterial color="#b7bbc0" roughness={0.35} metalness={0.75} envMapIntensity={1.2} />
       </mesh>
-      <mesh position={[0, 0, 0.015]} rotation={[Math.PI / 2, 0, 0]} castShadow>
-        <cylinderGeometry args={[0.03, 0.03, 0.03, 16]} />
-        <meshStandardMaterial color="#8a8e93" roughness={0.25} metalness={0.85} />
+      <mesh position={[0, 0, 0.013]} rotation={[Math.PI / 2, 0, 0]} castShadow>
+        <cylinderGeometry args={[0.026, 0.026, 0.026, 16]} />
+        <meshStandardMaterial color="#8a8e93" roughness={0.22} metalness={0.85} envMapIntensity={1.4} />
       </mesh>
     </group>
   )
@@ -51,51 +52,64 @@ function Panel({ index, isOpen, color }: { index: number; isOpen: boolean; color
     ref.current.position.y = restY + progress.current * LIFT_HEIGHT
   })
 
+  // Real sectional doors are stamped, not flat — a raised rectangular
+  // field inset from the stile/rail border is the classic "raised panel"
+  // profile, and it's built as actual geometry here so real shadow
+  // mapping defines its edges, rather than a painted-on line.
+  const embossWidth = DOOR_WIDTH - 0.34
+  const embossHeight = PANEL_HEIGHT - 0.14
+
   return (
     <group ref={ref} position={[0, restY, 0]}>
       <RoundedBox args={[DOOR_WIDTH, PANEL_HEIGHT, PANEL_DEPTH]} radius={0.016} smoothness={3} castShadow receiveShadow>
-        <meshStandardMaterial color={color} roughness={0.42} metalness={0.35} />
+        <meshStandardMaterial color={color} roughness={0.55} metalness={0.16} envMapIntensity={0.5} />
       </RoundedBox>
 
-      {/* Two ribbed grooves per panel, echoing a real rolled-steel sectional door's profile */}
-      {[0.32, -0.1].map((yOffset) => (
-        <mesh key={yOffset} position={[0, PANEL_HEIGHT * yOffset, PANEL_DEPTH / 2 + 0.002]}>
-          <boxGeometry args={[DOOR_WIDTH - 0.04, 0.018, 0.008]} />
-          <meshStandardMaterial color="#000000" transparent opacity={0.32} roughness={0.6} />
-        </mesh>
-      ))}
-      <mesh position={[0, PANEL_HEIGHT * 0.34, PANEL_DEPTH / 2 + 0.003]}>
-        <boxGeometry args={[DOOR_WIDTH - 0.04, 0.008, 0.006]} />
-        <meshStandardMaterial color="#ffffff" transparent opacity={0.15} />
+      <RoundedBox
+        args={[embossWidth, embossHeight, 0.03]}
+        radius={0.014}
+        smoothness={3}
+        position={[0, 0, PANEL_DEPTH / 2 + 0.014]}
+        castShadow
+        receiveShadow
+      >
+        <meshStandardMaterial color={color} roughness={0.48} metalness={0.2} envMapIntensity={0.6} />
+      </RoundedBox>
+
+      {/* Panel-to-panel seam highlight, the one real horizontal joint a stacked sectional door actually has */}
+      <mesh position={[0, PANEL_HEIGHT / 2 - 0.01, PANEL_DEPTH / 2 + 0.002]}>
+        <boxGeometry args={[DOOR_WIDTH, 0.014, 0.008]} />
+        <meshStandardMaterial color="#000000" transparent opacity={0.28} />
       </mesh>
 
       {index === PANEL_COUNT - 1 && (
-        <group position={[0, 0, PANEL_DEPTH / 2 + 0.004]}>
+        <group position={[0, 0, PANEL_DEPTH / 2 + 0.014 + 0.016]}>
           {[-1, -0.34, 0.34, 1].map((x) => (
             <mesh key={x} position={[x * (DOOR_WIDTH / 2 - 0.52), 0, 0]}>
-              <planeGeometry args={[0.42, PANEL_HEIGHT - 0.18]} />
+              <planeGeometry args={[0.4, embossHeight - 0.14]} />
               <meshPhysicalMaterial
                 color="#dce6f0"
                 emissive="#bcd3e6"
-                emissiveIntensity={0.35}
-                roughness={0.05}
+                emissiveIntensity={0.4}
+                roughness={0.04}
                 metalness={0}
                 clearcoat={1}
                 transmission={0.3}
+                envMapIntensity={1.5}
               />
             </mesh>
           ))}
         </group>
       )}
 
-      {/* Roller/hinge hardware at each panel's edges — cheap visual cue that this is a real mechanism, not a flat slab */}
-      <HardwareBracket x={-DOOR_WIDTH / 2 + 0.32} />
-      <HardwareBracket x={DOOR_WIDTH / 2 - 0.32} />
+      {/* Roller/hinge hardware sits on the flat stile outside the raised field, not on top of it */}
+      <HardwareBracket x={-DOOR_WIDTH / 2 + 0.1} />
+      <HardwareBracket x={DOOR_WIDTH / 2 - 0.1} />
 
       {index === 1 && (
-        <mesh position={[DOOR_WIDTH / 2 - 0.68, 0, PANEL_DEPTH / 2 + 0.02]} castShadow>
+        <mesh position={[DOOR_WIDTH / 2 - 0.74, 0, PANEL_DEPTH / 2 + 0.014 + 0.02]} castShadow>
           <boxGeometry args={[0.16, 0.05, 0.035]} />
-          <meshStandardMaterial color="#c9cdd1" roughness={0.25} metalness={0.8} />
+          <meshStandardMaterial color="#c9cdd1" roughness={0.22} metalness={0.82} envMapIntensity={1.3} />
         </mesh>
       )}
     </group>
@@ -108,7 +122,7 @@ function Facade() {
   const height = DOOR_HEIGHT + LIFT_HEIGHT + 0.6
   const y = FLOOR_Y + height / 2
   const jambX = DOOR_WIDTH / 2 + jambWidth / 2
-  const wallMaterial = <meshStandardMaterial color="#E4E2DC" roughness={0.92} />
+  const wallMaterial = <meshStandardMaterial color="#E4E2DC" roughness={0.94} envMapIntensity={0.35} />
 
   return (
     <group>
@@ -136,10 +150,17 @@ export function GarageDoorScene({ isOpen }: { isOpen: boolean }) {
       gl={{ antialias: true, toneMapping: THREE.ACESFilmicToneMapping, toneMappingExposure: 1.1 }}
       camera={{ position: [3.4, 1.5, 4.6], fov: 32 }}
     >
-      <Sky sunPosition={[8, 5, 6]} turbidity={4} rayleigh={1.2} mieCoefficient={0.02} mieDirectionalG={0.9} />
+      <Sky sunPosition={SUN_POSITION} turbidity={4} rayleigh={1.2} mieCoefficient={0.02} mieDirectionalG={0.9} />
       <fog attach="fog" args={['#cfd8e3', 9, 21]} />
 
-      <ambientLight intensity={0.28} />
+      {/* Baked once (frames=1), not per-frame — gives the dark steel and
+          hardware real sky-tinted reflections instead of flat diffuse
+          color, without any external HDR asset or per-frame render cost. */}
+      <Environment resolution={128} frames={1}>
+        <Sky sunPosition={SUN_POSITION} turbidity={4} rayleigh={1.2} mieCoefficient={0.02} mieDirectionalG={0.9} />
+      </Environment>
+
+      <ambientLight intensity={0.22} />
       <directionalLight
         position={[6, 7, 5]}
         intensity={1.6}
@@ -152,7 +173,7 @@ export function GarageDoorScene({ isOpen }: { isOpen: boolean }) {
         shadow-camera-top={4}
         shadow-camera-bottom={-4}
       />
-      <directionalLight position={[-5, 3, -3]} intensity={0.3} color="#cbd9ff" />
+      <directionalLight position={[-5, 3, -3]} intensity={0.28} color="#cbd9ff" />
 
       <Facade />
       {Array.from({ length: PANEL_COUNT }, (_, i) => (
@@ -161,7 +182,7 @@ export function GarageDoorScene({ isOpen }: { isOpen: boolean }) {
 
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, FLOOR_Y, 0]} receiveShadow>
         <planeGeometry args={[16, 16]} />
-        <meshStandardMaterial color="#d9d5cb" roughness={0.96} />
+        <meshStandardMaterial color="#d9d5cb" roughness={0.96} envMapIntensity={0.25} />
       </mesh>
 
       <OrbitControls
