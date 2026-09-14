@@ -202,3 +202,44 @@ export async function recomputeWorkerRating(workerUserId: string, tx: Prisma.Tra
     },
   })
 }
+
+/**
+ * How well an open request lines up with what a technician has said they
+ * do and where they go.
+ *
+ * This is ordinary set membership against the postcodes and service
+ * categories a technician typed into their own profile — not a model, not
+ * a prediction, and it is described to them in exactly those terms. The
+ * board still shows every open job; matching changes the order and adds a
+ * label, it never hides work from someone.
+ */
+export interface LeadMatch {
+  areaMatch: boolean
+  serviceMatch: boolean
+  /** Higher sorts first. Area is weighted above service because driving
+   *  three hours to a job you are qualified for is still not a job you
+   *  will take. */
+  score: number
+  reasons: string[]
+}
+
+export function matchLead(
+  lead: { postcode: string | null; serviceCategoryId: string | null },
+  profile: { postcodes: Set<string>; categoryIds: Set<string> } | null
+): LeadMatch {
+  if (!profile) return { areaMatch: false, serviceMatch: false, score: 0, reasons: [] }
+
+  const areaMatch = Boolean(lead.postcode && profile.postcodes.has(lead.postcode))
+  const serviceMatch = Boolean(lead.serviceCategoryId && profile.categoryIds.has(lead.serviceCategoryId))
+
+  const reasons: string[] = []
+  if (areaMatch) reasons.push('in an area you cover')
+  if (serviceMatch) reasons.push('a service you offer')
+
+  return {
+    areaMatch,
+    serviceMatch,
+    score: (areaMatch ? 2 : 0) + (serviceMatch ? 1 : 0),
+    reasons,
+  }
+}

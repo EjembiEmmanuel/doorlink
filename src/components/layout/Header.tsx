@@ -42,6 +42,7 @@ export async function Header() {
     // it is gated on being able to quote rather than on owning leads.
     if (can(session.role, 'marketplace:quote')) {
       accountLinks.push({ href: '/leads', label: 'Job board' })
+      accountLinks.push({ href: '/my-profile', label: 'Trade profile' })
     }
     accountLinks.push({ href: '/jobs', label: 'Jobs' })
     accountLinks.push({ href: '/support', label: 'Support' })

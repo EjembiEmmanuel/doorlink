@@ -144,7 +144,14 @@ export default async function RequestDetailPage({ params }: PageProps) {
                     <li key={quote.id} className="rounded-md border border-line bg-paper p-5">
                       <div className="flex flex-wrap items-start justify-between gap-3">
                         <div className="min-w-0">
-                          <p className="font-medium text-graphite">{displayName}</p>
+                          <p className="font-medium text-graphite">
+                            <Link
+                              href={`/technicians/${quote.worker.id}`}
+                              className="text-signal hover:text-signal-hover"
+                            >
+                              {displayName}
+                            </Link>
+                          </p>
                           {profile?.headline && (
                             <p className="mt-0.5 text-sm text-zinc-deep">{profile.headline}</p>
                           )}

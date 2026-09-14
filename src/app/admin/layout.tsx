@@ -23,6 +23,7 @@ const ADMIN_NAV: Array<{
     label: 'Marketplace',
     permission: 'lead:write:any',
   },
+  { href: '/admin/verification', label: 'Verification', permission: 'admin:settings' },
   { href: '/admin/settings', label: 'Settings', permission: 'admin:settings' },
 ]
 
