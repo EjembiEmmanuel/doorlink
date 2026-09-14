@@ -1,7 +1,7 @@
 // The single place that decides whether a feature is actually live.
 // Everything else checks this and renders <NotConnected /> when the
 // answer is no — nothing in the UI pretends to be connected.
-export type IntegrationKey = 'auth' | 'storage' | 'payments' | 'email' | 'ai'
+export type IntegrationKey = 'auth' | 'storage' | 'payments' | 'email' | 'push' | 'ai'
 
 interface IntegrationStatus {
   enabled: boolean
@@ -15,7 +15,10 @@ function configured(...vars: Array<string | undefined>): boolean {
 export const integrations: Record<IntegrationKey, IntegrationStatus> = {
   auth: configured(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY)
     ? { enabled: true }
-    : { enabled: false, reason: 'Supabase auth is not configured. The dev session provider is active instead.' },
+    : {
+        enabled: false,
+        reason: 'Supabase auth is not configured. The dev session provider is active instead.',
+      },
   storage: configured(process.env.SUPABASE_SERVICE_ROLE_KEY, process.env.SUPABASE_STORAGE_BUCKET)
     ? { enabled: true }
     : { enabled: false, reason: 'Supabase storage is not configured. Document uploads are disabled.' },
@@ -25,6 +28,13 @@ export const integrations: Record<IntegrationKey, IntegrationStatus> = {
   email: configured(process.env.RESEND_API_KEY)
     ? { enabled: true }
     : { enabled: false, reason: 'Resend is not configured. No transactional email is sent.' },
+  // Web push needs a VAPID key pair. There is no provider to sign up
+  // to — the keys are generated once — but until they exist the service
+  // worker has nothing to subscribe to, so nothing may claim a push was
+  // sent.
+  push: configured(process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY, process.env.VAPID_PRIVATE_KEY)
+    ? { enabled: true }
+    : { enabled: false, reason: 'No VAPID keys are configured. No push notification is sent.' },
   ai: configured(process.env.ANTHROPIC_API_KEY)
     ? { enabled: true }
     : { enabled: false, reason: 'No AI provider is configured.' },

@@ -4,6 +4,8 @@ import { can } from '@/lib/rbac'
 import { devSignOutAction } from '@/lib/dev-session'
 import { prisma } from '@/lib/prisma'
 import { isDatabaseUnreachable } from '@/lib/db-errors'
+import { unreadNotificationCount } from '@/lib/notifications'
+import { unreadMessageCount } from '@/lib/messaging'
 import { MobileNavToggle } from './MobileNavToggle'
 import { AccountMenu } from './AccountMenu'
 
@@ -14,6 +16,20 @@ const NAV_LINKS = [
   { href: '/request-technician', label: 'Request a technician' },
   { href: '/data-sources', label: 'Data sources' },
 ]
+
+/**
+ * Counts shown in the header are decoration, not the page. If one cannot
+ * be fetched it shows no number rather than taking every page down with
+ * it.
+ */
+async function countOrZero(run: () => Promise<number>): Promise<number> {
+  try {
+    return await run()
+  } catch (error) {
+    if (isDatabaseUnreachable(error)) return 0
+    throw error
+  }
+}
 
 async function getCartItemCount(userId: string): Promise<number> {
   try {
@@ -31,7 +47,19 @@ export async function Header() {
   const accountLinks: { href: string; label: string }[] = []
 
   if (session) {
-    const cartCount = await getCartItemCount(session.userId)
+    const [cartCount, messageCount, notificationCount] = await Promise.all([
+      getCartItemCount(session.userId),
+      countOrZero(() => unreadMessageCount(session.userId)),
+      countOrZero(() => unreadNotificationCount(session.userId)),
+    ])
+    accountLinks.push({
+      href: '/messages',
+      label: messageCount > 0 ? `Messages (${messageCount})` : 'Messages',
+    })
+    accountLinks.push({
+      href: '/notifications',
+      label: notificationCount > 0 ? `Notifications (${notificationCount})` : 'Notifications',
+    })
     accountLinks.push({ href: '/cart', label: cartCount > 0 ? `Cart (${cartCount})` : 'Cart' })
     accountLinks.push({ href: '/account', label: 'Account' })
     if (can(session.role, 'listing:write:own')) {
@@ -65,7 +93,11 @@ export async function Header() {
 
         <nav className="hidden items-center gap-6 md:flex">
           {NAV_LINKS.map((link) => (
-            <Link key={link.href} href={link.href} className="text-sm font-medium text-graphite hover:text-signal">
+            <Link
+              key={link.href}
+              href={link.href}
+              className="text-sm font-medium text-graphite hover:text-signal"
+            >
               {link.label}
             </Link>
           ))}

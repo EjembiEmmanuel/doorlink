@@ -1,8 +1,10 @@
-import { JobStatus, LeadStatus, Prisma, QuoteStatus } from '@prisma/client'
+import { JobStatus, LeadStatus, NotificationType, Prisma, QuoteStatus } from '@prisma/client'
 import { prisma } from './prisma'
 import { calculateSplit } from './commission'
 import { currentCommissionBps } from './commission-settings'
 import { makeReference } from './reference'
+import { notify } from './notifications'
+import { formatMoney } from './money'
 
 /**
  * The marketplace's state transitions, kept in one place so the rules
@@ -118,6 +120,13 @@ export async function acceptQuote(quoteId: string, acceptingUserId: string) {
       data: { status: QuoteStatus.ACCEPTED, respondedAt: new Date() },
     })
 
+    // Read the losing quotes before declining them: after the update
+    // there is no way to tell which ones this acceptance closed.
+    const declined = await tx.quote.findMany({
+      where: { leadId: quote.leadId, id: { not: quote.id }, status: QuoteStatus.PENDING },
+      select: { workerId: true },
+    })
+
     await tx.quote.updateMany({
       where: { leadId: quote.leadId, id: { not: quote.id }, status: QuoteStatus.PENDING },
       data: { status: QuoteStatus.DECLINED, respondedAt: new Date() },
@@ -171,6 +180,33 @@ export async function acceptQuote(quoteId: string, acceptingUserId: string) {
         status: 'PENDING',
       },
     })
+
+    await notify(
+      {
+        userId: quote.workerId,
+        type: NotificationType.QUOTE_ACCEPTED,
+        title: 'Your quote was accepted',
+        body: `You have been hired for "${quote.lead.title ?? quote.lead.reference}" at ${formatMoney(quote.amountCents, quote.currency)}. Contact details are on the job.`,
+        href: `/jobs/${job.id}`,
+      },
+      tx
+    )
+
+    // Losing a job is worth being told about too: a technician holding a
+    // slot open for a quote that has already gone elsewhere is the thing
+    // this prevents.
+    for (const loser of declined) {
+      await notify(
+        {
+          userId: loser.workerId,
+          type: NotificationType.QUOTE_DECLINED,
+          title: 'A quote was not taken up',
+          body: `The customer hired someone else for "${quote.lead.title ?? quote.lead.reference}".`,
+          href: '/leads',
+        },
+        tx
+      )
+    }
 
     return { job }
   })

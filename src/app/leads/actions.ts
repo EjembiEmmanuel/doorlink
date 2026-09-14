@@ -2,13 +2,14 @@
 
 import { revalidatePath } from 'next/cache'
 import { z } from 'zod'
-import { LeadStatus, QuoteStatus } from '@prisma/client'
+import { LeadStatus, NotificationType, QuoteStatus } from '@prisma/client'
 import { prisma } from '@/lib/prisma'
 import { getSession, type Session } from '@/lib/auth'
 import { can, requireSession, RbacError } from '@/lib/rbac'
 import { isDatabaseUnreachable, isRecordNotFound } from '@/lib/db-errors'
 import { isQuotable } from '@/lib/marketplace'
-import { toMinorUnits } from '@/lib/money'
+import { formatMoney, toMinorUnits } from '@/lib/money'
+import { notify } from '@/lib/notifications'
 
 export type QuoteFormState = { error?: string; ok?: boolean }
 
@@ -88,6 +89,19 @@ export async function submitQuoteAction(
 
     if (lead.status === LeadStatus.NEW || lead.status === LeadStatus.OPEN_FOR_QUOTES) {
       await prisma.lead.update({ where: { id: lead.id }, data: { status: LeadStatus.QUOTED } })
+    }
+
+    // A quote the customer is never told about is a quote that does not
+    // get compared. Notifying is best-effort — see notify() — so it can
+    // never be the reason a sent quote is lost.
+    if (lead.customerId) {
+      await notify({
+        userId: lead.customerId,
+        type: NotificationType.QUOTE_RECEIVED,
+        title: 'New quote on your request',
+        body: `${session.name} quoted ${formatMoney(toMinorUnits(parsed.data.amount))} on "${lead.title ?? lead.reference}".`,
+        href: `/my-requests/${lead.id}`,
+      })
     }
   } catch (error) {
     if (isRecordNotFound(error)) return { error: 'Request not found.' }

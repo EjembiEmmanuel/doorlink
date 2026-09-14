@@ -21,6 +21,7 @@ import {
   URGENCY_TONE,
 } from '@/lib/labels'
 import { QuoteForm } from './QuoteForm'
+import { OpenConversationButton } from '@/app/messages/OpenConversation'
 
 export const metadata: Metadata = {
   title: 'Job board',
@@ -218,6 +219,14 @@ export default async function JobBoardPage() {
                       />
                     </div>
                   </details>
+
+                  {/* Only once you have quoted. Otherwise the board is a
+                      way to message every customer on the platform. */}
+                  {mine && (
+                    <div className="mt-4">
+                      <OpenConversationButton leadId={lead.id} label="Ask the customer a question" />
+                    </div>
+                  )}
                 </li>
               )
             })}

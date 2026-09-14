@@ -1,13 +1,15 @@
 'use server'
 
 import { revalidatePath } from 'next/cache'
-import { JobStatus } from '@prisma/client'
+import { JobStatus, NotificationType } from '@prisma/client'
 import { z } from 'zod'
 import { prisma } from '@/lib/prisma'
 import { getSession, type Session } from '@/lib/auth'
 import { can, requireSession, RbacError } from '@/lib/rbac'
 import { isDatabaseUnreachable, isRecordNotFound } from '@/lib/db-errors'
 import { canTransition, jobActorFor, isReviewable, recomputeWorkerRating } from '@/lib/marketplace'
+import { notify } from '@/lib/notifications'
+import { JOB_STATUS_LABELS } from '@/lib/labels'
 
 export type JobActionState = { error?: string; ok?: boolean }
 
@@ -99,6 +101,26 @@ export async function transitionJobAction(
       if (next === JobStatus.COMPLETED && job.workerId) {
         await recomputeWorkerRating(job.workerId, tx)
       }
+
+      // Whoever did not press the button is the one who needs telling.
+      const otherId = session.userId === job.customerId ? job.workerId : job.customerId
+      if (otherId) {
+        await notify(
+          {
+            userId: otherId,
+            type:
+              next === JobStatus.SCHEDULED
+                ? NotificationType.JOB_SCHEDULED
+                : next === JobStatus.COMPLETED
+                  ? NotificationType.JOB_COMPLETED
+                  : NotificationType.ORDER_UPDATE,
+            title: `Job ${job.reference} is now ${JOB_STATUS_LABELS[next].toLowerCase()}`,
+            body: parsed.data.note ?? `Moved from ${JOB_STATUS_LABELS[job.status].toLowerCase()}.`,
+            href: `/jobs/${job.id}`,
+          },
+          tx
+        )
+      }
     })
   } catch (error) {
     if (isRecordNotFound(error)) return { error: 'Job not found.' }
@@ -162,6 +184,17 @@ export async function reviewJobAction(
         },
       })
       await recomputeWorkerRating(job.workerId!, tx)
+
+      await notify(
+        {
+          userId: job.workerId!,
+          type: NotificationType.REVIEW_RECEIVED,
+          title: `${parsed.data.rating}-star review on job ${job.reference}`,
+          body: parsed.data.body ?? 'No comment was left.',
+          href: `/jobs/${job.id}`,
+        },
+        tx
+      )
     })
   } catch (error) {
     if (isRecordNotFound(error)) return { error: 'Job not found.' }

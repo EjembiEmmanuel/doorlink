@@ -996,8 +996,15 @@ model Notification {
   type      NotificationType
   title     String
   body      String
+  // Where the notification is about. A notification you cannot act on is
+  // just noise, so almost every one carries the path to the thing that
+  // changed.
+  href      String?
   readAt    DateTime?
   createdAt DateTime         @default(now())
+
+  @@index([userId, readAt])
+  @@index([userId, createdAt])
 }
 
 model AuditLog {

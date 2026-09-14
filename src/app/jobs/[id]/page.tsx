@@ -14,6 +14,7 @@ import { Badge } from '@/components/ui/Badge'
 import { SpecList } from '@/components/ui/Table'
 import { JOB_STATUS_LABELS, JOB_STATUS_TONE, TRANSACTION_STATUS_LABELS } from '@/lib/labels'
 import { JobTransitionControls, ReviewForm } from './JobControls'
+import { OpenConversationButton } from '@/app/messages/OpenConversation'
 
 export const metadata: Metadata = { title: 'Job' }
 
@@ -170,6 +171,12 @@ export default async function JobDetailPage({ params }: PageProps) {
                     </a>
                   )}
                 </p>
+                <div className="mt-3">
+                  <OpenConversationButton
+                    jobId={job.id}
+                    label={`Message ${counterpartyLabel.toLowerCase()}`}
+                  />
+                </div>
               </div>
             </section>
           )}
