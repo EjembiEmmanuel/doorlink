@@ -6,6 +6,7 @@ import { prisma } from '@/lib/prisma'
 import { isDatabaseUnreachable } from '@/lib/db-errors'
 import { unreadNotificationCount } from '@/lib/notifications'
 import { unreadMessageCount } from '@/lib/messaging'
+import { HeaderSearch } from './HeaderSearch'
 import { MobileNavToggle } from './MobileNavToggle'
 import { AccountMenu } from './AccountMenu'
 
@@ -99,6 +100,7 @@ export async function Header() {
         </Link>
 
         <nav className="hidden items-center gap-6 md:flex">
+          <HeaderSearch />
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}
@@ -120,11 +122,14 @@ export async function Header() {
           )}
         </nav>
 
-        <MobileNavToggle
-          links={mobileLinks}
-          session={session ? { name: session.name } : null}
-          signOutAction={devSignOutAction}
-        />
+        <div className="flex items-center gap-1 md:hidden">
+          <HeaderSearch />
+          <MobileNavToggle
+            links={mobileLinks}
+            session={session ? { name: session.name } : null}
+            signOutAction={devSignOutAction}
+          />
+        </div>
       </div>
     </header>
   )
