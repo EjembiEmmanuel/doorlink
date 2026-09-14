@@ -1302,6 +1302,144 @@ be repeated per page.
 
 ---
 
+## Session 17 — the Doorlink re-brief: manuals, and a real marketplace
+
+This session started with a new, much larger brief. DoorLink stops being
+a parts finder with a lead form bolted on and becomes **Doorlink**: a
+product experience, a searchable manual library, a customer-to-technician
+marketplace with Doorlink taking a commission, accounts for customers,
+workers and businesses, paid subscriptions, Stripe, Supabase, and a
+premium 3D landing page.
+
+### What the re-brief changes about earlier decisions
+
+Two entries under "Still needs you, not code" were written against the
+old scope and are now wrong. They are corrected here rather than quietly
+deleted, because the reasoning that produced them was sound at the time:
+
+- **"DoorLink is free to use — no Stripe, no payment processing"** is
+  reversed. The brief asks for Stripe, a Doorlink commission on completed
+  jobs, and paid subscriptions. The commission engine is built (below);
+  Stripe itself is not connected and everything says so.
+- **"the marketplace is peer-to-peer"** still holds for *parts* — the
+  `/marketplace` listings are unchanged. It never applied to *services*,
+  which is what this session built: there, Doorlink is a party to the
+  transaction and takes a fee.
+
+### User manuals (committed separately, `a204181`)
+
+Five PDFs were supplied. Three were real; two were 837-byte empty Safari
+print artifacts, and were reported as such rather than ingested as blank
+"manuals".
+
+The interesting problem was honesty about provenance. Two documents are
+FAAC's own E045 control-board manual (revisions B and C, document 732786
+— read out of the documents, not guessed). The third is a page captured
+from AGG Doors' website about a BFT product: useful, but not BFT's
+manual. Presenting it as one would be a lie a technician might act on.
+
+So `DataSource` (how much the *record* is trusted) was separated from a
+new `DocumentOrigin` (where the *file* came from). The FAAC files are
+`ADMIN_VERIFIED` / `MANUFACTURER_ORIGINAL`: a Doorlink admin confirmed
+they are the genuine FAAC files, but FAAC did not supply them to us and
+saying they did would be a claim we cannot back. The BFT file is
+`THIRD_PARTY_GUIDE` with a provenance note naming AGG Doors, and its
+badge is amber, not green. On the document page that warning sits
+directly under the title, because if a document is someone's write-up
+rather than the manufacturer's own file, that is the first thing a
+technician relying on it should see.
+
+Search reads the text *inside* the PDFs (`pdftotext` at ingest into
+`Document.searchText`), not just titles — verified by searching
+"BUS-2EASY", a term that appears only in the body of the FAAC manuals,
+and getting both back with a real snippet.
+
+The demo banner was rewritten in the same pass: it used to assert the
+whole catalogue was invented sample data, which stopped being true the
+moment real manufacturer documents landed next to the seeded models.
+
+### The services marketplace (`97ea012`)
+
+`post a job -> technicians quote -> customer hires -> job tracked to
+completion -> customer reviews`, end to end.
+
+**Money.** Commission is basis points, so 12.5% is the integer 1250 and
+never a float. The worker's payout is the *remainder* of the split, not a
+second independent rounding — rounding both halves separately is how
+marketplaces end up a cent short and cannot reconcile. `commission.test.ts`
+asserts this over 88 amount/rate combinations. The rate lives in
+`PlatformSetting`, not in code, because the brief is explicit that an
+admin must be able to change it without a rebuild; `DEFAULT_COMMISSION_BPS`
+is 1000 as a starting point, not as a business decision anyone has made.
+When a quote is accepted the rate is **snapshotted onto the Transaction**,
+so changing the platform rate next month cannot rewrite the economics of
+a job two people already shook hands on.
+
+**The state machine** lives in `src/lib/marketplace.ts` as data keyed by
+actor, not as conditionals spread across the pages that happen to trigger
+them. It is deliberately asymmetric: a technician can say "started" and
+"done", only the customer can cancel outright, and neither side can
+declare a dispute resolved. The job page renders exactly the buttons the
+person looking at it is allowed to press, because it asks the same
+function the server action validates against.
+
+**Accepting a quote** is one transaction: accept this quote, decline
+every rival quote, assign the lead, create the job, create the
+transaction. A customer cannot accidentally hire two people for one job,
+and a half-completed hire cannot exist.
+
+**Contact details** are withheld until a job exists. The job board shows
+the work and the suburb and never the phone number; both sides get each
+other's details at the moment they have agreed to work together. The
+customer's number comes from the request they filled in rather than their
+account record, which may have no number on it at all.
+
+**Nothing pretends to take money.** The transaction records the agreed
+split and stays `PENDING` — only a real provider webhook will ever mark
+it `PAID`. The job page says plainly that no payment provider is
+connected and that the two sides should settle directly for now.
+
+Subscription plans are seeded with the one price that has been decided
+($4.99/week). Monthly and annual exist with `priceCents: null`, and a
+null price means the plan cannot be subscribed to and the UI will say
+"pricing not set" rather than showing an invented number.
+
+### Three bugs the browser walkthrough found
+
+Worth recording because none of them would have shown up in a typecheck:
+
+1. **The quote form could not be submitted at all.** `min="1" step="15"`
+   on the duration field makes the browser treat 1, 16, 31, 46 as the
+   only valid values, so a technician typing "90" got a form that
+   silently refused. `step="1"` on the amount rejected any quote with
+   cents in it. Both fixed; the hint now says the field is in blocks of
+   15.
+2. **`/leads` shipped 21.8 kB of first-load JS** because the client-side
+   quote form imported `commission.ts`, which imported Prisma — pulling
+   database code into the browser bundle. The arithmetic is now a pure
+   module with no imports at all, and the database read moved to
+   `commission-settings.ts` behind `server-only`. 21.8 kB -> 2.34 kB.
+3. **The manuals list scrolled sideways on a phone.** A badge row marked
+   `shrink-0` was wider than a 390px viewport and refused to wrap, so it
+   pushed the whole page instead.
+
+### Verification
+
+- Walked the entire flow in a real browser as two signed-in users:
+  posted a job, quoted $480 as the technician, compared and hired as the
+  customer, booked a time, started, completed, and left a review.
+- Checked the result in the database rather than trusting the screens:
+  $480 gross, 10% -> $48 fee and $432 payout, rate snapshotted at 1000
+  bps, transaction still `PENDING`, four status events with their notes
+  and actors, lead moved to `ASSIGNED`, and the technician's cached
+  rating recomputed to 5.0 from 1 review and 1 completed job.
+- Swept every route at a 390px viewport for horizontal overflow — all
+  clean after the manuals fix.
+- `npm run typecheck`, `npx vitest run` (8 passing), and `npm run build`
+  all green.
+
+---
+
 ## Status by module
 
 | # | Module | Status |
@@ -1313,10 +1451,11 @@ be repeated per page.
 | 4 | Database architecture | Done; `db push` + seed verified against a local Postgres this session |
 | 5 | Product database | Manufacturer, Category, and Model admin CRUD done and verified; Document/Compatibility admin screens still outstanding |
 | 6 | Product finder | Cascade, model profile page (`/model/[id]`), and honest no-DB handling all done and verified in a browser (see Session 2) |
-| 7 | Technical library | Schema done; documents listed on the model page, download UI still outstanding (needs storage) |
+| 7 | User manuals | Library, in-PDF search, facets, provenance badges and the document page done and verified (Session 17); three real manufacturer documents ingested. Upload UI still blocked on storage |
 | 8 | Compatibility engine | Schema, seed, bidirectional query, and admin CRUD (`/admin/compatibility`) all done and verified |
 | 9–12 | Customer / technician / supplier / manufacturer portals | `/account` hub (real per-account counts + links to `/my-listings`, `/support`, `/leads`) done and verified (Session 11), deliberately smaller than four separate per-role dashboards |
-| 13–15 | Marketplace, search, checkout | Peer-to-peer: anyone can list (`/my-listings`, business or individual), browse/search/filter, cart, and "I'm interested" contact reveal all done and verified; real payment checkout dropped from scope entirely (the app is free to use, buyers and sellers meet up directly) |
+| 13–15 | Parts marketplace, search, checkout | Peer-to-peer: anyone can list (`/my-listings`, business or individual), browse/search/filter, cart, and "I'm interested" contact reveal all done and verified. No payment processing — Doorlink is not a party to parts sales |
+| — | Services marketplace | Post a job, quote, hire, job lifecycle, reviews and the commission engine done and verified end to end in a browser (Session 17). Taking payment is honestly disconnected; messaging, worker profiles and the admin commission screen are the next gaps |
 | 16–18 | Leads, support, admin | Support tickets (`/support`, `/support/[id]`, `/support/queue`) done and verified; Leads reimagined as public "request a technician" (`/request-technician`) + claim queue (`/leads`), done and verified (Session 11) |
 | 19 | SEO | Sitemap, robots.txt, WebSite/Product JSON-LD, and canonicals on every public page all done and verified |
 | 20–25 | Notifications, analytics, security, performance, testing, production | Foundations only |
@@ -1343,10 +1482,10 @@ be repeated per page.
    page and supplier-scoped listing CRUD (`/supplier/listings`) done and
    verified (Session 5), including the cross-tenant ownership boundary.
 9. ~~Cart.~~ Add/view/adjust-quantity/remove done and verified (Session 6).
-   Checkout stays behind `<NotConnected />` — not "until Stripe exists"
-   any more, but because payment processing was dropped from scope
-   entirely (the app is free to use). What replaces it is a product
-   decision, not a connection to wait on — see "Still needs you, not code".
+   Checkout stays behind `<NotConnected />`. The Session 17 brief brings
+   Stripe back for *services* (commission on jobs) and subscriptions, but
+   says nothing about charging for peer-to-peer parts sales, so the cart
+   is still waiting on a product decision rather than on a connection.
 10. ~~Marketplace search/filtering.~~ Keyword search plus category,
     manufacturer, and condition filters done and verified (Session 7).
 11. Wire in a real auth provider (Supabase) to replace
@@ -1397,17 +1536,51 @@ be repeated per page.
     scaffolded (`capacitor.config.ts`) but not buildable yet — it needs
     a real deployed URL and platform SDKs neither of which exist in this
     sandbox; see "Native app (iOS/Android)" below for the exact runbook.
+23. ~~The services marketplace: quotes, hiring, jobs, reviews and the
+    commission engine.~~ Done and verified end to end in a browser
+    (Session 17). Money is recorded, never moved.
+24. The admin screen for the commission rate. The rate is already stored
+    in `PlatformSetting` and read at quote time, so nothing is hard-coded
+    — but there is no UI to change it yet, which is half of what the
+    brief asked for.
+25. Worker profiles and onboarding: services offered, service areas,
+    availability, certifications, and submitting documents for
+    verification. Until this exists the job board cannot match a
+    technician to a suburb, and `VerificationStatus` can only be moved by
+    hand.
+26. Messaging between a customer and a technician (`Conversation`,
+    `Message` and attachments are already in the schema, with no UI).
+27. The payments module: a Stripe service abstraction kept isolated
+    behind one interface, so the marketplace keeps working untouched when
+    no keys are present. Nothing may report a payment as taken until a
+    real provider webhook says so.
+28. Subscriptions: the plans page, feature gating, and a subscription
+    dashboard. Monthly and annual prices stay `null` until decided.
+29. Notifications: in-app first (the `Notification` model exists), email
+    and push behind the same honest not-connected treatment.
+30. The premium landing page rework, including the garage door opening
+    into a parallax reveal of "App developed for automated doors and
+    gates."
 
 ## Still needs you, not code
 
-- **Decided:** DoorLink is free to use — no Stripe, no payment processing.
-  `/cart`'s "Checkout" stays behind `<NotConnected />` not because Stripe is
-  merely unconfigured but because it's been dropped from scope entirely.
-- **Decided (Session 8):** the marketplace is peer-to-peer, like Facebook
-  Marketplace — anyone can list, buyers and sellers meet up and handle the
-  exchange themselves, contact happens via email reveal (`/my-listings`,
-  `revealListingContactAction`), not a supplier-only storefront with a
-  formal order flow.
+- **Reversed by the Session 17 brief:** "DoorLink is free to use — no
+  Stripe, no payment processing" no longer holds. Doorlink takes a
+  commission on completed jobs and will sell subscriptions, both through
+  Stripe. The commission engine is built and tested; Stripe is not
+  connected, and every screen that touches money says so rather than
+  implying otherwise.
+- **Still true (Session 8), for parts:** the *parts* marketplace is
+  peer-to-peer — anyone can list, buyers and sellers meet up, contact
+  happens via email reveal (`/my-listings`,
+  `revealListingContactAction`). Doorlink is not a party to those sales
+  and takes nothing from them.
+- **New (Session 17), for services:** the *services* marketplace is not
+  peer-to-peer. Doorlink is a party to the transaction, holds the agreed
+  split on the Transaction record, and takes a commission. The two
+  marketplaces are separate systems that happen to share a word.
+- Still undecided, and left as `null` rather than invented: the monthly
+  and annual subscription prices. Only $4.99/week has been set.
 - Supabase project (auth + storage) — see the step-by-step setup guide
   given directly to the user; covers `NEXT_PUBLIC_SUPABASE_URL`,
   `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, and can
