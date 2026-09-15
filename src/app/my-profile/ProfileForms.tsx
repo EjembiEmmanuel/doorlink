@@ -3,9 +3,11 @@
 import { useActionState, useState } from 'react'
 import type { ReactNode } from 'react'
 import {
+  addAvailabilityAction,
   addCertificationAction,
   addServiceAction,
   addServiceAreaAction,
+  removeAvailabilityAction,
   removeCertificationAction,
   removeServiceAction,
   removeServiceAreaAction,
@@ -19,6 +21,7 @@ import {
 import { Field, Input, Select, Textarea } from '@/components/ui/Field'
 import { Button } from '@/components/ui/Button'
 import { AU_STATES } from '@/lib/australia'
+import { DAY_LABELS, WEEK_ORDER, formatWindow, groupByDay } from '@/lib/availability'
 import { formatMoney } from '@/lib/money'
 
 const initial: ProfileActionState = {}
@@ -567,5 +570,68 @@ function RemoveChip({
       )}
       {state.error && <span className="text-micro text-bad">{state.error}</span>}
     </form>
+  )
+}
+
+export function AvailabilityEditor({
+  availability,
+}: {
+  availability: Array<{ id: string; dayOfWeek: number; startMinute: number; endMinute: number }>
+}) {
+  const [state, formAction, isPending] = useActionState(addAvailabilityAction, initial)
+  const days = groupByDay(availability)
+
+  return (
+    <div className="flex flex-col gap-5">
+      <ul className="flex flex-col divide-y divide-line border-y border-line">
+        {days.map((day) => (
+          <li key={day.dayOfWeek} className="flex flex-col gap-2 py-3 sm:flex-row sm:items-baseline sm:gap-4">
+            <span className="w-24 shrink-0 text-sm font-medium text-graphite">{day.label}</span>
+
+            {day.windows.length === 0 ? (
+              // Said, not omitted — a day missing from the list reads as an
+              // oversight rather than as a day off.
+              <span className="text-sm text-zinc-deep">Not working</span>
+            ) : (
+              <ul className="flex flex-wrap gap-2">
+                {day.windows.map((window) => (
+                  <li key={window.id}>
+                    <RemoveChip
+                      action={removeAvailabilityAction}
+                      name="availabilityId"
+                      value={window.id}
+                      label={formatWindow(window)}
+                    />
+                  </li>
+                ))}
+              </ul>
+            )}
+          </li>
+        ))}
+      </ul>
+
+      <form action={formAction} className="flex flex-wrap items-end gap-3">
+        <Field label="Day" htmlFor="dayOfWeek">
+          <Select id="dayOfWeek" name="dayOfWeek" defaultValue="1" className="w-36">
+            {WEEK_ORDER.map((day) => (
+              <option key={day} value={day}>
+                {DAY_LABELS[day]}
+              </option>
+            ))}
+          </Select>
+        </Field>
+        <Field label="From" htmlFor="startTime">
+          <Input id="startTime" name="startTime" type="time" defaultValue="07:00" required className="w-36" />
+        </Field>
+        <Field label="Until" htmlFor="endTime">
+          <Input id="endTime" name="endTime" type="time" defaultValue="17:00" required className="w-36" />
+        </Field>
+        <Button type="submit" variant="secondary" disabled={isPending}>
+          {isPending ? 'Adding…' : 'Add hours'}
+        </Button>
+      </form>
+
+      <FormStatus state={state} savedLabel="Hours added." />
+    </div>
   )
 }

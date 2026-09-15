@@ -56,14 +56,19 @@ const registerSchema = z
     role: z.enum(REGISTRABLE_ROLES),
     organizationName: z.string().trim().optional(),
   })
-  .refine((data) => (data.role === 'SUPPLIER' || data.role === 'MANUFACTURER' ? !!data.organizationName : true), {
-    message: 'Enter your organization name.',
-    path: ['organizationName'],
-  })
+  .refine(
+    (data) => (data.role === 'SUPPLIER' || data.role === 'MANUFACTURER' ? !!data.organizationName : true),
+    {
+      message: 'Enter your organization name.',
+      path: ['organizationName'],
+    }
+  )
 
 export async function devRegisterAction(_prevState: RegisterState, formData: FormData): Promise<RegisterState> {
   if (process.env.NODE_ENV === 'production') {
-    return { error: 'Registration is not available in production yet — no authentication provider is connected.' }
+    return {
+      error: 'Registration is not available in production yet — no authentication provider is connected.',
+    }
   }
 
   const parsed = registerSchema.safeParse({
@@ -95,7 +100,10 @@ export async function devRegisterAction(_prevState: RegisterState, formData: For
     // something a signup form gets to do for itself.
     if ((role === Role.SUPPLIER || role === Role.MANUFACTURER) && organizationName) {
       const org = await prisma.organization.create({
-        data: { name: organizationName, type: role === Role.SUPPLIER ? OrgType.SUPPLIER : OrgType.MANUFACTURER },
+        data: {
+          name: organizationName,
+          type: role === Role.SUPPLIER ? OrgType.SUPPLIER : OrgType.MANUFACTURER,
+        },
       })
       await prisma.organizationMember.create({
         data: { organizationId: org.id, userId: user.id, role: OrgMemberRole.OWNER },
@@ -114,7 +122,10 @@ export async function devRegisterAction(_prevState: RegisterState, formData: For
     throw error
   }
 
-  redirect('/')
+  // A new account lands on the checklist rather than the home page. What
+  // it shows is counted from the account, so this is not a wizard that has
+  // to be finished — leaving it does not strand anything half-created.
+  redirect('/welcome')
 }
 
 export async function devSignOutAction(_formData: FormData): Promise<void> {
