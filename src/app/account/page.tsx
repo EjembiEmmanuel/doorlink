@@ -5,8 +5,10 @@ import { getSession } from '@/lib/auth'
 import { can } from '@/lib/rbac'
 import { prisma } from '@/lib/prisma'
 import { isDatabaseUnreachable } from '@/lib/db-errors'
+import { onboardingFor } from '@/lib/onboarding'
 import { NotConnected } from '@/components/ui/NotConnected'
 import { Badge } from '@/components/ui/Badge'
+import { ContactForm } from './ContactForm'
 
 export const metadata: Metadata = {
   title: 'Account',
@@ -32,45 +34,69 @@ export default async function AccountPage() {
 
   let data
   try {
-    const [listingCount, activeListingCount, openTicketCount, claimedLeadCount, organization] = await Promise.all([
-      prisma.listing.count({
-        where: session.organizationId
-          ? { organizationId: session.organizationId }
-          : { sellerId: session.userId },
-      }),
-      prisma.listing.count({
-        where: {
-          status: 'ACTIVE',
-          ...(session.organizationId ? { organizationId: session.organizationId } : { sellerId: session.userId }),
-        },
-      }),
-      prisma.supportTicket.count({
-        where: { userId: session.userId, status: { in: ['OPEN', 'PENDING'] } },
-      }),
-      handlesLeads
-        ? prisma.lead.count({
-            where: session.organizationId
-              ? { assignedOrgId: session.organizationId }
-              : { assignedUserId: session.userId },
-          })
-        : Promise.resolve(0),
-      session.organizationId
-        ? prisma.organization.findUnique({
-            where: { id: session.organizationId },
-            select: { name: true, type: true },
-          })
-        : Promise.resolve(null),
-    ])
-    data = { listingCount, activeListingCount, openTicketCount, claimedLeadCount, organization }
+    const [listingCount, activeListingCount, openTicketCount, claimedLeadCount, organization, user] =
+      await Promise.all([
+        prisma.listing.count({
+          where: session.organizationId
+            ? { organizationId: session.organizationId }
+            : { sellerId: session.userId },
+        }),
+        prisma.listing.count({
+          where: {
+            status: 'ACTIVE',
+            ...(session.organizationId
+              ? { organizationId: session.organizationId }
+              : { sellerId: session.userId }),
+          },
+        }),
+        prisma.supportTicket.count({
+          where: { userId: session.userId, status: { in: ['OPEN', 'PENDING'] } },
+        }),
+        handlesLeads
+          ? prisma.lead.count({
+              where: session.organizationId
+                ? { assignedOrgId: session.organizationId }
+                : { assignedUserId: session.userId },
+            })
+          : Promise.resolve(0),
+        session.organizationId
+          ? prisma.organization.findUnique({
+              where: { id: session.organizationId },
+              select: { name: true, type: true },
+            })
+          : Promise.resolve(null),
+        prisma.user.findUniqueOrThrow({ where: { id: session.userId }, select: { name: true, phone: true } }),
+      ])
+    data = { listingCount, activeListingCount, openTicketCount, claimedLeadCount, organization, user }
   } catch (error) {
     if (!isDatabaseUnreachable(error)) throw error
     return <NotConnected feature="Your account" reason="Can't load your account data right now." />
   }
 
+  // Null when the database could not be read. The banner is simply absent
+  // then — an unread checklist must not render as "nothing left to do".
+  const onboarding = await onboardingFor(session)
+  const setupRemaining = onboarding && !onboarding.complete ? onboarding.total - onboarding.done : 0
+
   return (
     <div className="flex flex-col gap-8">
+      {setupRemaining > 0 && (
+        <Link
+          href="/welcome"
+          className="flex flex-col gap-1 rounded-md border border-signal/40 bg-signal-tint px-5 py-4 transition-colors hover:border-signal"
+        >
+          <p className="text-sm font-medium text-graphite">
+            {setupRemaining} thing{setupRemaining === 1 ? '' : 's'} left to set up
+          </p>
+          <p className="text-sm text-zinc-deep">{onboarding!.summary}</p>
+          <p className="text-sm font-medium text-signal">
+            Finish setting up<span aria-hidden="true"> →</span>
+          </p>
+        </Link>
+      )}
+
       <div>
-        <h1 className="text-xl font-semibold text-graphite">{session.name}</h1>
+        <h1 className="text-xl font-semibold text-graphite">{data.user.name}</h1>
         <div className="mt-2 flex flex-wrap items-center gap-2">
           <Badge tone="signal">{ROLE_LABEL[session.role] ?? session.role}</Badge>
           {data.organization && <Badge tone="neutral">{data.organization.name}</Badge>}
@@ -108,6 +134,11 @@ export default async function AccountPage() {
       </div>
 
       <div className="flex flex-col gap-3">
+        <h2 className="text-sm font-semibold uppercase tracking-wide text-zinc-deep">Contact details</h2>
+        <ContactForm name={data.user.name} phone={data.user.phone} />
+      </div>
+
+      <div className="flex flex-col gap-3">
         <h2 className="text-sm font-semibold uppercase tracking-wide text-zinc-deep">Quick links</h2>
         <div className="flex flex-wrap gap-3 text-sm">
           <Link href="/my-listings/new" className="font-medium text-signal hover:text-signal-hover">
@@ -115,6 +146,9 @@ export default async function AccountPage() {
           </Link>
           <Link href="/support/new" className="font-medium text-signal hover:text-signal-hover">
             New support ticket
+          </Link>
+          <Link href="/welcome" className="font-medium text-signal hover:text-signal-hover">
+            Getting started
           </Link>
           {handlesLeads && (
             <Link href="/leads" className="font-medium text-signal hover:text-signal-hover">

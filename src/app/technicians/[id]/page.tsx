@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { JobStatus, VerificationStatus } from '@prisma/client'
 import { prisma } from '@/lib/prisma'
+import { formatWindow, groupByDay } from '@/lib/availability'
 import { isDatabaseUnreachable } from '@/lib/db-errors'
 import { formatMoney } from '@/lib/money'
 import { NotConnected } from '@/components/ui/NotConnected'
@@ -24,6 +25,7 @@ async function loadTechnician(userId: string) {
             orderBy: { createdAt: 'asc' },
           },
           serviceAreas: { orderBy: { postcode: 'asc' } },
+          availability: { orderBy: [{ dayOfWeek: 'asc' }, { startMinute: 'asc' }] },
           certifications: { orderBy: { createdAt: 'desc' } },
         },
       },
@@ -81,6 +83,7 @@ export default async function TechnicianProfilePage({ params }: PageProps) {
   const profile = user.technicianProfile!
   const displayName = profile.businessName || user.name
   const location = [profile.baseSuburb, profile.baseState].filter(Boolean).join(' ')
+  const availabilityDays = groupByDay(profile.availability)
   const isVerified = profile.verificationStatus === VerificationStatus.VERIFIED
 
   return (
@@ -252,6 +255,32 @@ export default async function TechnicianProfilePage({ params }: PageProps) {
                   </li>
                 ))}
               </ul>
+            </div>
+          )}
+
+          {profile.availability.length > 0 && (
+            <div className="mt-6">
+              <h2 className="mb-2 text-sm font-semibold uppercase tracking-wide text-zinc-deep">Usual hours</h2>
+              <dl className="flex flex-col gap-1 text-sm">
+                {availabilityDays
+                  .filter((day) => day.windows.length > 0)
+                  .map((day) => (
+                    <div key={day.dayOfWeek} className="flex gap-3">
+                      <dt className="w-12 shrink-0 text-zinc-deep">{day.shortLabel}</dt>
+                      <dd className="text-graphite">
+                        {day.windows.map((window) => formatWindow(window)).join(', ')}
+                      </dd>
+                    </div>
+                  ))}
+              </dl>
+              {/* Said explicitly: this is what the technician wrote down,
+                  not a diary Doorlink can see. Rendering hours without
+                  this line invites a customer to read an empty slot as a
+                  free slot. */}
+              <p className="mt-2 text-micro text-zinc-deep">
+                Stated by the technician. Doorlink is not connected to their calendar, so this is not live
+                availability.
+              </p>
             </div>
           )}
 

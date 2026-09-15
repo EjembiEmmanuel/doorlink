@@ -9,6 +9,7 @@ import { can, requireSession, RbacError } from '@/lib/rbac'
 import { isDatabaseUnreachable, isRecordNotFound } from '@/lib/db-errors'
 import { toMinorUnits } from '@/lib/money'
 import { AU_POSTCODE_PATTERN, AU_STATES } from '@/lib/australia'
+import { parseTime, windowProblem } from '@/lib/availability'
 import {
   canSubmitForVerification,
   canWithdrawVerification,
@@ -419,6 +420,57 @@ export async function removeCertificationAction(
 
     const removed = await prisma.workerCertification.deleteMany({ where: { id, workerId: profileId } })
     if (removed.count === 0) return { error: 'That certification is no longer on your profile.' }
+    refresh(session.userId)
+    return { ok: true }
+  })
+}
+
+// ---------------------------------------------------------------------
+// Working hours
+// ---------------------------------------------------------------------
+
+export async function addAvailabilityAction(
+  _prevState: ProfileActionState,
+  formData: FormData
+): Promise<ProfileActionState> {
+  return withProfile(async (profileId, session) => {
+    const dayOfWeek = Number(formData.get('dayOfWeek'))
+    const startMinute = parseTime(String(formData.get('startTime') ?? ''))
+    const endMinute = parseTime(String(formData.get('endTime') ?? ''))
+
+    if (startMinute === null) return { error: 'Enter a start time.' }
+    if (endMinute === null) return { error: 'Enter a finish time.' }
+
+    // Overlap is checked against what is in the database now, not against
+    // what the page was rendered with — two tabs open on this form would
+    // otherwise be able to write a pair of windows that each looked fine
+    // on its own.
+    const existing = await prisma.workerAvailability.findMany({
+      where: { workerId: profileId, dayOfWeek },
+      select: { dayOfWeek: true, startMinute: true, endMinute: true },
+    })
+
+    const problem = windowProblem({ dayOfWeek, startMinute, endMinute }, existing)
+    if (problem) return { error: problem }
+
+    await prisma.workerAvailability.create({
+      data: { workerId: profileId, dayOfWeek, startMinute, endMinute },
+    })
+    refresh(session.userId)
+    return { ok: true }
+  })
+}
+
+export async function removeAvailabilityAction(
+  _prevState: ProfileActionState,
+  formData: FormData
+): Promise<ProfileActionState> {
+  return withProfile(async (profileId, session) => {
+    const id = String(formData.get('availabilityId') ?? '')
+    if (!id) return { error: 'Missing window.' }
+
+    const removed = await prisma.workerAvailability.deleteMany({ where: { id, workerId: profileId } })
+    if (removed.count === 0) return { error: 'Those hours are no longer on your profile.' }
     refresh(session.userId)
     return { ok: true }
   })

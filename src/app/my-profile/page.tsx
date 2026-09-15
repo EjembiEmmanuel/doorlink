@@ -17,6 +17,7 @@ import { NotConnected } from '@/components/ui/NotConnected'
 import { Badge } from '@/components/ui/Badge'
 import { VERIFICATION_LABELS, VERIFICATION_TONE } from '@/lib/labels'
 import {
+  AvailabilityEditor,
   BaseForm,
   CertificationEditor,
   CredentialsForm,
@@ -62,6 +63,7 @@ export default async function MyProfilePage() {
             orderBy: { createdAt: 'asc' },
           },
           serviceAreas: { orderBy: { postcode: 'asc' } },
+          availability: { orderBy: [{ dayOfWeek: 'asc' }, { startMinute: 'asc' }] },
           certifications: { orderBy: { createdAt: 'desc' } },
         },
       }),
@@ -118,7 +120,7 @@ export default async function MyProfilePage() {
         </div>
       )}
 
-      <Section title="About you">
+      <Section id="about" title="About you">
         <DetailsForm profile={profile} />
       </Section>
 
@@ -127,13 +129,14 @@ export default async function MyProfilePage() {
       </Section>
 
       <Section
+        id="areas"
         title="Postcodes you cover"
         description="Jobs are matched on these, not on the radius above. Add every postcode you would actually drive to."
       >
         <ServiceAreaEditor areas={profile.serviceAreas} />
       </Section>
 
-      <Section title="What you do">
+      <Section id="services" title="What you do">
         <ServiceEditor services={profile.services} categories={categories} />
       </Section>
 
@@ -141,7 +144,15 @@ export default async function MyProfilePage() {
         <CredentialsForm profile={profile} />
       </Section>
 
-      <Section title="Verification">
+      <Section
+        id="availability"
+        title="Hours you normally work"
+        description="Shown on your profile so a customer knows when to expect you. Doorlink has no calendar connected — nothing here books or blocks anything, and a job can still be scheduled outside these hours if you agree to it."
+      >
+        <AvailabilityEditor availability={profile.availability} />
+      </Section>
+
+      <Section id="verification" title="Verification">
         <div className="flex flex-col gap-4">
           <div className="flex flex-wrap items-center gap-3">
             <Badge tone={VERIFICATION_TONE[profile.verificationStatus]}>
@@ -182,16 +193,24 @@ export default async function MyProfilePage() {
 }
 
 function Section({
+  id,
   title,
   description,
   children,
 }: {
+  // The getting-started checklist links straight at a section, so these
+  // ids are part of an interface, not decoration — renaming one breaks a
+  // link in src/lib/onboarding.ts.
+  id?: string
   title: string
   description?: string
   children: React.ReactNode
 }) {
   return (
-    <section className="mb-10 border-t border-line pt-8 first-of-type:border-t-0 first-of-type:pt-0">
+    <section
+      id={id}
+      className="mb-10 scroll-mt-24 border-t border-line pt-8 first-of-type:border-t-0 first-of-type:pt-0"
+    >
       <h2 className="text-lg font-semibold text-graphite">{title}</h2>
       {description && <p className="mt-1 max-w-prose text-sm text-graphite-soft">{description}</p>}
       <div className="mt-5">{children}</div>
