@@ -79,7 +79,8 @@ real database:
 - Messaging and in-app notifications
 - The manuals library, with full-text search inside the PDFs
 - The door configurator, backed by a live 3D preview
-- Admin: catalogue CRUD, marketplace oversight, commission rate, verification
+- Admin: catalogue CRUD, marketplace oversight, commission rate, verification,
+  users, reports, disputes, subscriptions (oversight), and platform metrics
 
 **Not** wired up, on purpose, and each says so on screen: Stripe,
 Supabase auth/storage, email, push. See §4.
@@ -243,18 +244,33 @@ keep it driven by `can(session.role, …)` rather than hard-coding menus.
 
 ---
 
-## 7. Screens that do not exist yet
+## 7. What exists vs what is still missing
 
 So you do not design around something that is not there, or assume
 something is missing when it is deliberate:
 
-- No universal search. Each area searches itself.
-- No onboarding flows.
-- Admin has catalogue, marketplace, verification and settings. No users,
-  reports, disputes or subscriptions screens, and no metrics panel.
-- No worker availability UI (the schema exists).
-- No message attachments (blocked on storage) and no report/safety flow.
-- No worker reply to a review (the column exists).
+**Already in the app (do not remove or “replace with simpler” markup):**
+
+- **`/search`** — cross-catalogue search (results grouped by type: manuals,
+  products, technicians, services, parts, manufacturers).
+- **`/welcome`** — role-aware getting-started / onboarding checklist.
+- **Admin:** `/admin/users`, `/admin/reports`, `/admin/disputes`,
+  `/admin/subscriptions`, `/admin/metrics` (plus catalogue, marketplace,
+  verification, settings). Nav is in `admin/layout.tsx` (`ADMIN_NAV`).
+- **Worker availability** — `AvailabilityEditor` on `/my-profile` (trade
+  profile). Technicians can set hours there.
+- **Worker review replies** — if present in the database, they **display**
+  on `/technicians/[id]`; there is still no UI for a worker to **write**
+  a reply.
+
+**Still not built:**
+
+- Message attachments (blocked on storage) and the user-facing report/safety
+  flow.
+- Worker reply **authoring** UI (column exists; display-only today).
+
+Per-area search still exists inside manuals, marketplace, etc.; `/search`
+is the shared entry point on top of that.
 
 `DEVELOPMENT.md` has the full history and the reasoning behind the
 decisions. It is long, but the "Status by module" and "Still needs you,
@@ -264,13 +280,16 @@ not code" sections at the end are the quick version.
 
 ## 8. Claude is working in parallel — how we avoid collisions
 
-Backend and feature work continues on `main` while you have the UI
-branch out. To keep the merge clean, Claude is staying **additive in the
-visual layer**:
+**Neither tool commits directly to `main`.** Replit works on
+`replit-ui-improvements`; Claude Code works on `claude/*`. Changes meet
+in GitHub through pull requests (`WORKFLOW.md`).
+
+To keep merges clean, Claude stays **additive in the visual layer**:
 
 - **Claude will not touch** `src/components/ui/`, `tailwind.config.ts`,
   or the markup of screens that already exist. Those are yours for the
-  duration.
+  duration. Exception: **surgical crash fixes** only (e.g. a guard that
+  stops a build or runtime throw) — no restyle.
 - **Claude will add** new routes, new `src/lib/` modules, and new server
   actions. New screens are built from the existing primitives, so they
   inherit your improvements to `Button`, `Field`, `Panel` and the rest
