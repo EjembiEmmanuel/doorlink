@@ -57,40 +57,61 @@ export default async function HomePage() {
   return (
     <div>
       {/* ---------------------------------------------------------------
-          Hero
+          Doorway
           --------------------------------------------------------------- */}
-      <section className="mx-auto max-w-shell px-4 pt-10 sm:pt-16">
-        <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:gap-14">
-          <div className="max-w-prose">
-            <p className="text-micro font-semibold uppercase tracking-[0.18em] text-zinc-deep">Doorlink</p>
-            <h1 className="mt-3 text-display font-semibold leading-[1.05] tracking-tight text-graphite sm:text-display-lg">
-              Automated doors.
-              <br />
-              Connected professionals.
-              <br />
-              One platform.
-            </h1>
-            <p className="mt-5 text-lg text-graphite-soft">
-              Garage doors, gates, shutters and access systems — find the technician, the manual and the part,
-              in the one place.
-            </p>
-            <div className="mt-7 flex flex-wrap gap-3">
-              <Link
-                href="/request-technician"
-                className="inline-flex h-12 items-center rounded bg-signal px-6 text-sm font-medium text-paper transition-colors hover:bg-signal-hover"
-              >
-                Find a door professional
-              </Link>
-              <Link
-                href="/configure"
-                className="inline-flex h-12 items-center rounded border border-line bg-paper px-6 text-sm font-medium text-graphite transition-colors hover:bg-rail"
-              >
-                Explore door systems
-              </Link>
+      <section className="relative overflow-hidden bg-graphite">
+        <div className="absolute inset-0 opacity-30 [background-image:linear-gradient(rgba(255,255,255,.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.04)_1px,transparent_1px)] [background-size:42px_42px]" />
+        <div className="relative mx-auto max-w-shell px-4 pb-10 pt-12 sm:pb-14 sm:pt-16">
+          <div className="grid items-center gap-9 lg:grid-cols-[minmax(0,.82fr)_minmax(0,1.18fr)] lg:gap-14">
+            <div className="max-w-prose">
+              <div className="flex flex-wrap items-center gap-3 text-micro font-semibold uppercase tracking-[0.18em] text-paper/55">
+                <span className="inline-flex items-center gap-2 text-paper">
+                  <span className="h-2 w-2 rounded-full bg-signal" />
+                  Doorlink
+                </span>
+                <span className="h-px w-8 bg-paper/25" />
+                <span>Trade platform / 01</span>
+              </div>
+              <h1 className="mt-6 text-display font-semibold leading-[1.02] tracking-tight text-paper sm:text-display-lg">
+                Everything for your door.
+                <br />
+                <span className="text-paper/55">One connected system.</span>
+              </h1>
+              <p className="mt-5 max-w-[48ch] text-base leading-7 text-paper/70 sm:text-lg">
+                Identify products, find the right professional, and get the manual you need — for garage doors,
+                gates, shutters and access systems.
+              </p>
+              <div className="mt-7 flex flex-wrap gap-3">
+                <Link
+                  href="/request-technician"
+                  className="inline-flex h-12 items-center rounded bg-signal px-6 text-sm font-semibold text-paper transition-colors hover:bg-signal-hover"
+                >
+                  Find a professional <span className="ml-2" aria-hidden="true">↗</span>
+                </Link>
+                <Link
+                  href="/configure"
+                  className="inline-flex h-12 items-center rounded border border-paper/25 px-6 text-sm font-semibold text-paper transition-colors hover:bg-paper/10"
+                >
+                  Design a door
+                </Link>
+              </div>
+              <div className="mt-9 flex flex-wrap gap-x-6 gap-y-2 border-t border-paper/15 pt-4 text-micro uppercase tracking-[0.14em] text-paper/45">
+                <span>Real documents</span>
+                <span>Trade-ready workflows</span>
+                <span>Built for the driveway</span>
+              </div>
             </div>
-          </div>
 
-          <DoorHero3DClientOnly />
+            <DoorHero3DClientOnly />
+          </div>
+        </div>
+      </section>
+
+      <section className="border-b border-line bg-paper">
+        <div className="mx-auto grid max-w-shell divide-y divide-line px-4 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+          <QuickEntry href="/find" index="01" title="Identify a system" body="Find the model, motor or controller you already have." />
+          <QuickEntry href="/configure" index="02" title="Configure a door" body="Build a clear door specification before you request a quote." />
+          <QuickEntry href="/manuals" index="03" title="Open the manual" body="Search installation, programming and troubleshooting documents." />
         </div>
       </section>
 
@@ -356,6 +377,21 @@ function HelpCard({ href, title, body }: { href: string; title: string; body: st
     >
       <p className="font-medium text-graphite">{title}</p>
       <p className="mt-1.5 text-sm text-zinc-deep">{body}</p>
+    </Link>
+  )
+}
+
+function QuickEntry({ href, index, title, body }: { href: string; index: string; title: string; body: string }) {
+  return (
+    <Link href={href} className="group flex gap-4 px-0 py-5 sm:px-6 sm:py-6 first:sm:pl-0 last:sm:pr-0">
+      <span className="font-code text-micro text-zinc-deep">{index}</span>
+      <span className="min-w-0">
+        <span className="flex items-center gap-2 font-medium text-graphite">
+          {title}
+          <span className="text-signal transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
+        </span>
+        <span className="mt-1 block text-sm leading-6 text-zinc-deep">{body}</span>
+      </span>
     </Link>
   )
 }

@@ -18,3 +18,247 @@ body {
   background-color: theme('colors.paper');
   color: theme('colors.graphite.DEFAULT');
 }
+
+::selection {
+  background: theme('colors.signal.tint');
+  color: theme('colors.graphite.DEFAULT');
+}
+
+.hero-scene-shell {
+  background:
+    radial-gradient(circle at 72% 22%, rgba(104, 142, 194, 0.18), transparent 28%),
+    linear-gradient(145deg, #24282d 0%, #111416 58%, #0a0c0d 100%);
+  box-shadow: 0 24px 64px -36px rgba(27, 29, 31, 0.72);
+}
+
+.hero-scene-shell::after {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  content: '';
+  background-image: linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 34px 34px;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), transparent 82%);
+}
+
+.garage-fallback {
+  position: relative;
+  isolation: isolate;
+  aspect-ratio: 4 / 3;
+  width: 100%;
+  overflow: hidden;
+  cursor: ns-resize;
+  touch-action: pan-y;
+  background: #172027;
+  user-select: none;
+}
+
+@media (min-width: 640px) {
+  .garage-fallback {
+    aspect-ratio: 16 / 10;
+  }
+}
+
+.garage-fallback-sky {
+  position: absolute;
+  inset: 0 0 38%;
+  background:
+    radial-gradient(circle at 76% 25%, rgba(255, 224, 158, 0.68), transparent 11%),
+    linear-gradient(155deg, #9aafc2 0%, #536b7d 52%, #283941 100%);
+}
+
+.garage-fallback-sky::after {
+  position: absolute;
+  inset: 0;
+  content: '';
+  opacity: 0.35;
+  background-image: linear-gradient(130deg, transparent 0 56%, rgba(255, 255, 255, 0.12) 56.2% 56.5%, transparent 56.7%);
+}
+
+.garage-fallback-house {
+  position: absolute;
+  inset: 18% 9% 0;
+  transform: perspective(720px) rotateX(1deg);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: linear-gradient(155deg, #5e676b, #272c2e 74%);
+  box-shadow: 0 22px 34px rgba(0, 0, 0, 0.34);
+}
+
+.garage-fallback-roof {
+  position: absolute;
+  top: -9%;
+  left: -4%;
+  width: 108%;
+  height: 18%;
+  transform: skewX(-16deg);
+  background: #202528;
+  box-shadow: 0 8px 0 rgba(0, 0, 0, 0.22);
+}
+
+.garage-fallback-wall {
+  position: absolute;
+  inset: 22% 9% 0;
+  border: 10px solid #252b2d;
+  border-bottom: 0;
+  background:
+    linear-gradient(90deg, transparent 49%, rgba(255, 255, 255, 0.06) 49.2% 50%, transparent 50.2%),
+    #121719;
+}
+
+.garage-fallback-window {
+  position: absolute;
+  top: 26%;
+  width: 10%;
+  height: 13%;
+  border: 3px solid #202729;
+  background: linear-gradient(140deg, #adc3d1, #435966);
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.14);
+}
+
+.garage-fallback-window-left {
+  left: 13%;
+}
+
+.garage-fallback-window-right {
+  right: 13%;
+}
+
+.garage-fallback-drive {
+  position: absolute;
+  right: -14%;
+  bottom: -12%;
+  left: -14%;
+  height: 38%;
+  transform: perspective(240px) rotateX(48deg);
+  transform-origin: bottom;
+  background: repeating-linear-gradient(175deg, #3c4547 0 10px, #333b3d 10px 12px);
+}
+
+.garage-fallback-interior {
+  position: absolute;
+  z-index: 1;
+  top: 43%;
+  left: 50%;
+  display: flex;
+  width: 70%;
+  transform: translate(-50%, -50%);
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+  color: #f5f7f9;
+  opacity: 0.06;
+  transition: opacity 550ms ease;
+}
+
+.garage-fallback-interior.is-visible {
+  opacity: 1;
+}
+
+.garage-fallback-wordmark,
+.garage-fallback-status {
+  font-family: var(--font-plex-mono), ui-monospace, monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+}
+
+.garage-fallback-wordmark {
+  color: #a8c3dd;
+}
+
+.garage-fallback-interior strong {
+  font-size: clamp(0.72rem, 2.2vw, 1.3rem);
+  line-height: 1.2;
+  letter-spacing: 0.07em;
+}
+
+.garage-fallback-status {
+  color: rgba(245, 247, 249, 0.55);
+}
+
+.garage-fallback-door {
+  position: absolute;
+  z-index: 2;
+  top: 27%;
+  left: 50%;
+  display: flex;
+  width: 54%;
+  height: 55%;
+  transform: translateX(-50%);
+  flex-direction: column;
+  gap: 3px;
+  transition: transform 750ms cubic-bezier(0.22, 0.7, 0.22, 1);
+}
+
+.garage-fallback-door.is-open {
+  transform: translate(-50%, -102%);
+}
+
+.garage-fallback-panel {
+  position: relative;
+  display: block;
+  flex: 1;
+  border: 5px solid #aeb5ba;
+  border-radius: 2px;
+  background: linear-gradient(135deg, #454d52, #22282b 72%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.13), 0 4px 10px rgba(0, 0, 0, 0.25);
+}
+
+.garage-fallback-panel-inset {
+  position: absolute;
+  inset: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  background: linear-gradient(160deg, transparent 40%, rgba(0, 0, 0, 0.14));
+}
+
+.garage-fallback-controls {
+  position: absolute;
+  z-index: 3;
+  right: 16px;
+  bottom: 16px;
+  left: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.garage-fallback-hint,
+.garage-fallback-note {
+  color: rgba(245, 247, 249, 0.72);
+  font-family: var(--font-plex-mono), ui-monospace, monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.garage-fallback-button {
+  display: inline-flex;
+  min-height: 42px;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+  background: rgba(10, 12, 13, 0.82);
+  padding: 0 14px;
+  color: #f5f7f9;
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition: background-color 150ms ease, border-color 150ms ease;
+}
+
+.garage-fallback-button:hover {
+  border-color: rgba(255, 255, 255, 0.42);
+  background: rgba(10, 12, 13, 0.96);
+}
+
+.garage-fallback-note {
+  position: absolute;
+  right: 16px;
+  top: 16px;
+  z-index: 3;
+  color: rgba(245, 247, 249, 0.48);
+  font-size: 0.5rem;
+  letter-spacing: 0.1em;
+}
