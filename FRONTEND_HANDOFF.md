@@ -48,16 +48,15 @@ passing.
 
 **Two things about running it on Replit.**
 
-Replit detects Next.js, infers a Vercel project, and offers to port the
-app into its own `PNPM_WORKSPACE` stack. **Decline.** That is a framework
-migration, not an import: it moves the real application into
-`.migration-backup/` and leaves an empty workspace scaffold at the root.
-It has already happened twice. There is a `.replit` in the repo telling
-Replit how to run the project as it is — npm, Next.js, port 3000 — so it
-should not need to guess. After importing, confirm the file tree has
-`src/app/`, `prisma/`, `next.config.mjs` and this file. If it instead
-shows `pnpm-workspace.yaml` and an `artifacts/` folder, the port ran and
-the import needs redoing.
+Do **not** use Replit **Import from GitHub**. When `package.json` depends on
+`next`, Agent auto-starts a Vercel/PNPM port that moves the app into
+`.migration-backup/` and leaves a pnpm scaffold at the root. That cannot be
+fixed from the repo without removing Next.js.
+
+Connect with a **Blank Repl + git** to `mizlaa/doorlink` (see `WORKFLOW.md`).
+Confirm the file tree has `src/app/`, `prisma/`, `next.config.mjs`. If you
+see `pnpm-workspace.yaml` or root `artifacts/`, cancel and `git reset --hard`
+from GitHub — do not commit the scaffold.
 
 And: **do not run `npm run build` while `npm run dev` is running.** They
 share `.next`, the build overwrites the chunks dev is serving, and then

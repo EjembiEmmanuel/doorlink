@@ -60,56 +60,96 @@ reports a conflict there, keep **every** entry from both sides: they are
 permission-gated, and dropping one hides a working screen from whichever
 role needed it.
 
-## Going to Replit to design
+## Going to Replit to design (phone checklist)
 
-1. In the Repl, open the **Git** pane and **pull** from `main`. This is
-   the step that brings across everything built in Claude Code since
-   last time.
-2. Make sure you are on the branch `replit-ui-improvements`, not `main`.
-3. Design.
-4. **Commit and push** when you stop, even mid-way. Unpushed work in a
-   Repl is the one thing here that can actually be lost — containers get
-   reclaimed.
+1. Open **your** Repl (keep it **private**).
+2. Git pane: confirm branch is **`replit-ui-improvements`**, not `main`.
+3. **Pull** so that branch has the latest from `main`.
+4. Design.
+5. **Commit and push** before you stop — even mid-way.
 
 ## Coming back to Claude Code to build
 
-1. Say so, and the branch gets pulled and reviewed before anything is
-   merged.
-2. Once merged into `main`, backend work continues from there.
+1. Open a **pull request** from `replit-ui-improvements` (or `claude/<feature>`).
+2. Review the diff. Resolve conflicts using the ownership rules in
+   `FRONTEND_HANDOFF.md` §8.
+3. Merge into `main` when CI is green.
+4. Claude Code pulls `main`, then starts a fresh `claude/<feature>` branch.
 
-Nothing needs migrating and nothing needs re-importing. The repository
-is the project; both tools are just views onto it.
+Nothing needs migrating. The repository is the project; both tools are
+just views onto it.
 
-## If Replit offers to "port" or "migrate" the project
+## GitHub Import — do not use it
 
-Decline it, every time.
+Replit **Import from GitHub** is not safe for Doorlink. Agent auto-starts
+**“Port imported Vercel app”** when root `package.json` depends on
+**`next`**. Repo tweaks (`next.config.mjs`, `.replit`, `replit.nix`) do
+**not** stop it; only removing the `next` package stops it — which breaks
+the app. Doorlink must keep `next`, so **Import cannot be made safe**.
 
-Replit detects Next.js and offers to convert the project to its own
-`PNPM_WORKSPACE` stack. That is a framework migration, not an import: it
-moves the real application into `.migration-backup/` and leaves an empty
-Express + Drizzle scaffold at the root. It has happened twice here.
+Do not use Import from Vercel, Bolt, Lovable, ZIP, or Empty + Agent either.
 
-It is recoverable — the application is intact inside
-`.migration-backup/`, and moving it back to the root and deleting the
-scaffold restores everything. But it is easier to decline.
+### If a port still happens
 
-Doorlink is **Next.js 15 on npm**, with Prisma and PostgreSQL. Not pnpm,
-not workspaces, not Express, not Drizzle. The `.replit` file in the root
-says so.
+Cancel Agent. On `replit-ui-improvements`:
 
-## Setting up the database in a fresh Repl
+```bash
+git fetch origin
+git reset --hard origin/replit-ui-improvements
+```
 
-Once, per Repl, after the first import:
+Do not commit `pnpm-workspace.yaml`, root `artifacts/`, or a scaffold.
+Do not gitignore `.migration-backup/`.
+
+## Setting up a fresh Repl
+
+Only if you **do not** already have a Repl that pushes to `mizlaa/doorlink`.
+Do not recreate a working Repl.
+
+1. Account → **Git Providers** → GitHub.
+2. Create **Blank** Repl (not Agent, not Import). Private. Do not run Agent.
+3. **Shell** — do not `git clone`:
+
+```bash
+git init
+git remote add origin https://github.com/mizlaa/doorlink.git
+git remote -v
+git fetch origin
+git checkout -B replit-ui-improvements origin/replit-ui-improvements
+git reset --hard origin/replit-ui-improvements
+```
+
+4. Files at Repl **root**: `src/app/`, `prisma/`, `next.config.mjs`. Remote
+   is `mizlaa/doorlink`.
+5. Secrets: `DATABASE_URL`, `DIRECT_URL` (same Postgres URL).
+6. Run:
 
 ```
 npm install
-npm run db:push     # creates the tables from prisma/schema.prisma
-npm run db:seed     # loads the demo catalogue and demo accounts
+npm run db:push
+npm run db:seed
 npm run dev
 ```
 
-If the home page returns a 500 with a message about a missing table,
-`db:push` has not been run against that database. That failure is
-deliberately loud: a database that is reachable but empty is a broken
-deployment, not an outage, and it should not quietly render a page with
-everything blank.
+A 500 about a missing table means `db:push` has not run — that should stay loud.
+
+Proof checklist for a throwaway test: `docs/BLANK_REPLIT_PROOF.md`.
+
+## If the Repl disappears
+
+**GitHub is the backup.** Set up again with **Setting up a fresh Repl** above
+(Blank + git — never Import). Unpushed work is lost.
+
+## Stop — do not keep going if
+
+- You are on **`main`** in the Repl when about to commit.
+- The tree shows `pnpm-workspace.yaml` or `.migration-backup/` instead of `src/app/`.
+- Agent offers to port to **pnpm workspace**.
+- You clicked **Deploy** by mistake on a dev Repl with seeded admin accounts.
+
+## Public GitHub, private Repl
+
+The repo may be public; the Repl should stay **private** (`admin@demo.doorlink`
+is passwordless in dev). Do not merge unsolicited PRs without reading the diff.
+
+See `replit.md` and `HANDOVER.md` (branch protection and Replit Invite).
