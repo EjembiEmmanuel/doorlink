@@ -1,0 +1,838 @@
+REPLIT MASTER PROMPT
+
+EXISTING CLAUDE CODE PROJECT → PROFESSIONAL APP DESIGN, UI/UX & SYSTEM INTERFACE
+
+You are working on an existing application that has already been substantially developed using Claude Code.
+
+Your job is to take the existing Claude Code project, fully understand what has already been built, and then create a professional, polished, production-quality application interface and user experience around the existing system.
+
+The goal is NOT to start again.
+
+The goal is to improve, organise, visually redesign and extend the existing application while protecting all existing functionality and code.
+
+⸻
+
+1. CRITICAL RULE — PROTECT THE EXISTING CLAUDE CODE SYSTEM
+
+Before making ANY changes:
+
+First inspect the entire project.
+
+Understand:
+
+* Frontend
+* Backend
+* Database
+* Authentication
+* API architecture
+* API integrations
+* Environment variables
+* Existing routes
+* Components
+* Services
+* Data models
+* User roles
+* Existing dashboards
+* Existing workflows
+* Existing business logic
+* Existing AI functionality
+* Existing integrations
+* Existing unfinished functionality
+* Existing errors
+* Existing placeholders
+* Existing mock data
+* Existing real data sources
+
+The existing Claude Code implementation is the source of truth for functionality.
+
+DO NOT:
+
+* Delete working functionality.
+* Rewrite working backend logic unnecessarily.
+* Replace existing APIs without a genuine reason.
+* Remove existing database structures unnecessarily.
+* Replace real data with fake data.
+* Create fake charts and pretend they are real.
+* Create placeholder functionality and present it as complete.
+* Overwrite Claude Code’s work.
+* Rebuild the application from scratch.
+* Introduce a separate competing application architecture.
+* Break existing functionality simply to change the design.
+
+If something already works, preserve it.
+
+If something needs changing, understand its dependencies before changing it.
+
+⸻
+
+2. UNDERSTAND THE PROJECT BEFORE DEVELOPING
+
+First create a complete mental/system map of the existing application.
+
+Use this structure:
+
+USER
+↓
+APPLICATION INTERFACE
+↓
+FRONTEND
+↓
+API / SERVICES
+↓
+BACKEND
+↓
+DATABASE / EXTERNAL DATA SOURCES
+
+Then identify:
+
+ALREADY WORKING
+
+What Claude Code has successfully implemented.
+
+PARTIALLY BUILT
+
+What exists but needs improvement.
+
+MISSING
+
+What needs to be developed.
+
+BROKEN
+
+What currently produces errors or unreliable behaviour.
+
+UI/UX
+
+What can be redesigned without interfering with the underlying system.
+
+FUTURE DEVELOPMENT
+
+What should remain structured so Claude Code can continue developing it later.
+
+⸻
+
+3. THE MAIN OBJECTIVE
+
+Transform the existing application into a professional production-quality platform.
+
+It should look and feel like a real company built it — not an AI-generated prototype.
+
+The application should be:
+
+* Clean
+* Modern
+* Professional
+* Premium
+* Fast
+* Responsive
+* Intuitive
+* Scalable
+* Consistent
+* Easy to navigate
+
+The design should have strong visual hierarchy and excellent spacing.
+
+⸻
+
+4. UI / UX DESIGN DIRECTION
+
+Redesign the application’s interface around the functionality that already exists.
+
+Avoid:
+
+* Huge unnecessary headings
+* Random cards everywhere
+* Excessive rounded containers
+* Clutter
+* Generic SaaS templates
+* Excessive gradients
+* Excessive animations
+* Random icons
+* Misaligned icons
+* Unnecessary graphs
+* Fake data
+* Busy backgrounds
+* AI-looking layouts
+* Repetitive UI
+* Oversized buttons
+
+The interface should feel intentional and engineered.
+
+Use a consistent design system for:
+
+* Typography
+* Spacing
+* Buttons
+* Cards
+* Icons
+* Navigation
+* Tables
+* Forms
+* Modals
+* Charts
+* Alerts
+* Status indicators
+* Empty states
+* Loading states
+* Error states
+
+⸻
+
+5. APPLICATION STRUCTURE
+
+Build the application shell around the actual functionality discovered in the Claude Code project.
+
+Use a professional navigation system.
+
+Potential structure:
+
+* Dashboard
+* Products
+* Automated Doors
+* Gates
+* Door Configurator
+* Product Catalogue
+* Customers
+* Technicians
+* Projects / Jobs
+* Quotes
+* Manuals & Documents
+* Installation Information
+* Notifications
+* Settings
+* Account
+
+Only include sections that are relevant to the actual project.
+
+Do not blindly create pages that have no underlying functionality.
+
+⸻
+
+6. PREMIUM 3D GARAGE DOOR HERO EXPERIENCE
+
+Create a premium interactive 3D-style garage door experience as a major visual entry point into the application.
+
+This should NOT feel like a random animation.
+
+It should feel like an intentional part of the company’s product identity.
+
+INITIAL STATE
+
+When the application opens, display:
+
+A premium modern garage entrance with a realistic garage door.
+
+The scene should have:
+
+* Architectural depth
+* Realistic proportions
+* Subtle lighting
+* Modern garage door design
+* Premium materials
+* Clean surroundings
+* Professional industrial/residential aesthetic
+
+The garage door should be the main visual focus.
+
+⸻
+
+7. INTERACTIVE GARAGE DOOR
+
+The user should be able to slide/swipe/drag the garage door open.
+
+Display a subtle instruction:
+
+SLIDE TO OPEN
+
+or
+
+OPEN THE DOOR →
+
+The interaction should work on:
+
+* iPhone
+* Android
+* Tablet
+* Desktop
+
+MOBILE
+
+Allow the user to swipe/drag the door upward.
+
+DESKTOP
+
+Allow:
+
+* Mouse dragging
+* Click interaction
+* Clear open button
+
+Dragging should never be the ONLY way to access the application.
+
+⸻
+
+8. GARAGE DOOR ANIMATION
+
+When the user opens the door:
+
+1. The garage door smoothly moves upward.
+2. The animation should feel physical and realistic.
+3. The interior behind the door is revealed.
+4. The main company message appears.
+5. The application naturally transitions into the main platform.
+
+The animation must be:
+
+* Smooth
+* Fast
+* Premium
+* Subtle
+* Realistic
+
+Do not make it gimmicky.
+
+Support reduced-motion preferences.
+
+⸻
+
+9. MESSAGE BEHIND THE GARAGE DOOR
+
+Once the door opens, reveal:
+
+ALL DEVELOPED FOR
+
+AUTOMATED DOORS & GATES
+
+This should be a major branding statement.
+
+Use excellent typography and spacing.
+
+The phrase should feel like part of the actual application identity.
+
+⸻
+
+10. TRANSITION INTO THE APPLICATION
+
+The experience should conceptually flow:
+
+GARAGE DOOR
+
+↓
+
+ALL DEVELOPED FOR AUTOMATED DOORS & GATES
+
+↓
+
+APPLICATION
+
+↓
+
+PRODUCTS / SERVICES
+
+↓
+
+CONFIGURATION
+
+↓
+
+CUSTOMER / TECHNICIAN WORKFLOW
+
+↓
+
+MANUALS / DOCUMENTATION
+
+↓
+
+QUOTES / JOBS / MANAGEMENT
+
+The transition should feel natural rather than like an unrelated landing page being placed on top of the application.
+
+⸻
+
+11. 3D FEATURE MUST CONNECT TO THE REAL APPLICATION
+
+The garage-door experience must be designed so it can eventually connect to the actual application.
+
+Structure it as reusable components.
+
+For example:
+
+GarageDoorHero
+→ GarageDoorScene
+→ GarageDoorAnimation
+→ GarageDoorInteraction
+→ AutomatedDoorsIntro
+→ MainApplication
+
+Use the existing project’s framework and architecture.
+
+Do not create an isolated mini-application that cannot communicate with the existing system.
+
+⸻
+
+12. AUTOMATED DOORS & GATES PRODUCT EXPERIENCE
+
+The application should be capable of supporting a professional product/service experience for:
+
+Automated Garage Doors
+
+* Product types
+* Door styles
+* Dimensions
+* Materials
+* Colours
+* Motor systems
+* Automation options
+* Accessories
+* Specifications
+* Manuals
+* Installation information
+
+Automated Gates
+
+* Gate types
+* Gate styles
+* Automation systems
+* Motors
+* Access systems
+* Safety systems
+* Accessories
+* Specifications
+* Manuals
+* Installation information
+
+The actual available options should come from the application’s real data structures where they already exist.
+
+Do not invent product information and present it as real.
+
+⸻
+
+13. PRODUCT CONFIGURATOR
+
+Where appropriate, create a professional product configuration interface.
+
+The user should be able to progress through a logical flow such as:
+
+SELECT PRODUCT
+
+↓
+
+SELECT TYPE
+
+↓
+
+SELECT SIZE
+
+↓
+
+SELECT MATERIAL / FINISH
+
+↓
+
+SELECT AUTOMATION
+
+↓
+
+SELECT ACCESSORIES
+
+↓
+
+VIEW SPECIFICATIONS
+
+↓
+
+VIEW MANUAL
+
+↓
+
+REQUEST QUOTE / CONTINUE
+
+Only implement options that can be supported by the underlying system.
+
+⸻
+
+14. CUSTOMER EXPERIENCE
+
+Where supported by the existing application, create a clean customer workflow.
+
+Potential flow:
+
+Customer
+→ Select product
+→ Configure product
+→ View information
+→ View manuals
+→ Request quote
+→ Submit details
+→ Track project/job
+
+Make this simple enough that a normal customer can use it without technical knowledge.
+
+⸻
+
+15. TECHNICIAN EXPERIENCE
+
+Where supported, provide a separate professional technician workflow.
+
+Potential functionality:
+
+* Assigned jobs
+* Customer information
+* Product information
+* Installation instructions
+* Technical manuals
+* Job status
+* Photos/documents
+* Notes
+* Required components
+* Installation checklist
+* Completion status
+
+Do not expose technician functionality to customers unless the existing permission system allows it.
+
+⸻
+
+16. ADMIN EXPERIENCE
+
+Where appropriate, provide an administrative interface for managing:
+
+* Products
+* Door types
+* Gate types
+* Specifications
+* Manuals
+* Customers
+* Technicians
+* Jobs
+* Quotes
+* Documents
+* Users
+* Settings
+
+Use the existing authentication and permissions architecture.
+
+Do not bypass security.
+
+⸻
+
+17. DOCUMENT / MANUAL SYSTEM
+
+If the existing project contains or is designed to contain manuals and technical documents, make this experience professional.
+
+Users should be able to:
+
+* Find manuals
+* Search manuals
+* Filter manuals
+* Open manuals
+* Download/view documents where supported
+* Associate manuals with products
+* Associate manuals with installation jobs
+
+Do not create fake downloadable documents.
+
+⸻
+
+18. RESPONSIVE DESIGN
+
+The entire application must work properly across:
+
+* iPhone
+* Android
+* Tablet
+* Laptop
+* Desktop
+
+At narrow widths:
+
+* No horizontal page overflow.
+* No clipped content.
+* Buttons remain usable.
+* Navigation adapts appropriately.
+* Tables become responsive.
+* Cards reflow.
+* Forms remain usable.
+* Garage-door interaction remains functional.
+
+Touch targets should be large enough for mobile use.
+
+⸻
+
+19. PERFORMANCE
+
+Keep the application fast.
+
+For the garage door:
+
+Prefer lightweight approaches such as:
+
+* CSS 3D
+* SVG
+* Optimised assets
+* Hardware-accelerated transforms
+
+Only introduce a heavy WebGL/3D library if it provides a meaningful benefit.
+
+Do not add unnecessary dependencies.
+
+The 3D garage experience must not make the entire application slow.
+
+⸻
+
+20. REAL DATA ONLY
+
+This is extremely important.
+
+If the existing application connects to real data:
+
+USE THE REAL DATA.
+
+Do not substitute:
+
+* Fake prices
+* Fake products
+* Fake customers
+* Fake statistics
+* Fake charts
+* Fake availability
+* Fake API responses
+
+If real information is unavailable, clearly display an appropriate empty state or indicate that the information needs to be configured.
+
+Do not make the application appear more complete than it actually is.
+
+⸻
+
+21. ERROR HANDLING
+
+Before considering the work complete:
+
+Check for:
+
+* Console errors
+* Broken routes
+* Broken imports
+* Missing dependencies
+* API errors
+* Database errors
+* Authentication problems
+* Broken buttons
+* Broken forms
+* Responsive layout issues
+* JavaScript errors
+* Type errors
+* Broken links
+* Missing assets
+
+Fix issues introduced by your changes.
+
+Do not hide errors with fake data.
+
+⸻
+
+22. CODE QUALITY
+
+Keep the code:
+
+* Modular
+* Readable
+* Maintainable
+* Reusable
+* Properly structured
+* Consistent with the existing project
+
+Do not create giant files unnecessarily.
+
+Do not duplicate existing components.
+
+Reuse existing components where appropriate.
+
+Keep the architecture understandable so another developer — especially Claude Code — can continue development later.
+
+⸻
+
+23. CLAUDE CODE COMPATIBILITY
+
+This is extremely important.
+
+The project will continue being developed using Claude Code after Replit.
+
+Therefore:
+
+DO NOT create a Replit-only architecture.
+
+Everything you change must remain understandable and editable through the existing codebase.
+
+Maintain:
+
+* Existing Git structure
+* Existing project structure
+* Existing framework
+* Existing APIs
+* Existing environment configuration
+* Existing database architecture
+* Existing backend
+* Existing frontend architecture
+
+When creating new components, use logical filenames and folders.
+
+Document significant architectural changes.
+
+⸻
+
+24. GITHUB / VERSION CONTROL SAFETY
+
+If this Replit project is connected to GitHub:
+
+Treat the existing repository as the source-controlled project.
+
+Before major changes:
+
+* Inspect the current branch.
+* Understand the repository structure.
+* Do not overwrite unrelated work.
+* Keep changes organised.
+* Avoid destructive operations.
+* Keep commits logically separated where possible.
+
+The ultimate goal is:
+
+Claude Code ↔ GitHub ↔ Replit
+
+with all three remaining compatible.
+
+Claude Code should be able to continue development after Replit without having to reverse-engineer a completely different system.
+
+⸻
+
+25. DEVELOPMENT WORKFLOW
+
+Work in this order:
+
+PHASE 1 — AUDIT
+
+Inspect the entire existing application.
+
+Understand what exists.
+
+PHASE 2 — ARCHITECTURE
+
+Map the current system and determine where improvements belong.
+
+PHASE 3 — DESIGN SYSTEM
+
+Create the visual language and reusable UI components.
+
+PHASE 4 — APPLICATION SHELL
+
+Improve navigation, layout and overall structure.
+
+PHASE 5 — 3D GARAGE DOOR
+
+Build the interactive garage-door opening experience.
+
+PHASE 6 — MAIN INTERFACE
+
+Connect the experience to the actual application.
+
+PHASE 7 — PRODUCT / SERVICE EXPERIENCE
+
+Improve the automated doors and gates workflows.
+
+PHASE 8 — CUSTOMER / TECHNICIAN / ADMIN
+
+Improve these experiences where supported by the existing system.
+
+PHASE 9 — RESPONSIVENESS
+
+Test mobile, tablet and desktop.
+
+PHASE 10 — TESTING
+
+Check the complete application for errors and regressions.
+
+⸻
+
+26. DO NOT ASK FOR PERMISSION FOR EVERY SMALL UI DECISION
+
+Use professional design judgement.
+
+You do not need to repeatedly stop and ask me whether:
+
+* Padding should be 16px or 20px
+* An icon should be left or right
+* A card should be slightly larger
+* A button should be rounded
+* A section should have slightly different spacing
+
+Make sensible professional decisions yourself.
+
+However, do NOT make destructive architectural decisions without understanding the existing system.
+
+⸻
+
+27. DO NOT JUST MAKE A MOCKUP
+
+I do NOT want a static visual mockup pretending to be an application.
+
+I want the existing application actually redesigned and improved.
+
+Where functionality already exists, connect the new UI to it.
+
+Where functionality does not exist yet, build the frontend structure in a way that can connect to the existing backend later without pretending it is operational.
+
+⸻
+
+28. FINAL QUALITY STANDARD
+
+When finished, the application should feel like a real commercial automated doors and gates platform.
+
+The first impression should be:
+
+A premium garage door.
+
+The user slides it open.
+
+The door reveals:
+
+ALL DEVELOPED FOR
+
+AUTOMATED DOORS & GATES
+
+Then the user enters a polished, modern application where they can naturally navigate through the actual available functionality.
+
+The interface should communicate:
+
+Technology + Engineering + Automation + Professionalism + Reliability.
+
+It should be visually impressive without being cluttered.
+
+⸻
+
+29. MOST IMPORTANT RULE
+
+Always remember:
+
+EXISTING CLAUDE CODE = SOURCE OF TRUTH
+
+REPLIT = DESIGN, UI/UX, FRONTEND IMPROVEMENT AND SAFE EXTENSION
+
+Do not destroy the existing system to make it look better.
+
+Improve it.
+
+Organise it.
+
+Connect the interface to it.
+
+Extend it intelligently.
+
+Keep it compatible with Claude Code.
+
+The final project should allow me to move smoothly between:
+
+Claude Code → GitHub → Replit → GitHub → Claude Code
+
+without losing functionality, creating conflicting versions, or breaking the application.
+
+Build the application as if it is going into production — not as a temporary prototype.
