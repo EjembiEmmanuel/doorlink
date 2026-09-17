@@ -1,6 +1,4 @@
-# Doorlink workflow handover (for mizlaa)
-
-Steps only you can click (the freelancer has WRITE, not admin).
+# Doorlink workflow handover
 
 ## 1. Protect `main` (GitHub Free, public repo)
 
@@ -31,10 +29,10 @@ workspace because `package.json` includes `next`.
 If you **already have a private Repl** that pushes to `mizlaa/doorlink` on
 `replit-ui-improvements`, keep using it. Do not recreate it.
 
-If you need a **new** Repl, follow **Setting up a fresh Repl** in `WORKFLOW.md`
-(Blank Repl + Shell git to `mizlaa/doorlink`).
-
-Grant collaborators with **Invite** (Replit), not by sharing your password.
+If you need a **new** Repl, follow **Setting up a fresh Repl** in `WORKFLOW.md`:
+Blank Repl, initialise Git, pull `mizlaa/doorlink` without cloning. After that
+one-time setup, day-to-day work is pull / design / push on
+`replit-ui-improvements`.
 
 ## 3. Day to day
 
@@ -44,4 +42,3 @@ See `WORKFLOW.md` (written for phone use).
 
 - Do not merge unsolicited PRs without reading the full diff.
 - Never use GitHub Import for this repo.
-- Ping the freelancer on merge conflicts in nav files or `package.json`.

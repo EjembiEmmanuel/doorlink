@@ -1,23 +1,14 @@
 # Replit configuration — npm + Next.js 15. See WORKFLOW.md and replit.md.
 #
 # GitHub Import is NOT safe: when package.json depends on `next`, Replit
-# auto-starts Agent "Port imported Vercel app" (PNPM_WORKSPACE port). Use
-# a Blank Repl + git overlay to attach mizlaa/doorlink instead.
+# auto-starts Agent "Port imported Vercel app". Attach with a Blank Repl
+# and git instead (WORKFLOW.md — Setting up a fresh Repl).
 
 run = "npm run dev -- --hostname 0.0.0.0 --port $PORT"
 entrypoint = "src/app/page.tsx"
 modules = ["nodejs-22", "postgresql-16"]
 
-hidden = [".next", "node_modules"]
-
-language = "nodejs"
-
-[packager]
-language = "nodejs"
-
-[packager.features]
-guessImports = false
-packageSearch = true
+hidden = [".next", "node_modules", ".git"]
 
 [nix]
 channel = "stable-24_05"

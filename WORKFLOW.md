@@ -41,7 +41,7 @@ and asks rather than silently picking one.
 
 ## Who owns what
 
-Set out in full in `FRONTEND_HANDOFF.md` §8. In short:
+Set out in full in `FRONTEND_HANDOFF.md`. In short:
 
 |                            | Replit            | Claude Code    |
 | -------------------------- | ----------------- | -------------- |
@@ -72,7 +72,7 @@ role needed it.
 
 1. Open a **pull request** from `replit-ui-improvements` (or `claude/<feature>`).
 2. Review the diff. Resolve conflicts using the ownership rules in
-   `FRONTEND_HANDOFF.md` §8.
+   `FRONTEND_HANDOFF.md`.
 3. Merge into `main` when CI is green.
 4. Claude Code pulls `main`, then starts a fresh `claude/<feature>` branch.
 
@@ -82,10 +82,10 @@ just views onto it.
 ## GitHub Import — do not use it
 
 Replit **Import from GitHub** is not safe for Doorlink. Agent auto-starts
-**“Port imported Vercel app”** when root `package.json` depends on
-**`next`**. Repo tweaks (`next.config.mjs`, `.replit`, `replit.nix`) do
-**not** stop it; only removing the `next` package stops it — which breaks
-the app. Doorlink must keep `next`, so **Import cannot be made safe**.
+**“Port imported Vercel app”** when `package.json` depends on **`next`**.
+Changing `.replit` or Next config does **not** stop it; only removing the
+`next` package stops it — which breaks the app. Doorlink must keep
+`next`, so **Import cannot be made safe**.
 
 Do not use Import from Vercel, Bolt, Lovable, ZIP, or Empty + Agent either.
 
@@ -103,12 +103,18 @@ Do not gitignore `.migration-backup/`.
 
 ## Setting up a fresh Repl
 
+The only reliable way to link this GitHub repo to Replit is to start with a
+**Blank** Repl, initialise Git in the Shell, and pull `mizlaa/doorlink`
+**without cloning**. `git clone` nests a second repo inside the Repl.
+After that one-time setup, continue development as usual: stay on
+`replit-ui-improvements`, pull before you design, commit and push before
+you stop.
+
 Only if you **do not** already have a Repl that pushes to `mizlaa/doorlink`.
 Do not recreate a working Repl.
 
-1. Account → **Git Providers** → GitHub.
-2. Create **Blank** Repl (not Agent, not Import). Private. Do not run Agent.
-3. **Shell** — do not `git clone`:
+1. Create **Blank** Repl (not Agent, not Import). Private. Do not run Agent.
+2. **Shell** — do not `git clone`:
 
 ```bash
 git init
@@ -119,10 +125,10 @@ git checkout -B replit-ui-improvements origin/replit-ui-improvements
 git reset --hard origin/replit-ui-improvements
 ```
 
-4. Files at Repl **root**: `src/app/`, `prisma/`, `next.config.mjs`. Remote
+3. Files at Repl **root**: `src/app/`, `prisma/`, `next.config.mjs`. Remote
    is `mizlaa/doorlink`.
-5. Secrets: `DATABASE_URL`, `DIRECT_URL` (same Postgres URL).
-6. Run:
+4. Secrets: `DATABASE_URL`, `DIRECT_URL` (same Postgres URL).
+5. Run:
 
 ```
 npm install
@@ -132,8 +138,6 @@ npm run dev
 ```
 
 A 500 about a missing table means `db:push` has not run — that should stay loud.
-
-Proof checklist for a throwaway test: `docs/BLANK_REPLIT_PROOF.md`.
 
 ## If the Repl disappears
 
@@ -152,4 +156,4 @@ Proof checklist for a throwaway test: `docs/BLANK_REPLIT_PROOF.md`.
 The repo may be public; the Repl should stay **private** (`admin@demo.doorlink`
 is passwordless in dev). Do not merge unsolicited PRs without reading the diff.
 
-See `replit.md` and `HANDOVER.md` (branch protection and Replit Invite).
+See `replit.md` and `HANDOVER.md` (branch protection).
