@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --bg: #0B0B0C;
+  --surface: #141416;
+  --surface-raised: #1C1C1F;
+  --border: #2A2A2E;
+  --text: #FFFFFF;
+  --text-muted: #A1A1A6;
+  --accent: #FF6A00;
+  --accent-hover: #FF8124;
+  --accent-dim: rgba(255, 106, 0, 0.12);
+}
+
 /* Respected globally, not just on individual animated components. */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -15,20 +27,19 @@
 }
 
 body {
-  background-color: theme('colors.paper');
-  color: theme('colors.graphite.DEFAULT');
+  background-color: var(--bg);
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
 }
 
 ::selection {
-  background: theme('colors.signal.tint');
-  color: theme('colors.graphite.DEFAULT');
+  background: var(--accent-dim);
+  color: var(--text);
 }
 
 .hero-scene-shell {
-  background:
-    radial-gradient(circle at 72% 22%, rgba(104, 142, 194, 0.18), transparent 28%),
-    linear-gradient(145deg, #24282d 0%, #111416 58%, #0a0c0d 100%);
-  box-shadow: 0 24px 64px -36px rgba(27, 29, 31, 0.72);
+  background: var(--surface);
+  box-shadow: 0 24px 64px -36px rgba(0, 0, 0, 0.72);
 }
 
 .hero-scene-shell::after {
@@ -50,7 +61,7 @@ body {
   overflow: hidden;
   cursor: ns-resize;
   touch-action: pan-y;
-  background: #172027;
+  background: var(--bg);
   user-select: none;
 }
 
