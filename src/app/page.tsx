@@ -6,7 +6,7 @@ import { isDatabaseUnreachable } from '@/lib/db-errors'
 import { formatMoney } from '@/lib/money'
 import { formatCommissionRate } from '@/lib/commission'
 import { currentCommissionBps } from '@/lib/commission-settings'
-import { DoorHero3DClientOnly } from '@/components/three/DoorHero3DClientOnly'
+import { GarageDoorHero } from '@/components/garage-door/GarageDoorHero'
 import { RevealCard } from '@/components/ui/RevealCard'
 
 export const metadata: Metadata = {
@@ -56,41 +56,19 @@ export default async function HomePage() {
 
   return (
     <div>
-      {/* ---------------------------------------------------------------
-          Hero
-          --------------------------------------------------------------- */}
-      <section className="mx-auto max-w-shell px-4 pt-10 sm:pt-16">
-        <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:gap-14">
-          <div className="max-w-prose">
-            <p className="text-micro font-semibold uppercase tracking-[0.18em] text-zinc-deep">Doorlink</p>
-            <h1 className="mt-3 text-display font-semibold leading-[1.05] tracking-tight text-graphite sm:text-display-lg">
-              Automated doors.
-              <br />
-              Connected professionals.
-              <br />
-              One platform.
-            </h1>
-            <p className="mt-5 text-lg text-graphite-soft">
-              Garage doors, gates, shutters and access systems — find the technician, the manual and the part,
-              in the one place.
-            </p>
-            <div className="mt-7 flex flex-wrap gap-3">
-              <Link
-                href="/request-technician"
-                className="inline-flex h-12 items-center rounded bg-signal px-6 text-sm font-medium text-paper transition-colors hover:bg-signal-hover"
-              >
-                Find a door professional
-              </Link>
-              <Link
-                href="/configure"
-                className="inline-flex h-12 items-center rounded border border-line bg-paper px-6 text-sm font-medium text-graphite transition-colors hover:bg-rail"
-              >
-                Explore door systems
-              </Link>
-            </div>
-          </div>
+      <GarageDoorHero />
 
-          <DoorHero3DClientOnly />
+      <section className="border-b border-line bg-paper">
+        <div className="mx-auto grid max-w-shell divide-y divide-line px-4 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+          <QuickEntry href="/find" index="01" title="Identify a system" body="Find the model, motor or controller you already have." />
+          <QuickEntry href="/configure" index="02" title="Configure a door" body="Build a clear door specification before you request a quote." />
+          <QuickEntry href="/manuals" index="03" title="Open the manual" body="Search installation, programming and troubleshooting documents." />
+          <QuickEntry
+            href="/compliance-pack"
+            index="04"
+            title="Get the compliance pack"
+            body="Prepare a professional safety and compliance document pack for your next client."
+          />
         </div>
       </section>
 
@@ -356,6 +334,21 @@ function HelpCard({ href, title, body }: { href: string; title: string; body: st
     >
       <p className="font-medium text-graphite">{title}</p>
       <p className="mt-1.5 text-sm text-zinc-deep">{body}</p>
+    </Link>
+  )
+}
+
+function QuickEntry({ href, index, title, body }: { href: string; index: string; title: string; body: string }) {
+  return (
+    <Link href={href} className="group flex gap-4 px-0 py-5 sm:px-6 sm:py-6 first:sm:pl-0 last:sm:pr-0">
+      <span className="font-code text-micro text-zinc-deep">{index}</span>
+      <span className="min-w-0">
+        <span className="flex items-center gap-2 font-medium text-graphite">
+          {title}
+          <span className="text-signal transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
+        </span>
+        <span className="mt-1 block text-sm leading-6 text-zinc-deep">{body}</span>
+      </span>
     </Link>
   )
 }
