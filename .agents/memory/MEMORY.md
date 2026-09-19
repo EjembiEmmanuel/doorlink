@@ -1,1 +1,2 @@
 - [Tailwind clean rebuild](tailwind-clean-rebuild.md) — stale generated utility CSS may require a clean Next.js build and workflow restart after token changes.
+- [Manual contribution boundary](manual-contributions.md) — route user manual suggestions through review with a public source link until storage is connected.
