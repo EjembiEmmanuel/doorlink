@@ -18,7 +18,7 @@ import {
 import { compareInspections } from '@/lib/inspections/history'
 import { RbacError } from '@/lib/rbac'
 import { NotConnected } from '@/components/ui/NotConnected'
-import { PrintButton } from '@/app/compliance/pack/PrintButton'
+import { PrintButton } from '@/components/ui/PrintButton'
 import {
   ANSWER_STATUS_LABELS,
   ASSET_TYPE_LABELS,
