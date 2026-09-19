@@ -30,7 +30,7 @@ export default async function SearchPage({ searchParams }: PageProps) {
       <header className="mb-6">
         <h1 className="text-2xl font-semibold tracking-tight text-graphite">Search</h1>
         <p className="mt-1 text-graphite-soft">
-          Manuals, products, technicians, services and parts — all at once.
+          Manuals, products, technicians, services and parts, all at once.
         </p>
       </header>
 
@@ -86,7 +86,7 @@ export default async function SearchPage({ searchParams }: PageProps) {
         ) : query.length < MIN_QUERY_LENGTH ? (
           <EmptyState
             title="Keep typing"
-            description={`Searches need at least ${MIN_QUERY_LENGTH} characters — one letter matches most of the catalogue, which isn't a result, it's a list.`}
+            description={`Searches need at least ${MIN_QUERY_LENGTH} characters. One letter matches most of the catalogue, which isn't a result, it's a list.`}
           />
         ) : results.groups.length === 0 ? (
           <EmptyState

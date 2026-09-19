@@ -61,7 +61,7 @@ export default async function EarningsPage() {
         <div className="mb-8">
           <NotConnected
             feature="Payouts"
-            reason="No payment provider is connected, so none of these amounts have moved. They are the agreed splits on your jobs, recorded so both sides have the same numbers — settle with each customer directly for now."
+            reason="No payment provider is connected, so none of these amounts have moved. They are the agreed splits on your jobs, recorded so both sides have the same numbers. Settle with each customer directly for now."
           />
         </div>
       )}
@@ -165,7 +165,7 @@ export default async function EarningsPage() {
                 </dl>
 
                 {/* The rate on this row is the one snapshotted when the
-                    quote was accepted, not today's — which is why an old
+                    quote was accepted, not today's. That is why an old
                     job can show a different percentage from a new one. */}
                 {transaction.payout && (
                   <p className="mt-2 text-micro text-zinc-deep">
