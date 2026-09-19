@@ -20,6 +20,7 @@ const NAV_LINKS = [
   { href: '/find', label: 'Door systems' },
   { href: '/manuals', label: 'Manuals' },
   { href: '/marketplace', label: 'Parts' },
+  { href: '/compliance', label: 'Compliance' },
 ]
 
 /**

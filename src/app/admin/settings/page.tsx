@@ -9,6 +9,8 @@ import { EmptyState } from '@/components/ui/EmptyState'
 import { COMMISSION_SETTING_KEY, formatCommissionRate } from '@/lib/commission'
 import { currentCommissionBps } from '@/lib/commission-settings'
 import { CommissionForm } from './CommissionForm'
+import { CompliancePriceForm } from './CompliancePriceForm'
+import { currentCompliancePriceCents } from '@/lib/compliance/pricing-settings'
 
 export const metadata: Metadata = { title: 'Platform settings' }
 
@@ -20,6 +22,8 @@ export default async function AdminSettingsPage() {
   if (!can(session.role, 'admin:settings')) redirect('/admin')
 
   let currentBps: number
+
+  let compliancePriceCents: number
   let history: Array<{
     id: string
     createdAt: Date
@@ -27,8 +31,9 @@ export default async function AdminSettingsPage() {
     actor: { name: string } | null
   }>
   try {
-    ;[currentBps, history] = await Promise.all([
+    ;[currentBps, compliancePriceCents, history] = await Promise.all([
       currentCommissionBps(),
+      currentCompliancePriceCents(),
       prisma.auditLog.findMany({
         where: {
           entityType: 'PlatformSetting',
@@ -59,6 +64,18 @@ export default async function AdminSettingsPage() {
 
         <div className="mt-5">
           <CommissionForm currentBps={currentBps} />
+        </div>
+      </section>
+
+      <section className="border-t border-line pt-10">
+        <h2 className="text-lg font-semibold text-graphite">Compliance &amp; Safety Pack</h2>
+        <p className="mt-1 max-w-prose text-sm text-graphite-soft">
+          The one-off price of the document pack add-on. Changing it affects new purchases only — the price is
+          written onto a purchase when it is made, so nobody&apos;s receipt changes retrospectively.
+        </p>
+
+        <div className="mt-5">
+          <CompliancePriceForm currentCents={compliancePriceCents} />
         </div>
       </section>
 

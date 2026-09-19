@@ -1,0 +1,195 @@
+/*
+ * Print styling for the Compliance & Safety Pack.
+ *
+ * This is what makes "Save as PDF" produce a real document rather than a
+ * screenshot of a web page: A4 pages, a running header and footer, and
+ * rules about where a page may break. No PDF library is involved — the
+ * browser's own print engine produces the file, which is why this works
+ * without a server-side renderer or any storage backend.
+ *
+ * Scoped under .cp-doc so it cannot leak into the rest of Doorlink.
+ */
+
+.cp-doc {
+  --cp-ink: #14171a;
+  --cp-muted: #5c6570;
+  --cp-line: #d5dade;
+  --cp-accent: #d2691e;
+  --cp-band: #14171a;
+  --cp-tint: #fdf1e7;
+
+  background: #fff;
+  color: var(--cp-ink);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 10pt;
+  line-height: 1.45;
+  max-width: 210mm;
+  margin: 0 auto 2rem;
+  padding: 14mm 13mm;
+  border: 1px solid var(--cp-line);
+}
+
+.cp-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  border-bottom: 3px solid var(--cp-accent);
+  padding-bottom: 8px;
+  margin-bottom: 14px;
+}
+.cp-brand { font-size: 13pt; font-weight: 700; margin: 0; letter-spacing: -0.2px; }
+.cp-brand-sub { font-size: 7pt; text-transform: uppercase; letter-spacing: 0.08em; color: var(--cp-muted); margin: 2px 0 0; }
+.cp-head-right { text-align: right; }
+.cp-doc-title { font-size: 10pt; font-weight: 700; text-transform: uppercase; margin: 0; }
+.cp-doc-ref { font-size: 7pt; text-transform: uppercase; letter-spacing: 0.06em; color: var(--cp-accent); margin: 2px 0 0; font-weight: 700; }
+
+.cp-title-band {
+  background: var(--cp-tint);
+  border-left: 5px solid var(--cp-accent);
+  padding: 14px 16px;
+  margin-bottom: 14px;
+}
+.cp-title-band h1 { font-size: 17pt; margin: 0; letter-spacing: -0.4px; text-transform: uppercase; }
+.cp-title-band p { font-size: 7.5pt; text-transform: uppercase; letter-spacing: 0.06em; color: var(--cp-accent); margin: 4px 0 0; font-weight: 700; }
+
+.cp-identity { display: flex; gap: 0; border: 1px solid var(--cp-line); margin-bottom: 14px; }
+.cp-logo {
+  width: 40%;
+  min-height: 74px;
+  background: var(--cp-band);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+.cp-logo img { max-height: 58px; max-width: 100%; object-fit: contain; }
+.cp-logo-empty { color: #fff; font-size: 8pt; letter-spacing: 0.05em; text-align: center; }
+.cp-identity-fields { flex: 1; margin: 0; padding: 12px 14px; display: flex; flex-direction: column; gap: 10px; }
+.cp-identity-fields div { border-bottom: 1px solid var(--cp-line); padding-bottom: 3px; }
+.cp-identity-fields dt { font-size: 6.5pt; text-transform: uppercase; letter-spacing: 0.07em; color: var(--cp-muted); }
+.cp-identity-fields dd { margin: 1px 0 0; font-size: 9.5pt; font-weight: 600; min-height: 12px; }
+
+.cp-intro { font-size: 9.5pt; margin: 0 0 14px; }
+
+.cp-band {
+  display: flex;
+  align-items: stretch;
+  background: var(--cp-band);
+  color: #fff;
+  margin: 16px 0 8px;
+  font-size: 9.5pt;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  break-after: avoid;
+  page-break-after: avoid;
+}
+.cp-band-no { background: var(--cp-accent); padding: 5px 10px; font-weight: 700; }
+.cp-band > span:last-child { padding: 5px 12px; font-weight: 700; }
+
+.cp-subhead { font-size: 7.5pt; text-transform: uppercase; letter-spacing: 0.07em; color: var(--cp-accent); font-weight: 700; margin: 14px 0 4px; }
+
+.cp-para { margin: 0 0 8px; font-size: 9.5pt; }
+.cp-bullets { margin: 0 0 10px; padding-left: 18px; }
+.cp-bullets li { margin-bottom: 3px; font-size: 9.5pt; }
+.cp-bullets li::marker { color: var(--cp-accent); }
+
+.cp-important {
+  background: var(--cp-tint);
+  border-left: 4px solid var(--cp-accent);
+  padding: 9px 12px;
+  margin: 10px 0;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+.cp-important p { margin: 0; font-size: 9pt; }
+.cp-important-title { font-size: 7.5pt; text-transform: uppercase; letter-spacing: 0.06em; color: var(--cp-accent); font-weight: 700; margin-bottom: 3px !important; }
+.cp-important-gap { background: #fdecea; border-left-color: #c0392b; }
+.cp-important-gap .cp-important-title { color: #c0392b; }
+
+.cp-table, .cp-fields { width: 100%; border-collapse: collapse; margin: 6px 0 12px; font-size: 8.5pt; }
+.cp-table th { background: var(--cp-band); color: #fff; text-align: left; padding: 5px 7px; font-size: 7.5pt; text-transform: uppercase; letter-spacing: 0.04em; }
+.cp-table td { border: 1px solid var(--cp-line); padding: 5px 7px; vertical-align: top; }
+.cp-table tbody tr:nth-child(even) { background: #f7f9fa; }
+
+.cp-fields th { background: #f2f4f6; text-align: left; padding: 5px 8px; font-size: 8pt; font-weight: 700; border: 1px solid var(--cp-line); width: 38%; text-transform: uppercase; letter-spacing: 0.02em; }
+.cp-fields td { border: 1px solid var(--cp-line); padding: 5px 8px; min-height: 16px; }
+.cp-fields-split th { width: 22%; }
+.cp-blank { background: #fff; min-height: 16px; }
+.cp-fields td.cp-blank, .cp-table td.cp-blank { height: 18px; }
+
+.cp-checks {
+  list-style: none;
+  margin: 6px 0 12px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px 14px;
+}
+.cp-checks li { display: flex; align-items: flex-start; gap: 6px; font-size: 8.5pt; }
+.cp-check-box {
+  flex: 0 0 auto;
+  width: 11px;
+  height: 11px;
+  border: 1px solid var(--cp-ink);
+  margin-top: 1px;
+}
+
+.cp-signatures { display: flex; gap: 22px; margin: 14px 0 10px; break-inside: avoid; page-break-inside: avoid; }
+.cp-signature { flex: 1; }
+.cp-signature-party { font-size: 7.5pt; text-transform: uppercase; letter-spacing: 0.06em; color: var(--cp-accent); font-weight: 700; margin: 0 0 8px; }
+.cp-signature-line { border-bottom: 1px solid var(--cp-ink); padding-bottom: 2px; margin-bottom: 14px; }
+.cp-signature-line span { font-size: 7pt; text-transform: uppercase; letter-spacing: 0.05em; color: var(--cp-muted); }
+
+.cp-disclaimer {
+  border-left: 4px solid var(--cp-band);
+  background: #f7f9fa;
+  padding: 9px 12px;
+  font-size: 7.5pt;
+  line-height: 1.4;
+  color: var(--cp-muted);
+  margin: 16px 0 0;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.cp-foot {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  border-top: 1px solid var(--cp-line);
+  margin-top: 12px;
+  padding-top: 6px;
+  font-size: 7pt;
+  color: var(--cp-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+@media print {
+  @page { size: A4; margin: 12mm 10mm; }
+
+  /* Everything that is not the document itself goes away: site header,
+     nav, the toolbar with the print button. */
+  .cp-hide-print { display: none !important; }
+
+  body { background: #fff !important; }
+
+  .cp-doc {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    max-width: none;
+    font-size: 9.5pt;
+  }
+
+  /* Each document starts its own page, so a pack prints as a pack. */
+  .cp-doc + .cp-doc { break-before: page; page-break-before: always; }
+
+  .cp-table, .cp-fields { break-inside: auto; }
+  .cp-table tr, .cp-fields tr { break-inside: avoid; page-break-inside: avoid; }
+  .cp-title-band, .cp-identity { break-inside: avoid; page-break-inside: avoid; }
+
+  /* Backgrounds are the document's identity here, not decoration. */
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
