@@ -1,4 +1,4 @@
-import { AnswerStatus, FindingSeverity } from '@prisma/client'
+import { AnswerStatus, FindingSeverity, QuestionType } from '@prisma/client'
 import type { AssetType } from '@prisma/client'
 import type {
   AnswerMap,
@@ -185,6 +185,27 @@ export function derivedFindings(
 // Completion requirements
 // ---------------------------------------------------------------------
 
+export interface EngineOptions {
+  /**
+   * False when the storage backend cannot accept uploads.
+   *
+   * A photo requirement is then unsatisfiable through no fault of the
+   * technician, and enforcing it would mean no inspection on that
+   * deployment could ever be completed — the feature would not be
+   * degraded, it would be unusable. So the requirement relaxes, and the
+   * report states plainly that photographic evidence could not be
+   * captured. What is never done is the other resolution: marking the
+   * requirement met, which would imply a photo exists.
+   */
+  photoCaptureAvailable: boolean
+}
+
+const DEFAULT_OPTIONS: EngineOptions = { photoCaptureAvailable: true }
+
+function isEvidenceQuestion(question: EngineQuestion): boolean {
+  return question.type === QuestionType.PHOTO || question.type === QuestionType.VIDEO
+}
+
 /**
  * What is still missing before this inspection can be submitted.
  *
@@ -196,7 +217,8 @@ export function derivedFindings(
 export function outstandingRequirements(
   template: EngineTemplate,
   assetType: AssetType,
-  answers: AnswerMap
+  answers: AnswerMap,
+  options: EngineOptions = DEFAULT_OPTIONS
 ): OutstandingRequirement[] {
   const index = indexQuestions(template)
   const out: OutstandingRequirement[] = []
@@ -204,6 +226,10 @@ export function outstandingRequirements(
   for (const section of visibleSections(template, assetType)) {
     for (const question of section.questions) {
       if (!isQuestionVisible(question, index, answers)) continue
+
+      // A question whose only possible answer is a file cannot be
+      // answered at all without somewhere to put the file.
+      if (isEvidenceQuestion(question) && !options.photoCaptureAvailable) continue
 
       const answer = answers.get(question.code)
       if (!isAnswered(question, answer)) {
@@ -216,7 +242,9 @@ export function outstandingRequirements(
 
       const rules = firedRules(question, answer)
       const needsNote = rules.some((rule) => rule.requireNote)
-      const needsPhoto = question.requirePhoto || rules.some((rule) => rule.requirePhoto)
+      const needsPhoto =
+        options.photoCaptureAvailable &&
+        (question.requirePhoto || rules.some((rule) => rule.requirePhoto))
 
       if (needsNote && (answer?.note ?? '').trim().length === 0) {
         out.push({ questionCode: question.code, prompt: question.prompt, reason: 'note-required' })
@@ -228,6 +256,32 @@ export function outstandingRequirements(
   }
 
   return out
+}
+
+/**
+ * Questions that asked for a photograph but could not be given one
+ * because the deployment has no file storage. Printed on the report so
+ * a reader knows what evidence is missing and why, rather than being
+ * left to assume none was thought necessary.
+ */
+export function unmetPhotoRequirements(
+  template: EngineTemplate,
+  assetType: AssetType,
+  answers: AnswerMap,
+  options: EngineOptions = DEFAULT_OPTIONS
+): string[] {
+  if (options.photoCaptureAvailable) return []
+  const index = indexQuestions(template)
+
+  return visibleSections(template, assetType)
+    .flatMap((section) => section.questions)
+    .filter((question) => isQuestionVisible(question, index, answers))
+    .filter((question) => {
+      if (isEvidenceQuestion(question)) return true
+      if (question.requirePhoto) return true
+      return firedRules(question, answers.get(question.code)).some((rule) => rule.requirePhoto)
+    })
+    .map((question) => question.prompt)
 }
 
 export interface InspectionProgress {

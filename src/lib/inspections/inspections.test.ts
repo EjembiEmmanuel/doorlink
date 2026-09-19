@@ -9,6 +9,7 @@ import {
   isQuestionVisible,
   outstandingRequirements,
   tallyAnswers,
+  unmetPhotoRequirements,
   visibleQuestions,
   visibleSections,
 } from './engine'
@@ -279,6 +280,71 @@ describe('outstanding requirements', () => {
     const tpl = template([question({ code: 'A', recommendPhoto: true })])
     const answers = indexAnswers([answer({ questionCode: 'A', status: AnswerStatus.PASS })])
     expect(outstandingRequirements(tpl, AssetType.ROLLER_SHUTTER, answers)).toEqual([])
+  })
+})
+
+describe('when the deployment has no file storage', () => {
+  // Enforcing a photo requirement with nowhere to put the photo means no
+  // inspection on that deployment can ever be completed — unusable, not
+  // degraded. The requirement relaxes; it is never marked satisfied.
+  const noStorage = { photoCaptureAvailable: false }
+
+  it('does not block submission on a photo that cannot be stored', () => {
+    const tpl = template([question({ code: 'A', requirePhoto: true })])
+    const answers = indexAnswers([answer({ questionCode: 'A', status: AnswerStatus.PASS })])
+    expect(outstandingRequirements(tpl, AssetType.ROLLER_SHUTTER, answers, noStorage)).toEqual([])
+  })
+
+  it('does not block on a photo-type question that cannot be answered', () => {
+    const tpl = template([question({ code: 'A', type: QuestionType.PHOTO, requirePhoto: true })])
+    expect(outstandingRequirements(tpl, AssetType.ROLLER_SHUTTER, indexAnswers([]), noStorage)).toEqual([])
+  })
+
+  it('does not block on a rule that demands a photo', () => {
+    const tpl = template([question({ code: 'A', rules: [rule({ requirePhoto: true, requireNote: false })] })])
+    const answers = indexAnswers([answer({ questionCode: 'A', status: AnswerStatus.FAIL })])
+    expect(outstandingRequirements(tpl, AssetType.ROLLER_SHUTTER, answers, noStorage)).toEqual([])
+  })
+
+  it('still enforces everything that is not a photo', () => {
+    const tpl = template([question({ code: 'A', rules: [rule({ requireNote: true })] })])
+    const answers = indexAnswers([answer({ questionCode: 'A', status: AnswerStatus.FAIL })])
+    expect(
+      outstandingRequirements(tpl, AssetType.ROLLER_SHUTTER, answers, noStorage)[0].reason
+    ).toBe('note-required')
+  })
+
+  it('still requires an answer to a normal question', () => {
+    const tpl = template([question({ code: 'A' })])
+    expect(
+      outstandingRequirements(tpl, AssetType.ROLLER_SHUTTER, indexAnswers([]), noStorage)[0].reason
+    ).toBe('unanswered')
+  })
+
+  it('names the photos that could not be captured, for the report', () => {
+    const tpl = template([
+      question({ code: 'A', requirePhoto: true }),
+      question({ code: 'B' }),
+      question({ code: 'C', type: QuestionType.PHOTO }),
+    ])
+    const answers = indexAnswers([answer({ questionCode: 'A', status: AnswerStatus.PASS })])
+    expect(unmetPhotoRequirements(tpl, AssetType.ROLLER_SHUTTER, answers, noStorage)).toEqual([
+      'Prompt for A',
+      'Prompt for C',
+    ])
+  })
+
+  it('reports nothing unmet when storage works', () => {
+    const tpl = template([question({ code: 'A', requirePhoto: true })])
+    expect(unmetPhotoRequirements(tpl, AssetType.ROLLER_SHUTTER, indexAnswers([]))).toEqual([])
+  })
+
+  it('still blocks a missing photo when storage IS available', () => {
+    const tpl = template([question({ code: 'A', requirePhoto: true })])
+    const answers = indexAnswers([answer({ questionCode: 'A', status: AnswerStatus.PASS })])
+    expect(outstandingRequirements(tpl, AssetType.ROLLER_SHUTTER, answers)[0].reason).toBe(
+      'photo-required'
+    )
   })
 })
 

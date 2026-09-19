@@ -1,10 +1,13 @@
-import 'server-only'
-
 import type { Prisma, PrismaClient } from '@prisma/client'
 import { DEFAULT_TEMPLATES, type SeedTemplate } from './templates'
 
 // Installs the Doorlink-supplied templates as `organizationId: null`
 // rows, available to every company.
+//
+// No `server-only` guard here, deliberately: `prisma/seed.ts` imports
+// this and runs under tsx, where that package does not resolve at all.
+// Nothing in this module is sensitive — it writes template rows through
+// whichever client the caller passes in.
 //
 // Idempotent by (organizationId, slug, version): running it twice does
 // not duplicate a template, and it does not touch a template that is
