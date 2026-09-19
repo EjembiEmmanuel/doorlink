@@ -1,0 +1,456 @@
+DOORLINK — FULL FILE AUDIT, NEW ADD-ONS & APP FEATURE INTEGRATION
+
+I want you to perform a complete audit of the Doorlink project and all files provided/saved for this project before making any changes.
+
+The goal is to take everything we currently have, including the new add-ons/files/information, compare it against the existing Doorlink application, and then bring the app up to date so that the app contains everything it is supposed to contain.
+
+IMPORTANT — DO NOT START CODING IMMEDIATELY
+
+First, inspect and understand everything.
+
+Go through:
+
+1. The entire existing Doorlink codebase.
+2. All newly provided files/add-ons.
+3. Existing features and functionality.
+4. Existing UI/UX and screens.
+5. Existing database/data structures if present.
+6. Existing API/integration structure.
+7. Existing authentication/user flows.
+8. Existing worker/customer/company/admin functionality.
+9. Existing payment/subscription structures if present.
+10. Existing compliance, safety and legal-related functionality.
+11. Existing manuals/document functionality.
+12. Existing settings, navigation and account functionality.
+13. Any TODOs, placeholders, incomplete features or temporary implementations.
+14. Any duplicated, outdated or conflicting features.
+15. Any code that may break when the new additions are integrated.
+
+⸻
+
+STEP 1 — BUILD A COMPLETE FEATURE INVENTORY
+
+Create an internal inventory of what Doorlink currently has.
+
+For every feature, determine:
+
+* What it does
+* Where it exists in the code
+* Whether it is complete
+* Whether it is partially implemented
+* Whether it is only UI/mock data
+* Whether it is actually connected to backend functionality
+* Whether it is outdated
+* Whether it conflicts with anything in the new files
+* Whether it needs to be modified
+* Whether it needs to be removed
+* Whether it needs to remain untouched
+
+Do not assume something is complete simply because a screen exists.
+
+Check the actual implementation.
+
+⸻
+
+STEP 2 — AUDIT ALL NEW FILES / ADD-ONS
+
+Go through every new file/add-on I have provided.
+
+For each one, identify:
+
+A. New features
+
+Anything that should become a Doorlink feature.
+
+B. Changes to existing features
+
+Anything that changes how an existing Doorlink feature should work.
+
+C. Missing functionality
+
+Anything described in the files that Doorlink currently does not have.
+
+D. Features that should be removed
+
+Anything in the current app that has been replaced, made redundant, outdated or contradicted by the new information.
+
+E. Information/data that needs to be incorporated
+
+Any new:
+
+* fields
+* categories
+* forms
+* workflows
+* documents
+* compliance requirements
+* safety requirements
+* legal information
+* user options
+* company information
+* worker information
+* admin information
+* pricing/subscription information
+* manuals
+* reports
+* notifications
+* statuses
+* permissions
+* settings
+
+⸻
+
+STEP 3 — USE EVERYTHING WE HAVE ALREADY ESTABLISHED FOR DOORLINK
+
+Do not only use the newly uploaded files.
+
+Cross-reference the implementation against the existing Doorlink project requirements and information already saved/provided for this project.
+
+The overall Doorlink concept is:
+
+Doorlink connects customers/leads with workers and companies, similar to a marketplace such as Airtasker, with Doorlink taking a commission from transactions.
+
+The application is intended to support the automated door and gate industry and should be structured professionally enough to eventually support real businesses, customers, workers, companies and administrators.
+
+The app should also be capable of supporting future integrations such as:
+
+* Supabase
+* Stripe/payments
+* subscriptions
+* transaction commissions
+* customer/worker accounts
+* company accounts
+* admin functionality
+* document/manual storage
+* compliance and safety information
+* notifications
+* marketplace functionality
+
+Do not invent unnecessary functionality just because it sounds useful.
+
+Only add functionality where it is supported by:
+
+1. The existing project,
+2. The new files/add-ons,
+3. Requirements already established for Doorlink,
+4. Or something technically necessary to make an existing requested feature actually work.
+
+⸻
+
+STEP 4 — COMPLIANCE / SAFETY / LEGAL FEATURES
+
+Pay particular attention to the Doorlink compliance functionality.
+
+Doorlink is intended to potentially offer companies additional paid access to:
+
+* compliance information
+* safety reports
+* legal information
+* required documentation
+* industry requirements
+* company-specific compliance resources
+
+If the new files contain information relating to these areas, make sure the application structure supports them properly.
+
+Do not simply place the documents somewhere in the UI.
+
+Create the appropriate structure for:
+
+* document categories
+* document viewing
+* document access
+* company-specific information
+* worker/company requirements
+* compliance status
+* safety documentation
+* legal information
+* future document uploads
+* future document management
+* paid access where applicable
+
+However, do not make legal claims or invent legal requirements that are not supported by the supplied information.
+
+⸻
+
+STEP 5 — MANUALS / DOCUMENT SYSTEM
+
+Doorlink also needs to support the concept of users being able to find manuals for automated doors and gates.
+
+Review the existing implementation and the new files and determine whether the manual/document system is complete.
+
+Where appropriate, support:
+
+* manual categories
+* door/gate system categories
+* manufacturer
+* model
+* document title
+* document type
+* search
+* filtering
+* viewing
+* uploading
+* future document management
+
+Do not create fake manuals or fake manufacturer data.
+
+Use placeholders only where technically necessary and clearly mark them as placeholders.
+
+⸻
+
+STEP 6 — REMOVE OUTDATED OR DUPLICATED FEATURES
+
+If the new files replace an existing feature, update the existing feature rather than creating a second version.
+
+If something is duplicated:
+
+* consolidate it
+* keep the correct implementation
+* remove unnecessary duplicate code
+* preserve functionality that is still required
+
+If a feature is genuinely no longer required, remove it carefully.
+
+Before removing anything, verify that another feature does not depend on it.
+
+⸻
+
+STEP 7 — DO NOT DESTROY EXISTING WORK
+
+This is extremely important.
+
+Do not rewrite the entire application unnecessarily.
+
+Do not delete working functionality simply to make the implementation easier.
+
+Do not replace existing systems unless there is a clear reason.
+
+Preserve:
+
+* existing working features
+* existing data structures where appropriate
+* existing authentication
+* existing navigation
+* existing integrations
+* existing UI functionality
+* existing business logic
+
+Only modify what needs to change.
+
+If a major architectural change is genuinely required, explain why before proceeding.
+
+⸻
+
+STEP 8 — UI / UX CONSISTENCY
+
+Any new functionality must look like it belongs inside Doorlink.
+
+Do not create random new screens that look like they came from a different application.
+
+Maintain the existing Doorlink design language while improving it where necessary.
+
+The desired direction is:
+
+* professional
+* premium
+* clean
+* modern
+* realistic
+* simple to understand
+* not cluttered
+* not overly animated
+* not “AI generated looking”
+* suitable for a serious Australian trade/industry platform
+
+Do not sacrifice usability for visual effects.
+
+⸻
+
+STEP 9 — DATA & BACKEND READINESS
+
+Where backend functionality is not yet connected, structure the code so that it can be connected properly later.
+
+Do not fake live functionality.
+
+Do not create fake production data and present it as real.
+
+Where Supabase or Stripe is planned for later, make the architecture ready for those integrations without pretending they are already connected.
+
+Where a feature requires backend functionality that does not yet exist, clearly identify it.
+
+⸻
+
+STEP 10 — FIND EVERYTHING THAT IS MISSING
+
+After comparing the current application with all of the files/add-ons and existing Doorlink requirements, create a final checklist of:
+
+MUST ADD
+
+Features that are definitely missing.
+
+MUST MODIFY
+
+Existing features that need updating.
+
+MUST REMOVE
+
+Features/code that are outdated, duplicated or replaced.
+
+KEEP
+
+Existing features that are already correct.
+
+FUTURE / NOT YET IMPLEMENTED
+
+Features that are planned but should not be fully implemented yet because required external information/integrations are not available.
+
+⸻
+
+STEP 11 — IMPLEMENT THE REQUIRED CHANGES
+
+Once the audit is complete, implement the required changes.
+
+Prioritise:
+
+1. Correct functionality
+2. Existing functionality preservation
+3. New required features
+4. Correct data structure
+5. UI/UX consistency
+6. Clean code
+7. Future scalability
+
+Do not add unnecessary features simply to make the app appear larger.
+
+⸻
+
+STEP 12 — TEST EVERYTHING
+
+After making changes, test the application thoroughly.
+
+Check:
+
+* navigation
+* buttons
+* forms
+* authentication
+* user flows
+* customer flows
+* worker flows
+* company flows
+* admin flows
+* documents
+* manuals
+* compliance functionality
+* payments/subscription areas if present
+* responsive layouts
+* error handling
+* loading states
+* empty states
+* permissions
+* data persistence
+* existing features that were not supposed to change
+
+Make sure the new additions have not broken existing functionality.
+
+⸻
+
+STEP 13 — CHECK FOR CODE / STRUCTURE PROBLEMS
+
+Also inspect for:
+
+* TypeScript errors
+* JavaScript errors
+* broken imports
+* unused imports
+* duplicated components
+* dead code
+* broken routes
+* inconsistent naming
+* missing dependencies
+* security issues
+* bad state management
+* incorrect API calls
+* hard-coded production data
+* fake data presented as real
+* broken mobile layouts
+* accessibility problems
+* obvious performance problems
+
+Fix issues that are directly related to the work being performed.
+
+Do not make unrelated destructive refactors.
+
+⸻
+
+STEP 14 — FINAL REPORT
+
+When finished, give me a clear final report containing:
+
+1. WHAT WAS ALREADY THERE
+
+Briefly explain the major existing Doorlink features.
+
+2. WHAT THE NEW FILES ADDED
+
+List each meaningful new addition.
+
+3. WHAT YOU ADDED TO THE APP
+
+List exactly what you implemented.
+
+4. WHAT YOU MODIFIED
+
+List existing features that were changed.
+
+5. WHAT YOU REMOVED
+
+Explain anything removed and why.
+
+6. WHAT WAS MISSING
+
+Identify important functionality that was missing before the update.
+
+7. WHAT IS STILL NOT CONNECTED
+
+Clearly identify anything requiring:
+
+* Supabase
+* Stripe
+* external APIs
+* real data
+* external document sources
+* other future integrations
+
+8. TESTING
+
+Tell me what was tested and whether there are any remaining errors.
+
+9. FUTURE WORK
+
+List features that should be left for a later phase rather than pretending they are complete.
+
+⸻
+
+MOST IMPORTANT RULE
+
+Use the files/add-ons as the source material and cross-reference them against the Doorlink project we already have.
+
+The objective is NOT to simply copy information from the files into the application.
+
+The objective is to determine:
+
+“What should Doorlink now contain based on everything we have?”
+
+Then:
+
+ADD what is missing.
+MODIFY what needs changing.
+REMOVE what is no longer required.
+KEEP what is already correct.
+DO NOT invent unsupported functionality.
+DO NOT destroy existing working code.
+
+Before making major architectural changes, stop and explain the change and why it is necessary.
+
+The final application should feel like one coherent Doorlink product, not a collection of separate additions.

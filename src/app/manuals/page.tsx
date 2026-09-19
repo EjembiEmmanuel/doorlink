@@ -72,12 +72,22 @@ export default async function ManualsPage({ searchParams }: { searchParams: Sear
   return (
     <div className="mx-auto max-w-shell px-4 py-10 sm:py-14">
       <header className="max-w-prose">
-        <h1 className="text-2xl font-semibold tracking-tight text-graphite sm:text-3xl">User manuals</h1>
-        <p className="mt-2 text-graphite-soft">
-          Installation manuals, programming guides, wiring diagrams and troubleshooting documents for
-          automated doors, gates, motors and access systems. Search the text inside the documents, not
-          just their titles.
-        </p>
+        <div className="flex flex-wrap items-start justify-between gap-4">
+          <div>
+            <h1 className="text-2xl font-semibold tracking-tight text-graphite sm:text-3xl">User manuals</h1>
+            <p className="mt-2 text-graphite-soft">
+              Installation manuals, programming guides, wiring diagrams and troubleshooting documents for
+              automated doors, gates, motors and access systems. Search the text inside the documents, not
+              just their titles.
+            </p>
+          </div>
+          <Link
+            href="/manuals/submit"
+            className="inline-flex h-11 shrink-0 items-center rounded border border-line bg-paper px-4 text-sm font-medium text-graphite transition-colors hover:border-signal hover:text-signal"
+          >
+            Submit a manual
+          </Link>
+        </div>
       </header>
 
       <form action="/manuals" className="mt-6 flex flex-wrap gap-2">
