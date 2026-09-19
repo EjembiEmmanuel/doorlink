@@ -8,6 +8,8 @@ import { requirePermission, RbacError } from '@/lib/rbac'
 import { isDatabaseUnreachable } from '@/lib/db-errors'
 import { COMMISSION_SETTING_KEY, MAX_COMMISSION_BPS } from '@/lib/commission'
 import { currentCommissionBps } from '@/lib/commission-settings'
+import { COMPLIANCE_PRICE_SETTING_KEY, MAX_COMPLIANCE_PRICE_CENTS } from '@/lib/compliance/pricing'
+import { currentCompliancePriceCents } from '@/lib/compliance/pricing-settings'
 
 export type SettingsFormState = { error?: string; ok?: boolean }
 
@@ -85,5 +87,78 @@ export async function updateCommissionAction(
 
   revalidatePath('/admin/settings')
   revalidatePath('/leads')
+  return { ok: true }
+}
+
+// ---------------------------------------------------------------------
+// Compliance & Safety Pack price
+// ---------------------------------------------------------------------
+
+const compliancePriceSchema = z.object({
+  dollars: z.coerce
+    .number({ invalid_type_error: 'Enter the price in dollars.' })
+    .min(0, 'The price cannot be negative.')
+    .max(MAX_COMPLIANCE_PRICE_CENTS / 100, `The price cannot exceed $${MAX_COMPLIANCE_PRICE_CENTS / 100}.`),
+})
+
+/**
+ * The list price of the pack, changeable without a rebuild — the same
+ * reasoning as the commission rate, and the reason $29.99 lives in
+ * `pricing.ts` as a default rather than as a constant the checkout reads.
+ *
+ * Changing it never alters what anyone was already charged: the price is
+ * snapshotted onto the purchase row when it is created.
+ */
+export async function updateCompliancePriceAction(
+  _prevState: SettingsFormState,
+  formData: FormData
+): Promise<SettingsFormState> {
+  let actorId: string
+  try {
+    const session = requirePermission(await getSession(), 'admin:settings')
+    actorId = session.userId
+  } catch (error) {
+    if (error instanceof RbacError) return { error: error.message }
+    throw error
+  }
+
+  const parsed = compliancePriceSchema.safeParse({ dollars: formData.get('dollars') })
+  if (!parsed.success) {
+    return { error: parsed.error.issues[0]?.message ?? 'Check the form and try again.' }
+  }
+
+  const cents = Math.round(parsed.data.dollars * 100)
+  if (Math.abs(parsed.data.dollars * 100 - cents) > 1e-9) {
+    return { error: 'Use at most two decimal places.' }
+  }
+
+  try {
+    const previousCents = await currentCompliancePriceCents()
+    if (previousCents === cents) return { ok: true }
+
+    await prisma.$transaction(async (tx) => {
+      await tx.platformSetting.upsert({
+        where: { key: COMPLIANCE_PRICE_SETTING_KEY },
+        update: { value: cents },
+        create: { key: COMPLIANCE_PRICE_SETTING_KEY, value: cents },
+      })
+
+      await tx.auditLog.create({
+        data: {
+          actorId,
+          action: 'compliance_price.update',
+          entityType: 'PlatformSetting',
+          entityId: COMPLIANCE_PRICE_SETTING_KEY,
+          metadata: { fromCents: previousCents, toCents: cents },
+        },
+      })
+    })
+  } catch (error) {
+    if (isDatabaseUnreachable(error)) return { error: 'The database is not reachable right now.' }
+    throw error
+  }
+
+  revalidatePath('/admin/settings')
+  revalidatePath('/compliance')
   return { ok: true }
 }
