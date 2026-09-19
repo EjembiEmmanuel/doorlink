@@ -64,7 +64,7 @@ export default async function HomePage() {
           <QuickEntry href="/configure" index="02" title="Configure a door" body="Build a clear door specification before you request a quote." />
           <QuickEntry href="/manuals" index="03" title="Open the manual" body="Search installation, programming and troubleshooting documents." />
           <QuickEntry
-            href="/compliance-pack"
+            href="/compliance"
             index="04"
             title="Get the compliance pack"
             body="Prepare a professional safety and compliance document pack for your next client."
