@@ -19,7 +19,7 @@ export const metadata: Metadata = {
  * Counts shown on the landing page are read from the database, never
  * written into the markup. A homepage that advertises "10,000 manuals"
  * because someone typed it there is the exact kind of claim this build
- * does not make — if the number cannot be read, the sentence that needs
+ * does not make. If the number cannot be read, the sentence that needs
  * it is not rendered.
  */
 async function landingFigures() {
@@ -97,7 +97,7 @@ export default async function HomePage() {
             {
               step: '04',
               title: 'Track it to done',
-              body: 'Booked, started, finished — the job keeps its own history, and you review the work at the end.',
+               body: 'Booked, started, finished. The job keeps its own history, and you review the work at the end.',
             },
           ].map((item, index) => (
             <RevealCard key={item.step} delay={index * 0.06}>
@@ -131,7 +131,7 @@ export default async function HomePage() {
             </Pillar>
 
             <Pillar href="/configure" eyebrow="Products" title="Explore door systems" cta="Design a door">
-              Pick a door type, size, colour and finish and watch it change on the house — then send the
+              Pick a door type, size, colour and finish and watch it change on the house, then send the
               specification to technicians for a price. Or work out which door, motor or controller you already
               have with{' '}
               <Link href="/find" className="font-medium text-signal hover:text-signal-hover">
@@ -142,7 +142,7 @@ export default async function HomePage() {
 
             <Pillar href="/manuals" eyebrow="Knowledge" title="User manuals" cta="Search the library">
               Installation manuals, programming guides, wiring diagrams and troubleshooting documents,
-              searchable by the text inside them — not just their titles.{' '}
+              searchable by the text inside them, not just their titles.{' '}
               {figures.available && figures.manuals > 0 && (
                 <>
                   {figures.manuals} documents from {figures.manufacturers} manufacturers so far, each labelled
@@ -167,7 +167,7 @@ export default async function HomePage() {
           <Reason title="Prices you can check">
             {figures.commissionBps === null
               ? 'Doorlink takes a percentage of a completed job, deducted from the amount the technician quotes. The technician sees their share before they send it.'
-              : `Doorlink takes ${formatCommissionRate(figures.commissionBps)} of a completed job, deducted from the amount the technician quotes — and they see exactly what they receive before they send it.`}
+               : `Doorlink takes ${formatCommissionRate(figures.commissionBps)} of a completed job, deducted from the amount the technician quotes, and they see exactly what they receive before they send it.`}
           </Reason>
           <Reason title="Reviews that mean something">
             A review can only be written by the customer of a job that actually reached completion on Doorlink.
@@ -182,7 +182,7 @@ export default async function HomePage() {
             write-up, or something we cannot vouch for. A technician relying on it sees that first.
           </Reason>
           <Reason title="Made for a phone in a driveway">
-            Large touch targets, a bottom tab bar, and an installable app — because this gets used outdoors,
+             Large touch targets, a bottom tab bar, and an installable app, because this gets used outdoors,
             often one-handed, often with gloves on.
           </Reason>
         </div>
@@ -217,7 +217,7 @@ export default async function HomePage() {
             </div>
             <p className="mt-6 max-w-prose text-sm text-zinc-deep">
               Subscriptions are not live. No payment provider is connected, so nothing here can be bought yet,
-              and a plan with no price is a plan whose price has not been decided — it is not a number we are
+               and a plan with no price is a plan whose price has not been decided. It is not a number we are
               hiding.
             </p>
           </div>

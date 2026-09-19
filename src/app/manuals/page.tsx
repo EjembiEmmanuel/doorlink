@@ -95,7 +95,7 @@ export default async function ManualsPage({ searchParams }: { searchParams: Sear
           type="search"
           name="q"
           defaultValue={params.q ?? ''}
-          placeholder="Search by model, document code, or a term inside the manual…"
+           placeholder="Search by model, document code, or a term inside the manual..."
           aria-label="Search manuals"
           className="h-11 min-w-0 flex-1 rounded border border-line bg-paper px-3 text-sm text-graphite placeholder:text-zinc focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-signal"
         />
