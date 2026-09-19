@@ -27,7 +27,7 @@ const TRANSITION_LABELS: Record<JobStatus, string> = {
 const TRANSITION_PROMPTS: Partial<Record<JobStatus, string>> = {
   SCHEDULED: 'Pick the time you have agreed with the other side. They will see it on this page.',
   IN_PROGRESS: 'This tells the customer you are on site and have started.',
-  COMPLETED: 'Only mark this complete once the work is genuinely finished — the customer is asked to review it next.',
+  COMPLETED: 'Only mark this complete once the work is genuinely finished. The customer is asked to review it next.',
   CANCELLED: 'Cancelling is final. Say why, so there is a record both sides can read.',
   DISPUTED: 'Describe what has gone wrong. A Doorlink admin reviews disputes before a job can move again.',
 }

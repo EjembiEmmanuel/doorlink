@@ -98,7 +98,7 @@ export function DetailsForm({
       <Field
         label="One-line summary"
         htmlFor="headline"
-        hint='e.g. "Roller doors, sectional doors and automatic gates — Brisbane northside".'
+        hint='e.g. "Roller doors, sectional doors and automatic gates, Brisbane northside".'
       >
         <Input id="headline" name="headline" defaultValue={profile.headline ?? ''} maxLength={140} />
       </Field>
@@ -159,7 +159,7 @@ export function BaseForm({
         </Field>
         <Field label="State" htmlFor="baseState">
           <Select id="baseState" name="baseState" defaultValue={profile.baseState ?? ''}>
-            <option value="">—</option>
+            <option value="">Select one</option>
             {AU_STATES.map((s) => (
               <option key={s} value={s}>
                 {s}
@@ -182,7 +182,7 @@ export function BaseForm({
       <Field
         label="How far you travel"
         htmlFor="serviceRadiusKm"
-        hint="Kilometres from your base. Optional — the postcodes below are what actually matter."
+        hint="Kilometres from your base. Optional. The postcodes below are what actually matter."
       >
         <Input
           id="serviceRadiusKm"
@@ -250,7 +250,7 @@ export function ServiceAreaEditor({
         </Field>
         <Field label="State" htmlFor="areaState">
           <Select id="areaState" name="state" className="w-28">
-            <option value="">—</option>
+            <option value="">Select one</option>
             {AU_STATES.map((s) => (
               <option key={s} value={s}>
                 {s}

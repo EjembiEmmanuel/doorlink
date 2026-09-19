@@ -53,7 +53,7 @@ export async function updateCommissionAction(
   const bps = Math.round(parsed.data.percent * 100)
   if (Math.abs(parsed.data.percent * 100 - bps) > 1e-9) {
     return {
-      error: 'Use at most two decimal places — 12.5% and 12.55% are fine, 12.345% is not.',
+      error: 'Use at most two decimal places. 12.5% and 12.55% are fine, 12.345% is not.',
     }
   }
 

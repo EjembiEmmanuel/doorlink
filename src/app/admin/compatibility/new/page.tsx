@@ -27,7 +27,7 @@ export default async function NewCompatibilityPage() {
 
   const options = models.map((model) => ({
     id: model.id,
-    label: `${model.modelCode} — ${model.manufacturer.name} ${model.name}`,
+    label: `${model.modelCode} | ${model.manufacturer.name} ${model.name}`,
   }))
 
   return (

@@ -9,7 +9,7 @@ import { DocumentView } from '../DocumentView'
 import { PrintButton } from '../PrintButton'
 import '../compliance-print.css'
 
-export const metadata: Metadata = { title: 'Compliance & Safety Pack — all documents' }
+export const metadata: Metadata = { title: 'Compliance & Safety Pack: all documents' }
 
 /**
  * Every transcribed document on one page, each starting a new sheet when

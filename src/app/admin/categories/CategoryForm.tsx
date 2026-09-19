@@ -28,7 +28,7 @@ export function CategoryForm({
         <Input id="slug" name="slug" defaultValue={category?.slug} placeholder="auto-generated" />
       </Field>
 
-      <Field label="Parent category" htmlFor="parentId" hint="Optional — leave as None for a top-level category.">
+      <Field label="Parent category" htmlFor="parentId" hint="Optional. Leave as None for a top-level category.">
         <Select id="parentId" name="parentId" defaultValue={category?.parentId ?? ''}>
           <option value="">None (top level)</option>
           {parentOptions.map((option) => (

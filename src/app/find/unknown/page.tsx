@@ -28,7 +28,7 @@ export default function FindUnknownPage() {
     <div className="mx-auto max-w-prose px-4 py-12">
       <h1 className="text-2xl font-semibold text-graphite">Don&apos;t know your model?</h1>
       <p className="mt-2 text-graphite-soft">
-        Try these first — most products can still be identified without the exact model number.
+        Try these first. Most products can still be identified without the exact model number.
       </p>
 
       <ul className="mt-8 flex flex-col gap-4">

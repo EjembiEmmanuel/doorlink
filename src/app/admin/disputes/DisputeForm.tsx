@@ -18,7 +18,7 @@ const LABELS: Record<Decision, string> = {
 const PROMPTS: Record<Decision, string> = {
   IN_REVIEW: 'Tells both sides someone has picked this up. A note is optional here.',
   RESOLVED: 'You have decided in favour of the person who raised it. Say what happens and why.',
-  REJECTED: 'You have decided against it. Say why — they have to be able to understand the call.',
+  REJECTED: 'You have decided against it. Say why. They have to be able to understand the call.',
 }
 
 export function DisputeForm({ disputeId, jobIsDisputed }: { disputeId: string; jobIsDisputed: boolean }) {

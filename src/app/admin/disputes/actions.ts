@@ -45,7 +45,7 @@ export async function decideDisputeAction(
   // Closing a dispute without saying why leaves both parties with a
   // decision and no reason for it.
   if (parsed.data.decision !== 'IN_REVIEW' && !parsed.data.resolution) {
-    return { error: 'Say how it was resolved — both people on the job see this.' }
+    return { error: 'Say how it was resolved. Both people on the job see this.' }
   }
 
   const status = DisputeStatus[parsed.data.decision]

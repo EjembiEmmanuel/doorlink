@@ -109,7 +109,7 @@ export default async function TechnicianProfilePage({ params }: PageProps) {
               a customer is deciding whether to trust it. */}
           <p className="mt-3 max-w-prose text-sm text-zinc-deep">
             {isVerified
-              ? 'A Doorlink admin has matched the licence and insurance details this business supplied to their account. Doorlink is not a licensing authority and has not audited the issuer — check anything that matters to you directly.'
+              ? 'A Doorlink admin has matched the licence and insurance details this business supplied to their account. Doorlink is not a licensing authority and has not audited the issuer. Check anything that matters to you directly.'
               : 'Doorlink has not checked this business’s licence or insurance. Ask to see them before work starts.'}
           </p>
 

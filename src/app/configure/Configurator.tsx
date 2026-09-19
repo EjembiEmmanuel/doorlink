@@ -60,7 +60,7 @@ export function Configurator({ signedIn, initialSpec }: { signedIn: boolean; ini
         {/* The single most important sentence on this page. */}
         <p className="mt-4 rounded-md border border-caution/30 bg-caution-tint p-3 text-sm text-graphite">
           These are Doorlink&apos;s own generic options, not any manufacturer&apos;s range. The preview shows
-          the shape and colour you have chosen — it is not a picture of a specific product, and no manufacturer
+          the shape and colour you have chosen. It is not a picture of a specific product, and no manufacturer
           has quoted on it.
         </p>
       </div>

@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next'
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'Doorlink — everything for your door',
+    name: 'Doorlink: everything for your door',
     short_name: 'Doorlink',
     description:
       'Identify your garage door, roller shutter, motor or lock, then find the manual, compatible parts and the people who can fit them.',

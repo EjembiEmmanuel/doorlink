@@ -68,7 +68,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title: `${model.name} · ${model.manufacturer.name}`,
       description:
         model.summary ??
-        `${model.name} (${model.modelCode}) by ${model.manufacturer.name} — specifications, documents, and compatible parts.`,
+        `${model.name} (${model.modelCode}) by ${model.manufacturer.name}: specifications, documents, and compatible parts.`,
       alternates: { canonical: `/model/${model.id}` },
     }
   } catch {

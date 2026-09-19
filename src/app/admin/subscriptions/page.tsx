@@ -50,7 +50,7 @@ export default async function AdminSubscriptionsPage() {
         <h2 className="text-lg font-semibold text-graphite">Plans</h2>
         <p className="mt-1 max-w-prose text-sm text-graphite-soft">
           Prices and plan definitions live in the database, so they change without a rebuild. A plan with no
-          price is one whose price has not been decided — it is not a number being hidden.
+          price is one whose price has not been decided. It is not a number being hidden.
         </p>
 
         <ul className="mt-5 flex flex-col gap-2">
@@ -89,7 +89,7 @@ export default async function AdminSubscriptionsPage() {
           <div className="mt-5 max-w-prose">
             <NotConnected
               feature="Selling subscriptions"
-              reason="No payment provider is connected, so nobody can subscribe yet and this list will stay empty. Plan definitions, billing states and the feature gate are all built — what is missing is the Stripe keys and a price id on each plan."
+              reason="No payment provider is connected, so nobody can subscribe yet and this list will stay empty. Plan definitions, billing states and the feature gate are all built. What is missing is the Stripe keys and a price id on each plan."
             />
           </div>
         )}
@@ -101,7 +101,7 @@ export default async function AdminSubscriptionsPage() {
           {subscriptions.length === 0 ? (
             <EmptyState
               title="Nobody is subscribed"
-              description="Which is expected — there is no way to pay yet."
+              description="Which is expected. There is no way to pay yet."
             />
           ) : (
             <ul className="flex flex-col gap-2">

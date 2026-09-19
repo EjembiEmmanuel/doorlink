@@ -70,7 +70,7 @@ export default async function AdminSettingsPage() {
       <section className="border-t border-line pt-10">
         <h2 className="text-lg font-semibold text-graphite">Compliance &amp; Safety Pack</h2>
         <p className="mt-1 max-w-prose text-sm text-graphite-soft">
-          The one-off price of the document pack add-on. Changing it affects new purchases only — the price is
+          The one-off price of the document pack add-on. Changing it affects new purchases only. The price is
           written onto a purchase when it is made, so nobody&apos;s receipt changes retrospectively.
         </p>
 

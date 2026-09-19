@@ -30,7 +30,7 @@ export default async function RequestTechnicianPage({ searchParams }: PageProps)
       const parsed = parseSpec(JSON.parse(spec))
       const type = describeSpec(parsed)[0]?.value ?? 'garage door'
       prefill = {
-        title: `New ${type.toLowerCase()} garage door — supply and install`,
+        title: `New ${type.toLowerCase()} garage door: supply and install`,
         message: `I've designed a door in the Doorlink configurator and would like a price to supply and install it.\n\n${specAsBrief(parsed)}\n\nThese are Doorlink's generic options rather than a specific product, so let me know the nearest equivalent you can supply.`,
       }
     } catch {
@@ -92,7 +92,7 @@ export default async function RequestTechnicianPage({ searchParams }: PageProps)
         }))}
         models={models.map((model) => ({
           id: model.id,
-          label: `${model.modelCode} — ${model.manufacturer.name} ${model.name}`,
+          label: `${model.modelCode} | ${model.manufacturer.name} ${model.name}`,
         }))}
       />
     </div>

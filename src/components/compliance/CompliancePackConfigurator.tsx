@@ -160,7 +160,7 @@ export function CompliancePackConfigurator() {
             disabled
             className="inline-flex h-11 items-center justify-center rounded bg-signal px-4 text-sm font-semibold text-paper opacity-50"
           >
-            Purchase &amp; prepare pack — {PACK_PRICE}
+            Purchase &amp; prepare pack: {PACK_PRICE}
           </button>
           <p className="text-xs leading-5 text-zinc-deep">
             Checkout is not connected in this workspace yet. No payment is taken and no paid access is claimed until a

@@ -140,7 +140,7 @@ export function ComplianceDetailsForm({ profile }: { profile: Profile }) {
           hint="Doorlink holds the NSW legislation list. Other states are marked as needing their own instruments added."
         >
           <Select id="state" name="state" defaultValue={text(profile, 'state')}>
-            <option value="">—</option>
+            <option value="">Select one</option>
             {AU_STATES.map((s) => (
               <option key={s} value={s}>
                 {s}

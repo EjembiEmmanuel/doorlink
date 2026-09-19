@@ -40,7 +40,7 @@ const VERIFICATION_EXPLANATION: Record<VerificationStatus, string> = {
     'Your details are queued for a Doorlink admin to look at. Nothing has been checked yet, and your profile still shows as unverified until it has.',
   IN_REVIEW: 'A Doorlink admin is going through your details now.',
   VERIFIED:
-    'A Doorlink admin has looked at the licence and insurance details you supplied and matched them to your account. That is what the badge means — Doorlink is not a licensing authority and has not audited the issuer.',
+    'A Doorlink admin has looked at the licence and insurance details you supplied and matched them to your account. That is what the badge means. Doorlink is not a licensing authority and has not audited the issuer.',
   REJECTED:
     'A Doorlink admin could not match the details you supplied. You can correct them and send them again.',
 }
@@ -147,7 +147,7 @@ export default async function MyProfilePage() {
       <Section
         id="availability"
         title="Hours you normally work"
-        description="Shown on your profile so a customer knows when to expect you. Doorlink has no calendar connected — nothing here books or blocks anything, and a job can still be scheduled outside these hours if you agree to it."
+        description="Shown on your profile so a customer knows when to expect you. Doorlink has no calendar connected. Nothing here books or blocks anything, and a job can still be scheduled outside these hours if you agree to it."
       >
         <AvailabilityEditor availability={profile.availability} />
       </Section>

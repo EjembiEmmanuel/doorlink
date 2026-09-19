@@ -37,7 +37,7 @@ export default async function MessagesPage() {
       {conversations.length === 0 ? (
         <EmptyState
           title="No messages yet"
-          description="Threads start from a quote or a job — there is no way to message someone out of the blue."
+          description="Threads start from a quote or a job. There is no way to message someone out of the blue."
         />
       ) : (
         <ul className="flex flex-col gap-2">

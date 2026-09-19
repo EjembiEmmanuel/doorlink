@@ -103,7 +103,7 @@ export function CompatibilityForm({
         </Select>
       </Field>
 
-      <Field label="Note" htmlFor="note" hint="Optional — visible wherever this link is shown.">
+      <Field label="Note" htmlFor="note" hint="Optional. Visible wherever this link is shown.">
         <Textarea id="note" name="note" defaultValue={compatibility?.note ?? ''} />
       </Field>
 

@@ -261,7 +261,7 @@ function BlockView({ block, profile, code }: { block: Block; profile: ProfileLik
               Commonwealth list were the whole of the law. */}
           {list.gap && (
             <div className="cp-important cp-important-gap">
-              <p className="cp-important-title">Check your jurisdiction — incomplete</p>
+              <p className="cp-important-title">Check your jurisdiction: incomplete</p>
               <p>{list.gap}</p>
             </div>
           )}
