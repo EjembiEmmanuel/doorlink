@@ -63,6 +63,12 @@ export default async function HomePage() {
           <QuickEntry href="/find" index="01" title="Identify a system" body="Find the model, motor or controller you already have." />
           <QuickEntry href="/configure" index="02" title="Configure a door" body="Build a clear door specification before you request a quote." />
           <QuickEntry href="/manuals" index="03" title="Open the manual" body="Search installation, programming and troubleshooting documents." />
+          <QuickEntry
+            href="/compliance-pack"
+            index="04"
+            title="Get the compliance pack"
+            body="Prepare a professional safety and compliance document pack for your next client."
+          />
         </div>
       </section>
 

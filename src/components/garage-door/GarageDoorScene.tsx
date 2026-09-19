@@ -23,6 +23,17 @@ export function GarageDoorScene({ progress, isDragging, dragHandlers }: GarageDo
       aria-label="Interactive automated garage door"
     >
       <div className="garage-door-skyline" aria-hidden="true" />
+      <div className="garage-door-sun" aria-hidden="true" />
+      <div className="garage-door-birds" aria-hidden="true">
+        <span />
+        <span />
+        <span />
+      </div>
+      <div className="garage-door-bushes" aria-hidden="true">
+        <span className="garage-door-bush garage-door-bush-left" />
+        <span className="garage-door-bush garage-door-bush-center" />
+        <span className="garage-door-bush garage-door-bush-right" />
+      </div>
       <div className="garage-door-opening">
         <div className="garage-door-shadow" aria-hidden="true" />
         <div className="garage-door-back-wall" aria-hidden="true" />

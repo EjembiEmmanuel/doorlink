@@ -16,7 +16,7 @@ export function AutomatedDoorsIntro({ progress }: AutomatedDoorsIntroProps) {
       }}
       aria-hidden={revealProgress < 0.2}
     >
-      <p>ALL DEVELOPED FOR</p>
+        <p>POWERED BY</p>
       <h2>
         AUTOMATED DOORS <span>&amp;</span> GATES
       </h2>
