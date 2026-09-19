@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from 'next'
 import type { ReactNode } from 'react'
 import { IBM_Plex_Mono, IBM_Plex_Sans } from 'next/font/google'
 import { SkipLink } from '@/components/layout/SkipLink'
-import { DemoBanner } from '@/components/layout/DemoBanner'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { MobileTabBar } from '@/components/layout/MobileTabBar'
@@ -18,7 +17,7 @@ const plexSans = IBM_Plex_Sans({
   display: 'swap',
 })
 
-// Restricted to identifiers — model codes, part numbers, order references —
+// Restricted to identifiers: model codes, part numbers, order references,
 // because that's the data a technician reads off a plate.
 const plexMono = IBM_Plex_Mono({
   subsets: ['latin'],
@@ -32,7 +31,7 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000'
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: 'Doorlink — automated doors, connected professionals',
+      default: 'Doorlink: automated doors, connected professionals',
     template: '%s · Doorlink',
   },
   description:
@@ -73,7 +72,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body className="flex min-h-screen flex-col bg-paper font-sans text-graphite antialiased">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: toJsonLd(websiteJsonLd) }} />
         <SkipLink />
-        <DemoBanner />
         <Header />
         <main id="main" className="flex-1">
           {children}

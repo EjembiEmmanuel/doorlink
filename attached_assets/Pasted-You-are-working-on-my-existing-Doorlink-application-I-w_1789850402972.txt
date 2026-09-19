@@ -1,0 +1,720 @@
+You are working on my existing Doorlink application.
+
+I want you to DESIGN AND BUILD a complete, professional inspection system inside the existing Doorlink app based on the workflow below:
+
+SELECT INSPECTION
+→ SELECT ASSET
+→ ENTER ASSET DETAILS
+→ CAPTURE EVIDENCE
+→ COMPLETE INSPECTION QUESTIONS
+→ RECORD DEFECTS / RISKS
+→ ADD NOTES / ACTIONS
+→ GENERATE REPORT
+→ DOWNLOAD / SHARE REPORT
+
+IMPORTANT:
+This is an existing application. DO NOT rebuild the entire app from scratch, delete existing functionality, overwrite unrelated features, or break anything that already works.
+
+Before making changes:
+
+1. Inspect the existing project structure.
+2. Understand the current frontend, backend, routing, components, database structure and styling system.
+3. Identify how the new inspection system should integrate with the existing Doorlink architecture.
+4. Reuse existing components, authentication, navigation, UI patterns and database infrastructure wherever appropriate.
+5. Make a backup/checkpoint before making major changes.
+6. Keep the implementation modular so I can continue developing it later in Claude Code and Replit.
+
+The inspection system should feel like a REAL professional inspection/compliance application — not a basic form.
+
+==================================================
+
+1. INSPECTION DASHBOARD
+    ==================================================
+
+Create an Inspection section inside Doorlink.
+
+The dashboard should allow users to:
+
+• Start a new inspection
+• Continue an incomplete inspection
+• View completed inspections
+• Search inspections
+• Filter inspections
+• Open previous inspection reports
+• Download reports
+• Share reports
+• View inspection status
+
+Suggested statuses:
+
+• Draft
+• In Progress
+• Completed
+• Report Generated
+• Archived
+
+Each inspection should display useful information such as:
+
+• Inspection type
+• Asset
+• Customer/company
+• Inspector
+• Date
+• Status
+• Risk/defect summary
+• Report availability
+
+Make the dashboard clean and professional.
+
+==================================================
+2. SELECT INSPECTION
+
+When the user selects “New Inspection”, provide an inspection-type selection screen.
+
+Examples:
+
+• Garage Door Inspection
+• Automatic Gate Inspection
+• Roller Shutter Inspection
+• Safety Inspection
+• Maintenance Inspection
+• Compliance Inspection
+• Installation Inspection
+• Custom Inspection
+
+Do NOT hard-code the architecture so that only these inspection types can ever exist.
+
+Create the system so additional inspection templates/questions can be added later.
+
+Each inspection type should be able to have its own:
+
+• Questions
+• Inspection categories
+• Required evidence
+• Risk classifications
+• Defect types
+• Report sections
+
+==================================================
+3. SELECT ASSET
+
+After selecting the inspection type, allow the user to select an existing Doorlink asset or create a new asset.
+
+Assets may include:
+
+• Garage doors
+• Gates
+• Roller shutters
+• Motors
+• Controllers
+• Safety devices
+• Access systems
+• Other equipment
+
+Allow searching existing assets.
+
+Display useful asset information when selected.
+
+For example:
+
+Asset name
+Asset ID
+Asset type
+Manufacturer
+Model
+Serial number
+Location
+Customer
+Installation date
+Previous inspection date
+Previous inspection result
+
+Allow the inspector to create a new asset if it does not already exist.
+
+==================================================
+4. ENTER ASSET DETAILS
+
+Create a professional asset-details form.
+
+Fields should be configurable depending on asset type.
+
+Potential fields:
+
+• Asset name
+• Asset type
+• Manufacturer
+• Model
+• Serial number
+• Asset ID
+• Location
+• Installation date
+• Installer
+• Customer
+• Site
+• Address
+• Access information
+• Operating conditions
+• Additional identifying information
+
+Allow photos of the asset to be associated with the asset record.
+
+Important:
+
+Do not create unnecessary duplicate asset records if an existing asset is already selected.
+
+The inspection should reference the asset rather than creating a completely new asset every time.
+
+==================================================
+5. CAPTURE EVIDENCE
+
+Create a dedicated evidence-capture stage.
+
+The inspector should be able to:
+
+• Take photos
+• Upload photos
+• Capture multiple images
+• Add captions
+• Categorise evidence
+• Delete/replace evidence
+• Associate evidence with an inspection question
+• Associate evidence with a defect
+• Associate evidence with the overall inspection
+
+Potential evidence categories:
+
+• Asset overview
+• Identification plate
+• Motor
+• Electrical components
+• Safety devices
+• Structural components
+• Damage
+• Defect
+• Compliance evidence
+• Before
+• After
+• Other
+
+Make the evidence interface extremely easy to use on mobile.
+
+The inspector should not have to navigate through complicated menus while standing at a job site.
+
+If supported by the existing application, use the device camera directly.
+
+Images should be stored against the correct inspection/asset records.
+
+==================================================
+6. INSPECTION QUESTIONS
+
+Create a professional inspection questionnaire system.
+
+Questions must NOT be permanently hard-coded into individual screens.
+
+Build a reusable question/template structure.
+
+Each question should support different answer types such as:
+
+• Pass
+• Fail
+• N/A
+• Yes
+• No
+• Text
+• Number
+• Date
+• Dropdown
+• Multiple choice
+• Checkbox
+• Photo required
+• Signature where appropriate
+
+Questions should be grouped into categories.
+
+Example garage door inspection categories:
+
+GENERAL CONDITION
+
+• Is the asset correctly identified?
+• Is the overall condition acceptable?
+• Is there visible damage?
+
+DOOR / GATE OPERATION
+
+• Does the door/gate open correctly?
+• Does it close correctly?
+• Is movement smooth?
+• Are abnormal noises present?
+
+SAFETY
+
+• Are safety devices installed?
+• Are safety devices operating correctly?
+• Are emergency controls accessible?
+• Are warning labels present?
+
+ELECTRICAL
+
+• Is electrical equipment visibly intact?
+• Are cables protected?
+• Are controls functioning?
+
+STRUCTURAL
+
+• Are mounting points secure?
+• Is the structure free from obvious damage?
+• Are fixings secure?
+
+These are examples only.
+
+The architecture must allow additional questions to be added later.
+
+Questions can be marked:
+
+• Required
+• Optional
+• Evidence required
+• Defect trigger
+• Risk trigger
+
+==================================================
+7. PROGRESS TRACKING
+
+Show inspection progress clearly.
+
+For example:
+
+Inspection Progress
+████████░░ 80%
+
+Display:
+
+• Questions completed
+• Questions remaining
+• Evidence captured
+• Defects recorded
+• Required fields remaining
+
+Allow the inspector to save and continue later.
+
+The user must NOT lose inspection progress if they leave the page.
+
+==================================================
+8. RECORD DEFECTS / RISKS
+
+Create a dedicated defect and risk system.
+
+When an inspection question fails or identifies an issue, allow the inspector to create a defect.
+
+Defect fields should include:
+
+• Defect title
+• Description
+• Category
+• Severity
+• Risk level
+• Location
+• Recommended action
+• Evidence/photos
+• Date identified
+• Assigned person/company
+• Status
+• Due date
+• Notes
+
+Risk levels could include:
+
+• Low
+• Medium
+• High
+• Critical
+
+Do not automatically classify something as a particular risk level without a defined rule.
+
+Allow the inspector to manually select the appropriate level.
+
+Clearly distinguish:
+
+DEFECT
+from
+RISK
+from
+RECOMMENDED ACTION
+
+A failed question should be able to create or link to a defect, but the system should not blindly create duplicate defects.
+
+==================================================
+9. NOTES AND ACTIONS
+
+Create a section for:
+
+• General notes
+• Customer notes
+• Inspector notes
+• Recommended actions
+• Corrective actions
+• Follow-up requirements
+• Additional comments
+
+Allow actions to be linked to defects.
+
+Example:
+
+Defect:
+Safety sensor not operating correctly.
+
+Recommended action:
+Repair/replace safety sensor and retest system.
+
+Status:
+Open.
+
+==================================================
+10. SIGN-OFF
+
+Before completing the inspection, provide a review/sign-off stage.
+
+Display:
+
+• Asset details
+• Inspection details
+• Questions/results
+• Evidence
+• Defects
+• Risks
+• Actions
+• Notes
+
+Allow the inspector to review everything before submission.
+
+Where appropriate, provide:
+
+• Inspector name
+• Inspector signature
+• Customer/client acknowledgement
+• Date/time
+
+Do not make customer acknowledgement mandatory unless the existing Doorlink requirements specifically require it.
+
+==================================================
+11. GENERATE PROFESSIONAL REPORT
+
+After the inspection is completed, generate a professional Doorlink inspection report.
+
+The report should be structured clearly.
+
+Suggested structure:
+
+PAGE 1
+Doorlink branding
+Inspection Report
+Inspection type
+Inspection date
+Inspector
+Customer/company
+Site/location
+Asset
+
+SECTION 1
+Inspection Overview
+
+SECTION 2
+Asset Details
+
+SECTION 3
+Inspection Results
+
+Organise questions by category.
+
+Show:
+
+Question
+Result
+Comments
+Evidence where relevant
+
+SECTION 4
+Defects
+
+For each defect:
+
+Title
+Description
+Severity
+Risk
+Photo/evidence
+Recommended action
+Status
+
+SECTION 5
+Risks
+
+SECTION 6
+Recommended Actions
+
+SECTION 7
+Evidence / Photos
+
+SECTION 8
+Notes
+
+SECTION 9
+Sign-Off
+
+SECTION 10
+Final Inspection Summary
+
+The report should look like a professional commercial inspection document.
+
+Do NOT make it look like a generic AI-generated PDF.
+
+Use consistent spacing, typography, headings, tables and Doorlink branding.
+
+==================================================
+12. REPORT STATUS
+
+After generation:
+
+Inspection status:
+COMPLETED
+
+Report status:
+GENERATED
+
+Allow:
+
+• View report
+• Download PDF
+• Share report
+• Regenerate report if necessary
+
+If the inspection data changes after the report is generated, clearly handle report regeneration so an outdated report is not accidentally shared.
+
+==================================================
+13. DOWNLOAD / SHARE
+
+Provide:
+
+DOWNLOAD PDF
+
+and
+
+SHARE REPORT
+
+The share function should be designed so it can later integrate with Doorlink’s communication/payment/customer systems.
+
+Do not build unnecessary external integrations unless they already exist.
+
+If the current app already has a sharing/email system, integrate with it rather than creating a duplicate system.
+
+==================================================
+14. DATABASE / DATA STRUCTURE
+
+Design a proper relational data structure.
+
+At minimum consider entities such as:
+
+Inspection
+InspectionTemplate
+InspectionQuestion
+InspectionResponse
+Asset
+Evidence
+Defect
+Risk
+Action
+InspectionNote
+InspectionReport
+Signature
+
+Use the existing Doorlink database architecture if one already exists.
+
+Do not create duplicate tables or competing data systems unnecessarily.
+
+Maintain clear relationships.
+
+Example:
+
+Customer
+↓
+Asset
+↓
+Inspection
+↓
+Questions / Responses
+↓
+Evidence
+↓
+Defects / Risks / Actions
+↓
+Inspection Report
+
+==================================================
+15. MOBILE-FIRST EXPERIENCE
+
+This system will primarily be used by technicians/inspectors on phones and tablets.
+
+Design accordingly.
+
+Prioritise:
+
+• Large touch targets
+• Easy photo capture
+• Minimal typing
+• Clear buttons
+• Simple navigation
+• Progress indicators
+• Sticky navigation where appropriate
+• Save automatically
+• Resume inspection
+• Clear status indicators
+
+Avoid clutter.
+
+The user should be able to complete a real inspection while standing at a customer’s property.
+
+==================================================
+16. UI / DESIGN
+
+Follow the existing Doorlink visual identity.
+
+The system should feel:
+
+Professional
+Premium
+Modern
+Industrial
+Trustworthy
+Clean
+
+Avoid:
+
+• Generic AI-looking interfaces
+• Excessive gradients
+• Overly rounded cartoon-style cards
+• Huge text
+• Unnecessary animations
+• Clutter
+• Excessive empty space
+• Complicated navigation
+
+Use realistic professional UI patterns similar to established field-service, compliance and inspection software.
+
+==================================================
+17. VALIDATION
+
+Implement proper validation.
+
+For example:
+
+• Required questions cannot be skipped.
+• Required evidence must be captured where configured.
+• Required asset information must be completed.
+• An inspection cannot be completed accidentally.
+• Draft inspections can be saved.
+• Completed inspections should be protected from accidental modification.
+• Report generation should only occur when required inspection data is complete.
+
+Show clear error messages explaining exactly what needs to be completed.
+
+==================================================
+18. BACKUP / DATA SAFETY
+
+Before major changes:
+
+• Preserve the existing working application.
+• Create a safe checkpoint/backup.
+• Do not delete unrelated functionality.
+• Do not replace existing systems without first understanding them.
+• Keep changes modular.
+
+If you discover an existing feature that conflicts with the new inspection system, STOP and analyse the conflict before removing anything.
+
+==================================================
+19. TEST THE COMPLETE WORKFLOW
+
+After implementation, test the complete flow from beginning to end:
+
+New Inspection
+↓
+Select Inspection Type
+↓
+Select Asset
+↓
+Enter Asset Details
+↓
+Capture Evidence
+↓
+Complete Questions
+↓
+Record Defects/Risks
+↓
+Add Notes/Actions
+↓
+Review
+↓
+Sign Off
+↓
+Generate Report
+↓
+View Report
+↓
+Download Report
+↓
+Share Report
+
+Test:
+
+• Creating a new inspection
+• Saving a draft
+• Leaving and returning to an inspection
+• Uploading multiple photos
+• Completing questions
+• Failing a question
+• Creating a defect
+• Adding a risk
+• Adding an action
+• Completing the inspection
+• Generating the report
+• Downloading the report
+• Opening the completed inspection again
+
+Fix errors you find.
+
+==================================================
+20. IMPORTANT DEVELOPMENT RULE
+
+Do not just create a visual prototype.
+
+I want the actual functional system built into the Doorlink application.
+
+However, do not make assumptions about missing Doorlink business rules.
+
+If something is not defined, build it in a configurable/modular way rather than hard-coding assumptions.
+
+Before changing existing architecture, inspect what is already there.
+
+At the end, provide me with a clear summary of:
+
+1. What you found in the existing Doorlink app.
+2. What you changed.
+3. What new components/features were created.
+4. What database/data structures were added or modified.
+5. What existing functionality was preserved.
+6. What tests were performed.
+7. Any errors or limitations remaining.
+8. Any recommended next steps.
+
+MOST IMPORTANT:
+
+Build this as a REAL Doorlink inspection platform, not simply a collection of screens.
+
+The workflow must be functional, persistent, mobile-friendly, scalable and ready for future integrations such as compliance documentation, customer accounts, payments, notifications and technician workflows.
+
+DO NOT remove existing Doorlink features.
+
+DO NOT overwrite unrelated work.
+
+DO NOT create fake data that looks like real inspection results.
+
+Use clearly labelled test/demo data only where necessary for development and testing.
