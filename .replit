@@ -12,6 +12,7 @@ hidden = [".next", "node_modules", ".git"]
 
 [nix]
 channel = "stable-24_05"
+packages = ["freetype", "gumbo", "harfbuzz", "jbig2dec", "libjpeg_turbo", "mupdf", "openjpeg", "swig", "xcbuild"]
 
 [env]
 PORT = "3000"
