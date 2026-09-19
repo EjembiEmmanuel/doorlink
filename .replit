@@ -6,12 +6,13 @@
 
 run = "npm run dev -- --hostname 0.0.0.0 --port $PORT"
 entrypoint = "src/app/page.tsx"
-modules = ["nodejs-22", "postgresql-16"]
+modules = ["nodejs-22", "postgresql-16", "python-base-3.13"]
 
 hidden = [".next", "node_modules", ".git"]
 
 [nix]
 channel = "stable-24_05"
+packages = ["freetype", "gumbo", "harfbuzz", "jbig2dec", "libjpeg_turbo", "mupdf", "openjpeg", "swig", "xcbuild"]
 
 [env]
 PORT = "3000"
@@ -24,5 +25,33 @@ run = ["sh", "-c", "npm run start -- --hostname 0.0.0.0 --port $PORT"]
 localPort = 3000
 externalPort = 80
 
+[[ports]]
+localPort = 5000
+externalPort = 5000
+
 [gitHubImport]
 requiredFiles = [".replit", "package.json", "next.config.mjs"]
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Start application"
+
+[[workflows.workflow]]
+name = "Start application"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm run dev -- --hostname 0.0.0.0 --port 5000"
+waitForPort = 5000
+
+[workflows.workflow.metadata]
+outputType = "webview"

@@ -322,6 +322,8 @@ model User {
   doorConfigurations    DoorConfiguration[]
   disputesRaised        Dispute[]                 @relation("DisputeRaiser")
   reportsFiled          Report[]                  @relation("ReportAuthor")
+  complianceProfile     ComplianceProfile?
+  compliancePurchases   CompliancePackPurchase[]
   reportsReviewed       Report[]                  @relation("ReportReviewer")
 
   clientRecords         Client[]                  @relation("ClientUser")
@@ -1356,6 +1358,106 @@ model Report {
 
   @@index([status])
   @@index([targetType, targetId])
+}
+
+// ---------------------------------------------------------------------
+// Compliance & Safety Pack
+//
+// A paid add-on: fifteen templates for the door, gate and shutter trade,
+// branded with the buyer's own business details and logo.
+//
+// The business details live here once rather than being re-entered on
+// every document, which is the same reasoning the source pack gives for
+// completing DL-BUS-001 first: every other document repeats the block.
+// ---------------------------------------------------------------------
+
+enum CompliancePurchaseStatus {
+  // Created, awaiting a payment provider that has not been connected.
+  PENDING
+  PAID
+  REFUNDED
+  CANCELLED
+}
+
+model ComplianceProfile {
+  id     String @id @default(cuid())
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String @unique
+
+  // Section 01 — business details
+  businessName    String?
+  tradingName     String?
+  abn             String?
+  acn             String?
+  businessAddress String?
+  postalAddress   String?
+  phone           String?
+  mobile          String?
+  email           String?
+  website         String?
+
+  // Section 02 — key people
+  ownerName              String?
+  operationsManager      String?
+  complianceContact      String?
+  primarySiteContact     String?
+  emergencyContactName   String?
+  emergencyContactNumber String?
+  firstAidOfficer        String?
+
+  // Section 03 — jurisdiction, licences and insurance
+  state                   String?
+  whsRegulator            String?
+  tradeLicenceNumber      String?
+  electricalLicenceNumber String?
+  otherRegistration       String?
+  publicLiabilityInsurer  String?
+  publicLiabilityPolicy   String?
+  publicLiabilityExpiry   DateTime?
+  workersCompPolicy       String?
+  workersCompExpiry       DateTime?
+
+  // Branding. A data URI rather than a storage key: a logo is small, and
+  // no file-storage backend is connected. Size and type are validated
+  // before this is written — see lib/compliance/logo.ts.
+  logoDataUri String?
+
+  // Approval block, repeated on every document
+  preparedByName     String?
+  preparedByPosition String?
+  approvedByName     String?
+  approvedByPosition String?
+
+  packVersion String?
+  dateIssued  DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model CompliancePackPurchase {
+  id     String @id @default(cuid())
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+
+  // Doorlink's own reference, handed to the payment provider.
+  reference String @unique
+
+  // The price is snapshotted at purchase, for the same reason the
+  // commission rate is snapshotted onto a Transaction: changing the list
+  // price later must not rewrite what someone was charged.
+  priceCents Int
+  currency   String @default("AUD")
+
+  status           CompliancePurchaseStatus @default(PENDING)
+  providerIntentId String?
+  purchasedAt      DateTime?
+  refundedAt       DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId, status])
 }
 
 // ---------------------------------------------------------------------

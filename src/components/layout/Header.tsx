@@ -20,6 +20,7 @@ const NAV_LINKS = [
   { href: '/find', label: 'Door systems' },
   { href: '/manuals', label: 'Manuals' },
   { href: '/marketplace', label: 'Parts' },
+  { href: '/compliance', label: 'Compliance' },
 ]
 
 /**
@@ -99,10 +100,13 @@ export async function Header() {
   const mobileLinks = [...NAV_LINKS, ...accountLinks]
 
   return (
-    <header className="relative border-b border-line bg-paper">
+    <header className="relative z-20 border-b border-line bg-paper">
       <div className="mx-auto flex h-16 max-w-shell items-center justify-between px-4">
-        <Link href="/" className="text-lg font-semibold tracking-tight text-graphite">
-          Doorlink
+        <Link href="/" className="flex items-center gap-2.5 text-lg font-semibold tracking-tight text-graphite">
+          <span className="flex h-7 w-7 items-center justify-center rounded bg-graphite text-[10px] font-bold tracking-normal text-paper">
+            DL
+          </span>
+          <span>Doorlink</span>
         </Link>
 
         <nav className="hidden items-center gap-6 md:flex">
@@ -111,7 +115,7 @@ export async function Header() {
             <Link
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-graphite hover:text-signal"
+              className="text-sm font-medium text-graphite-soft transition-colors hover:text-signal"
             >
               {link.label}
             </Link>
