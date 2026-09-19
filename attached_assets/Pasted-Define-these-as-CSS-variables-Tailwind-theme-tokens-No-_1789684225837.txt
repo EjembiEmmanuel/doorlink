@@ -1,0 +1,47 @@
+Define these as CSS variables / Tailwind theme tokens. No other hues anywhere in the app.
+
+	•	--bg: #0B0B0C (near-black, app background)
+	•	--surface: #141416 (cards, panels)
+	•	--surface-raised: #1C1C1F (modals, popovers)
+	•	--border: #2A2A2E
+	•	--text: #FFFFFF
+	•	--text-muted: #A1A1A6
+	•	--accent: #FF6A00 (primary orange)
+	•	--accent-hover: #FF8124
+	•	--accent-dim: rgba(255,106,0,0.12) (tints, hover rows, active nav)
+
+Rules: orange is an accent, not a background. Maximum one orange element per visual group — primary button, active nav item, or a status highlight, not all three at once. Never orange text on white. Never gradients between orange and black. Light mode (if built) inverts to #FFFFFF background, #0B0B0C text, same orange.
+
+2. Typography
+
+One sans-serif family (Inter or Geist), weights 400/500/600 only. Scale: 12 / 14 / 16 / 20 / 28 / 40px. Tight tracking (-0.02em) on anything 28px and above. Numbers in tables use tabular figures.
+
+3. Spacing & shape
+
+8px base grid — spacing is only ever 4, 8, 12, 16, 24, 32, 48, 64. Border radius: 6px on inputs and buttons, 10px on cards, 0px on tables. No pill-shaped buttons. Borders over shadows; if a shadow is used it's a single soft one, never stacked.
+
+4. The garage door — exact specification
+
+Full-viewport scene, not a hero section with a door graphic in it.
+
+Scene: a dark concrete/architectural opening, interior in shadow. The door is a modern sectional door — 4 horizontal panels with a subtle horizontal groove between each, brushed dark metal, one thin orange LED strip along the bottom edge of the lowest panel as the only colour in frame. Light source top-left, soft, so panel edges catch a faint highlight and the floor takes a soft reflection. Slight perspective — the door plane is tilted a few degrees so it reads as 3D, not a flat rectangle.
+
+Interaction:
+
+	•	Drag or swipe upward anywhere on the door. The door tracks the pointer 1:1 while dragging — this is the part that has to feel real.
+	•	Release past 35% of travel: it completes the opening on its own. Release below 35%: it falls back down.
+	•	Panels articulate as they rise — each panel rotates back toward horizontal as it reaches the top of the opening, like a real sectional door on a curved track. This is the single most important detail. A door that slides up as one flat sheet looks cheap.
+	•	A persistent OPEN THE DOOR ↑ button sits below the door. Dragging is never the only route in.
+	•	Text hint fades out the moment a drag starts.
+
+Motion: 600–800ms to complete, easing cubic-bezier(0.22, 1, 0.36, 1). Faint motor-hum ambient sound, muted by default, toggleable — never autoplay audio. Under prefers-reduced-motion, skip the animation entirely and cross-fade straight to the reveal.
+
+Reveal: as the door clears, the interior lights up and the text appears — ALL DEVELOPED FOR in 14px muted uppercase with wide tracking, AUTOMATED DOORS & GATES beneath it at 40px+, white, with only the ampersand in orange. Text fades up 200ms after the door passes it, not simultaneously.
+
+Then: the scene scales back and dissolves into the dashboard over ~400ms. It should feel like walking through the opening, not like a landing page being swapped out.
+
+Implementation: CSS 3D transforms with transform-style: preserve-3d and per-panel rotateX + translateY, driven by pointer events. No Three.js, no WebGL, no physics library. Must hold 60fps on a mid-range Android. Only transform and opacity animate — never top, height, or width.
+
+Persistence: store a flag so the door sequence plays once per session, not on every route change. Returning users land straight in the app with a small door icon in the nav that replays it if clicked.
+
+5. Component structure

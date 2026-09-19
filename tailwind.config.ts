@@ -1,41 +1,38 @@
 import type { Config } from 'tailwindcss'
 
 /**
- * DoorLink design tokens.
+ * Doorlink design tokens.
  *
- * Palette is drawn from the materials the platform is about: galvanised
- * steel, powder-coat charcoal, and the printed white of a spec sheet.
- * One accent (signal blue) carries every interactive affordance; amber is
- * reserved exclusively for provenance and "not connected" states so those
- * warnings can never be mistaken for decoration.
+ * The interface uses one restrained industrial palette. Orange is reserved
+ * for the current action or a single status highlight in a visual group.
  */
 const config: Config = {
   content: ['./src/**/*.{ts,tsx}'],
   theme: {
     extend: {
       colors: {
-        paper: '#FAFAF9',
-        rail: '#F1F0ED',
-        line: '#DEDCD6',
+        paper: '#0B0B0C',
+        rail: '#141416',
+        line: '#2A2A2E',
         zinc: {
-          DEFAULT: '#8C9096',
-          deep: '#5A6068',
+          DEFAULT: '#A1A1A6',
+          deep: '#A1A1A6',
         },
         graphite: {
-          DEFAULT: '#1B1D1F',
-          soft: '#2C3033',
+          DEFAULT: '#FFFFFF',
+          soft: '#A1A1A6',
         },
         signal: {
-          DEFAULT: '#1B4FA8',
-          hover: '#163F87',
-          tint: '#EDF2FB',
+          DEFAULT: '#FF6A00',
+          hover: '#FF8124',
+          tint: 'rgba(255,106,0,0.12)',
         },
         caution: {
-          DEFAULT: '#94600C',
-          tint: '#FBF3E3',
+          DEFAULT: '#FF6A00',
+          tint: 'rgba(255,106,0,0.12)',
         },
-        good: '#1F6B44',
-        bad: '#A12B24',
+        good: '#A1A1A6',
+        bad: '#FF6A00',
       },
       fontFamily: {
         sans: ['var(--font-plex-sans)', 'system-ui', 'sans-serif'],
@@ -48,14 +45,13 @@ const config: Config = {
         'display-lg': ['3.75rem', { lineHeight: '1.04', letterSpacing: '-0.026em' }],
       },
       borderRadius: {
-        // Industrial, not consumer-app. Nothing is pill-shaped.
-        DEFAULT: '3px',
-        md: '4px',
-        lg: '6px',
+        DEFAULT: '6px',
+        md: '6px',
+        lg: '10px',
       },
       boxShadow: {
-        panel: '0 1px 2px rgba(27, 29, 31, 0.06), 0 8px 24px -16px rgba(27, 29, 31, 0.28)',
-        lift: '0 2px 4px rgba(27, 29, 31, 0.08), 0 16px 32px -20px rgba(27, 29, 31, 0.35)',
+        panel: '0 12px 28px rgba(0, 0, 0, 0.24)',
+        lift: '0 16px 32px rgba(0, 0, 0, 0.3)',
       },
       maxWidth: {
         prose: '68ch',
