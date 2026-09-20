@@ -3,6 +3,7 @@ import { join } from 'node:path'
 import { PrismaClient, DataSource } from '@prisma/client'
 import { manufacturerFileSchema } from './schema'
 import { aliasSpellings, normaliseModel } from '../../src/lib/manuals/normalise'
+import { documentSlug, slugify } from '../../src/lib/manuals/slug'
 
 // Imports data/manuals/*.json into the catalogue.
 //
@@ -17,13 +18,6 @@ import { aliasSpellings, normaliseModel } from '../../src/lib/manuals/normalise'
 
 const prisma = new PrismaClient()
 const DATA_DIR = join(process.cwd(), 'data', 'manuals')
-
-function slugify(value: string): string {
-  return value
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-|-$/g, '')
-}
 
 async function main() {
   // portals.json shares this directory but is a registry of harvest
@@ -186,7 +180,10 @@ async function main() {
                 ...data,
                 ...versionPatch,
                 modelId: model.id,
-                slug: slugify(`${manufacturer.slug}-${seed.modelCode}-${doc.kind}-${doc.title}`).slice(0, 90),
+                slug: documentSlug(
+                  `${manufacturer.slug}-${seed.modelCode}-${doc.kind}-${doc.title}`,
+                  doc.sourceUrl
+                ),
               },
             })
         documents += 1

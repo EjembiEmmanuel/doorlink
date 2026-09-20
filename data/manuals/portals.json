@@ -1261,6 +1261,47 @@
       "region": "AU",
       "note": "Reseller index of Steel-Line manuals.",
       "follow": true
+    },
+    {
+      "manufacturer": "Mighty Mule (GTO Access Systems)",
+      "slug": "mighty-mule",
+      "url": "https://mightymule.com/pages/manuals",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "US",
+      "note": "Manufacturer's manuals index. Note it also pushes a 3D installation app; only the PDFs are of interest here.",
+      "follow": true
+    },
+    {
+      "manufacturer": "Mighty Mule (GTO Access Systems)",
+      "slug": "mighty-mule",
+      "url": "https://www.mightymule.com/wp-content/uploads/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "US",
+      "note": "Manufacturer's uploads directory, flat, serving the manuals directly. Some links surfaced over plain HTTP."
+    },
+    {
+      "manufacturer": "Ramset",
+      "slug": "ramset",
+      "url": "https://ramsetstore.com/store/pdfs/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "US",
+      "note": "PDF directory of a Ramset-branded store. Every Ramset manual found came from here; the brand is in the domain but it is a store, so harvested records are third-party."
+    },
+    {
+      "manufacturer": "Ramset",
+      "slug": "ramset",
+      "url": "http://ramsetgateopeners.com/manuals/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "US",
+      "note": "Second Ramset-branded distributor domain with its own manuals directory. Plain HTTP as surfaced."
+    },
+    {
+      "manufacturer": "Ramset",
+      "slug": "ramset",
+      "url": "http://www.gatesnfences.com/files/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "US",
+      "note": "Distributor file tree, subfoldered by brand - it carries Ramset and Linear/OSCO documents among others."
     }
   ]
 }

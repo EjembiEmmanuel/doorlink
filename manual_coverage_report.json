@@ -1,19 +1,19 @@
 {
-  "generatedAt": "2026-09-20T11:12:04.260Z",
+  "generatedAt": "2026-09-20T12:32:14.093Z",
   "caveat": "verified_documents counts links that were actually fetched and resolved. A document can be from an official manufacturer domain and still be unverified. Run `npm run manuals:verify` in an environment with outbound network access to raise this number. All figures below EXCLUDE the demo catalogue, whose manufacturers are invented for demonstration and are reported separately under demo_catalogue.",
   "totals": {
-    "total_manufacturers": 71,
-    "total_models": 202,
-    "total_documents": 226,
-    "total_model_aliases": 416,
-    "total_alternate_sources": 136,
-    "official_documents": 94,
-    "third_party_documents": 132,
+    "total_manufacturers": 73,
+    "total_models": 212,
+    "total_documents": 237,
+    "total_model_aliases": 441,
+    "total_alternate_sources": 143,
+    "official_documents": 97,
+    "third_party_documents": 140,
     "verified_documents": 0,
-    "unverified_documents": 226,
+    "unverified_documents": 237,
     "documents_needing_review": 0,
     "models_without_documentation": 2,
-    "link_only_documents": 226,
+    "link_only_documents": 237,
     "hosted_documents": 3
   },
   "demo_catalogue": {
@@ -23,24 +23,24 @@
     "documents": 10
   },
   "by_verification": {
-    "UNVERIFIED": 226
+    "UNVERIFIED": 237
   },
   "by_origin": {
-    "MANUFACTURER_ORIGINAL": 94,
-    "THIRD_PARTY_GUIDE": 132
+    "MANUFACTURER_ORIGINAL": 97,
+    "THIRD_PARTY_GUIDE": 140
   },
   "by_region": {
     "UNKNOWN": 3,
-    "AU": 36,
-    "GLOBAL": 39,
-    "US": 60,
-    "UK": 16,
+    "AU": 37,
     "EU": 68,
+    "UK": 16,
+    "GLOBAL": 39,
+    "US": 70,
     "NZ": 2,
     "ASIA": 2
   },
   "by_document_kind": {
-    "INSTALL_MANUAL": 159,
+    "INSTALL_MANUAL": 170,
     "PROGRAMMING_GUIDE": 7,
     "USER_MANUAL": 42,
     "TECHNICAL_DOCUMENT": 4,
@@ -49,7 +49,7 @@
     "PARTS_LIST": 1
   },
   "by_rights": {
-    "LINK_ONLY": 226
+    "LINK_ONLY": 237
   },
   "by_manufacturer": [
     {
@@ -354,6 +354,13 @@
       "documents": 5
     },
     {
+      "name": "Mighty Mule (GTO Access Systems)",
+      "slug": "mighty-mule",
+      "country": "US",
+      "models": 4,
+      "documents": 4
+    },
+    {
       "name": "NABCO Entrances",
       "slug": "nabco",
       "country": "US",
@@ -394,6 +401,13 @@
       "country": "AU",
       "models": 4,
       "documents": 3
+    },
+    {
+      "name": "Ramset",
+      "slug": "ramset",
+      "country": "US",
+      "models": 6,
+      "documents": 6
     },
     {
       "name": "Roger Technology",
@@ -463,7 +477,7 @@
       "slug": "steel-line",
       "country": "AU",
       "models": 1,
-      "documents": 1
+      "documents": 2
     },
     {
       "name": "TORMAX",
