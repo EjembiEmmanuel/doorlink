@@ -1209,6 +1209,58 @@
       "authority": "THIRD_PARTY_MIRROR",
       "region": "AU",
       "note": "Reseller directory subfoldered by door type."
+    },
+    {
+      "manufacturer": "Merlin",
+      "slug": "merlin",
+      "url": "https://www.gomerlin.com.au/support-page/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "AU",
+      "note": "Merlin's own support centre, described as carrying spare parts books, brochures and user guides. The first Merlin manufacturer source in this registry - earlier passes found none and left the brand reseller-only.",
+      "follow": true
+    },
+    {
+      "manufacturer": "Merlin",
+      "slug": "merlin",
+      "url": "https://garagedooropenerremotes.com.au/manuals-and-downloads/merlin-downloads",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "AU",
+      "note": "Merlin section of the AU aggregator index; splits roller (MR series) from sectional and tilt (MT/MS Commander and Whisper Drive).",
+      "follow": true
+    },
+    {
+      "manufacturer": "Merlin",
+      "slug": "merlin",
+      "url": "https://wholesalegaragedoors.com.au/chamberlain-merlin-manuals/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "AU",
+      "note": "Reseller index covering Chamberlain and Merlin together - the two brands share document numbering.",
+      "follow": true
+    },
+    {
+      "manufacturer": "Merlin",
+      "slug": "merlin",
+      "url": "https://motepro.com.au/Manuals/Merlin/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "AU",
+      "note": "Reseller directory of Merlin manuals, named by model code."
+    },
+    {
+      "manufacturer": "Steel-Line",
+      "slug": "steel-line",
+      "url": "https://www.steel-lineautomation.com.au/uploads/7/2/0/3/7203835/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "AU",
+      "note": "Manufacturer's upload directory. File names encode model and edition as v<n>-<mmyy>, so several editions of one manual sit side by side - worth harvesting all of them, not just the newest."
+    },
+    {
+      "manufacturer": "Steel-Line",
+      "slug": "steel-line",
+      "url": "https://wholesalegaragedoors.com.au/steel-line-manuals/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "AU",
+      "note": "Reseller index of Steel-Line manuals.",
+      "follow": true
     }
   ]
 }
