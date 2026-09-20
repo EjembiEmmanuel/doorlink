@@ -1158,6 +1158,57 @@
       "region": "GLOBAL",
       "note": "Installer index of Centurion swing and sliding gate motor manuals.",
       "follow": true
+    },
+    {
+      "manufacturer": "B&D",
+      "slug": "bnd",
+      "url": "https://www.bnd.com.au/trade-resources/installation-manuals/door-manuals/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "AU",
+      "note": "Door manuals section of B&D's trade resources - Panelift, Roll-A-Door, Storm-Shield, Shutters and Designer Finishes. Separate from the opener-manuals page already registered.",
+      "follow": true
+    },
+    {
+      "manufacturer": "B&D",
+      "slug": "bnd",
+      "url": "https://www.bnd.com.au/support/resources-for-owners/owner-manuals/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "AU",
+      "note": "Owner-facing manual index, distinct from the trade installation manuals.",
+      "follow": true
+    },
+    {
+      "manufacturer": "B&D",
+      "slug": "bnd",
+      "url": "https://admin.bnd.com.au/media/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "AU",
+      "note": "B&D's CMS media host. Asset paths carry opaque keys, so links here rot - use the trade-resources index as the durable entry point."
+    },
+    {
+      "manufacturer": "Automatic Technology",
+      "slug": "automatic-technology",
+      "url": "https://media.umbraco.io/ata-automation/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "AU",
+      "note": "ATA's own CMS media host. Like B&D's, asset paths carry opaque keys. File names encode document number, model, revision and market (an nz prefix marks the New Zealand edition)."
+    },
+    {
+      "manufacturer": "B&D",
+      "slug": "bnd",
+      "url": "https://wholesalegaragedoors.com.au/bnd-doors-manuals/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "AU",
+      "note": "Reseller index of B&D door manuals.",
+      "follow": true
+    },
+    {
+      "manufacturer": "B&D",
+      "slug": "bnd",
+      "url": "https://motepro.com.au/Manuals/BND/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "AU",
+      "note": "Reseller directory subfoldered by door type."
     }
   ]
 }

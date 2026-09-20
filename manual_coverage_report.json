@@ -1,19 +1,19 @@
 {
-  "generatedAt": "2026-09-20T11:09:35.745Z",
+  "generatedAt": "2026-09-20T11:10:46.318Z",
   "caveat": "verified_documents counts links that were actually fetched and resolved. A document can be from an official manufacturer domain and still be unverified. Run `npm run manuals:verify` in an environment with outbound network access to raise this number. All figures below EXCLUDE the demo catalogue, whose manufacturers are invented for demonstration and are reported separately under demo_catalogue.",
   "totals": {
     "total_manufacturers": 71,
-    "total_models": 200,
-    "total_documents": 221,
-    "total_model_aliases": 404,
-    "total_alternate_sources": 129,
-    "official_documents": 92,
-    "third_party_documents": 129,
+    "total_models": 201,
+    "total_documents": 224,
+    "total_model_aliases": 410,
+    "total_alternate_sources": 134,
+    "official_documents": 94,
+    "third_party_documents": 130,
     "verified_documents": 0,
-    "unverified_documents": 221,
+    "unverified_documents": 224,
     "documents_needing_review": 0,
     "models_without_documentation": 2,
-    "link_only_documents": 221,
+    "link_only_documents": 224,
     "hosted_documents": 3
   },
   "demo_catalogue": {
@@ -23,33 +23,33 @@
     "documents": 10
   },
   "by_verification": {
-    "UNVERIFIED": 221
+    "UNVERIFIED": 224
   },
   "by_origin": {
-    "MANUFACTURER_ORIGINAL": 92,
-    "THIRD_PARTY_GUIDE": 129
+    "MANUFACTURER_ORIGINAL": 94,
+    "THIRD_PARTY_GUIDE": 130
   },
   "by_region": {
     "UNKNOWN": 3,
-    "AU": 32,
+    "AU": 34,
     "GLOBAL": 39,
     "US": 60,
-    "EU": 68,
     "UK": 16,
-    "NZ": 1,
+    "EU": 68,
+    "NZ": 2,
     "ASIA": 2
   },
   "by_document_kind": {
-    "INSTALL_MANUAL": 155,
+    "INSTALL_MANUAL": 157,
     "PROGRAMMING_GUIDE": 7,
-    "USER_MANUAL": 41,
+    "USER_MANUAL": 42,
     "TECHNICAL_DOCUMENT": 4,
-    "SPEC_SHEET": 6,
     "QUICK_START": 7,
+    "SPEC_SHEET": 6,
     "PARTS_LIST": 1
   },
   "by_rights": {
-    "LINK_ONLY": 221
+    "LINK_ONLY": 224
   },
   "by_manufacturer": [
     {
@@ -84,15 +84,15 @@
       "name": "Automatic Technology",
       "slug": "automatic-technology",
       "country": "AU",
-      "models": 4,
-      "documents": 3
+      "models": 5,
+      "documents": 5
     },
     {
       "name": "B&D",
       "slug": "bnd",
       "country": "AU",
       "models": 3,
-      "documents": 3
+      "documents": 4
     },
     {
       "name": "BFT",

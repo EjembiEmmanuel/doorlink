@@ -65,6 +65,23 @@
               "label": "ManualsLib listing"
             }
           ]
+        },
+        {
+          "kind": "USER_MANUAL",
+          "title": "B&D Controll-A-Door R Automatic Rolling Garage Door Opener Instruction Manual",
+          "sourceUrl": "https://motepro.com.au/Manuals/BND/Roller/cadr.pdf",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "Motepro",
+          "region": "AU",
+          "rights": "LINK_ONLY",
+          "evidence": "Reseller copy, direct PDF. No bnd.com.au URL for the Controll-A-Door R surfaced, so this stays third-party while the RDO-1v4 is manufacturer-hosted. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "https://www.manualslib.com/manual/933573/BAndd-Controll-A-Door-R.html",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "ManualsLib listing"
+            }
+          ]
         }
       ]
     }
