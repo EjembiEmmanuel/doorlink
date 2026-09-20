@@ -1,0 +1,68 @@
+{
+  "manufacturer": {
+    "name": "Dominator",
+    "slug": "dominator",
+    "country": "NZ",
+    "website": "https://www.dominator.co.nz/",
+    "supportUrl": "https://www.dominator.co.nz/resources/owners-manuals",
+    "note": "New Zealand garage door and opener manufacturer. Serves its documents from a flat /asset/ path under bare numeric IDs - 3133.pdf, 4025.pdf, 4026.pdf all surfaced. Only 3133 came back with a title, so it is the only one recorded; 4025 and 4026 are real Dominator PDFs whose contents are unidentified from search alone, and creating models for them would mean inventing what they cover. The asset path is registered as a harvest target so they can be resolved properly rather than guessed at now."
+  },
+  "models": [
+    {
+      "modelCode": "Smart & Secure Sectional",
+      "name": "Dominator Smart & Secure Sectional Door Opener",
+      "category": "garage-door-openers",
+      "region": "NZ",
+      "aliases": ["Smart and Secure", "Smart & Secure"],
+      "documents": [
+        {
+          "kind": "QUICK_START",
+          "title": "Smart & Secure Sectional Door Opener Quick Operation Guide",
+          "sourceUrl": "https://www.dominator.co.nz/asset/3133.pdf",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "publisher": "Dominator",
+          "region": "NZ",
+          "rights": "LINK_ONLY",
+          "evidence": "On dominator.co.nz, the manufacturer's own domain. Typed QUICK_START on the document's own title - it is the quick operation guide, not the full manual, and the full one is a recorded gap rather than an assumption. The file name is a bare asset ID carrying no model information, so the title comes entirely from the search result's rendering of the document. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "Select Sectional",
+      "name": "Dominator Select Sectional Door Opener",
+      "category": "garage-door-openers",
+      "region": "NZ",
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "Dominator Select Sectional Door Opener Instruction Manual",
+          "sourceUrl": "https://manuals.plus/dominator/select-sectional-door-opener-manual",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "manuals.plus",
+          "region": "NZ",
+          "rights": "LINK_ONLY",
+          "evidence": "Aggregator listing. No dominator.co.nz asset URL was tied to the Select, so it stays third-party while the Smart & Secure guide is manufacturer-hosted. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "Excel Rolling",
+      "name": "Dominator Excel Rolling Door Opener",
+      "category": "garage-door-openers",
+      "region": "NZ",
+      "aliases": ["Excel"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "Dominator Excel Rolling Door Opener Instructions",
+          "sourceUrl": "https://www.dominatorrodney.co.nz/storage/files/shares/Brochures/ExcelRollingDoorOpener.pdf",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "Dominator Rodney",
+          "region": "NZ",
+          "rights": "LINK_ONLY",
+          "evidence": "Dealer copy. Recorded as third-party because dominatorrodney.co.nz is a regional dealer domain, not the manufacturer's. Note it sits in a Brochures folder while its own opening line reads \"These instructions are intended for professional garage door...\" - the folder is the dealer's filing, the content is installer instructions, so it is typed on the content. Not fetched - egress blocked."
+        }
+      ]
+    }
+  ]
+}

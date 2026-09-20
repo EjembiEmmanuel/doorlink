@@ -1,19 +1,19 @@
 {
-  "generatedAt": "2026-09-20T12:37:08.598Z",
+  "generatedAt": "2026-09-20T12:53:51.760Z",
   "caveat": "verified_documents counts links that were actually fetched and resolved. A document can be from an official manufacturer domain and still be unverified. Run `npm run manuals:verify` in an environment with outbound network access to raise this number. All figures below EXCLUDE the demo catalogue, whose manufacturers are invented for demonstration and are reported separately under demo_catalogue.",
   "totals": {
-    "total_manufacturers": 75,
-    "total_models": 226,
-    "total_documents": 253,
-    "total_model_aliases": 489,
+    "total_manufacturers": 76,
+    "total_models": 229,
+    "total_documents": 258,
+    "total_model_aliases": 500,
     "total_alternate_sources": 155,
-    "official_documents": 111,
-    "third_party_documents": 142,
+    "official_documents": 113,
+    "third_party_documents": 145,
     "verified_documents": 0,
-    "unverified_documents": 253,
+    "unverified_documents": 258,
     "documents_needing_review": 0,
-    "models_without_documentation": 2,
-    "link_only_documents": 253,
+    "models_without_documentation": 1,
+    "link_only_documents": 258,
     "hosted_documents": 3
   },
   "demo_catalogue": {
@@ -23,34 +23,34 @@
     "documents": 10
   },
   "by_verification": {
-    "UNVERIFIED": 253
+    "UNVERIFIED": 258
   },
   "by_origin": {
-    "MANUFACTURER_ORIGINAL": 111,
-    "THIRD_PARTY_GUIDE": 142
+    "MANUFACTURER_ORIGINAL": 113,
+    "THIRD_PARTY_GUIDE": 145
   },
   "by_region": {
     "UNKNOWN": 3,
-    "UK": 16,
-    "AU": 38,
+    "AU": 40,
     "EU": 74,
-    "US": 79,
+    "UK": 16,
     "GLOBAL": 39,
-    "NZ": 2,
+    "US": 79,
+    "NZ": 5,
     "ASIA": 2
   },
   "by_document_kind": {
-    "INSTALL_MANUAL": 179,
+    "INSTALL_MANUAL": 183,
     "PROGRAMMING_GUIDE": 7,
     "USER_MANUAL": 43,
     "TECHNICAL_DOCUMENT": 5,
     "SPEC_SHEET": 10,
-    "QUICK_START": 7,
+    "QUICK_START": 8,
     "SERVICE_BULLETIN": 1,
     "PARTS_LIST": 1
   },
   "by_rights": {
-    "LINK_ONLY": 253
+    "LINK_ONLY": 258
   },
   "by_manufacturer": [
     {
@@ -199,6 +199,13 @@
       "country": "IT",
       "models": 7,
       "documents": 8
+    },
+    {
+      "name": "Dominator",
+      "slug": "dominator",
+      "country": "NZ",
+      "models": 3,
+      "documents": 3
     },
     {
       "name": "DoorHan",
@@ -408,7 +415,7 @@
       "slug": "ozroll",
       "country": "AU",
       "models": 4,
-      "documents": 3
+      "documents": 5
     },
     {
       "name": "Ramset",

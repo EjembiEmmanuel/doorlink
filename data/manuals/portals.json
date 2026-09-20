@@ -1429,6 +1429,49 @@
       "region": "GLOBAL",
       "note": "Aggregator product page reporting 24 ED100 documents. No dormakaba.com document URL has surfaced in any search, so aggregators are the only route to this brand so far.",
       "follow": true
+    },
+    {
+      "manufacturer": "Dominator",
+      "slug": "dominator",
+      "url": "https://www.dominator.co.nz/asset/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "NZ",
+      "note": "Flat asset path serving documents under bare numeric IDs (3133.pdf, 4025.pdf, 4026.pdf all surfaced). The names carry no model information, so harvested records from here need their titles read from the documents rather than inferred."
+    },
+    {
+      "manufacturer": "Dominator",
+      "slug": "dominator",
+      "url": "https://www.dominator.co.nz/resources",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "NZ",
+      "note": "Resource index covering owner's manuals and brochures; the readable route into the numeric asset path.",
+      "follow": true
+    },
+    {
+      "manufacturer": "Dominator",
+      "slug": "dominator",
+      "url": "https://www.dominatorrodney.co.nz/resources/",
+      "authority": "AUTHORISED_DISTRIBUTOR",
+      "region": "NZ",
+      "note": "Regional dealer's manual, warranty and brochure index.",
+      "follow": true
+    },
+    {
+      "manufacturer": "Ozroll",
+      "slug": "ozroll",
+      "url": "https://ozrolltech.com.au/cms/wp-content/uploads/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "AU",
+      "note": "Manufacturer's uploads tree, year/month foldered. File names carry Ozroll's dotted part numbers and revision letters (15.920.253-B)."
+    },
+    {
+      "manufacturer": "Ozroll",
+      "slug": "ozroll",
+      "url": "https://www.manualslib.com/brand/ozroll/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "GLOBAL",
+      "note": "Aggregator brand index listing ODS T10, T20 and T35 manuals. Currently the only source for the T20.",
+      "follow": true
     }
   ]
 }

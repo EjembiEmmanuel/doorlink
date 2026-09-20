@@ -1,6 +1,7 @@
 import { writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { PrismaClient } from '@prisma/client'
+import { reportFailure } from './db-guard'
 
 // Generates manual_coverage_report.json from the database.
 //
@@ -132,8 +133,5 @@ async function main() {
 }
 
 main()
-  .catch((error) => {
-    console.error(error)
-    process.exit(1)
-  })
+  .catch(reportFailure)
   .finally(() => prisma.$disconnect())

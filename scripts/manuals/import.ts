@@ -4,6 +4,7 @@ import { PrismaClient, DataSource } from '@prisma/client'
 import { manufacturerFileSchema } from './schema'
 import { aliasSpellings, normaliseModel } from '../../src/lib/manuals/normalise'
 import { documentSlug, slugify } from '../../src/lib/manuals/slug'
+import { reportFailure } from './db-guard'
 
 // Imports data/manuals/*.json into the catalogue.
 //
@@ -218,8 +219,5 @@ async function main() {
 }
 
 main()
-  .catch((error) => {
-    console.error(error)
-    process.exit(1)
-  })
+  .catch(reportFailure)
   .finally(() => prisma.$disconnect())

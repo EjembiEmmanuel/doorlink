@@ -1,4 +1,5 @@
 import { PrismaClient, VerificationState } from '@prisma/client'
+import { reportFailure } from './db-guard'
 
 // Checks that recorded document links actually resolve.
 //
@@ -154,8 +155,5 @@ async function main() {
 }
 
 main()
-  .catch((error) => {
-    console.error(error)
-    process.exit(1)
-  })
+  .catch(reportFailure)
   .finally(() => prisma.$disconnect())
