@@ -614,6 +614,46 @@
       "authority": "THIRD_PARTY_MIRROR",
       "region": "US",
       "note": "Distributor manual tree, subfoldered by brand - Tormax, Besam and NABCO/Gyro Tech documents in this library all came from it. One of the higher-yield US pedestrian-door targets, and third-party throughout."
+    },
+    {
+      "manufacturer": "Wayne Dalton",
+      "slug": "wayne-dalton",
+      "url": "https://www.wayne-dalton.com/resources/support/installation",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "US",
+      "note": "Manufacturer's installation-documents index; search describes it as covering the 9100, 9605, 9405, 5120 and 5145."
+    },
+    {
+      "manufacturer": "Overhead Door",
+      "slug": "overhead-door",
+      "url": "https://www.overheaddoor.com/resources/owner-manuals",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "US",
+      "note": "Manufacturer's owner-manual index. The reliable route to the CDN files, whose URLs carry changeable cache-buster parameters."
+    },
+    {
+      "manufacturer": "Overhead Door",
+      "slug": "overhead-door",
+      "url": "https://overheaddoor-production-assets.azureedge.net/assets/docs/default-source/owner's-manuals/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "US",
+      "note": "Overhead Door's own CDN directory for owner's manuals - a manufacturer host despite the azureedge.net address."
+    },
+    {
+      "manufacturer": "Overhead Door",
+      "slug": "overhead-door",
+      "url": "https://www.ohdconcord.com/owners-manuals",
+      "authority": "AUTHORISED_DISTRIBUTOR",
+      "region": "US",
+      "note": "Dealer manual index. Several Overhead Door dealers keep near-identical indexes; two more are ohdmetromilwaukee.com and overheaddoorkearney.com."
+    },
+    {
+      "manufacturer": "Wayne Dalton",
+      "slug": "wayne-dalton",
+      "url": "https://www.manualslib.com/brand/wayne-dalton/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "GLOBAL",
+      "note": "Aggregator brand index."
     }
   ]
 }

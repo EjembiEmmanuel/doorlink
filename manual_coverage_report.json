@@ -1,19 +1,19 @@
 {
-  "generatedAt": "2026-09-20T10:44:37.951Z",
+  "generatedAt": "2026-09-20T10:45:59.636Z",
   "caveat": "verified_documents counts links that were actually fetched and resolved. A document can be from an official manufacturer domain and still be unverified. Run `npm run manuals:verify` in an environment with outbound network access to raise this number. All figures below EXCLUDE the demo catalogue, whose manufacturers are invented for demonstration and are reported separately under demo_catalogue.",
   "totals": {
-    "total_manufacturers": 54,
-    "total_models": 140,
-    "total_documents": 149,
-    "total_model_aliases": 244,
-    "total_alternate_sources": 72,
-    "official_documents": 55,
-    "third_party_documents": 94,
+    "total_manufacturers": 57,
+    "total_models": 142,
+    "total_documents": 152,
+    "total_model_aliases": 256,
+    "total_alternate_sources": 78,
+    "official_documents": 56,
+    "third_party_documents": 96,
     "verified_documents": 0,
-    "unverified_documents": 149,
+    "unverified_documents": 152,
     "documents_needing_review": 0,
     "models_without_documentation": 3,
-    "link_only_documents": 149,
+    "link_only_documents": 152,
     "hosted_documents": 3
   },
   "demo_catalogue": {
@@ -23,32 +23,32 @@
     "documents": 10
   },
   "by_verification": {
-    "UNVERIFIED": 149
+    "UNVERIFIED": 152
   },
   "by_origin": {
-    "MANUFACTURER_ORIGINAL": 55,
-    "THIRD_PARTY_GUIDE": 94
+    "MANUFACTURER_ORIGINAL": 56,
+    "THIRD_PARTY_GUIDE": 96
   },
   "by_region": {
     "UNKNOWN": 3,
     "AU": 29,
     "GLOBAL": 32,
-    "US": 37,
+    "US": 40,
     "EU": 39,
     "UK": 6,
     "NZ": 1,
     "ASIA": 2
   },
   "by_document_kind": {
-    "INSTALL_MANUAL": 97,
+    "INSTALL_MANUAL": 98,
     "PROGRAMMING_GUIDE": 5,
-    "USER_MANUAL": 33,
+    "USER_MANUAL": 34,
     "TECHNICAL_DOCUMENT": 4,
-    "QUICK_START": 5,
-    "SPEC_SHEET": 5
+    "SPEC_SHEET": 5,
+    "QUICK_START": 6
   },
   "by_rights": {
-    "LINK_ONLY": 149
+    "LINK_ONLY": 152
   },
   "by_manufacturer": [
     {
@@ -141,6 +141,13 @@
       "country": "IT",
       "models": 4,
       "documents": 4
+    },
+    {
+      "name": "Clopay",
+      "slug": "clopay",
+      "country": "US",
+      "models": 0,
+      "documents": 0
     },
     {
       "name": "DEA System",
@@ -318,6 +325,13 @@
       "documents": 0
     },
     {
+      "name": "Overhead Door",
+      "slug": "overhead-door",
+      "country": "US",
+      "models": 1,
+      "documents": 1
+    },
+    {
       "name": "Ozroll",
       "slug": "ozroll",
       "country": "AU",
@@ -407,6 +421,13 @@
       "country": "IT",
       "models": 1,
       "documents": 1
+    },
+    {
+      "name": "Wayne Dalton",
+      "slug": "wayne-dalton",
+      "country": "US",
+      "models": 1,
+      "documents": 2
     },
     {
       "name": "dormakaba",
