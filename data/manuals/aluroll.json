@@ -1,0 +1,31 @@
+{
+  "manufacturer": {
+    "name": "Aluroll",
+    "slug": "aluroll",
+    "country": "GB",
+    "website": "https://www.aluroll.com/",
+    "supportUrl": null,
+    "note": "British roller garage door manufacturer. No aluroll.com document URL surfaced; the manual below is on an installer's site and names Aluroll as the manufacturer on its own cover, which is why the attribution is made at all."
+  },
+  "models": [
+    {
+      "modelCode": "Secureroll Classic",
+      "name": "Aluroll Secureroll Classic and Compact Roller Garage Door",
+      "category": "roller-shutter-motors",
+      "region": "UK",
+      "aliases": ["Secureroll", "Secureroll Compact"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "Aluroll Secureroll Classic & Compact Roller Garage Door Installation Manual",
+          "sourceUrl": "https://www.chamberlaindoors.co.uk/wp-content/uploads/2025/01/Aluroll-Secureroll-Garage-Door-Installation-Manual.pdf",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "Chamberlain Doors",
+          "region": "UK",
+          "rights": "LINK_ONLY",
+          "evidence": "Installer-hosted copy. The document's own heading reads \"Classic & Compact Roller Garage Door Installation Manual - Manufactured by:\", which is what ties it to Aluroll. Note the host is Chamberlain Doors, a UK door installer, and has nothing to do with Chamberlain the opener manufacturer already in this library - a collision worth flagging before someone merges them. The 2025/01 path segment is the installer's upload month, not the document's edition. Not fetched - egress blocked."
+        }
+      ]
+    }
+  ]
+}

@@ -1,19 +1,19 @@
 {
-  "generatedAt": "2026-09-20T10:55:32.910Z",
+  "generatedAt": "2026-09-20T11:01:34.432Z",
   "caveat": "verified_documents counts links that were actually fetched and resolved. A document can be from an official manufacturer domain and still be unverified. Run `npm run manuals:verify` in an environment with outbound network access to raise this number. All figures below EXCLUDE the demo catalogue, whose manufacturers are invented for demonstration and are reported separately under demo_catalogue.",
   "totals": {
-    "total_manufacturers": 68,
-    "total_models": 171,
-    "total_documents": 186,
-    "total_model_aliases": 327,
-    "total_alternate_sources": 104,
-    "official_documents": 73,
-    "third_party_documents": 113,
+    "total_manufacturers": 71,
+    "total_models": 180,
+    "total_documents": 195,
+    "total_model_aliases": 344,
+    "total_alternate_sources": 107,
+    "official_documents": 75,
+    "third_party_documents": 120,
     "verified_documents": 0,
-    "unverified_documents": 186,
+    "unverified_documents": 195,
     "documents_needing_review": 0,
     "models_without_documentation": 3,
-    "link_only_documents": 186,
+    "link_only_documents": 195,
     "hosted_documents": 3
   },
   "demo_catalogue": {
@@ -23,24 +23,24 @@
     "documents": 10
   },
   "by_verification": {
-    "UNVERIFIED": 186
+    "UNVERIFIED": 195
   },
   "by_origin": {
-    "MANUFACTURER_ORIGINAL": 73,
-    "THIRD_PARTY_GUIDE": 113
+    "MANUFACTURER_ORIGINAL": 75,
+    "THIRD_PARTY_GUIDE": 120
   },
   "by_region": {
     "UNKNOWN": 3,
     "AU": 29,
     "GLOBAL": 32,
     "US": 55,
-    "UK": 8,
-    "EU": 56,
+    "EU": 60,
+    "UK": 13,
     "NZ": 1,
     "ASIA": 2
   },
   "by_document_kind": {
-    "INSTALL_MANUAL": 123,
+    "INSTALL_MANUAL": 132,
     "PROGRAMMING_GUIDE": 6,
     "USER_MANUAL": 39,
     "TECHNICAL_DOCUMENT": 4,
@@ -49,7 +49,7 @@
     "PARTS_LIST": 1
   },
   "by_rights": {
-    "LINK_ONLY": 186
+    "LINK_ONLY": 195
   },
   "by_manufacturer": [
     {
@@ -58,6 +58,13 @@
       "country": "SE",
       "models": 4,
       "documents": 4
+    },
+    {
+      "name": "Aluroll",
+      "slug": "aluroll",
+      "country": "GB",
+      "models": 1,
+      "documents": 1
     },
     {
       "name": "Alutech",
@@ -298,6 +305,13 @@
       "documents": 4
     },
     {
+      "name": "Krispol",
+      "slug": "krispol",
+      "country": "PL",
+      "models": 0,
+      "documents": 0
+    },
+    {
       "name": "LiftMaster",
       "slug": "liftmaster",
       "country": "US",
@@ -364,8 +378,8 @@
       "name": "Novoferm",
       "slug": "novoferm",
       "country": "DE",
-      "models": 0,
-      "documents": 0
+      "models": 3,
+      "documents": 3
     },
     {
       "name": "Overhead Door",
@@ -422,6 +436,13 @@
       "country": "DE",
       "models": 2,
       "documents": 2
+    },
+    {
+      "name": "SWS UK",
+      "slug": "sws",
+      "country": "GB",
+      "models": 4,
+      "documents": 4
     },
     {
       "name": "Somfy",
@@ -504,8 +525,8 @@
       "name": "Wiśniowski",
       "slug": "wisniowski",
       "country": "PL",
-      "models": 2,
-      "documents": 2
+      "models": 3,
+      "documents": 3
     },
     {
       "name": "dormakaba",

@@ -5,7 +5,77 @@
     "country": "DE",
     "website": "https://www.novoferm.com/",
     "supportUrl": "https://www.novoferm.com/downloads/installation-assembly-instructions",
-    "note": "German door and operator manufacturer. Its own downloads area carries installation, assembly and maintenance instructions for garage doors, operators and industrial doors. No model-level PDF URL was surfaced, so none is claimed — the portal is the record, and the harvester is what will open it."
+    "note": "German door and operator manufacturer, with national arms on their own domains (novoferm.pl, novoferm.co.uk) that publish separately from the group site. The Tormatic brand appears on some of its operator documentation. Four documentation indexes across the group are registered as harvest targets; aggregator listings report 93+ Novoferm manuals, so what is here is a small fraction of the range."
   },
-  "models": []
+  "models": [
+    {
+      "modelCode": "R-500",
+      "name": "Novoferm R-500 / R-700 Operator",
+      "category": "garage-door-openers",
+      "region": "EU",
+      "aliases": [
+        "R-700",
+        "R500",
+        "R700",
+        "WN 931002-67-6-50"
+      ],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "Novoferm R-500 / R-700 Manual",
+          "documentCode": "WN 931002-67-6-50",
+          "version": "06-2020",
+          "sourceUrl": "https://www.novoferm.pl/fileadmin/user_upload/manual.pdf",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "publisher": "Novoferm",
+          "region": "EU",
+          "rights": "LINK_ONLY",
+          "evidence": "On novoferm.pl, Novoferm's Polish arm. The document code WN 931002-67-6-50 and the date 06-2020 come from the document's own header as rendered in the search result, not from the file name - the file is called just manual.pdf, which is a generic name and a reason to re-check that this URL still serves this document when the link is verified. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "Novoport III",
+      "name": "Novoferm Novoport III Operator",
+      "category": "garage-door-openers",
+      "region": "EU",
+      "aliases": [
+        "NovoPort III",
+        "Novoport 3"
+      ],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "Novoferm Novoport III Manual",
+          "sourceUrl": "https://www.manualslib.com/manual/1669550/Novoferm-Novoport-Iii.html",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "ManualsLib",
+          "region": "EU",
+          "rights": "LINK_ONLY",
+          "evidence": "Aggregator listing. No novoferm.com URL for the Novoport III surfaced, so it stays third-party while the R-500 is manufacturer-hosted. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "Novogate",
+      "name": "Novoferm Tormatic Novogate",
+      "category": "gate-motors",
+      "region": "EU",
+      "aliases": [
+        "Tormatic Novogate"
+      ],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "Novoferm Tormatic Novogate Manual",
+          "sourceUrl": "https://www.manualslib.com/manual/2108896/Novoferm-Tormatic-Novogate.html",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "ManualsLib",
+          "region": "EU",
+          "rights": "LINK_ONLY",
+          "evidence": "Aggregator listing. Tormatic is the brand on this operator's documentation; it is filed under Novoferm here because the aggregator does, not because the corporate relationship was confirmed. Not fetched - egress blocked."
+        }
+      ]
+    }
+  ]
 }

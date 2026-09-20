@@ -870,6 +870,57 @@
       "authority": "THIRD_PARTY_MIRROR",
       "region": "GLOBAL",
       "note": "Aggregator brand index."
+    },
+    {
+      "manufacturer": "SWS UK",
+      "slug": "sws",
+      "url": "https://www.sws.co.uk/fitting-instructions/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "UK",
+      "note": "Manufacturer's fitting-instructions index, described as covering the full Seceuro range of doors, shutters and gates.",
+      "follow": true
+    },
+    {
+      "manufacturer": "Krispol",
+      "slug": "krispol",
+      "url": "https://krispol.eu/en/download/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "EU",
+      "note": "Manufacturer's download centre. The only Krispol source found; no document URL surfaced from it.",
+      "follow": true
+    },
+    {
+      "manufacturer": "Novoferm",
+      "slug": "novoferm",
+      "url": "https://www.novoferm.co.uk/library/installation-instructions",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "UK",
+      "note": "Novoferm UK's own installation-instruction library, separate from the group downloads area.",
+      "follow": true
+    },
+    {
+      "manufacturer": "Novoferm",
+      "slug": "novoferm",
+      "url": "https://www.novoferm.pl/fileadmin/user_upload/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "EU",
+      "note": "Novoferm Poland's upload directory. Files here can carry generic names like manual.pdf, so what a URL serves needs checking rather than inferring."
+    },
+    {
+      "manufacturer": "Novoferm",
+      "slug": "novoferm",
+      "url": "https://www.manualslib.com/brand/novoferm/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "GLOBAL",
+      "note": "Aggregator brand index; listings report 93+ Novoferm manuals, which is the measure of how much of the range is still missing."
+    },
+    {
+      "manufacturer": "Wiśniowski",
+      "slug": "wisniowski",
+      "url": "https://obchod.wisniowski.eu/img/products_files/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "EU",
+      "note": "Second Wiśniowski shop domain's product-files directory, carrying English-language guides."
     }
   ]
 }

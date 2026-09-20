@@ -5,7 +5,7 @@
     "country": "PL",
     "website": "https://www.wisniowski.pl/",
     "supportUrl": null,
-    "note": "Polish garage, industrial and gate door manufacturer. The one manufacturer-hosted document found is on its own online shop rather than a documentation index, and no index surfaced, so supportUrl is null."
+    "note": "Polish garage, industrial and gate door manufacturer. It serves documents from two of its own shop domains - sklep.wisniowski.pl and obchod.wisniowski.eu - rather than from a documentation index, and no index surfaced, so supportUrl stays null while both shop directories are registered as harvest targets."
   },
   "models": [
     {
@@ -42,6 +42,27 @@
           "region": "EU",
           "rights": "LINK_ONLY",
           "evidence": "Aggregator listing. Whether this is the English edition of the shop-hosted Polish manual above or a UNIPRO-specific document could not be established, so the two are kept separate rather than merged on an assumption. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "GATE",
+      "name": "Wiśniowski GATE Two-Channel Gate Controller",
+      "category": "remotes-accessories",
+      "region": "EU",
+      "aliases": [
+        "WISNIOWSKI GATE"
+      ],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "WIŚNIOWSKI GATE Two-Channel Gate Controller Installation and Configuration Guide",
+          "sourceUrl": "https://obchod.wisniowski.eu/img/products_files/WISNIOWSKI_GATE-installation_and_configuration_guide.pdf",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "publisher": "Wiśniowski",
+          "region": "EU",
+          "rights": "LINK_ONLY",
+          "evidence": "On obchod.wisniowski.eu, a second Wiśniowski shop domain alongside sklep.wisniowski.pl. English edition per the file name, unlike the Polish-only sectional door manual in this file. Filed under accessories because GATE is the controller, not a door. Not fetched - egress blocked."
         }
       ]
     }
