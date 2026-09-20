@@ -1,0 +1,110 @@
+{
+  "manufacturer": {
+    "name": "DEA System",
+    "slug": "dea",
+    "country": "IT",
+    "website": "https://www.deasystem.com/",
+    "supportUrl": null,
+    "note": "Italian gate automation manufacturer. No deasystem.com documentation URL was surfaced by search, so supportUrl is left null and every document below is an aggregator or reseller copy."
+  },
+  "models": [
+    {
+      "modelCode": "LIVI 502",
+      "name": "DEA LIVI 502 Swing Gate Operator",
+      "category": "gate-motors",
+      "region": "EU",
+      "aliases": ["LIVI502", "LIVI 500 Series"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "DEA LIVI 500 Series Operating Instructions and Warnings",
+          "sourceUrl": "https://www.manualslib.com/manual/2011002/Dea-Livi-500-Series.html",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "ManualsLib",
+          "region": "EU",
+          "rights": "LINK_ONLY",
+          "evidence": "Aggregator listing for the 500 series, which search describes as covering electro-mechanical operators for swing gates including the 502. Recorded against the 502 because that is the model the series manual names; the series name is kept as an alias so a search for either finds it. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "https://manuals.easygates.co.uk/dea-livi-502-manual/",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "EasyGates manuals copy, model-specific"
+            },
+            {
+              "url": "https://manuals.plus/m/739cf76d706da57e02ceb72c0d9479a1008cc3dbfccb8b786715c3f1e5b5114e",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "manuals.plus LIVI 502 listing"
+            },
+            {
+              "url": "https://pdf.archiexpo.com/pdf/dea-system/livi-502/150642-270181.html",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "ArchiExpo catalogue entry - product literature, not the installation manual"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "modelCode": "LIVI/N",
+      "name": "DEA LIVI/N Series Operator",
+      "category": "gate-motors",
+      "region": "EU",
+      "aliases": ["LIVI N"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "DEA LIVI/N Series Operating Instructions and Warnings",
+          "sourceUrl": "https://www.manualslib.com/manual/1603144/Dea-Livi-N-Series.html",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "ManualsLib",
+          "region": "EU",
+          "rights": "LINK_ONLY",
+          "evidence": "Aggregator listing, 108 pages per the result. Kept separate from the 500 series because the aggregator files it as a distinct series, not because the difference was confirmed. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "LIVI",
+      "name": "DEA LIVI Series Operator",
+      "category": "gate-motors",
+      "region": "EU",
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "DEA LIVI Series Operating Instructions and Warnings",
+          "sourceUrl": "https://www.manualslib.com/manual/2263512/Dea-Livi-Series.html",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "ManualsLib",
+          "region": "EU",
+          "rights": "LINK_ONLY",
+          "evidence": "Aggregator listing with an installation and assembly section. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "https://www.knowledgebase.egates.co.uk/manuals/dea-livi-manual/",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "eGates knowledge base copy"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "modelCode": "GULLIVER",
+      "name": "DEA Gulliver Sliding Gate Operator",
+      "category": "gate-motors",
+      "region": "EU",
+      "documents": [
+        {
+          "kind": "USER_MANUAL",
+          "title": "DEA Gulliver User Manual",
+          "sourceUrl": "https://manualmachine.com/dea/gulliver/2591288-user-manual/",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "ManualMachine",
+          "region": "EU",
+          "rights": "LINK_ONLY",
+          "evidence": "Aggregator listing. Recorded as its own model rather than folded into the LIVI records: the LIVI line is for swing gates and Gulliver for sliding, and search returned no document covering both. Not fetched - egress blocked."
+        }
+      ]
+    }
+  ]
+}

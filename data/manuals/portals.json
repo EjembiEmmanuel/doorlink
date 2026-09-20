@@ -326,6 +326,70 @@
       "authority": "THIRD_PARTY_MIRROR",
       "region": "GLOBAL",
       "note": "Aggregator brand index spanning the V2 range."
+    },
+    {
+      "manufacturer": "Key Automation",
+      "slug": "key-automation",
+      "url": "https://www.keyautomation.com/media/products/images/MANUALS/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "EU",
+      "note": "Manufacturer's own MANUALS media directory, serving files named <code> <rev>.PDF. If it indexes, one crawl covers the range."
+    },
+    {
+      "manufacturer": "Aprimatic",
+      "slug": "aprimatic",
+      "url": "https://manuals.easygates.co.uk/category/manuals/aprimatic/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "UK",
+      "note": "Reseller index of Aprimatic manuals. Third-party by definition; harvested records must not be shown as manufacturer documents."
+    },
+    {
+      "manufacturer": "Aprimatic",
+      "slug": "aprimatic",
+      "url": "https://www.manualslib.com/brand/aprimatic/gate-opener.html",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "GLOBAL",
+      "note": "Aggregator brand index for Aprimatic gate openers."
+    },
+    {
+      "manufacturer": "SEA (Seateam)",
+      "slug": "sea",
+      "url": "https://download.seateam.com/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "EU",
+      "note": "Public file-browser index of SEA installation manuals, organised by language, product family and type. The most productive-looking target in this registry. SEA's separate reserved area needs registration and is deliberately not listed here."
+    },
+    {
+      "manufacturer": "SEA (Seateam)",
+      "slug": "sea",
+      "url": "https://download.seateam.com/index4.php?folder=RU5HTElTSCAtIEluc3RhbGxhdGlvbiBNYW51YWxzL0VsZWN0cm9uaWMvQ09OVFJPTCBCT0FSRFMgQU5EIFBST0dSQU1NRVJT",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "EU",
+      "note": "One folder inside that index: ENGLISH - Installation Manuals/Electronic/CONTROL BOARDS AND PROGRAMMERS (the folder parameter is base64). Recorded as a worked example of the encoding, since the harvester will need to walk these folder links rather than guess paths."
+    },
+    {
+      "manufacturer": "SEA (Seateam)",
+      "slug": "sea",
+      "url": "https://www.seauk.uk/technical-page/",
+      "authority": "AUTHORISED_DISTRIBUTOR",
+      "region": "UK",
+      "note": "SEA UK technical page; search describes it as carrying control-panel instructions including the User 1 and User 2 boards."
+    },
+    {
+      "manufacturer": "Meccanica Fadini",
+      "slug": "fadini",
+      "url": "https://manuals.easygates.co.uk/PDF/fadini/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "UK",
+      "note": "Reseller directory of Fadini PDFs, subfoldered by product type. Third-party; harvested records must not be shown as manufacturer documents."
+    },
+    {
+      "manufacturer": "Meccanica Fadini",
+      "slug": "fadini",
+      "url": "https://www.manualslib.com/brand/fadini/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "GLOBAL",
+      "note": "Aggregator brand index for Fadini."
     }
   ]
 }

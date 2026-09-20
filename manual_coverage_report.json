@@ -1,19 +1,19 @@
 {
-  "generatedAt": "2026-09-20T10:34:28.155Z",
+  "generatedAt": "2026-09-20T10:37:05.730Z",
   "caveat": "verified_documents counts links that were actually fetched and resolved. A document can be from an official manufacturer domain and still be unverified. Run `npm run manuals:verify` in an environment with outbound network access to raise this number. All figures below EXCLUDE the demo catalogue, whose manufacturers are invented for demonstration and are reported separately under demo_catalogue.",
   "totals": {
-    "total_manufacturers": 34,
-    "total_models": 93,
-    "total_documents": 97,
-    "total_model_aliases": 135,
-    "total_alternate_sources": 40,
-    "official_documents": 36,
-    "third_party_documents": 61,
+    "total_manufacturers": 39,
+    "total_models": 110,
+    "total_documents": 114,
+    "total_model_aliases": 164,
+    "total_alternate_sources": 55,
+    "official_documents": 40,
+    "third_party_documents": 74,
     "verified_documents": 0,
-    "unverified_documents": 97,
+    "unverified_documents": 114,
     "documents_needing_review": 0,
     "models_without_documentation": 3,
-    "link_only_documents": 97,
+    "link_only_documents": 114,
     "hosted_documents": 3
   },
   "demo_catalogue": {
@@ -23,34 +23,41 @@
     "documents": 10
   },
   "by_verification": {
-    "UNVERIFIED": 97
+    "UNVERIFIED": 114
   },
   "by_origin": {
-    "MANUFACTURER_ORIGINAL": 36,
-    "THIRD_PARTY_GUIDE": 61
+    "MANUFACTURER_ORIGINAL": 40,
+    "THIRD_PARTY_GUIDE": 74
   },
   "by_region": {
     "UNKNOWN": 3,
     "AU": 26,
     "GLOBAL": 29,
     "US": 17,
-    "EU": 16,
-    "UK": 4,
+    "EU": 31,
+    "UK": 6,
     "NZ": 1,
     "ASIA": 1
   },
   "by_document_kind": {
-    "INSTALL_MANUAL": 59,
+    "INSTALL_MANUAL": 74,
     "PROGRAMMING_GUIDE": 4,
-    "USER_MANUAL": 25,
+    "USER_MANUAL": 26,
     "TECHNICAL_DOCUMENT": 4,
     "SPEC_SHEET": 3,
-    "QUICK_START": 2
+    "QUICK_START": 3
   },
   "by_rights": {
-    "LINK_ONLY": 97
+    "LINK_ONLY": 114
   },
   "by_manufacturer": [
+    {
+      "name": "Aprimatic",
+      "slug": "aprimatic",
+      "country": "IT",
+      "models": 2,
+      "documents": 2
+    },
     {
       "name": "Automatic Technology",
       "slug": "automatic-technology",
@@ -106,6 +113,13 @@
       "country": "AU",
       "models": 0,
       "documents": 0
+    },
+    {
+      "name": "DEA System",
+      "slug": "dea",
+      "country": "IT",
+      "models": 4,
+      "documents": 4
     },
     {
       "name": "Ditec Entrematic",
@@ -178,6 +192,13 @@
       "documents": 3
     },
     {
+      "name": "Key Automation",
+      "slug": "key-automation",
+      "country": "IT",
+      "models": 4,
+      "documents": 4
+    },
+    {
       "name": "LiftMaster",
       "slug": "liftmaster",
       "country": "US",
@@ -190,6 +211,13 @@
       "country": "DE",
       "models": 3,
       "documents": 3
+    },
+    {
+      "name": "Meccanica Fadini",
+      "slug": "fadini",
+      "country": "IT",
+      "models": 2,
+      "documents": 2
     },
     {
       "name": "Merlin",
@@ -232,6 +260,13 @@
       "country": "AU",
       "models": 3,
       "documents": 3
+    },
+    {
+      "name": "SEA (Seateam)",
+      "slug": "sea",
+      "country": "IT",
+      "models": 5,
+      "documents": 5
     },
     {
       "name": "Somfy",
