@@ -5,7 +5,7 @@
     "country": "CH",
     "website": "https://www.dormakaba.com/",
     "supportUrl": "https://my.dormakaba.com/",
-    "note": "Swiss manufacturer of automatic pedestrian door systems, formed from Dorma and Kaba. Older documentation still carries the Dorma name."
+    "note": "Swiss manufacturer of automatic pedestrian door systems, formed from Dorma and Kaba. Older documentation still carries the Dorma name. No dormakaba.com document URL has surfaced in any search so far - every source here is an aggregator. An aggregator reports 24 ED100 documents alone across installation, service, mounting, owner's and maintenance types, so the range behind these records is large and almost entirely unrecorded."
   },
   "models": [
     {
@@ -13,7 +13,10 @@
       "name": "ES 200 EASY Sliding Door Operator",
       "category": "automatic-pedestrian-doors",
       "region": "EU",
-      "aliases": ["ES200 EASY", "ES200EASY"],
+      "aliases": [
+        "ES200 EASY",
+        "ES200EASY"
+      ],
       "documents": [
         {
           "kind": "SPEC_SHEET",
@@ -32,7 +35,9 @@
       "name": "ES 200 Sliding Door Operator",
       "category": "automatic-pedestrian-doors",
       "region": "NZ",
-      "aliases": ["ES200"],
+      "aliases": [
+        "ES200"
+      ],
       "documents": [
         {
           "kind": "INSTALL_MANUAL",
@@ -44,6 +49,59 @@
           "region": "NZ",
           "rights": "LINK_ONLY",
           "evidence": "Document-sharing site, not a manufacturer source, and Scribd commonly gates downloads. Recorded because the document code and the NZ regional edition are identifiable from the title. The harvester will likely mark this RESTRICTED. Not fetched - egress blocked."
+        },
+        {
+          "kind": "USER_MANUAL",
+          "title": "dormakaba ES 200 User Manual",
+          "sourceUrl": "https://www.manualslib.com/manual/3376852/Dormakaba-Es-200.html",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "ManualsLib",
+          "region": "EU",
+          "rights": "LINK_ONLY",
+          "evidence": "Aggregator listing of the user-facing document, kept alongside the installation material already on this model because they serve different readers. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "https://pdf.archiexpo.com/pdf/dormakaba/es-200/52803-385652.html",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "ArchiExpo catalogue entry - product literature, not a manual"
+            },
+            {
+              "url": "https://doordynamic.com/blogs/news/es200-automatic-door-installation-manual",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "Third-party step-by-step write-up; a retelling, not the manufacturer's document"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "modelCode": "ED100",
+      "name": "dormakaba ED100 / ED250 Swing Door Operator",
+      "category": "automatic-pedestrian-doors",
+      "region": "EU",
+      "aliases": [
+        "ED250",
+        "ED100/ED250",
+        "ED100 SA",
+        "ED250 SA"
+      ],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "dormakaba ED100 / ED250 Installation Guide",
+          "sourceUrl": "https://www.manualslib.com/products/Dormakaba-Ed100-8830099.html",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "ManualsLib",
+          "region": "EU",
+          "rights": "LINK_ONLY",
+          "evidence": "Aggregator product page rather than a single document - search reports 24 ED100 manuals behind it across installation, service, mounting, owner's and maintenance types. Recorded at that level because no individual document URL surfaced, and picking one arbitrarily would misrepresent which document this record points at. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "https://www.scribd.com/document/906734171/9",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "Document-sharing copy covering ED100/ED250 SA parameter values and firmware updates via handheld terminal"
+            }
+          ]
         }
       ]
     }

@@ -1,19 +1,19 @@
 {
-  "generatedAt": "2026-09-20T12:35:51.434Z",
+  "generatedAt": "2026-09-20T12:37:08.598Z",
   "caveat": "verified_documents counts links that were actually fetched and resolved. A document can be from an official manufacturer domain and still be unverified. Run `npm run manuals:verify` in an environment with outbound network access to raise this number. All figures below EXCLUDE the demo catalogue, whose manufacturers are invented for demonstration and are reported separately under demo_catalogue.",
   "totals": {
     "total_manufacturers": 75,
-    "total_models": 223,
-    "total_documents": 249,
-    "total_model_aliases": 477,
-    "total_alternate_sources": 148,
-    "official_documents": 109,
-    "third_party_documents": 140,
+    "total_models": 226,
+    "total_documents": 253,
+    "total_model_aliases": 489,
+    "total_alternate_sources": 155,
+    "official_documents": 111,
+    "third_party_documents": 142,
     "verified_documents": 0,
-    "unverified_documents": 249,
+    "unverified_documents": 253,
     "documents_needing_review": 0,
     "models_without_documentation": 2,
-    "link_only_documents": 249,
+    "link_only_documents": 253,
     "hosted_documents": 3
   },
   "demo_catalogue": {
@@ -23,34 +23,34 @@
     "documents": 10
   },
   "by_verification": {
-    "UNVERIFIED": 249
+    "UNVERIFIED": 253
   },
   "by_origin": {
-    "MANUFACTURER_ORIGINAL": 109,
-    "THIRD_PARTY_GUIDE": 140
+    "MANUFACTURER_ORIGINAL": 111,
+    "THIRD_PARTY_GUIDE": 142
   },
   "by_region": {
     "UNKNOWN": 3,
-    "EU": 70,
     "UK": 16,
     "AU": 38,
-    "GLOBAL": 39,
+    "EU": 74,
     "US": 79,
+    "GLOBAL": 39,
     "NZ": 2,
     "ASIA": 2
   },
   "by_document_kind": {
-    "INSTALL_MANUAL": 178,
+    "INSTALL_MANUAL": 179,
     "PROGRAMMING_GUIDE": 7,
-    "USER_MANUAL": 42,
+    "USER_MANUAL": 43,
     "TECHNICAL_DOCUMENT": 5,
-    "SPEC_SHEET": 8,
+    "SPEC_SHEET": 10,
     "QUICK_START": 7,
     "SERVICE_BULLETIN": 1,
     "PARTS_LIST": 1
   },
   "by_rights": {
-    "LINK_ONLY": 249
+    "LINK_ONLY": 253
   },
   "by_manufacturer": [
     {
@@ -113,8 +113,8 @@
       "name": "Becker",
       "slug": "becker",
       "country": "DE",
-      "models": 3,
-      "documents": 3
+      "models": 5,
+      "documents": 5
     },
     {
       "name": "Benincà",
@@ -561,8 +561,8 @@
       "name": "dormakaba",
       "slug": "dormakaba",
       "country": "CH",
-      "models": 2,
-      "documents": 2
+      "models": 3,
+      "documents": 4
     },
     {
       "name": "elero",

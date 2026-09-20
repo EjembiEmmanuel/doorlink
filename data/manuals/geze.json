@@ -13,7 +13,9 @@
       "name": "Slimdrive SL Automatic Sliding Door Operator",
       "category": "automatic-pedestrian-doors",
       "region": "EU",
-      "aliases": ["SlimdriveSL"],
+      "aliases": [
+        "SlimdriveSL"
+      ],
       "documents": [
         {
           "kind": "INSTALL_MANUAL",

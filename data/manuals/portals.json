@@ -1402,6 +1402,33 @@
       "region": "AU",
       "note": "Reseller coding-instruction index - remote programming steps by model, across brands.",
       "follow": true
+    },
+    {
+      "manufacturer": "Becker",
+      "slug": "becker",
+      "url": "https://produktcenter.becker-antriebe.com/en/Drives/Roller-shutter-applications/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "EU",
+      "note": "Manufacturer's product centre, foldered by drive type. Pages rather than PDFs, so this needs the follow step - and what it yields will be product pages unless documents are linked from them.",
+      "follow": true
+    },
+    {
+      "manufacturer": "GEZE",
+      "slug": "geze",
+      "url": "https://www.geze.com/en/download/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "EU",
+      "note": "Download index. Files are served through a handler with opaque mw####### media keys, so the index is the durable route in rather than the file URLs.",
+      "follow": true
+    },
+    {
+      "manufacturer": "dormakaba",
+      "slug": "dormakaba",
+      "url": "https://www.manualslib.com/products/Dormakaba-Ed100-8830099.html",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "GLOBAL",
+      "note": "Aggregator product page reporting 24 ED100 documents. No dormakaba.com document URL has surfaced in any search, so aggregators are the only route to this brand so far.",
+      "follow": true
     }
   ]
 }

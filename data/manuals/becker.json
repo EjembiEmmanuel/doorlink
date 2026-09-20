@@ -13,7 +13,11 @@
       "name": "R12-17 to R30-17 Tubular Drive (E03a)",
       "category": "roller-shutter-motors",
       "region": "AU",
-      "aliases": ["E03A", "R12-17", "R30-17"],
+      "aliases": [
+        "E03A",
+        "R12-17",
+        "R30-17"
+      ],
       "documents": [
         {
           "kind": "INSTALL_MANUAL",
@@ -39,7 +43,10 @@
       "name": "R8-17 Tubular Drive for Roller Shutters",
       "category": "roller-shutter-motors",
       "region": "GLOBAL",
-      "aliases": ["R8/17", "R817"],
+      "aliases": [
+        "R8/17",
+        "R817"
+      ],
       "documents": [
         {
           "kind": "INSTALL_MANUAL",
@@ -58,7 +65,9 @@
       "name": "R8/17R Tubular Drive for Roller Shutters",
       "category": "roller-shutter-motors",
       "region": "GLOBAL",
-      "aliases": ["R8/17R"],
+      "aliases": [
+        "R8/17R"
+      ],
       "documents": [
         {
           "kind": "USER_MANUAL",
@@ -69,6 +78,75 @@
           "region": "GLOBAL",
           "rights": "LINK_ONLY",
           "evidence": "Aggregator listing. Recorded separately from the R8-17 because the model designations differ by suffix and the manuals are listed separately. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "R8-17-C01",
+      "name": "Becker R8-17-C01 Tubular Drive (integrated radio receiver)",
+      "category": "roller-shutter-motors",
+      "region": "EU",
+      "aliases": [
+        "R8/17 C01",
+        "R8-17-C01 PLUS",
+        "R8/17PRF+"
+      ],
+      "documents": [
+        {
+          "kind": "SPEC_SHEET",
+          "title": "Becker R8-17-C01 Product Centre Page",
+          "sourceUrl": "https://produktcenter.becker-antriebe.com/en/Drives/Roller-shutter-applications/Drives-with-integrated-radio-receiver/R8-17-C01.html",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "publisher": "Becker-Antriebe",
+          "region": "EU",
+          "rights": "LINK_ONLY",
+          "evidence": "On produktcenter.becker-antriebe.com, the manufacturer's own product centre. Typed SPEC_SHEET, not a manual: this is the product page, which carries specifications and some setting guidance but is not the assembly and operating instructions. The actual instructions surfaced only on aggregators, recorded below. Filing a product page as an install manual would be the substitution this library refuses. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "https://produktcenter.becker-antriebe.com/en/Drives/Roller-shutter-applications/Drives-with-integrated-radio-receiver/R8-17-C01-PLUS.html",
+              "authority": "MANUFACTURER_OFFICIAL",
+              "label": "Product centre page for the C01 PLUS variant"
+            },
+            {
+              "url": "https://www.manualslib.com/manual/1995016/Becker-R8-17prfPlus.html",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "ManualsLib operating instructions for the R8/17PRF+ radio variant"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "modelCode": "R8-17-E01",
+      "name": "Becker R8-17-E01 Tubular Drive (electronic limit switching)",
+      "category": "roller-shutter-motors",
+      "region": "EU",
+      "aliases": [
+        "R8/17 E01",
+        "R8/17PS"
+      ],
+      "documents": [
+        {
+          "kind": "SPEC_SHEET",
+          "title": "Becker R8-17-E01 Product Centre Page",
+          "sourceUrl": "https://produktcenter.becker-antriebe.com/en/Drives/Roller-shutter-applications/Drives-with-electronic-limit-switching/R8-17-E01.html",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "publisher": "Becker-Antriebe",
+          "region": "EU",
+          "rights": "LINK_ONLY",
+          "evidence": "On produktcenter.becker-antriebe.com, the manufacturer's own product centre. Typed SPEC_SHEET, not a manual: this is the product page, which carries specifications and some setting guidance but is not the assembly and operating instructions. The actual instructions surfaced only on aggregators, recorded below. Filing a product page as an install manual would be the substitution this library refuses. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "https://www.manualslib.com/products/Becker-R8-17-E01-13807782.html",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "ManualsLib product page listing the E01 assembly and operating instructions"
+            },
+            {
+              "url": "https://www.manualslib.com/manual/2123617/Becker-R8-17ps.html",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "ManualsLib operating instructions for the R8/17PS variant"
+            }
+          ]
         }
       ]
     }
