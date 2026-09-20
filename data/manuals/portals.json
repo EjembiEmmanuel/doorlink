@@ -734,6 +734,54 @@
       "authority": "MANUFACTURER_OFFICIAL",
       "region": "EU",
       "note": "Product-certificates directory on the manufacturer's shop, subfoldered by product type. Polish-language documents."
+    },
+    {
+      "manufacturer": "Nice | HySecurity",
+      "slug": "hysecurity",
+      "url": "https://support.hysecurity.com/hc/en-us/sections/360007387533-Manuals-Accessories",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "US",
+      "note": "Manufacturer support centre, one article per document across the range. The articles are HTML pages linking the PDFs, not the PDFs - the harvester only extracts direct document links, so this target needs a follow-through step and will otherwise report no-documents."
+    },
+    {
+      "manufacturer": "Viking Access Systems",
+      "slug": "viking-access",
+      "url": "https://www.vikingaccess.com/download-page",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "US",
+      "note": "Manufacturer download page, described as split into swing, slide, underground and solar operators."
+    },
+    {
+      "manufacturer": "Viking Access Systems",
+      "slug": "viking-access",
+      "url": "https://laornamental.com/pdf-files/Viking_Access_PDF%20Files/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "US",
+      "note": "Distributor directory of Viking PDFs. Some files there are re-compressed copies rather than the manufacturer's originals."
+    },
+    {
+      "manufacturer": "Nice | HySecurity",
+      "slug": "hysecurity",
+      "url": "https://www.aegates.com/hysecurity-gate-manuals/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "US",
+      "note": "Distributor index of HySecurity manuals."
+    },
+    {
+      "manufacturer": "multiple",
+      "slug": null,
+      "url": "https://www.affordableopeners.com/manuals/Manufacturer/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "US",
+      "note": "Distributor manual tree, one folder per manufacturer, serving direct PDFs that keep the manufacturers' own document codes in their names. Third-party throughout."
+    },
+    {
+      "manufacturer": "multiple",
+      "slug": null,
+      "url": "https://www.tsdistributors.com/pdfs/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "US",
+      "note": "Distributor PDF directory spanning several US gate operator brands."
     }
   ]
 }

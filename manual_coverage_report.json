@@ -1,19 +1,19 @@
 {
-  "generatedAt": "2026-09-20T10:48:31.287Z",
+  "generatedAt": "2026-09-20T10:49:59.996Z",
   "caveat": "verified_documents counts links that were actually fetched and resolved. A document can be from an official manufacturer domain and still be unverified. Run `npm run manuals:verify` in an environment with outbound network access to raise this number. All figures below EXCLUDE the demo catalogue, whose manufacturers are invented for demonstration and are reported separately under demo_catalogue.",
   "totals": {
-    "total_manufacturers": 62,
-    "total_models": 154,
-    "total_documents": 164,
-    "total_model_aliases": 286,
-    "total_alternate_sources": 90,
-    "official_documents": 64,
-    "third_party_documents": 100,
+    "total_manufacturers": 64,
+    "total_models": 162,
+    "total_documents": 175,
+    "total_model_aliases": 298,
+    "total_alternate_sources": 93,
+    "official_documents": 68,
+    "third_party_documents": 107,
     "verified_documents": 0,
-    "unverified_documents": 164,
+    "unverified_documents": 175,
     "documents_needing_review": 0,
     "models_without_documentation": 3,
-    "link_only_documents": 164,
+    "link_only_documents": 175,
     "hosted_documents": 3
   },
   "demo_catalogue": {
@@ -23,32 +23,33 @@
     "documents": 10
   },
   "by_verification": {
-    "UNVERIFIED": 164
+    "UNVERIFIED": 175
   },
   "by_origin": {
-    "MANUFACTURER_ORIGINAL": 64,
-    "THIRD_PARTY_GUIDE": 100
+    "MANUFACTURER_ORIGINAL": 68,
+    "THIRD_PARTY_GUIDE": 107
   },
   "by_region": {
     "UNKNOWN": 3,
     "AU": 29,
     "GLOBAL": 32,
-    "US": 41,
-    "EU": 50,
+    "US": 52,
     "UK": 6,
+    "EU": 50,
     "NZ": 1,
     "ASIA": 2
   },
   "by_document_kind": {
-    "INSTALL_MANUAL": 108,
-    "PROGRAMMING_GUIDE": 5,
+    "INSTALL_MANUAL": 116,
+    "PROGRAMMING_GUIDE": 6,
     "USER_MANUAL": 36,
     "TECHNICAL_DOCUMENT": 4,
+    "SPEC_SHEET": 6,
     "QUICK_START": 6,
-    "SPEC_SHEET": 5
+    "PARTS_LIST": 1
   },
   "by_rights": {
-    "LINK_ONLY": 164
+    "LINK_ONLY": 175
   },
   "by_manufacturer": [
     {
@@ -325,6 +326,13 @@
       "documents": 3
     },
     {
+      "name": "Nice | HySecurity",
+      "slug": "hysecurity",
+      "country": "US",
+      "models": 2,
+      "documents": 5
+    },
+    {
       "name": "Novoferm",
       "slug": "novoferm",
       "country": "DE",
@@ -449,6 +457,13 @@
       "country": "IT",
       "models": 1,
       "documents": 1
+    },
+    {
+      "name": "Viking Access Systems",
+      "slug": "viking-access",
+      "country": "US",
+      "models": 6,
+      "documents": 6
     },
     {
       "name": "Wayne Dalton",
