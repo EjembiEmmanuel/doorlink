@@ -10,10 +10,14 @@
   "models": [
     {
       "modelCode": "Comfort 260",
-      "name": "Comfort 260 Garage Door Operator",
+      "name": "Marantec Comfort 260 / 270 / 280 Garage Door Operator System",
       "category": "garage-door-openers",
       "region": "EU",
-      "aliases": ["Comfort260"],
+      "aliases": [
+        "Comfort260",
+        "Comfort 280",
+        "100316"
+      ],
       "documents": [
         {
           "kind": "USER_MANUAL",
@@ -69,6 +73,61 @@
           "region": "EU",
           "rights": "LINK_ONLY",
           "evidence": "Aggregator index for this model. The 100316 document does not cover the 250, so it was not attributed here. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "Comfort 360",
+      "name": "Marantec Comfort 360 / 370 / 380 Garage Door Operator System",
+      "category": "garage-door-openers",
+      "region": "EU",
+      "aliases": [
+        "Comfort 370",
+        "Comfort 380",
+        "101258"
+      ],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "Operator Systems for Garage Doors Comfort 360, 370, 380 (#101258, version D)",
+          "documentCode": "101258",
+          "version": "D",
+          "sourceUrl": "https://www.marantec.com/files/eba_download.php?file=101258.pdf&vrsn=D",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "publisher": "Marantec",
+          "region": "EU",
+          "rights": "LINK_ONLY",
+          "evidence": "On marantec.com, served through its eba_download handler rather than as a static path. Document number 101258 and version D are the handler's own query parameters - Marantec versions its documents by letter, so the vrsn value is the edition and worth keeping. A parameterised URL is more fragile than a static one; the installation-instructions index is the route back in. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "https://manuals.plus/m/3fa935c97185900c29aadfae1061226451f0f92870be2299ec512200e9b27ab0",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "manuals.plus copy of the 360/370/380 installation instructions"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "modelCode": "Comfort 220.2",
+      "name": "Marantec Comfort 220.2 / 250.2 / 252.2 / 250.2 speed Garage Door Operator",
+      "category": "garage-door-openers",
+      "region": "UK",
+      "aliases": [
+        "Comfort 250.2",
+        "Comfort 252.2",
+        "Comfort 250.2 speed"
+      ],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "Comfort 220.2, 250.2, 252.2, 250.2 speed - Operator System for Garage Doors",
+          "sourceUrl": "https://www.thegaragedoorcentre.co.uk/userfiles/downloads/Marantec%20Comfort.pdf",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "The Garage Door Centre",
+          "region": "UK",
+          "rights": "LINK_ONLY",
+          "evidence": "Reseller copy. Kept apart from the existing Comfort 250 record because the .2 suffix marks a different generation and the two should not be conflated - though whether this document supersedes that one was not established. No marantec.com URL for this generation surfaced. Not fetched - egress blocked."
         }
       ]
     }

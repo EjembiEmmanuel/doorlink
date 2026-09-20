@@ -1057,6 +1057,48 @@
       "region": "US",
       "note": "Store resources hub indexing BFT manuals and quick-start guides.",
       "follow": true
+    },
+    {
+      "manufacturer": "Marantec",
+      "slug": "marantec",
+      "url": "https://www.marantec.com/files/eba_sap/A/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "EU",
+      "note": "Marantec's static instruction directory, files named by document number (eba = Einbau- und Betriebsanleitung)."
+    },
+    {
+      "manufacturer": "Marantec",
+      "slug": "marantec",
+      "url": "https://www.marantec.com/en/installation-instructions",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "EU",
+      "note": "Searchable instruction index. Some documents are served via an eba_download handler with file and vrsn parameters rather than static paths, so this index is the reliable route in.",
+      "follow": true
+    },
+    {
+      "manufacturer": "LiftMaster",
+      "slug": "liftmaster",
+      "url": "https://support.chamberlaingroup.com/s/manuals-parts",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "US",
+      "note": "Chamberlain Group support site - one article per document across the LiftMaster and Chamberlain ranges. Articles are HTML pages linking the PDFs, so this needs the follow step.",
+      "follow": true
+    },
+    {
+      "manufacturer": "LiftMaster",
+      "slug": "liftmaster",
+      "url": "https://jansensupply.com/docs/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "US",
+      "note": "Distributor document directory carrying LiftMaster commercial operator manuals."
+    },
+    {
+      "manufacturer": "Marantec",
+      "slug": "marantec",
+      "url": "https://www.thegaragedoorcentre.co.uk/userfiles/downloads/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "UK",
+      "note": "Second download directory on the same reseller as its /download/ path - both are needed to cover what it hosts."
     }
   ]
 }

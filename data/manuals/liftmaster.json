@@ -4,8 +4,8 @@
     "slug": "liftmaster",
     "country": "US",
     "website": "https://www.liftmaster.com/",
-    "supportUrl": "https://partner.liftmaster.com/",
-    "note": "US gate and door operator brand, part of the Chamberlain group. Documentation is split between a partner portal and the shared Chamberlain support site."
+    "supportUrl": "https://support.chamberlaingroup.com/s/manuals-parts",
+    "note": "US gate and door operator brand of the Chamberlain Group. Its manuals live on support.chamberlaingroup.com as one article per document - HTML pages that link the PDFs rather than the PDFs themselves, so that target needs the harvester's follow step. Note the UL-suffixed model codes (LA400UL, CSW24UL) are separate listings from the bare ones and are recorded as separate models here, because whether they are the same operator under a certification suffix or a different build was not established."
   },
   "models": [
     {
@@ -13,7 +13,10 @@
       "name": "CSW24U Commercial DC Vehicular Swing Gate Operator",
       "category": "gate-motors",
       "region": "US",
-      "aliases": ["CSW24UL", "CSW 24U"],
+      "aliases": [
+        "CSW24UL",
+        "CSW 24U"
+      ],
       "documents": [
         {
           "kind": "INSTALL_MANUAL",
@@ -31,6 +34,16 @@
               "label": "A-Fence mirror"
             }
           ]
+        },
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "LiftMaster CSW24U Swing Gate Operator Installation Manual",
+          "sourceUrl": "https://support.chamberlaingroup.com/s/article/GATE-LiftMaster-CSW24U-Swing-Gate-Operator-Installation-Manual-1484145708731",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "publisher": "Chamberlain Group",
+          "region": "US",
+          "rights": "LINK_ONLY",
+          "evidence": "On support.chamberlaingroup.com. Article page, not the PDF. Not fetched - egress blocked."
         }
       ]
     },
@@ -39,7 +52,10 @@
       "name": "CSL24U Commercial Slide Gate Operator",
       "category": "gate-motors",
       "region": "US",
-      "aliases": ["CSL24VDC", "CSL 24U"],
+      "aliases": [
+        "CSL24VDC",
+        "CSL 24U"
+      ],
       "documents": [
         {
           "kind": "INSTALL_MANUAL",
@@ -64,7 +80,9 @@
       "name": "LA400 Residential Swing Gate Operator",
       "category": "gate-motors",
       "region": "US",
-      "aliases": ["LA 400"],
+      "aliases": [
+        "LA 400"
+      ],
       "documents": [
         {
           "kind": "INSTALL_MANUAL",
@@ -82,7 +100,10 @@
       "name": "SL585UL Elite Series Industrial AC Slide Gate Operator",
       "category": "gate-motors",
       "region": "US",
-      "aliases": ["SL585", "SL 585UL"],
+      "aliases": [
+        "SL585",
+        "SL 585UL"
+      ],
       "documents": [
         {
           "kind": "INSTALL_MANUAL",
@@ -101,7 +122,9 @@
       "name": "SL3000 Slide Gate Operator",
       "category": "gate-motors",
       "region": "US",
-      "aliases": ["SL 3000"],
+      "aliases": [
+        "SL 3000"
+      ],
       "documents": [
         {
           "kind": "INSTALL_MANUAL",
@@ -120,7 +143,10 @@
       "name": "RSL12UL Residential DC Vehicular Slide Gate Operator",
       "category": "gate-motors",
       "region": "US",
-      "aliases": ["RSL12", "RSL 12UL"],
+      "aliases": [
+        "RSL12",
+        "RSL 12UL"
+      ],
       "documents": [
         {
           "kind": "INSTALL_MANUAL",
@@ -131,6 +157,61 @@
           "region": "US",
           "rights": "LINK_ONLY",
           "evidence": "Distributor copy. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "LA400UL",
+      "name": "LiftMaster LA400UL Swing Gate Operator",
+      "category": "gate-motors",
+      "region": "US",
+      "aliases": [
+        "LA400 UL"
+      ],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "LiftMaster LA400UL Swing Gate Operator Installation Manual",
+          "sourceUrl": "https://support.chamberlaingroup.com/s/article/LA400UL-Installation-Manual",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "publisher": "Chamberlain Group",
+          "region": "US",
+          "rights": "LINK_ONLY",
+          "evidence": "On support.chamberlaingroup.com, as its own article separate from the non-UL LA400 listing. Recorded as a distinct model for that reason; whether the UL suffix marks a certification variant of the same operator or a different build was not established, so neither is claimed. Article page, not the PDF. Not fetched - egress blocked.",
+          "altSources": []
+        }
+      ]
+    },
+    {
+      "modelCode": "CSW24UL",
+      "name": "LiftMaster CSW24UL Commercial DC Vehicular Swing Gate Operator",
+      "category": "gate-motors",
+      "region": "US",
+      "aliases": [
+        "CSW24 UL"
+      ],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "LiftMaster CSW24UL Commercial DC Vehicular Swing Gate Operator Installation Manual",
+          "sourceUrl": "https://support.chamberlaingroup.com/s/article/CSW24UL-Installation-Manual",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "publisher": "Chamberlain Group",
+          "region": "US",
+          "rights": "LINK_ONLY",
+          "evidence": "On support.chamberlaingroup.com, as its own article separate from the non-UL CSW24 listing. Recorded as a distinct model for that reason; whether the UL suffix marks a certification variant of the same operator or a different build was not established, so neither is claimed. Article page, not the PDF. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "https://shop.bobsdist.com/documents/CSW24UL_Owner's_Manual.pdf",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "Distributor copy, direct PDF"
+            },
+            {
+              "url": "https://jansensupply.com/docs/CSW24UL_INSTALL.pdf",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "Second distributor copy of the installation manual"
+            }
+          ]
         }
       ]
     }
