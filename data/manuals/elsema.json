@@ -30,7 +30,10 @@
       "name": "FMT-301 Handheld 27MHz Remote Control Digital Transmitter",
       "category": "remotes-accessories",
       "region": "AU",
-      "aliases": ["FMT301", "FMT 301"],
+      "aliases": [
+        "FMT301",
+        "FMT 301"
+      ],
       "documents": [
         {
           "kind": "PROGRAMMING_GUIDE",
@@ -49,7 +52,10 @@
       "name": "FMT-302 27MHz 2-Channel Remote Control Digital Transmitter",
       "category": "remotes-accessories",
       "region": "AU",
-      "aliases": ["FMT302", "FMT 302"],
+      "aliases": [
+        "FMT302",
+        "FMT 302"
+      ],
       "documents": [
         {
           "kind": "USER_MANUAL",
@@ -68,7 +74,10 @@
       "name": "KEY-301 27.145MHz Transmitter",
       "category": "remotes-accessories",
       "region": "AU",
-      "aliases": ["KEY301", "KEY 301"],
+      "aliases": [
+        "KEY301",
+        "KEY 301"
+      ],
       "documents": [
         {
           "kind": "PROGRAMMING_GUIDE",
@@ -79,6 +88,30 @@
           "region": "AU",
           "rights": "LINK_ONLY",
           "evidence": "Distributor-hosted coding sheet covering both the FMT and KEY series. Attached to KEY-301 because that is the series it names; it is not specific to this one model. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "KEY-304",
+      "name": "Elsema KEY-304 Keyring Transmitter (superseded)",
+      "category": "remotes-accessories",
+      "region": "AU",
+      "aliases": [
+        "KEY304",
+        "FMT-204",
+        "FMT-304",
+        "FMT-404"
+      ],
+      "documents": [
+        {
+          "kind": "SERVICE_BULLETIN",
+          "title": "Elsema Replacement Guide: FMT-204, FMT-304, FMT-404 and KEY-304 superseded by Penta PCK43304 / FOB43304",
+          "sourceUrl": "https://elsema.com/blogs/fmt-301-replacement/",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "publisher": "Elsema",
+          "region": "AU",
+          "rights": "LINK_ONLY",
+          "evidence": "On elsema.com, the manufacturer's own domain. Typed SERVICE_BULLETIN because that is what it is - a supersession notice, not an installation manual. It states that the FMT-204, FMT-304, FMT-404 and KEY-304 are replaced by the Penta PCK43304 or FOB43304. Recorded because a discontinued-part notice is exactly what a technician holding a dead remote needs, and it is the kind of document a catalogue of manuals usually loses. The superseded part numbers are aliases so a search for any of them lands here. Not fetched - egress blocked."
         }
       ]
     }

@@ -1360,6 +1360,48 @@
       "region": "US",
       "note": "Distributor index of Raynor opener manuals.",
       "follow": true
+    },
+    {
+      "manufacturer": "Rollease Acmeda",
+      "slug": "rollease-acmeda",
+      "url": "https://www.rolleaseacmeda.com/docs/default-source/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "GLOBAL",
+      "note": "Open instruction tree, foldered by market and motor family. Distinct from the member-documents area already registered, which may require sign-in - this one does not."
+    },
+    {
+      "manufacturer": "Rollease Acmeda",
+      "slug": "rollease-acmeda",
+      "url": "https://www.automateshades.com/assets/uploads/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "US",
+      "note": "Rollease Acmeda's Automate brand site uploads directory, year/month foldered."
+    },
+    {
+      "manufacturer": "Elsema",
+      "slug": "elsema",
+      "url": "https://elsema.com/blogs/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "AU",
+      "note": "Manufacturer's blog, which carries supersession and replacement guidance for discontinued remotes - the kind of document a manual catalogue usually misses.",
+      "follow": true
+    },
+    {
+      "manufacturer": "Elsema",
+      "slug": "elsema",
+      "url": "https://www.waverleygaragedoors.com.au/instruction-manuals/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "AU",
+      "note": "Reseller instruction-manual directory covering several AU remote brands."
+    },
+    {
+      "manufacturer": "Elsema",
+      "slug": "elsema",
+      "url": "https://www.aggdoors.com.au/product-support/manuals/coding-instructions/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "AU",
+      "note": "Reseller coding-instruction index - remote programming steps by model, across brands.",
+      "follow": true
     }
   ]
 }

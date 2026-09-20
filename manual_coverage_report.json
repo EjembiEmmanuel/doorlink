@@ -1,19 +1,19 @@
 {
-  "generatedAt": "2026-09-20T12:34:38.065Z",
+  "generatedAt": "2026-09-20T12:35:51.434Z",
   "caveat": "verified_documents counts links that were actually fetched and resolved. A document can be from an official manufacturer domain and still be unverified. Run `npm run manuals:verify` in an environment with outbound network access to raise this number. All figures below EXCLUDE the demo catalogue, whose manufacturers are invented for demonstration and are reported separately under demo_catalogue.",
   "totals": {
     "total_manufacturers": 75,
-    "total_models": 220,
-    "total_documents": 246,
-    "total_model_aliases": 466,
+    "total_models": 223,
+    "total_documents": 249,
+    "total_model_aliases": 477,
     "total_alternate_sources": 148,
-    "official_documents": 106,
+    "official_documents": 109,
     "third_party_documents": 140,
     "verified_documents": 0,
-    "unverified_documents": 246,
+    "unverified_documents": 249,
     "documents_needing_review": 0,
     "models_without_documentation": 2,
-    "link_only_documents": 246,
+    "link_only_documents": 249,
     "hosted_documents": 3
   },
   "demo_catalogue": {
@@ -23,33 +23,34 @@
     "documents": 10
   },
   "by_verification": {
-    "UNVERIFIED": 246
+    "UNVERIFIED": 249
   },
   "by_origin": {
-    "MANUFACTURER_ORIGINAL": 106,
+    "MANUFACTURER_ORIGINAL": 109,
     "THIRD_PARTY_GUIDE": 140
   },
   "by_region": {
     "UNKNOWN": 3,
-    "AU": 37,
     "EU": 70,
     "UK": 16,
+    "AU": 38,
     "GLOBAL": 39,
-    "US": 77,
+    "US": 79,
     "NZ": 2,
     "ASIA": 2
   },
   "by_document_kind": {
-    "INSTALL_MANUAL": 176,
+    "INSTALL_MANUAL": 178,
     "PROGRAMMING_GUIDE": 7,
     "USER_MANUAL": 42,
     "TECHNICAL_DOCUMENT": 5,
     "SPEC_SHEET": 8,
     "QUICK_START": 7,
+    "SERVICE_BULLETIN": 1,
     "PARTS_LIST": 1
   },
   "by_rights": {
-    "LINK_ONLY": 246
+    "LINK_ONLY": 249
   },
   "by_manufacturer": [
     {
@@ -238,8 +239,8 @@
       "name": "Elsema",
       "slug": "elsema",
       "country": "AU",
-      "models": 4,
-      "documents": 4
+      "models": 5,
+      "documents": 5
     },
     {
       "name": "FAAC",
@@ -434,8 +435,8 @@
       "name": "Rollease Acmeda",
       "slug": "rollease-acmeda",
       "country": "AU",
-      "models": 3,
-      "documents": 3
+      "models": 5,
+      "documents": 5
     },
     {
       "name": "Rytec",
