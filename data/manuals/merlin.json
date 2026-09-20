@@ -1,0 +1,81 @@
+{
+  "manufacturer": {
+    "name": "Merlin",
+    "slug": "merlin",
+    "country": "AU",
+    "website": "https://www.merlin.com.au/",
+    "supportUrl": null,
+    "note": "Garage door opener brand sold in Australia, part of the Chamberlain group. No manufacturer-hosted manual URL was surfaced by search, so supportUrl is left null rather than guessed."
+  },
+  "models": [
+    {
+      "modelCode": "MT60EVO",
+      "name": "PowerAce MT60EVO Sectional Garage Door Opener",
+      "category": "garage-door-openers",
+      "region": "AU",
+      "aliases": ["MT60 EVO", "MT-60EVO"],
+      "documents": [
+        {
+          "kind": "USER_MANUAL",
+          "title": "PowerAce MT60EVO User Manual",
+          "sourceUrl": "https://edenrocgaragedoors.com.au/wp-content/uploads/2020/07/Merlin-MT60EVO-User-Manual.pdf",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "Edenroc Garage Doors",
+          "region": "AU",
+          "rights": "LINK_ONLY",
+          "evidence": "Australian installer-hosted copy. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "https://www.manualslib.com/manual/814106/Merlin-Powerace-Mt60evo.html",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "ManualsLib listing"
+            },
+            {
+              "url": "https://www.dominatornsw.com.au/resources/merlin-owner-s-manuals",
+              "authority": "AUTHORISED_DISTRIBUTOR",
+              "label": "Dominator NSW manual index"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "modelCode": "MT100EVO",
+      "name": "Tiltmaster MT100EVO Sectional and Tilt Garage Door Opener",
+      "category": "garage-door-openers",
+      "region": "AU",
+      "aliases": ["MT100 EVO", "MT-100EVO"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "Tiltmaster MT100EVO Installation and Operating Instructions",
+          "sourceUrl": "https://merlin.manymanuals.com/garage-door-opener/tiltmaster-mt100evo/operations-instructions-30176",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "ManyManuals",
+          "region": "AU",
+          "rights": "LINK_ONLY",
+          "evidence": "Aggregator listing. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "MT60",
+      "name": "Merlin MT60 Garage Door Opener",
+      "category": "garage-door-openers",
+      "region": "AU",
+      "aliases": ["MT-60", "MT 60"],
+      "documents": [
+        {
+          "kind": "USER_MANUAL",
+          "title": "Merlin MT60 Operating Instructions",
+          "sourceUrl": "https://merlin.manymanuals.com/garage-door-opener/mt60/operations-instructions-28058",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "ManyManuals",
+          "region": "AU",
+          "rights": "LINK_ONLY",
+          "evidence": "Aggregator listing. A file size of 2.91 MB was mentioned in the search summary but is not recorded here, because it was not confirmed by fetching the file. Not fetched - egress blocked."
+        }
+      ]
+    }
+  ]
+}

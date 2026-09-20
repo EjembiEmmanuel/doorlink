@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { prisma } from '@/lib/prisma'
 import { isDatabaseUnreachable } from '@/lib/db-errors'
-import { resolveFileUrl } from '@/lib/storage'
+import { manualAccess } from '@/lib/manual-access'
 import { formatFileSize } from '@/lib/manuals'
 import { toJsonLd } from '@/lib/json-ld'
 import { NotConnected } from '@/components/ui/NotConnected'
@@ -63,7 +63,11 @@ export default async function ManualDetailPage({ params }: PageProps) {
 
   if (!doc || !doc.isPublished) notFound()
 
-  const fileUrl = resolveFileUrl(doc.fileKey)
+  // How this document can be opened: a copy Doorlink is entitled to
+  // serve, or the publisher's own. Decided in one place so the page
+  // never offers a download it has no right to hand out.
+  const access = manualAccess(doc)
+  const fileUrl = access.mode === 'hosted' ? access.url : null
 
   // Only the facts the document itself carries. Anything absent is left
   // out rather than filled with a plausible-looking default.
@@ -154,10 +158,10 @@ export default async function ManualDetailPage({ params }: PageProps) {
           )}
 
           <div className="mt-6 flex flex-wrap items-center gap-3">
-            {fileUrl ? (
+            {access.mode === 'hosted' && (
               <>
                 <a
-                  href={fileUrl}
+                  href={access.url}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex h-11 items-center rounded bg-signal px-5 text-sm font-medium text-paper transition-colors hover:bg-signal-hover"
@@ -165,18 +169,59 @@ export default async function ManualDetailPage({ params }: PageProps) {
                   Open document
                 </a>
                 <a
-                  href={fileUrl}
+                  href={access.url}
                   download
                   className="inline-flex h-11 items-center rounded border border-line px-5 text-sm font-medium text-graphite transition-colors hover:bg-rail"
                 >
                   Download PDF
                 </a>
               </>
-            ) : (
-              <NotConnected
-                feature="This document's file"
-                reason="Document storage isn't connected, so the file can't be served yet."
-              />
+            )}
+
+            {/* The common case. Doorlink holds the record, the
+                manufacturer holds the file, and the button says which
+                is which rather than implying Doorlink is serving it. */}
+            {access.mode === 'link' && (
+              <div className="flex flex-col gap-1.5">
+                <a
+                  href={access.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex h-11 items-center rounded bg-signal px-5 text-sm font-medium text-paper transition-colors hover:bg-signal-hover"
+                >
+                  Open at the source
+                  <span aria-hidden="true"> &#8599;</span>
+                </a>
+                <p className="text-micro text-zinc-deep">
+                  Opens {new URL(access.url).hostname}. Doorlink links to this document rather than
+                  hosting a copy of it.
+                </p>
+              </div>
+            )}
+
+            {access.mode === 'restricted' && (
+              <div className="rounded border border-caution/30 bg-caution-tint px-4 py-3 text-sm">
+                <p className="font-medium text-caution">Behind a login or installer portal.</p>
+                <p className="mt-1 text-graphite-soft">
+                  This document exists but is not publicly reachable. Doorlink records where it lives
+                  and does not attempt to get around the restriction.
+                </p>
+              </div>
+            )}
+
+            {access.mode === 'unavailable' && (
+              <div className="rounded border border-line bg-rail px-4 py-3 text-sm">
+                <p className="font-medium text-graphite">
+                  {access.reason === 'link-broken'
+                    ? 'The published link no longer resolves.'
+                    : 'No source is recorded for this document yet.'}
+                </p>
+                <p className="mt-1 text-graphite-soft">
+                  {access.reason === 'link-broken'
+                    ? 'It is flagged for review rather than deleted \u2014 the document may have simply moved.'
+                    : 'The record exists so the model is searchable; the document itself has not been located.'}
+                </p>
+              </div>
             )}
           </div>
 

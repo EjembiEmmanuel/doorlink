@@ -1,0 +1,78 @@
+{
+  "manufacturer": {
+    "name": "Gliderol",
+    "slug": "gliderol",
+    "country": "AU",
+    "website": "https://www.gliderol.com.au/",
+    "supportUrl": "https://gliderol.com.au/support/user-manuals-guides/",
+    "note": "Australian garage door manufacturer. Publishes user manuals and install guides on its own support area."
+  },
+  "models": [
+    {
+      "modelCode": "GTS2000",
+      "name": "Tilt and Sectional Overhead Door Operator",
+      "category": "garage-door-openers",
+      "region": "AU",
+      "documents": [
+        {
+          "kind": "USER_MANUAL",
+          "title": "GTS2000 Owner's Manual",
+          "version": "V1",
+          "sourceUrl": "https://www.gliderol.com.au/wp-content/uploads/2025/02/GTS2000-Owners-Manual-V1-Board.pdf",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "region": "AU",
+          "rights": "LINK_ONLY",
+          "evidence": "Surfaced by web search on the manufacturer's own domain. Version V1 is taken from the filename, not inferred. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "GRD",
+      "name": "Glidermatic GRD Roller Door Automatic Operator",
+      "category": "garage-door-openers",
+      "region": "AU",
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "Glidermatic GRD Installation Instructions and Owner's Manual",
+          "sourceUrl": "https://wholesalegaragedoors.com.au/wp-content/uploads/2022/07/Gliderol-Garage-Doors-Glidermatic-GRD-Roller-Door-Opener-Installation-Manual.pdf",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "Wholesale Garage Doors",
+          "region": "AU",
+          "rights": "LINK_ONLY",
+          "evidence": "Reseller-hosted copy. Gliderol's own support page lists this manual but the search result did not expose a direct PDF URL on gliderol.com.au, so the official link is recorded at manufacturer level instead of guessed. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "https://www.manualslib.com/manual/817825/Gliderol-Glidermatic-Grd.html",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "ManualsLib listing"
+            },
+            {
+              "url": "https://therollerdoordoctor.com.au/wp-content/uploads/GLID-GR2-MANUAL.pdf",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "The Roller Door Doctor mirror"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "modelCode": "GTS+",
+      "name": "Glidermatic GTS+",
+      "category": "garage-door-openers",
+      "region": "AU",
+      "documents": [
+        {
+          "kind": "USER_MANUAL",
+          "title": "Glidermatic GTS+ Owner's Manual",
+          "sourceUrl": "https://www.manualslib.com/manual/1047029/Gliderol-Glidermatic-GtsPlus.html",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "ManualsLib",
+          "region": "AU",
+          "rights": "LINK_ONLY",
+          "evidence": "Only an aggregator listing was surfaced for this model. No manufacturer-hosted URL was found, so none is recorded. Not fetched - egress blocked."
+        }
+      ]
+    }
+  ]
+}

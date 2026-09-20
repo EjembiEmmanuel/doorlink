@@ -1,0 +1,84 @@
+{
+  "manufacturer": {
+    "name": "Automatic Technology",
+    "slug": "automatic-technology",
+    "country": "AU",
+    "website": "https://www.automatictechnology.com/au/",
+    "supportUrl": "https://www.automatictechnology.com/au/resources/installation-manuals",
+    "note": "Australian garage door opener manufacturer, commonly written ATA. Publishes an installation-manual index on its own site."
+  },
+  "models": [
+    {
+      "modelCode": "GDO-8 v1",
+      "name": "EasyRoller II",
+      "category": "garage-door-openers",
+      "region": "AU",
+      "aliases": ["GDO8", "GDO-8"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "GDO-8 v1 EasyRoller II Installation Instructions",
+          "sourceUrl": "https://www.manualslib.com/manual/965901/Automatic-Technology-Australia-Gdo-8-V1-Easyroller-Ii.html",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "ManualsLib",
+          "region": "AU",
+          "rights": "LINK_ONLY",
+          "evidence": "Aggregator listing. ATA's own manual index exists but the search result did not expose a direct PDF URL for this model, so none is recorded. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "GDO-4 v4",
+      "name": "EasyRoller",
+      "category": "garage-door-openers",
+      "region": "AU",
+      "aliases": ["GDO4", "GDO-4"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "GDO-4 v4 EasyRoller Installation Instructions",
+          "sourceUrl": "https://www.manualslib.com/manual/945897/Automatic-Technology-Australia-Gdo-4-V4-Easyroller.html",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "ManualsLib",
+          "region": "AU",
+          "rights": "LINK_ONLY",
+          "evidence": "Aggregator listing only. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "GDO-5-AS",
+      "name": "GDO-5 AS Garage Door Opener",
+      "category": "garage-door-openers",
+      "region": "AU",
+      "aliases": ["GDO5", "GDO-5"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "GDO-5 AS Instruction Manual",
+          "sourceUrl": "https://motepro.com.au/Manuals/ATA/GDO-5.pdf",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "Motepro",
+          "region": "AU",
+          "rights": "LINK_ONLY",
+          "evidence": "Australian trade supplier mirror. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "https://www.manualslib.com/products/Automatic-Technology-Australia-Gdo-5-As-3924351.html",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "ManualsLib listing"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "modelCode": "GDO-11v5",
+      "name": "EasyRoller (GDO-11 series)",
+      "category": "garage-door-openers",
+      "region": "AU",
+      "documents": [],
+      "note": "Model searched for explicitly; no documentation URL was surfaced for this version. Recorded with no documents so the model is searchable and the gap is visible, rather than substituting another version's manual."
+    }
+  ]
+}

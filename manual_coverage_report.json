@@ -1,0 +1,88 @@
+{
+  "generatedAt": "2026-09-20T00:31:06.968Z",
+  "caveat": "verified_documents counts links that were actually fetched and resolved. A document can be from an official manufacturer domain and still be unverified. Run `npm run manuals:verify` in an environment with outbound network access to raise this number. All figures below EXCLUDE the demo catalogue, whose manufacturers are invented for demonstration and are reported separately under demo_catalogue.",
+  "totals": {
+    "total_manufacturers": 6,
+    "total_models": 15,
+    "total_documents": 15,
+    "total_model_aliases": 16,
+    "total_alternate_sources": 6,
+    "official_documents": 5,
+    "third_party_documents": 10,
+    "verified_documents": 0,
+    "unverified_documents": 15,
+    "documents_needing_review": 0,
+    "models_without_documentation": 1,
+    "link_only_documents": 15,
+    "hosted_documents": 3
+  },
+  "demo_catalogue": {
+    "note": "Invented sample data shipped by prisma/seed.ts. Not real manufacturers or manuals.",
+    "manufacturers": 3,
+    "models": 5,
+    "documents": 10
+  },
+  "by_verification": {
+    "UNVERIFIED": 15
+  },
+  "by_origin": {
+    "MANUFACTURER_ORIGINAL": 5,
+    "THIRD_PARTY_GUIDE": 10
+  },
+  "by_region": {
+    "UNKNOWN": 3,
+    "AU": 12
+  },
+  "by_document_kind": {
+    "INSTALL_MANUAL": 9,
+    "PROGRAMMING_GUIDE": 1,
+    "USER_MANUAL": 5
+  },
+  "by_rights": {
+    "LINK_ONLY": 15
+  },
+  "by_manufacturer": [
+    {
+      "name": "Automatic Technology",
+      "slug": "automatic-technology",
+      "country": "AU",
+      "models": 4,
+      "documents": 3
+    },
+    {
+      "name": "B&D",
+      "slug": "bnd",
+      "country": "AU",
+      "models": 3,
+      "documents": 3
+    },
+    {
+      "name": "BFT",
+      "slug": "bft",
+      "country": null,
+      "models": 1,
+      "documents": 1
+    },
+    {
+      "name": "FAAC",
+      "slug": "faac",
+      "country": null,
+      "models": 1,
+      "documents": 2
+    },
+    {
+      "name": "Gliderol",
+      "slug": "gliderol",
+      "country": "AU",
+      "models": 3,
+      "documents": 3
+    },
+    {
+      "name": "Merlin",
+      "slug": "merlin",
+      "country": "AU",
+      "models": 3,
+      "documents": 3
+    }
+  ]
+}
