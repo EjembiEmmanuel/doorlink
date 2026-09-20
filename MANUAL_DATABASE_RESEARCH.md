@@ -51,20 +51,46 @@ model + document-type form:
 - `Gliderol Australia garage roller door opener installation manual PDF GTS GRD`
 - `Automatic Technology ATA Australia GDO-11v5 Easy Roller installation manual PDF official`
 - `Merlin Australia garage door opener MT60 MT100EVO owner's manual PDF merlin.com.au support`
+- `Steel-Line garage doors Australia opener installation manual PDF SD800 roller door`
+- `Centurion Systems D5 Evo sliding gate motor installation manual PDF centsys official`
+- `Elsema Australia remote control receiver manual PDF FMT KEY transmitter instructions`
+- `Chamberlain LiftMaster Australia garage door opener owner's manual PDF official support downloads`
+- `Nice Automation Robus sliding gate motor installation instructions PDF niceforyou official`
 
 Australia first, per §4 and §27 Phase 1.
 
 ## Manufacturers researched
 
-| Manufacturer | Country | Models recorded | Documents | Official-domain URLs |
+| Manufacturer | Country | Models | Documents | Official-domain URLs |
 |---|---|---|---|---|
 | B&D | AU | 3 | 3 | 2 |
 | Gliderol | AU | 3 | 3 | 1 |
 | Automatic Technology (ATA) | AU | 4 | 3 | 0 |
 | Merlin | AU | 3 | 3 | 0 |
+| Steel-Line | AU | 1 | 1 | 1 |
+| Centurion Systems | AU | 2 | 4 | 4 |
+| Elsema | AU | 4 | 4 | 1 |
+| Chamberlain | AU | 0 | 0 | 0 |
+| Nice | IT | 3 | 3 | 1 |
 
 Plus two manufacturers already in the catalogue with real hosted
 manuals from earlier work: **FAAC** (2 documents) and **BFT** (1).
+
+**Chamberlain is recorded with no documents.** Both its Australian
+documents-and-downloads area and its global support portal were
+surfaced, but no direct model-level PDF URL was. The portals are
+recorded at manufacturer level so a technician has somewhere to go;
+no document record is claimed.
+
+### Regional editions are separate documents
+
+Centurion publishes the same operator's manual per market, and the
+editions are not interchangeable — different document codes, different
+dates. The D5-Evo SMART carries `1410.D.01.0003` dated 19/12/2024 on
+the Australian site and `1410.D.01.0001_1` dated 28/03/2024 on the
+global one. These are stored as two documents, not one with two links,
+and the finder ranks the Australian edition first for an Australian
+reader. This is the case `region` exists for.
 
 Live totals are generated, not transcribed — see
 `manual_coverage_report.json`, regenerated with `npm run manuals:report`.
@@ -123,7 +149,7 @@ is never.
 
 The same manual appears on many sites. One canonical `Document` keeps the
 most authoritative source; the rest are `DocumentSource` rows with an
-`authority` level. Six alternate sources are recorded this way rather
+`authority` level. Ten alternate sources are recorded this way rather
 than as six duplicate documents. The importer is idempotent on
 `(model, sourceUrl)` — re-running it changed nothing and produced zero
 duplicate URLs.
@@ -135,19 +161,22 @@ constraint changed what is worth doing next.
 
 1. **Run `npm run manuals:verify`** somewhere with normal egress. Until
    this happens the library is a set of candidates, not a reference.
-2. **Australian manufacturers not yet touched**: Steel-Line, Centurion,
-   Boss, Danmar, Taurean, Ozroll, Rollease Acmeda.
-3. **International openers and gate automation**: Chamberlain, LiftMaster,
-   Nice, FAAC (beyond the 2 existing), BFT, CAME, Somfy, Hörmann,
-   Marantec, Beninca, Roger Technology.
-4. **Automatic pedestrian doors**: ASSA ABLOY, Dormakaba, GEZE, Record,
+2. **Australian manufacturers not yet touched**: Boss, Danmar, Taurean,
+   Ozroll, Rollease Acmeda, Dominator.
+3. **International openers and gate automation**: LiftMaster, FAAC
+   (beyond the 2 existing), BFT (beyond the 1), CAME, Somfy, Hörmann,
+   Marantec, Beninca, Roger Technology, V2, DEA.
+4. **Chamberlain model-level documents.** The portals are recorded; the
+   individual model PDFs behind them are not, and finding them needs a
+   session that can open the portal.
+5. **Automatic pedestrian doors**: ASSA ABLOY, Dormakaba, GEZE, Record,
    Tormax, Gilgen, Entrematic.
-5. **Motors, controllers, remotes**: Becker, Cherubini, Elero, Dooya,
-   Elsema, Rollease Acmeda.
-6. **Body-text indexing.** `searchText` exists and search already reads
+6. **Motors, controllers, remotes**: Becker, Cherubini, Elero, Dooya,
+   Rollease Acmeda.
+7. **Body-text indexing.** `searchText` exists and search already reads
    it, but nothing populates it — that needs a PDF text extractor, and
    extraction has its own rights question per document.
-7. **Photo identification** (§10) is not built. The finder says so
+8. **Photo identification** (§10) is not built. The finder says so
    rather than pretending.
 
 Adding any of these is a JSON file in `data/manuals/` and a re-run of the
@@ -156,7 +185,7 @@ rebuilding for every new manufacturer.
 
 ## Honest limitations
 
-- **Scale.** Four manufacturers researched in this session, not hundreds.
+- **Scale.** Nine manufacturers researched in this session, not hundreds.
   §28 asks not to stop early; it also says accuracy beats fabricated
   completeness. Without the ability to fetch a single document, adding
   hundreds of unverifiable URLs would have made the library look

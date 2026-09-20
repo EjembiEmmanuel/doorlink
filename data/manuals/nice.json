@@ -1,0 +1,77 @@
+{
+  "manufacturer": {
+    "name": "Nice",
+    "slug": "nice",
+    "country": "IT",
+    "website": "https://www.niceforyou.com/",
+    "supportUrl": "https://www.niceforyou.com/en/professional-area/download",
+    "note": "Italian gate and door automation manufacturer, widely installed in Australia through distributors. Publishes instruction manuals in a downloadable professional area."
+  },
+  "models": [
+    {
+      "modelCode": "ROBO600",
+      "name": "ROBO600 Sliding Gate Gearmotor",
+      "category": "gate-motors",
+      "region": "GLOBAL",
+      "aliases": ["ROBO 600"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "ROBO600 Instructions and Warnings for Installation",
+          "documentCode": "IDV0772A01EN",
+          "language": "en",
+          "sourceUrl": "https://www.niceforyou.com/sites/default/files/upload/manuals/IDV0772A01EN.pdf",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "region": "GLOBAL",
+          "rights": "LINK_ONLY",
+          "evidence": "Manufacturer's own domain, and the search result title names ROBO600 explicitly. Document code read from the filename. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "RBS600HS",
+      "name": "Robus RBS600HS Hi-Speed Sliding Gate Gearmotor",
+      "category": "gate-motors",
+      "region": "GLOBAL",
+      "aliases": ["RBS 600HS", "ROBUS 600HS"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "Robus RBS600HS Instructions and Warnings for Installation",
+          "sourceUrl": "https://www.manualslib.com/manual/3936195/Nice-Robus-Rbs600hs.html",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "ManualsLib",
+          "region": "GLOBAL",
+          "rights": "LINK_ONLY",
+          "evidence": "Aggregator listing. A manufacturer-hosted sliding-gate manual was also surfaced but its title did not name a model, so it was not attributed to this one. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "RB400",
+      "name": "Robus RB400 Sliding Gate Gearmotor",
+      "category": "gate-motors",
+      "region": "GLOBAL",
+      "aliases": ["ROBUS 400", "RB 400"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "Robus RB400 Instructions and Warnings for Installation and Use",
+          "sourceUrl": "https://www.manualslib.com/manual/1919215/Nice-Robus-Rb400.html",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "ManualsLib",
+          "region": "GLOBAL",
+          "rights": "LINK_ONLY",
+          "evidence": "Aggregator listing. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "https://www.manualslib.com/manual/2670668/Nice-Robus-400.html",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "ManualsLib — Robus 400 instruction manual"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

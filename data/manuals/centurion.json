@@ -1,0 +1,77 @@
+{
+  "manufacturer": {
+    "name": "Centurion Systems",
+    "slug": "centurion-systems",
+    "country": "AU",
+    "website": "https://www.centsys.com.au/",
+    "supportUrl": "https://www.centsys.com.au/",
+    "note": "Gate automation manufacturer with a dedicated Australian arm (centsys.com.au) alongside its global and South African sites. The same product is documented separately per market, which is why the regional variants below are recorded as distinct documents rather than one."
+  },
+  "models": [
+    {
+      "modelCode": "D5-Evo",
+      "name": "D5-Evo Light-Industrial Sliding Gate Operator",
+      "category": "gate-motors",
+      "region": "AU",
+      "aliases": ["D5 Evo", "D5EVO"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "D5-Evo and D5-Evo Low-Voltage Installation Manual",
+          "documentCode": "1010.D.01.0001",
+          "sourceUrl": "https://www.centsys.com.au/pdf/D5-Evo/1010.D.01.0001%20D5-Evo%20and%20D5Evo%20Low-Voltage%20Manual.pdf",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "region": "AU",
+          "rights": "LINK_ONLY",
+          "evidence": "Australian Centurion domain. Document code read from the filename. Not fetched - egress blocked."
+        },
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "D5-Evo Installation Manual (South African edition)",
+          "documentCode": "0_07_A_0059",
+          "sourceUrl": "https://www.centsys.co.za/upload/0_07_A_0059%20D5-Evo%20Installation%20Manual-18092013-BMCT-web.pdf",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "region": "GLOBAL",
+          "rights": "LINK_ONLY",
+          "evidence": "Manufacturer's South African domain. Kept as a separate record from the Australian edition rather than treated as the same document, because regional editions differ. Region recorded as GLOBAL since the schema has no ZA value. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "D5-Evo SMART",
+      "name": "D5-Evo SMART Automatic Sliding Gate Operator",
+      "category": "gate-motors",
+      "region": "AU",
+      "aliases": ["D5E Smart", "D5 Evo Smart"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "D5-Evo SMART Installation Manual (Australian edition)",
+          "documentCode": "1410.D.01.0003",
+          "sourceUrl": "https://www.centsys.com.au/wp-content/uploads/2025/01/1410.D.01.0003_D5E-Smart-Installation-Manual-CENTSYS_19122024_AP_Web_App.pdf",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "region": "AU",
+          "rights": "LINK_ONLY",
+          "evidence": "Australian Centurion domain. Document code and the 19/12/2024 date are read from the filename. Not fetched - egress blocked."
+        },
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "D5-Evo SMART Installation Manual (global edition)",
+          "documentCode": "1410.D.01.0001_1",
+          "sourceUrl": "https://www.centsys.com/app/pdf/d5evosmart/1410.D.01.0001_1%20D5E%20Smart%20installation%20manual_28032024_AP_Web.pdf",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "region": "GLOBAL",
+          "rights": "LINK_ONLY",
+          "evidence": "Manufacturer's global domain. A different document code and date from the Australian edition, so recorded separately. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "https://www.manualslib.com/manual/882595/Centurion-D5-Evo.html",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "ManualsLib listing"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

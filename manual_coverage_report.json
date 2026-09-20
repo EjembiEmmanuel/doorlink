@@ -1,19 +1,19 @@
 {
-  "generatedAt": "2026-09-20T00:31:06.968Z",
+  "generatedAt": "2026-09-20T00:50:43.863Z",
   "caveat": "verified_documents counts links that were actually fetched and resolved. A document can be from an official manufacturer domain and still be unverified. Run `npm run manuals:verify` in an environment with outbound network access to raise this number. All figures below EXCLUDE the demo catalogue, whose manufacturers are invented for demonstration and are reported separately under demo_catalogue.",
   "totals": {
-    "total_manufacturers": 6,
-    "total_models": 15,
-    "total_documents": 15,
-    "total_model_aliases": 16,
-    "total_alternate_sources": 6,
-    "official_documents": 5,
-    "third_party_documents": 10,
+    "total_manufacturers": 11,
+    "total_models": 25,
+    "total_documents": 27,
+    "total_model_aliases": 29,
+    "total_alternate_sources": 10,
+    "official_documents": 12,
+    "third_party_documents": 15,
     "verified_documents": 0,
-    "unverified_documents": 15,
+    "unverified_documents": 27,
     "documents_needing_review": 0,
     "models_without_documentation": 1,
-    "link_only_documents": 15,
+    "link_only_documents": 27,
     "hosted_documents": 3
   },
   "demo_catalogue": {
@@ -23,23 +23,25 @@
     "documents": 10
   },
   "by_verification": {
-    "UNVERIFIED": 15
+    "UNVERIFIED": 27
   },
   "by_origin": {
-    "MANUFACTURER_ORIGINAL": 5,
-    "THIRD_PARTY_GUIDE": 10
+    "MANUFACTURER_ORIGINAL": 12,
+    "THIRD_PARTY_GUIDE": 15
   },
   "by_region": {
     "UNKNOWN": 3,
-    "AU": 12
+    "AU": 19,
+    "GLOBAL": 5
   },
   "by_document_kind": {
-    "INSTALL_MANUAL": 9,
-    "PROGRAMMING_GUIDE": 1,
-    "USER_MANUAL": 5
+    "INSTALL_MANUAL": 17,
+    "PROGRAMMING_GUIDE": 3,
+    "USER_MANUAL": 6,
+    "TECHNICAL_DOCUMENT": 1
   },
   "by_rights": {
-    "LINK_ONLY": 15
+    "LINK_ONLY": 27
   },
   "by_manufacturer": [
     {
@@ -64,6 +66,27 @@
       "documents": 1
     },
     {
+      "name": "Centurion Systems",
+      "slug": "centurion-systems",
+      "country": "AU",
+      "models": 2,
+      "documents": 4
+    },
+    {
+      "name": "Chamberlain",
+      "slug": "chamberlain",
+      "country": "AU",
+      "models": 0,
+      "documents": 0
+    },
+    {
+      "name": "Elsema",
+      "slug": "elsema",
+      "country": "AU",
+      "models": 4,
+      "documents": 4
+    },
+    {
       "name": "FAAC",
       "slug": "faac",
       "country": null,
@@ -83,6 +106,20 @@
       "country": "AU",
       "models": 3,
       "documents": 3
+    },
+    {
+      "name": "Nice",
+      "slug": "nice",
+      "country": "IT",
+      "models": 3,
+      "documents": 3
+    },
+    {
+      "name": "Steel-Line",
+      "slug": "steel-line",
+      "country": "AU",
+      "models": 1,
+      "documents": 1
     }
   ]
 }
