@@ -58,6 +58,28 @@ async function main() {
       continue
     }
 
+    // Two models sharing a modelCode is not a schema error, so zod lets
+    // it through — and the upsert below is keyed on (manufacturer,
+    // modelCode), so the second silently overwrites the first's name
+    // and category and pools its documents. The result imports cleanly
+    // and looks right in the count, which is how it goes unnoticed.
+    // Worth failing on: it is always either a mistake or two things
+    // that should have been one record.
+    const seenCodes = new Set<string>()
+    const repeated = new Set<string>()
+    for (const model of parsed.data.models) {
+      if (seenCodes.has(model.modelCode)) repeated.add(model.modelCode)
+      seenCodes.add(model.modelCode)
+    }
+    if (repeated.size > 0) {
+      console.error(`\n${file} repeats a model code:`)
+      for (const code of repeated) {
+        console.error(`  ${code} — merge these into one model, or give them distinct codes.`)
+      }
+      process.exitCode = 1
+      continue
+    }
+
     const { manufacturer, models: modelSeeds } = parsed.data
 
     const mfr = await prisma.manufacturer.upsert({

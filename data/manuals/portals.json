@@ -1005,6 +1005,58 @@
       "authority": "THIRD_PARTY_MIRROR",
       "region": "US",
       "note": "Distributor manual directory for the FAAC US range. Plain HTTP as surfaced."
+    },
+    {
+      "manufacturer": "Somfy",
+      "slug": "somfy",
+      "url": "https://service.somfy.com/downloads/il_v5/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "GLOBAL",
+      "note": "Somfy's own service download host, installation-instructions directory (il = instructions d'installation, v5). Flat PDFs on a manufacturer host - the shape that scales."
+    },
+    {
+      "manufacturer": "Somfy",
+      "slug": "somfy",
+      "url": "https://www.somfy.co.za/support-and-assistance/downloads",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "GLOBAL",
+      "note": "Somfy South Africa downloads; described as carrying LT 50/60 installation guides and Oximo RTS data sheets and guides. Somfy publishes per country, so each regional index is a distinct target.",
+      "follow": true
+    },
+    {
+      "manufacturer": "Somfy",
+      "slug": "somfy",
+      "url": "https://www.manualslib.com/products/Somfy-Lt50-10747153.html",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "GLOBAL",
+      "note": "Aggregator product page listing 17 LT50 documents alone - a measure of how deep one Somfy motor's documentation runs.",
+      "follow": true
+    },
+    {
+      "manufacturer": "BFT",
+      "slug": "bft",
+      "url": "https://bftgateopeners.com/store/media/pdfs/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "US",
+      "note": "PDF directory of a BFT-branded US store. Brand in the domain, retail site in fact - harvested records here are third-party."
+    },
+    {
+      "manufacturer": "BFT",
+      "slug": "bft",
+      "url": "http://www.allgateoperatormanuals.com/bft-manuals.html",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "US",
+      "note": "Aggregator index of BFT manuals. Plain HTTP as surfaced.",
+      "follow": true
+    },
+    {
+      "manufacturer": "BFT",
+      "slug": "bft",
+      "url": "https://bftgateopeners.com/store/resources/resources-hub/bft-manuals.html",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "US",
+      "note": "Store resources hub indexing BFT manuals and quick-start guides.",
+      "follow": true
     }
   ]
 }

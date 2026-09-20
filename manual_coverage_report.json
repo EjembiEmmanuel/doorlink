@@ -1,19 +1,19 @@
 {
-  "generatedAt": "2026-09-20T11:04:31.098Z",
+  "generatedAt": "2026-09-20T11:06:50.805Z",
   "caveat": "verified_documents counts links that were actually fetched and resolved. A document can be from an official manufacturer domain and still be unverified. Run `npm run manuals:verify` in an environment with outbound network access to raise this number. All figures below EXCLUDE the demo catalogue, whose manufacturers are invented for demonstration and are reported separately under demo_catalogue.",
   "totals": {
     "total_manufacturers": 71,
-    "total_models": 189,
-    "total_documents": 205,
-    "total_model_aliases": 369,
-    "total_alternate_sources": 116,
-    "official_documents": 82,
-    "third_party_documents": 123,
+    "total_models": 193,
+    "total_documents": 211,
+    "total_model_aliases": 381,
+    "total_alternate_sources": 119,
+    "official_documents": 83,
+    "third_party_documents": 128,
     "verified_documents": 0,
-    "unverified_documents": 205,
+    "unverified_documents": 211,
     "documents_needing_review": 0,
     "models_without_documentation": 2,
-    "link_only_documents": 205,
+    "link_only_documents": 211,
     "hosted_documents": 3
   },
   "demo_catalogue": {
@@ -23,33 +23,33 @@
     "documents": 10
   },
   "by_verification": {
-    "UNVERIFIED": 205
+    "UNVERIFIED": 211
   },
   "by_origin": {
-    "MANUFACTURER_ORIGINAL": 82,
-    "THIRD_PARTY_GUIDE": 123
+    "MANUFACTURER_ORIGINAL": 83,
+    "THIRD_PARTY_GUIDE": 128
   },
   "by_region": {
     "UNKNOWN": 3,
     "AU": 29,
-    "GLOBAL": 32,
+    "GLOBAL": 37,
     "US": 57,
     "EU": 67,
-    "UK": 14,
+    "UK": 15,
     "NZ": 1,
     "ASIA": 2
   },
   "by_document_kind": {
-    "INSTALL_MANUAL": 141,
-    "PROGRAMMING_GUIDE": 6,
-    "USER_MANUAL": 40,
+    "INSTALL_MANUAL": 145,
+    "PROGRAMMING_GUIDE": 7,
+    "USER_MANUAL": 41,
     "TECHNICAL_DOCUMENT": 4,
     "QUICK_START": 7,
     "SPEC_SHEET": 6,
     "PARTS_LIST": 1
   },
   "by_rights": {
-    "LINK_ONLY": 205
+    "LINK_ONLY": 211
   },
   "by_manufacturer": [
     {
@@ -99,7 +99,7 @@
       "slug": "bft",
       "country": "IT",
       "models": 6,
-      "documents": 6
+      "documents": 7
     },
     {
       "name": "Becker",
@@ -448,8 +448,8 @@
       "name": "Somfy",
       "slug": "somfy",
       "country": "FR",
-      "models": 3,
-      "documents": 3
+      "models": 7,
+      "documents": 8
     },
     {
       "name": "Stanley Access Technologies",
