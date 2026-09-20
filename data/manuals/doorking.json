@@ -4,8 +4,8 @@
     "slug": "doorking",
     "country": "US",
     "website": "https://www.doorking.com/",
-    "supportUrl": "https://www.doorking.com/",
-    "note": "US manufacturer of vehicular gate operators and access control. Publishes owner's manuals on its own domain with a document code and revision in the filename."
+    "supportUrl": "https://www.doorking.com/wp-content/uploads/",
+    "note": "US manufacturer of vehicular gate operators and access control. Publishes owner's manuals on its own domain with a document code and revision in the filename. Its manuals sit in a WordPress uploads tree under a consistent naming scheme - <model>-065-<revision letter>-<month>-<year>.pdf - which makes both the revision and its date readable from the URL alone. That tree is registered as a harvest target."
   },
   "models": [
     {
@@ -13,7 +13,10 @@
       "name": "Series 6300 Vehicular Swing Gate Operator",
       "category": "gate-motors",
       "region": "US",
-      "aliases": ["Series 6300", "DKS 6300"],
+      "aliases": [
+        "Series 6300",
+        "DKS 6300"
+      ],
       "documents": [
         {
           "kind": "USER_MANUAL",
@@ -32,6 +35,107 @@
               "label": "Gates'n'Fences mirror naming the 6300 series"
             }
           ]
+        },
+        {
+          "kind": "USER_MANUAL",
+          "title": "DoorKing Series 6300 Vehicular Swing Gate Operators Owner's Manual",
+          "sourceUrl": "http://www.gatesnfences.com/files/doorking_openers_pdf/DoorKing_6300_Swing_Gate_Opener_Manual.pdf",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "Gates N Fences",
+          "region": "US",
+          "rights": "LINK_ONLY",
+          "evidence": "Distributor copy, plain HTTP as surfaced. Search reports the current 6300 manual is for circuit board 4502-010 revision K or higher, covering operators built from July 2011 - which means older 6300s need an older manual, and this copy's edition is unknown. Recorded with that caveat rather than assumed current. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "https://www.manualslib.com/manual/783936/Dks-Series-6300.html",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "ManualsLib listing, filed under the DKS brand name"
+            },
+            {
+              "url": "http://www.doorkinggateopeners.com/pdf/6300-Manual.pdf",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "Second distributor copy, plain HTTP"
+            },
+            {
+              "url": "https://www.doorking.com/gate-operators/6300-swing-gate/",
+              "authority": "MANUFACTURER_OFFICIAL",
+              "label": "Manufacturer product page for the 6300 - a page, not a document"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "modelCode": "6500",
+      "name": "DoorKing Series 6500 Swing Gate Operator",
+      "category": "gate-motors",
+      "region": "US",
+      "aliases": [
+        "6500 Series"
+      ],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "Series 6500 Installation / Owner's Manual",
+          "documentCode": "6500-065",
+          "revision": "W",
+          "version": "3-14",
+          "sourceUrl": "https://www.doorking.com/wp-content/uploads/2014/03/6500-065-W-3-14.pdf",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "publisher": "DoorKing",
+          "region": "US",
+          "rights": "LINK_ONLY",
+          "evidence": "On doorking.com, the manufacturer's own domain. The file name decodes as model 6500, document family 065, revision W, dated March 2014 - so both revision and date are readable without opening it. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "6050",
+      "name": "DoorKing Series 6050 Gate Operator",
+      "category": "gate-motors",
+      "region": "US",
+      "aliases": [
+        "6050 Series"
+      ],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "Series 6050 Installation / Owner's Manual",
+          "documentCode": "6050-065",
+          "revision": "X",
+          "version": "10-23",
+          "sourceUrl": "https://www.doorking.com/wp-content/uploads/2018/08/6050-065-X-10-23.pdf",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "publisher": "DoorKing",
+          "region": "US",
+          "rights": "LINK_ONLY",
+          "evidence": "On doorking.com. Revision X dated October 2023, in a 2018/08 upload folder - the folder is when the path was first used, the file name is the edition, and they disagree. The file name is the one to trust. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "1600",
+      "name": "DoorKing Series 1600 / 6000 / 9000 Gate Operators",
+      "category": "gate-motors",
+      "region": "US",
+      "aliases": [
+        "6000",
+        "9000",
+        "9310"
+      ],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "Owner's Manual Supplemental Instructions for Series 1600, 6000 and 9000",
+          "documentCode": "2340-065",
+          "revision": "K",
+          "version": "7-08",
+          "sourceUrl": "https://www.doorking.com/wp-content/uploads/2013/09/2340-065-K-7-08.pdf",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "publisher": "DoorKing",
+          "region": "US",
+          "rights": "LINK_ONLY",
+          "evidence": "On doorking.com. Note this is supplemental instructions, not a full manual - it accompanies the per-series manuals rather than replacing them, and the three series share it, which is why 6000 and 9000 are aliases here rather than models holding a copy. Not fetched - egress blocked."
         }
       ]
     }

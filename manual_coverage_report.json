@@ -1,19 +1,19 @@
 {
-  "generatedAt": "2026-09-20T12:55:43.155Z",
+  "generatedAt": "2026-09-20T12:57:03.154Z",
   "caveat": "verified_documents counts links that were actually fetched and resolved. A document can be from an official manufacturer domain and still be unverified. Run `npm run manuals:verify` in an environment with outbound network access to raise this number. All figures below EXCLUDE the demo catalogue, whose manufacturers are invented for demonstration and are reported separately under demo_catalogue.",
   "totals": {
     "total_manufacturers": 76,
-    "total_models": 233,
-    "total_documents": 263,
-    "total_model_aliases": 513,
-    "total_alternate_sources": 160,
-    "official_documents": 113,
-    "third_party_documents": 150,
+    "total_models": 238,
+    "total_documents": 269,
+    "total_model_aliases": 525,
+    "total_alternate_sources": 167,
+    "official_documents": 117,
+    "third_party_documents": 152,
     "verified_documents": 0,
-    "unverified_documents": 263,
+    "unverified_documents": 269,
     "documents_needing_review": 0,
     "models_without_documentation": 1,
-    "link_only_documents": 263,
+    "link_only_documents": 269,
     "hosted_documents": 3
   },
   "demo_catalogue": {
@@ -23,26 +23,26 @@
     "documents": 10
   },
   "by_verification": {
-    "UNVERIFIED": 263
+    "UNVERIFIED": 269
   },
   "by_origin": {
-    "MANUFACTURER_ORIGINAL": 113,
-    "THIRD_PARTY_GUIDE": 150
+    "MANUFACTURER_ORIGINAL": 117,
+    "THIRD_PARTY_GUIDE": 152
   },
   "by_region": {
     "UNKNOWN": 3,
     "EU": 78,
     "UK": 17,
     "AU": 40,
+    "US": 85,
     "GLOBAL": 39,
-    "US": 79,
     "NZ": 5,
     "ASIA": 2
   },
   "by_document_kind": {
-    "INSTALL_MANUAL": 186,
+    "INSTALL_MANUAL": 189,
     "PROGRAMMING_GUIDE": 7,
-    "USER_MANUAL": 44,
+    "USER_MANUAL": 47,
     "TECHNICAL_DOCUMENT": 5,
     "SPEC_SHEET": 10,
     "QUICK_START": 8,
@@ -50,7 +50,7 @@
     "PARTS_LIST": 2
   },
   "by_rights": {
-    "LINK_ONLY": 263
+    "LINK_ONLY": 269
   },
   "by_manufacturer": [
     {
@@ -218,8 +218,8 @@
       "name": "DoorKing",
       "slug": "doorking",
       "country": "US",
-      "models": 1,
-      "documents": 1
+      "models": 4,
+      "documents": 5
     },
     {
       "name": "Dooya",
@@ -274,8 +274,8 @@
       "name": "Genie",
       "slug": "genie",
       "country": "US",
-      "models": 1,
-      "documents": 1
+      "models": 3,
+      "documents": 3
     },
     {
       "name": "GiBiDi",

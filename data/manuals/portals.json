@@ -1499,6 +1499,40 @@
       "region": "GLOBAL",
       "note": "Aggregator carrying Beninca and Roger Technology documents among many brands. Listings are per-document, so a crawl needs the follow step.",
       "follow": true
+    },
+    {
+      "manufacturer": "DoorKing",
+      "slug": "doorking",
+      "url": "https://www.doorking.com/wp-content/uploads/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "US",
+      "note": "Manufacturer's uploads tree. Names decode as <model>-065-<revision>-<month>-<year>.pdf, so revision and date are readable from the URL - one of the cleanest schemes in this registry. Upload folder dates can disagree with the file name; trust the file name."
+    },
+    {
+      "manufacturer": "DoorKing",
+      "slug": "doorking",
+      "url": "http://www.gatesnfences.com/files/doorking_openers_pdf/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "US",
+      "note": "Distributor directory of DoorKing opener manuals. Plain HTTP as surfaced."
+    },
+    {
+      "manufacturer": "DoorKing",
+      "slug": "doorking",
+      "url": "https://www.aegates.com/doorking-gate-equipment-manuals/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "US",
+      "note": "Distributor index of DoorKing gate equipment manuals.",
+      "follow": true
+    },
+    {
+      "manufacturer": "Genie",
+      "slug": "genie",
+      "url": "https://www.geniecompany.com/product-support/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "US",
+      "note": "Per-model product-support pages. Pages rather than PDFs and no geniecompany.com document URL has surfaced in any search, so this needs the follow step and may still yield nothing.",
+      "follow": true
     }
   ]
 }
