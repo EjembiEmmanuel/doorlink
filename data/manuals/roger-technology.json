@@ -13,7 +13,10 @@
       "name": "BRUSHLESS BE20 Series Swing Gate Automation",
       "category": "gate-motors",
       "region": "GLOBAL",
-      "aliases": ["BE 20", "BE20 Series"],
+      "aliases": [
+        "BE 20",
+        "BE20 Series"
+      ],
       "documents": [
         {
           "kind": "INSTALL_MANUAL",
@@ -65,6 +68,76 @@
           "region": "GLOBAL",
           "rights": "LINK_ONLY",
           "evidence": "Hosted on a Shopify CDN belonging to a reseller rather than on a manufacturer domain, so the publisher is recorded generically rather than named with false precision. Date 2025-06 read from the filename. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "BH30",
+      "name": "Roger Technology BH30 Series Brushless Sliding Gate Operator",
+      "category": "gate-motors",
+      "region": "EU",
+      "aliases": [
+        "BH30/603/HS",
+        "BH30/1000",
+        "BH30/804",
+        "BRUSHLESS BH30"
+      ],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "BH30 Series Instructions and Recommendations for the Installer, Rev13 27/08/2024",
+          "revision": "Rev13",
+          "version": "27/08/2024",
+          "sourceUrl": "https://www.manualslib.com/manual/2113042/Roger-Technology-Bh30-Series.html",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "ManualsLib",
+          "region": "EU",
+          "rights": "LINK_ONLY",
+          "evidence": "Aggregator listing. Revision 13 dated 27/08/2024 is Roger Technology's own revision marking as reported by the search; four separate listings for this series surfaced across two aggregators, which is a sign the document is revised often and that this record should be re-checked rather than trusted to stay current. The brushless motor and B70/1DC control unit pairing is noted here rather than recorded as specifications, having come from a search summary. No rogertechnology.com URL surfaced. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "https://www.manualslib.com/manual/2586722/Roger-Technology-Bh30-Series.html",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "Second ManualsLib listing, titled instruction manual"
+            },
+            {
+              "url": "https://manualzz.com/doc/en/53365925/roger-technology-brushless-bh30-804-installation-guide",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "Manualzz guide specific to the BH30/804"
+            },
+            {
+              "url": "https://manuals.plus/m/29102bcdeef46ff6ca2ba3692c051d883c83c768658a31b71cf9f3cba9d9af63",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "manuals.plus copy"
+            },
+            {
+              "url": "https://accesssystems.ie/index.php/information/documentation/115-roger-technology-manuals",
+              "authority": "AUTHORISED_DISTRIBUTOR",
+              "label": "Distributor index naming BH30_Instructions_0621.pdf - a June 2021 edition, older than Rev13"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "modelCode": "R30",
+      "name": "Roger Technology R30 Series Operator",
+      "category": "gate-motors",
+      "region": "EU",
+      "aliases": [
+        "R30 Series",
+        "R23"
+      ],
+      "documents": [
+        {
+          "kind": "USER_MANUAL",
+          "title": "Roger Technology R30 Series User Manual",
+          "sourceUrl": "https://www.manualslib.com/manual/1226663/Roger-Technology-R30-Series.html",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "ManualsLib",
+          "region": "EU",
+          "rights": "LINK_ONLY",
+          "evidence": "Aggregator listing of the user-facing document; no installer manual for the R30 surfaced, which is a recorded gap rather than a reason to file this as one. R23 was searched for in the same query and returned nothing of its own; it is kept as an alias only so a search lands somewhere in the R range. Not fetched - egress blocked."
         }
       ]
     }

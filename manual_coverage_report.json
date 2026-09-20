@@ -1,19 +1,19 @@
 {
-  "generatedAt": "2026-09-20T12:53:51.760Z",
+  "generatedAt": "2026-09-20T12:55:43.155Z",
   "caveat": "verified_documents counts links that were actually fetched and resolved. A document can be from an official manufacturer domain and still be unverified. Run `npm run manuals:verify` in an environment with outbound network access to raise this number. All figures below EXCLUDE the demo catalogue, whose manufacturers are invented for demonstration and are reported separately under demo_catalogue.",
   "totals": {
     "total_manufacturers": 76,
-    "total_models": 229,
-    "total_documents": 258,
-    "total_model_aliases": 500,
-    "total_alternate_sources": 155,
+    "total_models": 233,
+    "total_documents": 263,
+    "total_model_aliases": 513,
+    "total_alternate_sources": 160,
     "official_documents": 113,
-    "third_party_documents": 145,
+    "third_party_documents": 150,
     "verified_documents": 0,
-    "unverified_documents": 258,
+    "unverified_documents": 263,
     "documents_needing_review": 0,
     "models_without_documentation": 1,
-    "link_only_documents": 258,
+    "link_only_documents": 263,
     "hosted_documents": 3
   },
   "demo_catalogue": {
@@ -23,34 +23,34 @@
     "documents": 10
   },
   "by_verification": {
-    "UNVERIFIED": 258
+    "UNVERIFIED": 263
   },
   "by_origin": {
     "MANUFACTURER_ORIGINAL": 113,
-    "THIRD_PARTY_GUIDE": 145
+    "THIRD_PARTY_GUIDE": 150
   },
   "by_region": {
     "UNKNOWN": 3,
+    "EU": 78,
+    "UK": 17,
     "AU": 40,
-    "EU": 74,
-    "UK": 16,
     "GLOBAL": 39,
     "US": 79,
     "NZ": 5,
     "ASIA": 2
   },
   "by_document_kind": {
-    "INSTALL_MANUAL": 183,
+    "INSTALL_MANUAL": 186,
     "PROGRAMMING_GUIDE": 7,
-    "USER_MANUAL": 43,
+    "USER_MANUAL": 44,
     "TECHNICAL_DOCUMENT": 5,
     "SPEC_SHEET": 10,
     "QUICK_START": 8,
     "SERVICE_BULLETIN": 1,
-    "PARTS_LIST": 1
+    "PARTS_LIST": 2
   },
   "by_rights": {
-    "LINK_ONLY": 258
+    "LINK_ONLY": 263
   },
   "by_manufacturer": [
     {
@@ -120,8 +120,8 @@
       "name": "Benincà",
       "slug": "beninca",
       "country": "IT",
-      "models": 4,
-      "documents": 4
+      "models": 6,
+      "documents": 7
     },
     {
       "name": "Berner Torantriebe",
@@ -435,8 +435,8 @@
       "name": "Roger Technology",
       "slug": "roger-technology",
       "country": "IT",
-      "models": 2,
-      "documents": 3
+      "models": 4,
+      "documents": 5
     },
     {
       "name": "Rollease Acmeda",

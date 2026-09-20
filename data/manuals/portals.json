@@ -1472,6 +1472,33 @@
       "region": "GLOBAL",
       "note": "Aggregator brand index listing ODS T10, T20 and T35 manuals. Currently the only source for the T20.",
       "follow": true
+    },
+    {
+      "manufacturer": "Roger Technology",
+      "slug": "roger-technology",
+      "url": "https://accesssystems.ie/index.php/information/documentation/115-roger-technology-manuals",
+      "authority": "AUTHORISED_DISTRIBUTOR",
+      "region": "EU",
+      "note": "Distributor documentation index naming Roger Technology files by model and date (BH30_Instructions_0621.pdf).",
+      "follow": true
+    },
+    {
+      "manufacturer": "Benincà",
+      "slug": "beninca",
+      "url": "https://www.intelligentsecurity.org/customers/user-guides/automatic-gates/beninca/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "UK",
+      "note": "Reseller index of Beninca user guides across the BILL, BOB and BULL lines. Currently the only source for the BILL series.",
+      "follow": true
+    },
+    {
+      "manufacturer": "Benincà",
+      "slug": "beninca",
+      "url": "https://device.report/manuals",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "GLOBAL",
+      "note": "Aggregator carrying Beninca and Roger Technology documents among many brands. Listings are per-document, so a crawl needs the follow step.",
+      "follow": true
     }
   ]
 }
