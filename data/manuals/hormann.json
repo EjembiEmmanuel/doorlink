@@ -138,6 +138,72 @@
           "evidence": "On hormann.us, the manufacturer's US domain, served through a download handler. The URL carries an opaque hash segment, so it is the kind of link that rots without warning - the tech-support index already registered for this manufacturer is the route back in if it does. Filed under accessories because the FCT3b is a keypad. Not fetched - egress blocked."
         }
       ]
+    },
+    {
+      "modelCode": "SPU F42",
+      "name": "Hörmann SPU F42 Industrial Sectional Door (42 mm depth)",
+      "category": "industrial-high-speed-doors",
+      "region": "EU",
+      "aliases": [
+        "SPU F 42",
+        "SPU 67 Thermo",
+        "Series 50",
+        "Series 60"
+      ],
+      "documents": [
+        {
+          "kind": "TECHNICAL_DOCUMENT",
+          "title": "Industrial Sectional Doors, Depth 42 mm - Technical Manual, Issue 01.03.2019 (Series 50)",
+          "documentCode": "EBD_INDBR50_Sectionaltor_42_EN",
+          "version": "01.03.2019",
+          "sourceUrl": "https://www.hoermann.com/fileadmin/_country/dok/EBD_INDBR50_Sectionaltor_42_EN.pdf",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "publisher": "Hörmann",
+          "region": "EU",
+          "rights": "LINK_ONLY",
+          "evidence": "On hoermann.com, the manufacturer's own domain, in its document tree. The EBD prefix and INDBR50 (industrial, series 50) are Hörmann's own naming; the issue date 01.03.2019 is from the document's own title line. Typed TECHNICAL_DOCUMENT rather than INSTALL_MANUAL because Hörmann calls it a technical manual and it covers specifications and track applications across the range, not one door's fitting steps. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "https://hoermann-uk.iokmx.de/fileadmin/_country/hoermann.uk/dok/Industrial_Sectional_Doors_Depth_42_mm.pdf",
+              "authority": "MANUFACTURER_OFFICIAL",
+              "label": "Hörmann UK's copy, an earlier issue dated 01.04.2014 - kept because doors fitted under it are still in service"
+            },
+            {
+              "url": "https://asset-center.com/original/419/320419_originalfile.pdf",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "Series 60 technical manual as of 01.10.2024 (EBD 3097452), on a third-party asset host - a later series than this record covers"
+            },
+            {
+              "url": "https://manuals.plus/m/9253840263bae021746290567c7b8c9ef16c10259cae403fcf47f121ebdf7675",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "manuals.plus copy of the 42 mm technical manual"
+            }
+          ]
+        },
+        {
+          "kind": "SPEC_SHEET",
+          "title": "Industrial Sectional Door SPU F42 - Product Catalogue (EN)",
+          "documentCode": "86786",
+          "sourceUrl": "https://cdn.hoermann-cloud.de/fileadmin/_country/kataloge/pdf/86786_Ind_Sec_Doors_SPU_F42_EN.pdf?v=1508834138",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "publisher": "Hörmann",
+          "region": "EU",
+          "rights": "LINK_ONLY",
+          "evidence": "On cdn.hoermann-cloud.de, Hörmann's own CDN. Typed SPEC_SHEET because its path says kataloge - this is the product catalogue, not a manual, and search renders its cover as sales copy. Recorded honestly so nobody reaches for it expecting fitting steps. The v= query parameter is a cache-buster and may change. Document number 86786 from the file name. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "https://www.hoermann.com/fileadmin/_country/kataloge/pdf/86465-Industrie-Sectionaltore-EN.pdf",
+              "authority": "MANUFACTURER_OFFICIAL",
+              "label": "Document 86465, the wider Industrial Sectional Doors catalogue"
+            },
+            {
+              "url": "https://www.samsondoors.co.uk/downloads/hormann_brochure_industrial_sectional_spu_f42___spu_67_79740.pdf",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "Reseller copy of the SPU F42 and SPU 67 Thermo brochure"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

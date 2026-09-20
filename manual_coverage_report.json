@@ -1,19 +1,19 @@
 {
-  "generatedAt": "2026-09-20T12:32:14.093Z",
+  "generatedAt": "2026-09-20T12:34:38.065Z",
   "caveat": "verified_documents counts links that were actually fetched and resolved. A document can be from an official manufacturer domain and still be unverified. Run `npm run manuals:verify` in an environment with outbound network access to raise this number. All figures below EXCLUDE the demo catalogue, whose manufacturers are invented for demonstration and are reported separately under demo_catalogue.",
   "totals": {
-    "total_manufacturers": 73,
-    "total_models": 212,
-    "total_documents": 237,
-    "total_model_aliases": 441,
-    "total_alternate_sources": 143,
-    "official_documents": 97,
+    "total_manufacturers": 75,
+    "total_models": 220,
+    "total_documents": 246,
+    "total_model_aliases": 466,
+    "total_alternate_sources": 148,
+    "official_documents": 106,
     "third_party_documents": 140,
     "verified_documents": 0,
-    "unverified_documents": 237,
+    "unverified_documents": 246,
     "documents_needing_review": 0,
     "models_without_documentation": 2,
-    "link_only_documents": 237,
+    "link_only_documents": 246,
     "hosted_documents": 3
   },
   "demo_catalogue": {
@@ -23,33 +23,33 @@
     "documents": 10
   },
   "by_verification": {
-    "UNVERIFIED": 237
+    "UNVERIFIED": 246
   },
   "by_origin": {
-    "MANUFACTURER_ORIGINAL": 97,
+    "MANUFACTURER_ORIGINAL": 106,
     "THIRD_PARTY_GUIDE": 140
   },
   "by_region": {
     "UNKNOWN": 3,
     "AU": 37,
-    "EU": 68,
+    "EU": 70,
     "UK": 16,
     "GLOBAL": 39,
-    "US": 70,
+    "US": 77,
     "NZ": 2,
     "ASIA": 2
   },
   "by_document_kind": {
-    "INSTALL_MANUAL": 170,
+    "INSTALL_MANUAL": 176,
     "PROGRAMMING_GUIDE": 7,
     "USER_MANUAL": 42,
-    "TECHNICAL_DOCUMENT": 4,
-    "SPEC_SHEET": 6,
+    "TECHNICAL_DOCUMENT": 5,
+    "SPEC_SHEET": 8,
     "QUICK_START": 7,
     "PARTS_LIST": 1
   },
   "by_rights": {
-    "LINK_ONLY": 237
+    "LINK_ONLY": 246
   },
   "by_manufacturer": [
     {
@@ -70,6 +70,13 @@
       "name": "Alutech",
       "slug": "alutech",
       "country": "BY",
+      "models": 1,
+      "documents": 1
+    },
+    {
+      "name": "Amarr",
+      "slug": "amarr",
+      "country": "US",
       "models": 1,
       "documents": 1
     },
@@ -294,8 +301,8 @@
       "name": "Hörmann",
       "slug": "hormann",
       "country": "DE",
-      "models": 6,
-      "documents": 6
+      "models": 7,
+      "documents": 8
     },
     {
       "name": "Key Automation",
@@ -405,6 +412,13 @@
     {
       "name": "Ramset",
       "slug": "ramset",
+      "country": "US",
+      "models": 6,
+      "documents": 6
+    },
+    {
+      "name": "Raynor Garage Doors",
+      "slug": "raynor",
       "country": "US",
       "models": 6,
       "documents": 6

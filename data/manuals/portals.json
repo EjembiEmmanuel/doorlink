@@ -1302,6 +1302,64 @@
       "authority": "THIRD_PARTY_MIRROR",
       "region": "US",
       "note": "Distributor file tree, subfoldered by brand - it carries Ramset and Linear/OSCO documents among others."
+    },
+    {
+      "manufacturer": "Raynor Garage Doors",
+      "slug": "raynor",
+      "url": "https://raynor.com/wp-content/uploads/literature/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "US",
+      "note": "Manufacturer's literature directory, flat, files named by part number. Language codes in the names suggest non-English editions sit alongside."
+    },
+    {
+      "manufacturer": "Raynor Garage Doors",
+      "slug": "raynor",
+      "url": "https://raynor.com/wp-content/uploads/csi/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "US",
+      "note": "CSI specification sections - architect-facing documents, not installation manuals. Worth harvesting, worth typing as spec sheets when imported."
+    },
+    {
+      "manufacturer": "Amarr",
+      "slug": "amarr",
+      "url": "https://sites.myamarr.biz/content/dam/amarr/com/us/en/documents/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "US",
+      "note": "Amarr's digital-asset tree, foldered by market, product family and document type. File names can be generic, so what a path serves needs checking rather than inferring."
+    },
+    {
+      "manufacturer": "Amarr",
+      "slug": "amarr",
+      "url": "https://www.amarr.com/us/en/support/garage-door-and-commercial-door-installation-instructions",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "US",
+      "note": "Manufacturer's installation-instruction index; links through to the asset host.",
+      "follow": true
+    },
+    {
+      "manufacturer": "Hörmann",
+      "slug": "hormann",
+      "url": "https://www.hoermann.com/fileadmin/_country/dok/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "EU",
+      "note": "Hörmann's document tree. Names encode document type, series and language (EBD_INDBR50_Sectionaltor_42_EN)."
+    },
+    {
+      "manufacturer": "Hörmann",
+      "slug": "hormann",
+      "url": "https://cdn.hoermann-cloud.de/fileadmin/_country/kataloge/pdf/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "EU",
+      "note": "Hörmann's CDN catalogue directory - product literature rather than manuals. URLs carry a v= cache-buster that may change."
+    },
+    {
+      "manufacturer": "Raynor Garage Doors",
+      "slug": "raynor",
+      "url": "https://support.garagedoorzone.com/raynor-openers.html",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "US",
+      "note": "Distributor index of Raynor opener manuals.",
+      "follow": true
     }
   ]
 }
