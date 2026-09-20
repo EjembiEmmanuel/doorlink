@@ -430,6 +430,46 @@
       "authority": "THIRD_PARTY_MIRROR",
       "region": "US",
       "note": "FCC filing mirror for Dooya grantee code VYY. Regulatory filings are public records and carry the manufacturer's own manuals; the mirror is still third-party."
+    },
+    {
+      "manufacturer": "Rytec",
+      "slug": "rytec",
+      "url": "https://www.rytecdoors.com/sites/default/files/documents/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "US",
+      "note": "Manufacturer's own documents directory. Several install and owner's manuals already sourced from it; likely holds the rest of the range."
+    },
+    {
+      "manufacturer": "Rytec",
+      "slug": "rytec",
+      "url": "https://s3.amazonaws.com/ddn.rytecdoors.com/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "US",
+      "note": "Rytec's own S3 document bucket - a manufacturer host despite the amazonaws.com address. Files are named by document number, so a bucket listing, if public, maps the whole set."
+    },
+    {
+      "manufacturer": "Rytec",
+      "slug": "rytec",
+      "url": "https://riceequipment.com/rytec-high-performance-doors-literature",
+      "authority": "AUTHORISED_DISTRIBUTOR",
+      "region": "US",
+      "note": "Distributor literature index for the Rytec range."
+    },
+    {
+      "manufacturer": "ASSA ABLOY Albany",
+      "slug": "albany",
+      "url": "https://www.assaabloyentrance.com/master-blueprint/en/product-assets/high-speed-doors/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "GLOBAL",
+      "note": "Group product-asset tree for high-speed doors, one folder per model with downloads beneath. Leaflet-heavy; manuals may sit in sibling folders."
+    },
+    {
+      "manufacturer": "ASSA ABLOY Albany",
+      "slug": "albany",
+      "url": "https://www.cisco-eagle.com/uploads/AlbanyDoor-Interior/",
+      "authority": "AUTHORISED_DISTRIBUTOR",
+      "region": "US",
+      "note": "Distributor upload directory holding the Albany install and owner's manuals that the group's own tree did not surface."
     }
   ]
 }

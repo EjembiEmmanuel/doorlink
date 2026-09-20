@@ -1,19 +1,19 @@
 {
-  "generatedAt": "2026-09-20T10:38:55.724Z",
+  "generatedAt": "2026-09-20T10:41:16.913Z",
   "caveat": "verified_documents counts links that were actually fetched and resolved. A document can be from an official manufacturer domain and still be unverified. Run `npm run manuals:verify` in an environment with outbound network access to raise this number. All figures below EXCLUDE the demo catalogue, whose manufacturers are invented for demonstration and are reported separately under demo_catalogue.",
   "totals": {
-    "total_manufacturers": 43,
-    "total_models": 121,
-    "total_documents": 126,
-    "total_model_aliases": 197,
-    "total_alternate_sources": 61,
-    "official_documents": 42,
-    "third_party_documents": 84,
+    "total_manufacturers": 46,
+    "total_models": 132,
+    "total_documents": 138,
+    "total_model_aliases": 226,
+    "total_alternate_sources": 63,
+    "official_documents": 50,
+    "third_party_documents": 88,
     "verified_documents": 0,
-    "unverified_documents": 126,
+    "unverified_documents": 138,
     "documents_needing_review": 0,
     "models_without_documentation": 3,
-    "link_only_documents": 126,
+    "link_only_documents": 138,
     "hosted_documents": 3
   },
   "demo_catalogue": {
@@ -23,34 +23,41 @@
     "documents": 10
   },
   "by_verification": {
-    "UNVERIFIED": 126
+    "UNVERIFIED": 138
   },
   "by_origin": {
-    "MANUFACTURER_ORIGINAL": 42,
-    "THIRD_PARTY_GUIDE": 84
+    "MANUFACTURER_ORIGINAL": 50,
+    "THIRD_PARTY_GUIDE": 88
   },
   "by_region": {
     "UNKNOWN": 3,
     "AU": 26,
-    "GLOBAL": 31,
-    "US": 19,
+    "GLOBAL": 32,
+    "US": 29,
     "UK": 6,
     "EU": 39,
     "NZ": 1,
-    "ASIA": 1
+    "ASIA": 2
   },
   "by_document_kind": {
-    "INSTALL_MANUAL": 83,
+    "INSTALL_MANUAL": 89,
     "PROGRAMMING_GUIDE": 4,
-    "USER_MANUAL": 28,
+    "USER_MANUAL": 32,
     "TECHNICAL_DOCUMENT": 4,
     "QUICK_START": 4,
-    "SPEC_SHEET": 3
+    "SPEC_SHEET": 5
   },
   "by_rights": {
-    "LINK_ONLY": 126
+    "LINK_ONLY": 138
   },
   "by_manufacturer": [
+    {
+      "name": "ASSA ABLOY Albany",
+      "slug": "albany",
+      "country": "SE",
+      "models": 4,
+      "documents": 4
+    },
     {
       "name": "Aprimatic",
       "slug": "aprimatic",
@@ -148,6 +155,13 @@
       "country": "CN",
       "models": 3,
       "documents": 4
+    },
+    {
+      "name": "Dynaco",
+      "slug": "dynaco",
+      "country": "BE",
+      "models": 1,
+      "documents": 1
     },
     {
       "name": "EFAFLEX",
@@ -281,6 +295,13 @@
       "country": "AU",
       "models": 3,
       "documents": 3
+    },
+    {
+      "name": "Rytec",
+      "slug": "rytec",
+      "country": "US",
+      "models": 6,
+      "documents": 7
     },
     {
       "name": "SEA (Seateam)",

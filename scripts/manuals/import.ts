@@ -146,14 +146,25 @@ async function main() {
           dataSource: DataSource.IMPORTED,
         }
 
+        // version is spread in rather than sitting in `data` because the
+        // column is non-nullable with a default: a seed file that states
+        // no version must leave the existing value alone, not overwrite
+        // it with null. It belongs on both paths — this ran on create
+        // only, so correcting a version in a seed file and re-importing
+        // silently did nothing.
+        const versionPatch = doc.version ? { version: doc.version } : {}
+
         const record = existing
-          ? await prisma.document.update({ where: { id: existing.id }, data })
+          ? await prisma.document.update({
+              where: { id: existing.id },
+              data: { ...data, ...versionPatch },
+            })
           : await prisma.document.create({
               data: {
                 ...data,
+                ...versionPatch,
                 modelId: model.id,
                 slug: slugify(`${manufacturer.slug}-${seed.modelCode}-${doc.kind}-${doc.title}`).slice(0, 90),
-                ...(doc.version ? { version: doc.version } : {}),
               },
             })
         documents += 1
