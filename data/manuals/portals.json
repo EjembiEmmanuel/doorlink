@@ -829,6 +829,47 @@
       "authority": "THIRD_PARTY_MIRROR",
       "region": "CA",
       "note": "Distributor manual directory spanning several North American opener brands."
+    },
+    {
+      "manufacturer": "Berner Torantriebe",
+      "slug": "berner",
+      "url": "https://www.berner-torantriebe.de/en/operating-instructions/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "EU",
+      "note": "Manufacturer's operating-instructions index, selectable by product category.",
+      "follow": true
+    },
+    {
+      "manufacturer": "Berner Torantriebe",
+      "slug": "berner",
+      "url": "https://www.berner-torantriebe.de/wp-content/uploads/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "EU",
+      "note": "Uploads tree serving documents named <number>-EBA-<model>_<market>-Rev.-<n>.pdf - document number, model, market and revision all in the file name."
+    },
+    {
+      "manufacturer": "Berner Torantriebe",
+      "slug": "berner",
+      "url": "https://www.berner-torantriebe.de/media/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "EU",
+      "note": "Second document location on the same host, with a different naming scheme (eba_<model>_<version>__rev._<n>__<lang>.pdf). Both are needed to cover the range."
+    },
+    {
+      "manufacturer": "Magnetic Autocontrol",
+      "slug": "magnetic-autocontrol",
+      "url": "https://magneticgateopeners.com/store/pdfs/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "US",
+      "note": "Distributor PDF directory; the only source of direct Magnetic barrier manuals found so far."
+    },
+    {
+      "manufacturer": "Berner Torantriebe",
+      "slug": "berner",
+      "url": "https://manuals.plus/category/berner-torantriebe-kg/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "GLOBAL",
+      "note": "Aggregator brand index."
     }
   ]
 }

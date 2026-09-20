@@ -1,19 +1,19 @@
 {
-  "generatedAt": "2026-09-20T10:54:10.552Z",
+  "generatedAt": "2026-09-20T10:55:32.910Z",
   "caveat": "verified_documents counts links that were actually fetched and resolved. A document can be from an official manufacturer domain and still be unverified. Run `npm run manuals:verify` in an environment with outbound network access to raise this number. All figures below EXCLUDE the demo catalogue, whose manufacturers are invented for demonstration and are reported separately under demo_catalogue.",
   "totals": {
-    "total_manufacturers": 66,
-    "total_models": 165,
-    "total_documents": 179,
-    "total_model_aliases": 311,
-    "total_alternate_sources": 100,
-    "official_documents": 69,
-    "third_party_documents": 110,
+    "total_manufacturers": 68,
+    "total_models": 171,
+    "total_documents": 186,
+    "total_model_aliases": 327,
+    "total_alternate_sources": 104,
+    "official_documents": 73,
+    "third_party_documents": 113,
     "verified_documents": 0,
-    "unverified_documents": 179,
+    "unverified_documents": 186,
     "documents_needing_review": 0,
     "models_without_documentation": 3,
-    "link_only_documents": 179,
+    "link_only_documents": 186,
     "hosted_documents": 3
   },
   "demo_catalogue": {
@@ -23,33 +23,33 @@
     "documents": 10
   },
   "by_verification": {
-    "UNVERIFIED": 179
+    "UNVERIFIED": 186
   },
   "by_origin": {
-    "MANUFACTURER_ORIGINAL": 69,
-    "THIRD_PARTY_GUIDE": 110
+    "MANUFACTURER_ORIGINAL": 73,
+    "THIRD_PARTY_GUIDE": 113
   },
   "by_region": {
     "UNKNOWN": 3,
     "AU": 29,
     "GLOBAL": 32,
     "US": 55,
-    "UK": 7,
-    "EU": 50,
+    "UK": 8,
+    "EU": 56,
     "NZ": 1,
     "ASIA": 2
   },
   "by_document_kind": {
-    "INSTALL_MANUAL": 119,
+    "INSTALL_MANUAL": 123,
     "PROGRAMMING_GUIDE": 6,
-    "USER_MANUAL": 37,
+    "USER_MANUAL": 39,
     "TECHNICAL_DOCUMENT": 4,
+    "QUICK_START": 7,
     "SPEC_SHEET": 6,
-    "QUICK_START": 6,
     "PARTS_LIST": 1
   },
   "by_rights": {
-    "LINK_ONLY": 179
+    "LINK_ONLY": 186
   },
   "by_manufacturer": [
     {
@@ -105,6 +105,13 @@
       "name": "Benincà",
       "slug": "beninca",
       "country": "IT",
+      "models": 4,
+      "documents": 4
+    },
+    {
+      "name": "Berner Torantriebe",
+      "slug": "berner",
+      "country": "DE",
       "models": 4,
       "documents": 4
     },
@@ -301,6 +308,13 @@
       "name": "Linear / OSCO",
       "slug": "linear",
       "country": "US",
+      "models": 2,
+      "documents": 3
+    },
+    {
+      "name": "Magnetic Autocontrol",
+      "slug": "magnetic-autocontrol",
+      "country": "DE",
       "models": 2,
       "documents": 3
     },
