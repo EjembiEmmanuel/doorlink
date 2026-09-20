@@ -25,6 +25,16 @@ export type Permission =
   | 'support:read:own'
   | 'support:write:any'
   | 'import:write'
+  // Uploading a manual the library does not have. Granted to every
+  // signed-in role: the whole point is to collect documents Doorlink
+  // lacks, and gating that behind a trade role would lose the homeowner
+  // holding the only copy of an opener manual from 1998.
+  | 'manual:submit'
+  // Approving one into the public library. Admin only, and deliberately
+  // separate from manual:submit — submitting and publishing are
+  // different powers, and nothing in the system may hold both
+  // implicitly.
+  | 'manual:review'
   | 'admin:settings'
 
 // listing:write:own is granted to every role — Doorlink's marketplace is
@@ -44,6 +54,7 @@ const MATRIX: Record<Role, Permission[]> = {
     'job:write:own',
     'marketplace:hire',
     'support:read:own',
+    'manual:submit',
   ],
   TECHNICIAN: [
     'catalogue:read',
@@ -56,6 +67,7 @@ const MATRIX: Record<Role, Permission[]> = {
     'marketplace:quote',
     'marketplace:hire',
     'support:read:own',
+    'manual:submit',
   ],
   SUPPLIER: [
     'catalogue:read',
@@ -64,6 +76,7 @@ const MATRIX: Record<Role, Permission[]> = {
     'order:read:any',
     'marketplace:hire',
     'support:read:own',
+    'manual:submit',
   ],
   MANUFACTURER: [
     'catalogue:read',
@@ -73,6 +86,7 @@ const MATRIX: Record<Role, Permission[]> = {
     'import:write',
     'marketplace:hire',
     'support:read:own',
+    'manual:submit',
   ],
   ADMIN: [
     'catalogue:read',
@@ -88,8 +102,10 @@ const MATRIX: Record<Role, Permission[]> = {
     'marketplace:quote',
     'marketplace:hire',
     'support:read:own',
+    'manual:submit',
     'support:write:any',
     'import:write',
+    'manual:review',
     'admin:settings',
   ],
 }

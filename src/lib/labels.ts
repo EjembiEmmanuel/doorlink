@@ -1,9 +1,11 @@
 import type {
+  AiVerdict,
   DocumentKind,
   DocumentOrigin,
   JobStatus,
   LeadStatus,
   QuoteStatus,
+  SubmissionStatus,
   SubscriptionStatus,
   TransactionStatus,
   UrgencyLevel,
@@ -162,4 +164,55 @@ export const SUBSCRIPTION_STATUS_LABELS: Record<SubscriptionStatus, string> = {
   PAST_DUE: 'Past due',
   CANCELLED: 'Cancelled',
   EXPIRED: 'Expired',
+}
+
+// Submitted-manual wording.
+//
+// Deliberately plain: a submitter reads these, not an engineer. Note
+// FLAGGED does not say "rejected" — the AI flagging something is not a
+// decision, and telling somebody their manual was rejected when a person
+// has not looked at it yet would be untrue.
+export const SUBMISSION_LABELS: Record<SubmissionStatus, string> = {
+  RECEIVED: 'Received',
+  CHECKING: 'Being checked',
+  AWAITING_REVIEW: 'Waiting for review',
+  FLAGGED: 'Needs a closer look',
+  POSSIBLE_DUPLICATE: 'We may already have this',
+  INFO_REQUESTED: 'We need more information',
+  APPROVED: 'In the library',
+  REJECTED: 'Not added',
+  WITHDRAWN: 'Withdrawn',
+}
+
+export const SUBMISSION_TONE: Record<SubmissionStatus, Tone> = {
+  RECEIVED: 'neutral',
+  CHECKING: 'neutral',
+  AWAITING_REVIEW: 'caution',
+  FLAGGED: 'caution',
+  POSSIBLE_DUPLICATE: 'caution',
+  INFO_REQUESTED: 'caution',
+  APPROVED: 'good',
+  REJECTED: 'bad',
+  WITHDRAWN: 'neutral',
+}
+
+// Admin-facing. These say what the check actually reported, including
+// the two that mean no useful check happened — which a reviewer must be
+// able to tell apart from a pass at a glance.
+export const AI_VERDICT_LABELS: Record<AiVerdict, string> = {
+  NOT_RUN: 'No check ran',
+  VERIFIED: 'Verified by check',
+  NEEDS_REVIEW: 'Check wants a human',
+  REJECTED: 'Check rejected it',
+  POSSIBLE_DUPLICATE: 'Check thinks it is a duplicate',
+  ERRORED: 'Check failed to complete',
+}
+
+export const AI_VERDICT_TONE: Record<AiVerdict, Tone> = {
+  NOT_RUN: 'neutral',
+  VERIFIED: 'good',
+  NEEDS_REVIEW: 'caution',
+  REJECTED: 'bad',
+  POSSIBLE_DUPLICATE: 'caution',
+  ERRORED: 'bad',
 }
