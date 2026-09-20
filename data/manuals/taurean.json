@@ -1,0 +1,44 @@
+{
+  "manufacturer": {
+    "name": "Taurean Door Systems",
+    "slug": "taurean",
+    "country": "AU",
+    "website": "https://www.taureands.com.au/",
+    "supportUrl": "https://www.taureands.com.au/safety/",
+    "note": "Australian garage door manufacturer. The document below is for the door, not an opener - a Taurean-branded opener manual was searched for and none surfaced, and the search result notes Taurean directs those enquiries to a phone number. That gap is left open rather than filled with another brand's opener manual."
+  },
+  "models": [
+    {
+      "modelCode": "Classic Range Sectional",
+      "name": "Taurean Classic Range Sectional Door",
+      "category": "garage-door-openers",
+      "region": "AU",
+      "aliases": ["Classic Range", "Classic Sectional"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "Taurean Classic Range Sectional Door Installation Instructions V5",
+          "version": "V5",
+          "sourceUrl": "https://www.taureands.com.au/wp-content/uploads/2016/12/Classic-Range-Installation-Instructions-V5.pdf",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "publisher": "Taurean Door Systems",
+          "region": "AU",
+          "rights": "LINK_ONLY",
+          "evidence": "On taureands.com.au, the manufacturer's own domain. Version V5 from the file name. The 2016/12 path segment is WordPress's upload month, which is when the file was posted, not necessarily the edition date - so no date is recorded. The Stramit copy below prints a note telling the reader to ring Taurean for the current version, which is a standing reason to re-check this one. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "https://www.stramit.com.au/assets/Taurean-Brochures/0d3f60be5a/Taurean-Classic-Range-Sectional-Door-Installation-Instructions.pdf",
+              "authority": "AUTHORISED_DISTRIBUTOR",
+              "label": "Stramit copy; carries a note to contact Taurean for the current version"
+            },
+            {
+              "url": "https://www.egaragesystems.com.au/images/uploads/2015/04/taurean-manual/sectional-door-brochure-web.pdf",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "eGarage Systems copy of the sectional door brochure - literature, not the installation instructions"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

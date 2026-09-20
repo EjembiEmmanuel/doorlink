@@ -470,6 +470,102 @@
       "authority": "AUTHORISED_DISTRIBUTOR",
       "region": "US",
       "note": "Distributor upload directory holding the Albany install and owner's manuals that the group's own tree did not surface."
+    },
+    {
+      "manufacturer": "Danmar Doors",
+      "slug": "danmar",
+      "url": "https://www.danmardoorswa.com.au/service/installation-guides/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "AU",
+      "note": "Danmar WA's own installation-guides page, described as carrying downloadable PDF guides. The only Danmar documentation index found."
+    },
+    {
+      "manufacturer": "Danmar Doors",
+      "slug": "danmar",
+      "url": "https://www.danmardoorswa.com.au/useful-information/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "AU",
+      "note": "Care, maintenance and service downloads."
+    },
+    {
+      "manufacturer": "Taurean Door Systems",
+      "slug": "taurean",
+      "url": "https://www.taureands.com.au/safety/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "AU",
+      "note": "Taurean's safety page; the manufacturer's own documentation entry point."
+    },
+    {
+      "manufacturer": "Taurean Door Systems",
+      "slug": "taurean",
+      "url": "https://www.egaragesystems.com.au/manuals/taurean-brochures",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "AU",
+      "note": "Reseller index of Taurean literature."
+    },
+    {
+      "manufacturer": "B&D",
+      "slug": "bnd",
+      "url": "https://garagedooropenerremotes.com.au/manuals-and-downloads/bnd-manuals",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "AU",
+      "note": "B&D section of the aggregator index. The parent index describes itself as holding 500+ garage door and gate opener documents from the 1980s on, which makes it one of the higher-yield AU targets - and third-party throughout, so nothing harvested here may be shown as a manufacturer document."
+    },
+    {
+      "manufacturer": "Garador",
+      "slug": "garador",
+      "url": "https://www.garador.co.uk/installer-support/fitting-instructions/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "UK",
+      "note": "Manufacturer's fitting-instructions index, covering Up & Over, Sectional (L, N and Z track), GaraRoll and Side Hinged."
+    },
+    {
+      "manufacturer": "Garador",
+      "slug": "garador",
+      "url": "https://www.garador.co.nz/resources/owner-manuals",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "NZ",
+      "note": "Garador New Zealand's owner-manual index - a separate arm with its own documents."
+    },
+    {
+      "manufacturer": "Garador",
+      "slug": "garador",
+      "url": "https://www.thegaragedoorcentre.co.uk/downloads",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "UK",
+      "note": "Reseller download index spanning many UK brands, not Garador alone."
+    },
+    {
+      "manufacturer": "multiple",
+      "slug": null,
+      "url": "https://www.garagedoorsonline.co.uk/downloads",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "UK",
+      "note": "UK aggregator index of garage door manuals and catalogues across brands."
+    },
+    {
+      "manufacturer": "Boss (Garage Door Operators)",
+      "slug": "boss",
+      "url": "https://www.aggdoors.com.au/product-support/manuals/garage-door-opener-manuals/boss-garage-opener-manuals/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "AU",
+      "note": "Reseller index of Boss opener manuals. Boss has no manufacturer documentation site in this registry, so the reseller indexes are the only route to its range."
+    },
+    {
+      "manufacturer": "Boss (Garage Door Operators)",
+      "slug": "boss",
+      "url": "https://expressgarageparts.com.au/boss-operator-door-manuals/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "AU",
+      "note": "Second reseller index of Boss operator manuals."
+    },
+    {
+      "manufacturer": "Boss (Garage Door Operators)",
+      "slug": "boss",
+      "url": "https://motepro.com.au/Manuals/Boss/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "AU",
+      "note": "Reseller manual directory, subfoldered by door type - the BOL4 PDF came from its Sectional folder."
     }
   ]
 }
