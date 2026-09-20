@@ -5,7 +5,101 @@
     "country": "DE",
     "website": "https://www.teckentrup.biz/",
     "supportUrl": "https://www.teckentrup.biz/en/downloadcenter",
-    "note": "German door manufacturer with a download centre carrying brochures, data sheets, approvals and installation instructions. No model-level PDF URL was surfaced, so none is claimed."
+    "note": "German door manufacturer with a download centre carrying brochures, data sheets, approvals and installation instructions. No model-level PDF URL was surfaced, so none is claimed. Its UK arm publishes installation instructions as static PDFs under teckentrup.co.uk/assets/content/images - an images path serving documents, which is why a harvester filtering on directory name would miss them. Registered as a target. Covers carry dates in a MM I YYYY form (06I2019)."
   },
-  "models": []
+  "models": [
+    {
+      "modelCode": "Industrial Sectional",
+      "name": "Teckentrup Industrial Sectional Door",
+      "category": "industrial-high-speed-doors",
+      "region": "UK",
+      "aliases": [
+        "SW 40",
+        "SW 80",
+        "SLW 40",
+        "SLW 80",
+        "SL 40",
+        "SL 80",
+        "SLX 40"
+      ],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "Industrial Sectional Doors Installation, Operating and Maintenance Instructions",
+          "sourceUrl": "https://www.teckentrup.co.uk/assets/content/images/installation-instructions_ind-sect-doors.pdf",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "publisher": "Teckentrup",
+          "region": "UK",
+          "rights": "LINK_ONLY",
+          "evidence": "On teckentrup.co.uk, the manufacturer's UK domain. The sectional model codes listed as aliases come from the UK downloads page, which names SW 40, SW 80, SLW 40, SLW 80, SL 40, SL 80 and SLX 40 as having installation instructions - they are aliases so a search lands, not a claim that this one document covers all seven. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "SW Sectional",
+      "name": "Teckentrup SW Industrial Sectional Door",
+      "category": "industrial-high-speed-doors",
+      "region": "UK",
+      "aliases": [
+        "SW"
+      ],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "SW Industrial Sectional Door Installation Instructions",
+          "sourceUrl": "https://www.teckentrup.co.uk/assets/content/images/Installation-Instruction-SW-Sectional-Doors.pdf",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "publisher": "Teckentrup",
+          "region": "UK",
+          "rights": "LINK_ONLY",
+          "evidence": "On teckentrup.co.uk. The cover reads 10I2017, Teckentrup's month-and-year form, recorded verbatim as the version rather than reformatted into a date. Not fetched - egress blocked.",
+          "version": "10I2017"
+        }
+      ]
+    },
+    {
+      "modelCode": "Folding Door",
+      "name": "Teckentrup Industrial Folding Door with Drive",
+      "category": "industrial-high-speed-doors",
+      "region": "UK",
+      "aliases": [
+        "Folding Doors"
+      ],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "Industrial Folding Doors with Drive Installation Instructions",
+          "sourceUrl": "https://www.teckentrup.co.uk/assets/content/images/Folding-Door-With-Drive-Installation-Instructions.pdf",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "publisher": "Teckentrup",
+          "region": "UK",
+          "rights": "LINK_ONLY",
+          "evidence": "On teckentrup.co.uk. Cover dated 06I2019, recorded verbatim. Not fetched - egress blocked.",
+          "version": "06I2019"
+        }
+      ]
+    },
+    {
+      "modelCode": "Sectional Garage",
+      "name": "Teckentrup Sectional Garage Door",
+      "category": "garage-door-openers",
+      "region": "UK",
+      "aliases": [
+        "Sectional Garage Door"
+      ],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "Sectional Garage Door Fitting Instructions, March 2022",
+          "sourceUrl": "https://www.teckentrup.co.uk/assets/content/images/Teckentrup-Sectional-Fitting-Instructions-March-2022.pdf",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "publisher": "Teckentrup",
+          "region": "UK",
+          "rights": "LINK_ONLY",
+          "evidence": "On teckentrup.co.uk. Dated March 2022 in the file name. This is the domestic garage door, not the industrial sectional recorded above - different products despite similar names. Not fetched - egress blocked.",
+          "version": "March 2022"
+        }
+      ]
+    }
+  ]
 }

@@ -1,19 +1,19 @@
 {
-  "generatedAt": "2026-09-20T12:57:03.154Z",
+  "generatedAt": "2026-09-20T12:58:12.521Z",
   "caveat": "verified_documents counts links that were actually fetched and resolved. A document can be from an official manufacturer domain and still be unverified. Run `npm run manuals:verify` in an environment with outbound network access to raise this number. All figures below EXCLUDE the demo catalogue, whose manufacturers are invented for demonstration and are reported separately under demo_catalogue.",
   "totals": {
     "total_manufacturers": 76,
-    "total_models": 238,
-    "total_documents": 269,
-    "total_model_aliases": 525,
-    "total_alternate_sources": 167,
-    "official_documents": 117,
-    "third_party_documents": 152,
+    "total_models": 245,
+    "total_documents": 276,
+    "total_model_aliases": 543,
+    "total_alternate_sources": 169,
+    "official_documents": 121,
+    "third_party_documents": 155,
     "verified_documents": 0,
-    "unverified_documents": 269,
+    "unverified_documents": 276,
     "documents_needing_review": 0,
     "models_without_documentation": 1,
-    "link_only_documents": 269,
+    "link_only_documents": 276,
     "hosted_documents": 3
   },
   "demo_catalogue": {
@@ -23,24 +23,24 @@
     "documents": 10
   },
   "by_verification": {
-    "UNVERIFIED": 269
+    "UNVERIFIED": 276
   },
   "by_origin": {
-    "MANUFACTURER_ORIGINAL": 117,
-    "THIRD_PARTY_GUIDE": 152
+    "MANUFACTURER_ORIGINAL": 121,
+    "THIRD_PARTY_GUIDE": 155
   },
   "by_region": {
     "UNKNOWN": 3,
-    "EU": 78,
-    "UK": 17,
+    "UK": 21,
     "AU": 40,
-    "US": 85,
+    "EU": 81,
     "GLOBAL": 39,
+    "US": 85,
     "NZ": 5,
     "ASIA": 2
   },
   "by_document_kind": {
-    "INSTALL_MANUAL": 189,
+    "INSTALL_MANUAL": 196,
     "PROGRAMMING_GUIDE": 7,
     "USER_MANUAL": 47,
     "TECHNICAL_DOCUMENT": 5,
@@ -50,7 +50,7 @@
     "PARTS_LIST": 2
   },
   "by_rights": {
-    "LINK_ONLY": 269
+    "LINK_ONLY": 276
   },
   "by_manufacturer": [
     {
@@ -400,8 +400,8 @@
       "name": "Novoferm",
       "slug": "novoferm",
       "country": "DE",
-      "models": 3,
-      "documents": 3
+      "models": 6,
+      "documents": 6
     },
     {
       "name": "Overhead Door",
@@ -519,8 +519,8 @@
       "name": "Teckentrup",
       "slug": "teckentrup",
       "country": "DE",
-      "models": 0,
-      "documents": 0
+      "models": 4,
+      "documents": 4
     },
     {
       "name": "Tousek",

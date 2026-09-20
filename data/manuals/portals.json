@@ -1533,6 +1533,41 @@
       "region": "US",
       "note": "Per-model product-support pages. Pages rather than PDFs and no geniecompany.com document URL has surfaced in any search, so this needs the follow step and may still yield nothing.",
       "follow": true
+    },
+    {
+      "manufacturer": "Teckentrup",
+      "slug": "teckentrup",
+      "url": "https://www.teckentrup.co.uk/assets/content/images/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "UK",
+      "note": "UK arm's asset path - an images directory that in fact serves installation-instruction PDFs, so a harvester filtering on directory name would miss it entirely."
+    },
+    {
+      "manufacturer": "Teckentrup",
+      "slug": "teckentrup",
+      "url": "https://www.teckentrup.co.uk/downloads",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "UK",
+      "note": "UK downloads index; names installation instructions per sectional model (SW 40, SW 80, SLW 40, SLW 80, SL 40, SL 80, SLX 40).",
+      "follow": true
+    },
+    {
+      "manufacturer": "Novoferm",
+      "slug": "novoferm",
+      "url": "https://www.novoferm.com/downloads",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "EU",
+      "note": "Group downloads root, broader than the installation-instructions page already registered.",
+      "follow": true
+    },
+    {
+      "manufacturer": "Novoferm",
+      "slug": "novoferm",
+      "url": "https://www.novoferm.com/installation-/-assembly-instructions/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "EU",
+      "note": "Second spelling of the assembly-instructions path seen in search results; recorded alongside the other in case they are distinct pages rather than one redirecting.",
+      "follow": true
     }
   ]
 }
