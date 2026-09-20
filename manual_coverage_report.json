@@ -1,19 +1,19 @@
 {
-  "generatedAt": "2026-09-20T09:47:26.683Z",
+  "generatedAt": "2026-09-20T10:15:20.834Z",
   "caveat": "verified_documents counts links that were actually fetched and resolved. A document can be from an official manufacturer domain and still be unverified. Run `npm run manuals:verify` in an environment with outbound network access to raise this number. All figures below EXCLUDE the demo catalogue, whose manufacturers are invented for demonstration and are reported separately under demo_catalogue.",
   "totals": {
-    "total_manufacturers": 29,
-    "total_models": 75,
-    "total_documents": 76,
-    "total_model_aliases": 106,
-    "total_alternate_sources": 27,
+    "total_manufacturers": 30,
+    "total_models": 80,
+    "total_documents": 81,
+    "total_model_aliases": 115,
+    "total_alternate_sources": 29,
     "official_documents": 28,
-    "third_party_documents": 48,
+    "third_party_documents": 53,
     "verified_documents": 0,
-    "unverified_documents": 76,
+    "unverified_documents": 81,
     "documents_needing_review": 0,
     "models_without_documentation": 3,
-    "link_only_documents": 76,
+    "link_only_documents": 81,
     "hosted_documents": 3
   },
   "demo_catalogue": {
@@ -23,31 +23,31 @@
     "documents": 10
   },
   "by_verification": {
-    "UNVERIFIED": 76
+    "UNVERIFIED": 81
   },
   "by_origin": {
     "MANUFACTURER_ORIGINAL": 28,
-    "THIRD_PARTY_GUIDE": 48
+    "THIRD_PARTY_GUIDE": 53
   },
   "by_region": {
     "UNKNOWN": 3,
     "AU": 26,
-    "GLOBAL": 20,
-    "US": 10,
+    "GLOBAL": 21,
+    "US": 14,
     "EU": 14,
     "UK": 2,
     "NZ": 1
   },
   "by_document_kind": {
-    "INSTALL_MANUAL": 48,
+    "INSTALL_MANUAL": 52,
     "PROGRAMMING_GUIDE": 4,
-    "USER_MANUAL": 19,
+    "USER_MANUAL": 20,
     "TECHNICAL_DOCUMENT": 1,
-    "SPEC_SHEET": 3,
-    "QUICK_START": 1
+    "QUICK_START": 1,
+    "SPEC_SHEET": 3
   },
   "by_rights": {
-    "LINK_ONLY": 76
+    "LINK_ONLY": 81
   },
   "by_manufacturer": [
     {
@@ -231,6 +231,13 @@
       "country": "AU",
       "models": 1,
       "documents": 1
+    },
+    {
+      "name": "TORMAX",
+      "slug": "tormax",
+      "country": "CH",
+      "models": 5,
+      "documents": 5
     },
     {
       "name": "Teckentrup",

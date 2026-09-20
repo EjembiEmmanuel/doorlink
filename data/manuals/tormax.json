@@ -1,0 +1,123 @@
+{
+  "manufacturer": {
+    "name": "TORMAX",
+    "slug": "tormax",
+    "country": "CH",
+    "website": "https://www.tormax.com/",
+    "supportUrl": null,
+    "note": "Swiss manufacturer of automatic pedestrian door operators. No manufacturer-hosted documentation index was surfaced; every document below sits on a distributor or aggregator, so supportUrl is left null rather than guessed."
+  },
+  "models": [
+    {
+      "modelCode": "iMotion 1301",
+      "name": "iMotion 1301 Swing Door Operator",
+      "category": "automatic-pedestrian-doors",
+      "region": "US",
+      "aliases": ["1301", "iMotion1301"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "iMotion 1301 Swing Door Operator Installation and Operating Manual",
+          "documentCode": "US801279",
+          "version": "V6.17",
+          "sourceUrl": "https://www.addisonautomatics.com/wp-content/uploads/manuals/Tormax/US801279_1301_Installation_and_Operating_Manual_V6.17.pdf",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "Addison Automatics",
+          "region": "US",
+          "rights": "LINK_ONLY",
+          "evidence": "Distributor copy. Document code US801279 and version V6.17 read from the filename — the US prefix suggests a North American edition, which is why the region is recorded as US rather than global. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "1102",
+      "name": "1102 Swing Door Operator",
+      "category": "automatic-pedestrian-doors",
+      "region": "US",
+      "aliases": ["TTX 1102"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "1102 / TTX Swing Door Operator Installation and Service Manual",
+          "sourceUrl": "https://www.addisonautomatics.com/wp-content/uploads/manuals/tormax/SWINGER%20NEW%201102%201201.pdf",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "Addison Automatics",
+          "region": "US",
+          "rights": "LINK_ONLY",
+          "evidence": "Distributor copy. The filename names both 1102 and 1201, so this document likely covers both; only 1102 is recorded as a model because 1201 was not otherwise identified. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "https://www.manualslib.com/manual/1662530/Tormax-1102.html",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "ManualsLib listing"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "modelCode": "TX9200",
+      "name": "TX9200 / TX9500 Series Sliding Door Operator",
+      "category": "automatic-pedestrian-doors",
+      "region": "US",
+      "aliases": ["TX 9200", "TX9500"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "TX9200 / TX9500 Series Sliding Door Installation and Service Manual",
+          "sourceUrl": "https://absupply.net/pdf/Tormax_TX9200%20Manual.pdf",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "AB Supply",
+          "region": "US",
+          "rights": "LINK_ONLY",
+          "evidence": "Distributor copy. One manual covers both the TX9200 and TX9500 series. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "https://www.addisonautomatics.com/wp-content/uploads/manuals/tormax/SLIDER%20I%20MOTION.pdf",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "Addison Automatics copy of the same series manual"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "modelCode": "TX9430",
+      "name": "TX9430 / TX9420 Telescopic Sliding Door Operator",
+      "category": "automatic-pedestrian-doors",
+      "region": "US",
+      "aliases": ["TX 9430", "TX9420"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "TX9430 / TX9420 Series with 2301 / 2401 Sliding Door Drives",
+          "sourceUrl": "https://www.addisonautomatics.com/wp-content/uploads/manuals/tormax/TELESCOPIC%20SLIDE.pdf",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "Addison Automatics",
+          "region": "US",
+          "rights": "LINK_ONLY",
+          "evidence": "Distributor copy. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "2101",
+      "name": "2101 Sliding Door Drive",
+      "category": "automatic-pedestrian-doors",
+      "region": "GLOBAL",
+      "documents": [
+        {
+          "kind": "USER_MANUAL",
+          "title": "2101 Sliding Door Drive Instructions for Use",
+          "documentCode": "t1672-e",
+          "sourceUrl": "https://www.scribd.com/document/509095635/t1672-e-instructions-for-use-2101",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "Scribd",
+          "region": "GLOBAL",
+          "rights": "LINK_ONLY",
+          "evidence": "Document-sharing site, which commonly gates downloads — verification will likely mark this restricted. Kept because the document code t1672-e and the model are identifiable from the title. Not fetched - egress blocked."
+        }
+      ]
+    }
+  ]
+}
