@@ -1,0 +1,68 @@
+{
+  "manufacturer": {
+    "name": "Rollease Acmeda",
+    "slug": "rollease-acmeda",
+    "country": "AU",
+    "website": "https://www.rolleaseacmeda.com/au/",
+    "supportUrl": "https://www.rolleaseacmeda.com/au/member-documents",
+    "note": "Tubular motor and control manufacturer for roller shutters and blinds, with an Australian division. The documentation area is named member-documents, which suggests it may be gated; the harvester will record that honestly rather than assume either way."
+  },
+  "models": [
+    {
+      "modelCode": "Automate ARC FT",
+      "name": "Automate ARC Tubular FT Motor 433MHz Bi-Directional",
+      "category": "roller-shutter-motors",
+      "region": "AU",
+      "aliases": ["ARC FT", "Automate ARC"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "Automate ARC Tubular FT Motor 433MHz Bi-Directional Electronic Limit",
+          "sourceUrl": "https://www.candccurtainsandblinds.com.au/uploads/default/files/acmeda-external.pdf",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "C&C Curtains and Blinds",
+          "region": "AU",
+          "rights": "LINK_ONLY",
+          "evidence": "Australian reseller copy. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "Automate Li-Ion Q10 DC",
+      "name": "Automate Li-Ion Q10 DC ARC Tubular Motor",
+      "category": "roller-shutter-motors",
+      "region": "AU",
+      "aliases": ["Q10 DC", "Li-Ion Q10"],
+      "documents": [
+        {
+          "kind": "USER_MANUAL",
+          "title": "Automate Li-Ion Q10 DC ARC Tubular Motor User Manual",
+          "sourceUrl": "https://manuals.plus/rollease-acmeda/automate-li-ion-q10-dc-arc-tubular-motor-manual-pdf",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "Manuals+",
+          "region": "AU",
+          "rights": "LINK_ONLY",
+          "evidence": "Aggregator listing. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "AC RF",
+      "name": "AC RF Tubular Motor",
+      "category": "roller-shutter-motors",
+      "region": "GLOBAL",
+      "documents": [
+        {
+          "kind": "PROGRAMMING_GUIDE",
+          "title": "AC RF Motor Programming Instructions",
+          "sourceUrl": "https://www.avoutlet.com/images/product/additional/r/rollease-ac-motor-programming.pdf",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "AV Outlet",
+          "region": "US",
+          "rights": "LINK_ONLY",
+          "evidence": "US reseller copy. Region recorded from the reseller's market, not confirmed from the document. Not fetched - egress blocked."
+        }
+      ]
+    }
+  ]
+}

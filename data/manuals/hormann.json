@@ -1,0 +1,74 @@
+{
+  "manufacturer": {
+    "name": "Hörmann",
+    "slug": "hormann",
+    "country": "DE",
+    "website": "https://www.hormann.com/",
+    "supportUrl": "https://www.hormann.us/high-performance/tech-support/",
+    "note": "German door and operator manufacturer. Search surfaced only third-party copies of its operator manuals, so no manufacturer-hosted document URL is claimed below."
+  },
+  "models": [
+    {
+      "modelCode": "SupraMatic E2",
+      "name": "SupraMatic E2 Garage Door Operator",
+      "category": "garage-door-openers",
+      "region": "EU",
+      "aliases": ["SupraMatic E 2"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "SupraMatic E2 Operator Fitting Instructions",
+          "sourceUrl": "https://easyfitgaragedoor.co.uk/wp-content/uploads/2021/05/Hormann-SupraMatic-E2-Operator-Fitting-Instructions.pdf",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "Easyfit Garage Door",
+          "region": "UK",
+          "rights": "LINK_ONLY",
+          "evidence": "UK installer-hosted copy. No hormann.com URL was surfaced for this model. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "SupraMatic S",
+      "name": "SupraMatic S Garage Door Operator",
+      "category": "garage-door-openers",
+      "region": "EU",
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "SupraMatic S / SupraMatic K Installation and Operating Instructions",
+          "sourceUrl": "https://bluemate.com/garage-door-openers/pdf/SupraMatic_S_Garage_Door_Operator_Text.pdf",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "Bluemate",
+          "region": "EU",
+          "rights": "LINK_ONLY",
+          "evidence": "Third-party copy. The search result title is in German, so the language of this copy was not confirmed and is left at the default. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "SupraMatic P Series 4",
+      "name": "SupraMatic P Series 4 Garage Door Operator",
+      "category": "garage-door-openers",
+      "region": "EU",
+      "documents": [
+        {
+          "kind": "USER_MANUAL",
+          "title": "SupraMatic P Series 4 Instruction Manual",
+          "sourceUrl": "https://manuals.plus/asin/B07Z87MTHZ",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "Manuals+",
+          "region": "EU",
+          "rights": "LINK_ONLY",
+          "evidence": "Aggregator listing keyed by retail ASIN rather than a manufacturer part number, which is a weaker identification. Recorded as such. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "ProMatic Series 4",
+      "name": "ProMatic Series 4 Garage Door Operator",
+      "category": "garage-door-openers",
+      "region": "EU",
+      "documents": []
+    }
+  ]
+}

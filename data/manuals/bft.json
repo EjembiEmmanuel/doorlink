@@ -1,0 +1,110 @@
+{
+  "manufacturer": {
+    "name": "BFT",
+    "slug": "bft",
+    "country": "IT",
+    "website": "https://www.bft-automation.com/",
+    "supportUrl": "https://www.bftautomationuk.com/resources/instruction-manuals.html",
+    "note": "Italian gate automation manufacturer. Publishes installation manuals on its own domain and through regional sites."
+  },
+  "models": [
+    {
+      "modelCode": "PHOBOS N BT",
+      "name": "PHOBOS N BT 24V Swing Gate Operator",
+      "category": "gate-motors",
+      "region": "GLOBAL",
+      "aliases": ["PHOBOS BT", "PHOBOS N"],
+      "documents": [
+        {
+          "kind": "QUICK_START",
+          "title": "PHOBOS N BT 24V Swing Operator Quick Reference Guide",
+          "sourceUrl": "https://www.bft-automation.com/fileadmin/user_upload/commercial_download/PHOBOS_N_BT_-_24V_-_SWING_OPERATOR_-_MANUAL_-_QUICK_REFERENCE_-_2.pdf",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "region": "GLOBAL",
+          "rights": "LINK_ONLY",
+          "evidence": "Manufacturer's own domain, commercial download area. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "https://bftgateopeners.com/store/media/pdfs/bft-phobos-bt-n-bt-nl-quick-guide.pdf",
+              "authority": "AUTHORISED_DISTRIBUTOR",
+              "label": "BFT Gate Openers store copy"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "modelCode": "PHOBOS AC A25",
+      "name": "PHOBOS AC A25 230V Swing Gate Operator",
+      "category": "gate-motors",
+      "region": "GLOBAL",
+      "aliases": ["PHOBOS AC A25 230"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "PHOBOS AC A25 230 Installation Manual",
+          "sourceUrl": "https://www.manualslib.com/manual/1182526/Bft-Phobos-Ac-A25-230.html",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "ManualsLib",
+          "region": "GLOBAL",
+          "rights": "LINK_ONLY",
+          "evidence": "Aggregator listing. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "DEIMOS",
+      "name": "DEIMOS Rack Sliding Gate Actuator",
+      "category": "gate-motors",
+      "region": "GLOBAL",
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "DEIMOS Installation and User Manual",
+          "sourceUrl": "https://www.manualslib.com/manual/1137015/Bft-Deimos.html",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "ManualsLib",
+          "region": "GLOBAL",
+          "rights": "LINK_ONLY",
+          "evidence": "Aggregator listing. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "ARES",
+      "name": "ARES Sliding Gate Operator",
+      "category": "gate-motors",
+      "region": "GLOBAL",
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "ARES Installation and User Manual",
+          "sourceUrl": "https://www.manualslib.com/manual/1333152/Bft-Ares.html",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "ManualsLib",
+          "region": "GLOBAL",
+          "rights": "LINK_ONLY",
+          "evidence": "Aggregator listing. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "ECOSOL PHOBOS",
+      "name": "ECOSOL PHOBOS Solar Swing Gate Kit",
+      "category": "gate-motors",
+      "region": "GLOBAL",
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "ECOSOL PHOBOS Installation Manual",
+          "sourceUrl": "https://bftgateopeners.com/store/media/pdfs/bft-ecosol-phobos-installation-manual.pdf",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "BFT Gate Openers",
+          "region": "US",
+          "rights": "LINK_ONLY",
+          "evidence": "Distributor store copy. Region recorded as US from the distributor's market; not confirmed from the document. Not fetched - egress blocked."
+        }
+      ]
+    }
+  ]
+}

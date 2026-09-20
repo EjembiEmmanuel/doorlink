@@ -1,19 +1,19 @@
 {
-  "generatedAt": "2026-09-20T00:50:43.863Z",
+  "generatedAt": "2026-09-20T05:24:03.027Z",
   "caveat": "verified_documents counts links that were actually fetched and resolved. A document can be from an official manufacturer domain and still be unverified. Run `npm run manuals:verify` in an environment with outbound network access to raise this number. All figures below EXCLUDE the demo catalogue, whose manufacturers are invented for demonstration and are reported separately under demo_catalogue.",
   "totals": {
-    "total_manufacturers": 11,
-    "total_models": 25,
-    "total_documents": 27,
-    "total_model_aliases": 29,
-    "total_alternate_sources": 10,
-    "official_documents": 12,
-    "third_party_documents": 15,
+    "total_manufacturers": 17,
+    "total_models": 51,
+    "total_documents": 52,
+    "total_model_aliases": 66,
+    "total_alternate_sources": 20,
+    "official_documents": 18,
+    "third_party_documents": 34,
     "verified_documents": 0,
-    "unverified_documents": 27,
+    "unverified_documents": 52,
     "documents_needing_review": 0,
-    "models_without_documentation": 1,
-    "link_only_documents": 27,
+    "models_without_documentation": 2,
+    "link_only_documents": 52,
     "hosted_documents": 3
   },
   "demo_catalogue": {
@@ -23,25 +23,29 @@
     "documents": 10
   },
   "by_verification": {
-    "UNVERIFIED": 27
+    "UNVERIFIED": 52
   },
   "by_origin": {
-    "MANUFACTURER_ORIGINAL": 12,
-    "THIRD_PARTY_GUIDE": 15
+    "MANUFACTURER_ORIGINAL": 18,
+    "THIRD_PARTY_GUIDE": 34
   },
   "by_region": {
     "UNKNOWN": 3,
-    "AU": 19,
-    "GLOBAL": 5
+    "AU": 22,
+    "GLOBAL": 16,
+    "US": 2,
+    "UK": 1,
+    "EU": 8
   },
   "by_document_kind": {
-    "INSTALL_MANUAL": 17,
-    "PROGRAMMING_GUIDE": 3,
-    "USER_MANUAL": 6,
-    "TECHNICAL_DOCUMENT": 1
+    "INSTALL_MANUAL": 33,
+    "PROGRAMMING_GUIDE": 4,
+    "USER_MANUAL": 13,
+    "TECHNICAL_DOCUMENT": 1,
+    "QUICK_START": 1
   },
   "by_rights": {
-    "LINK_ONLY": 27
+    "LINK_ONLY": 52
   },
   "by_manufacturer": [
     {
@@ -61,9 +65,23 @@
     {
       "name": "BFT",
       "slug": "bft",
-      "country": null,
-      "models": 1,
-      "documents": 1
+      "country": "IT",
+      "models": 6,
+      "documents": 6
+    },
+    {
+      "name": "Benincà",
+      "slug": "beninca",
+      "country": "IT",
+      "models": 4,
+      "documents": 4
+    },
+    {
+      "name": "CAME",
+      "slug": "came",
+      "country": "IT",
+      "models": 2,
+      "documents": 2
     },
     {
       "name": "Centurion Systems",
@@ -89,14 +107,28 @@
     {
       "name": "FAAC",
       "slug": "faac",
-      "country": null,
-      "models": 1,
-      "documents": 2
+      "country": "IT",
+      "models": 3,
+      "documents": 4
     },
     {
       "name": "Gliderol",
       "slug": "gliderol",
       "country": "AU",
+      "models": 3,
+      "documents": 3
+    },
+    {
+      "name": "Hörmann",
+      "slug": "hormann",
+      "country": "DE",
+      "models": 4,
+      "documents": 3
+    },
+    {
+      "name": "Marantec",
+      "slug": "marantec",
+      "country": "DE",
       "models": 3,
       "documents": 3
     },
@@ -111,6 +143,20 @@
       "name": "Nice",
       "slug": "nice",
       "country": "IT",
+      "models": 3,
+      "documents": 3
+    },
+    {
+      "name": "Rollease Acmeda",
+      "slug": "rollease-acmeda",
+      "country": "AU",
+      "models": 3,
+      "documents": 3
+    },
+    {
+      "name": "Somfy",
+      "slug": "somfy",
+      "country": "FR",
       "models": 3,
       "documents": 3
     },

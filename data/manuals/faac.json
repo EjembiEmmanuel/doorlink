@@ -1,0 +1,59 @@
+{
+  "manufacturer": {
+    "name": "FAAC",
+    "slug": "faac",
+    "country": "IT",
+    "website": "https://www.faac.co.uk/",
+    "supportUrl": "https://www.faac.co.uk/support/knowledge-base",
+    "note": "Italian gate automation manufacturer. Publishes manuals on its own CDN with document code and revision in the filename."
+  },
+  "models": [
+    {
+      "modelCode": "740",
+      "name": "740 230V Sliding Gate Operator",
+      "category": "gate-motors",
+      "region": "GLOBAL",
+      "aliases": ["FAAC 740"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "740 / 741 Sliding Gate Operator Manual (Rev. D)",
+          "documentCode": "732484",
+          "revision": "D",
+          "language": "en",
+          "sourceUrl": "https://faac.blob.core.windows.net/web/1/gate-automation/faac-sliding-gates/740-230v-sliding-gate-operator/740-741-732484-revd-en.pdf",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "region": "GLOBAL",
+          "rights": "LINK_ONLY",
+          "evidence": "FAAC's own CDN. Document code 732484 and revision D read from the filename. One manual covers both 740 and 741. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "https://www.global-access.com.au/wp-content/uploads/2025/04/FAAC-740-741-Gate-Motor-Manual.pdf",
+              "authority": "AUTHORISED_DISTRIBUTOR",
+              "label": "Global Access (AU) copy"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "modelCode": "741",
+      "name": "741 230V Sliding Gate Operator",
+      "category": "gate-motors",
+      "region": "GLOBAL",
+      "aliases": ["FAAC 741"],
+      "documents": [
+        {
+          "kind": "USER_MANUAL",
+          "title": "741 User Manual",
+          "sourceUrl": "https://www.manualslib.com/manual/1339777/Faac-741.html",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "ManualsLib",
+          "region": "GLOBAL",
+          "rights": "LINK_ONLY",
+          "evidence": "Aggregator listing for the 741 entry of the shared 740/741 documentation. Not fetched - egress blocked."
+        }
+      ]
+    }
+  ]
+}

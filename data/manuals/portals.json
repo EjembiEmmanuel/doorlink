@@ -1,5 +1,5 @@
 {
-  "note": "Documentation portals — the harvest targets. Each is an index page that lists many documents. `npm run manuals:harvest` crawls these and writes candidate records to data/manuals/harvested/ for review. This registry is how the library scales: one portal can yield hundreds of documents, which searching model-by-model never will. Every URL here was surfaced by a real search. None is a guessed URL pattern.",
+  "note": "Documentation portals \u2014 the harvest targets. Each is an index page that lists many documents. `npm run manuals:harvest` crawls these and writes candidate records to data/manuals/harvested/ for review. This registry is how the library scales: one portal can yield hundreds of documents, which searching model-by-model never will. Every URL here was surfaced by a real search. None is a guessed URL pattern.",
   "portals": [
     {
       "manufacturer": "B&D",
@@ -86,7 +86,7 @@
       "region": "GLOBAL"
     },
     {
-      "manufacturer": "Hörmann",
+      "manufacturer": "H\u00f6rmann",
       "slug": "hormann",
       "url": "https://www.hormann.us/high-performance/tech-support/",
       "authority": "MANUFACTURER_OFFICIAL",
@@ -135,6 +135,57 @@
       "authority": "THIRD_PARTY_MIRROR",
       "region": "AU",
       "note": "Aggregator index spanning many Australian brands."
+    },
+    {
+      "manufacturer": "Marantec",
+      "slug": "marantec",
+      "url": "https://www.marantec.com/en/installation-instructions",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "EU"
+    },
+    {
+      "manufacturer": "BFT",
+      "slug": "bft",
+      "url": "https://www.bftautomationuk.com/resources/instruction-manuals.html",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "UK"
+    },
+    {
+      "manufacturer": "FAAC",
+      "slug": "faac",
+      "url": "https://www.faac.co.uk/support/knowledge-base",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "UK"
+    },
+    {
+      "manufacturer": "Beninc\u00e0",
+      "slug": "beninca",
+      "url": "https://www.beninca.com/en/beninca-products/automations-for-swinging-gates.html",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "GLOBAL"
+    },
+    {
+      "manufacturer": "Rollease Acmeda",
+      "slug": "rollease-acmeda",
+      "url": "https://www.rolleaseacmeda.com/au/member-documents",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "AU",
+      "note": "Named member-documents; may require sign-in. The harvester records a 401/403 rather than attempting to get past it."
+    },
+    {
+      "manufacturer": "Rollease Acmeda",
+      "slug": "rollease-acmeda",
+      "url": "https://blindmotorsonline.com.au/rollease-acmeda-products-manuals/",
+      "authority": "AUTHORISED_DISTRIBUTOR",
+      "region": "AU"
+    },
+    {
+      "manufacturer": "multiple",
+      "slug": null,
+      "url": "https://manuals.plus/category/beninca",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "GLOBAL",
+      "note": "Aggregator index. Listings report several hundred Beninc\u00e0 manuals."
     }
   ]
 }

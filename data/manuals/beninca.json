@@ -1,0 +1,95 @@
+{
+  "manufacturer": {
+    "name": "Benincà",
+    "slug": "beninca",
+    "country": "IT",
+    "website": "https://www.beninca.com/",
+    "supportUrl": "https://www.beninca.com/en/beninca-products/automations-for-swinging-gates.html",
+    "note": "Italian gate automation manufacturer. Aggregator listings report several hundred Benincà manuals, so this is a small sample of what exists rather than coverage of the range."
+  },
+  "models": [
+    {
+      "modelCode": "IT24N",
+      "name": "IT24N Underground Swing Gate Operator",
+      "category": "gate-motors",
+      "region": "GLOBAL",
+      "aliases": ["IT 24N"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "IT24N Underground Swing Gate Operator Installation Manual",
+          "documentCode": "0.07.A.0064",
+          "sourceUrl": "https://www.centsys.co.za/upload/0_07_A_0064%20Beninca%20Installation%20Manual-22072013-BM-web.pdf",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "Centurion Systems",
+          "region": "GLOBAL",
+          "rights": "LINK_ONLY",
+          "evidence": "Hosted by Centurion Systems, a different manufacturer, which distributes Benincà in that market. Third-party for that reason. Document code and 22/07/2013 date read from the filename. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "https://www.centsys.co.za/upload/product_link_files/0.07.A.0064-Beninca-Installation-Manual-22072013-BM-for-web.pdf",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "Same document, alternate path on the same host"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "modelCode": "BOB2124",
+      "name": "BOB2124 Swing Gate Motor",
+      "category": "gate-motors",
+      "region": "GLOBAL",
+      "aliases": ["BOB 2124"],
+      "documents": [
+        {
+          "kind": "USER_MANUAL",
+          "title": "BOB2124 Swing Gate Motor Owner's Manual",
+          "sourceUrl": "https://manuals.plus/beninca/bob2124-swing-gate-motor-manual",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "Manuals+",
+          "region": "GLOBAL",
+          "rights": "LINK_ONLY",
+          "evidence": "Aggregator listing. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "BOB 50M",
+      "name": "BOB 50M Linear Worm Drive Swing Gate Motor",
+      "category": "gate-motors",
+      "region": "GLOBAL",
+      "aliases": ["BOB50M"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "BOB 50M Linear Worm Drive Swing Gate Motor Instruction Manual",
+          "sourceUrl": "https://manuals.plus/beninca/bob-50m-linear-worm-drive-swing-gate-motor-manual",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "Manuals+",
+          "region": "GLOBAL",
+          "rights": "LINK_ONLY",
+          "evidence": "Aggregator listing. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "BULL",
+      "name": "BULL Sliding Gate Operator",
+      "category": "gate-motors",
+      "region": "GLOBAL",
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "BULL Sliding Gate Operator Installation and User Manual",
+          "sourceUrl": "https://manuals.plus/m/f97f5844120186d379a4681527563c442d4088e4ce7b476a46193d730d513c86",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "Manuals+",
+          "region": "GLOBAL",
+          "rights": "LINK_ONLY",
+          "evidence": "Aggregator listing addressed by content hash rather than model, which is a weak identifier. Recorded as such. Not fetched - egress blocked."
+        }
+      ]
+    }
+  ]
+}

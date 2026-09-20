@@ -61,20 +61,22 @@ Australia first, per §4 and §27 Phase 1.
 
 ## Manufacturers researched
 
-| Manufacturer | Country | Models | Documents | Official-domain URLs |
-|---|---|---|---|---|
-| B&D | AU | 3 | 3 | 2 |
-| Gliderol | AU | 3 | 3 | 1 |
-| Automatic Technology (ATA) | AU | 4 | 3 | 0 |
-| Merlin | AU | 3 | 3 | 0 |
-| Steel-Line | AU | 1 | 1 | 1 |
-| Centurion Systems | AU | 2 | 4 | 4 |
-| Elsema | AU | 4 | 4 | 1 |
-| Chamberlain | AU | 0 | 0 | 0 |
-| Nice | IT | 3 | 3 | 1 |
+Seventeen manufacturers are now recorded. Rather than repeat per-
+manufacturer counts here, where they go stale the moment anyone adds a
+seed file, they are generated:
 
-Plus two manufacturers already in the catalogue with real hosted
-manuals from earlier work: **FAAC** (2 documents) and **BFT** (1).
+```bash
+npm run manuals:report   # writes manual_coverage_report.json
+```
+
+Researched this session, Australia first per §4 and §27: **B&D**,
+**Gliderol**, **Automatic Technology**, **Merlin**, **Steel-Line**,
+**Centurion Systems**, **Elsema**, **Chamberlain**, **Rollease Acmeda**
+(AU); **Dominator** (NZ); and **Nice**, **CAME**, **FAAC**, **BFT**,
+**Somfy**, **Marantec**, **Hörmann**, **Benincà** internationally.
+
+FAAC and BFT were already in the catalogue with real hosted manuals
+from earlier work; both have been expanded rather than duplicated.
 
 **Chamberlain is recorded with no documents.** Both its Australian
 documents-and-downloads area and its global support portal were
@@ -161,7 +163,7 @@ manufacturer's own download index lists hundreds on one page. That
 difference is the whole scaling story, and it is why the second half of
 this work is a crawler rather than more searching.
 
-`data/manuals/portals.json` holds **19 documentation portals** across 14
+`data/manuals/portals.json` holds **26 documentation portals** across 17
 manufacturers — every one surfaced by a real search, none a guessed URL
 pattern. `npm run manuals:harvest` walks them, extracts document links,
 and writes candidates to `data/manuals/harvested/` for review.
@@ -240,7 +242,11 @@ rebuilding for every new manufacturer.
 
 ## Honest limitations
 
-- **Scale.** Nine manufacturers researched in this session, not hundreds.
+- **Scale.** Seventeen manufacturers, not hundreds. Aggregator listings
+  seen during this research report 840+ Benincà, 151 BFT and 98 Somfy
+  manuals for those brands alone — which is the measure of how much of
+  each range is still missing, and why the harvester matters more than
+  further searching.
   §28 asks not to stop early; it also says accuracy beats fabricated
   completeness. Without the ability to fetch a single document, adding
   hundreds of unverifiable URLs would have made the library look

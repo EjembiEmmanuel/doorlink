@@ -1,0 +1,76 @@
+{
+  "manufacturer": {
+    "name": "Marantec",
+    "slug": "marantec",
+    "country": "DE",
+    "website": "https://www.marantec.com/",
+    "supportUrl": "https://www.marantec.com/en/installation-instructions",
+    "note": "German garage door operator manufacturer. Publishes operating instructions on its own domain, indexed by document number."
+  },
+  "models": [
+    {
+      "modelCode": "Comfort 260",
+      "name": "Comfort 260 Garage Door Operator",
+      "category": "garage-door-openers",
+      "region": "EU",
+      "aliases": ["Comfort260"],
+      "documents": [
+        {
+          "kind": "USER_MANUAL",
+          "title": "Comfort 260 / 270 / 280 Operating Instructions (EN)",
+          "documentCode": "100316",
+          "language": "en",
+          "sourceUrl": "https://www.marantec.com/files/eba_sap/A/100316.pdf",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "region": "EU",
+          "rights": "LINK_ONLY",
+          "evidence": "Manufacturer's own domain. Document number 100316 read from the filename. One document covers the 260, 270 and 280, so it is recorded against each rather than split. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "https://www.onlinegaragedoorspares.com/wp-content/uploads/marantec-200-series-manual.pdf",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "Online Garage Door Spares (UK) mirror"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "modelCode": "Comfort 270",
+      "name": "Comfort 270 Garage Door Operator",
+      "category": "garage-door-openers",
+      "region": "EU",
+      "documents": [
+        {
+          "kind": "USER_MANUAL",
+          "title": "Comfort 260 / 270 / 280 Operating Instructions (EN)",
+          "documentCode": "100316",
+          "language": "en",
+          "sourceUrl": "https://www.marantec.com/files/eba_download.php?file=100316.pdf&vrsn=E",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "region": "EU",
+          "rights": "LINK_ONLY",
+          "evidence": "Manufacturer's own download endpoint for the same document number, version E. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "Comfort 250",
+      "name": "Comfort 250 Garage Door Operator",
+      "category": "garage-door-openers",
+      "region": "EU",
+      "documents": [
+        {
+          "kind": "USER_MANUAL",
+          "title": "Comfort 250 Manuals",
+          "sourceUrl": "https://marantec.manymanuals.com/garage-door-opener/comfort-250",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "ManyManuals",
+          "region": "EU",
+          "rights": "LINK_ONLY",
+          "evidence": "Aggregator index for this model. The 100316 document does not cover the 250, so it was not attributed here. Not fetched - egress blocked."
+        }
+      ]
+    }
+  ]
+}
