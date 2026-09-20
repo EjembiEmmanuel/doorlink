@@ -1,19 +1,19 @@
 {
-  "generatedAt": "2026-09-20T05:24:03.027Z",
+  "generatedAt": "2026-09-20T07:37:40.245Z",
   "caveat": "verified_documents counts links that were actually fetched and resolved. A document can be from an official manufacturer domain and still be unverified. Run `npm run manuals:verify` in an environment with outbound network access to raise this number. All figures below EXCLUDE the demo catalogue, whose manufacturers are invented for demonstration and are reported separately under demo_catalogue.",
   "totals": {
-    "total_manufacturers": 17,
-    "total_models": 51,
-    "total_documents": 52,
-    "total_model_aliases": 66,
-    "total_alternate_sources": 20,
-    "official_documents": 18,
-    "third_party_documents": 34,
+    "total_manufacturers": 23,
+    "total_models": 69,
+    "total_documents": 71,
+    "total_model_aliases": 95,
+    "total_alternate_sources": 26,
+    "official_documents": 27,
+    "third_party_documents": 44,
     "verified_documents": 0,
-    "unverified_documents": 52,
+    "unverified_documents": 71,
     "documents_needing_review": 0,
     "models_without_documentation": 2,
-    "link_only_documents": 52,
+    "link_only_documents": 71,
     "hosted_documents": 3
   },
   "demo_catalogue": {
@@ -23,29 +23,31 @@
     "documents": 10
   },
   "by_verification": {
-    "UNVERIFIED": 52
+    "UNVERIFIED": 71
   },
   "by_origin": {
-    "MANUFACTURER_ORIGINAL": 18,
-    "THIRD_PARTY_GUIDE": 34
+    "MANUFACTURER_ORIGINAL": 27,
+    "THIRD_PARTY_GUIDE": 44
   },
   "by_region": {
     "UNKNOWN": 3,
-    "AU": 22,
-    "GLOBAL": 16,
-    "US": 2,
-    "UK": 1,
-    "EU": 8
+    "AU": 23,
+    "GLOBAL": 20,
+    "US": 8,
+    "EU": 14,
+    "UK": 2,
+    "NZ": 1
   },
   "by_document_kind": {
-    "INSTALL_MANUAL": 33,
+    "INSTALL_MANUAL": 47,
     "PROGRAMMING_GUIDE": 4,
-    "USER_MANUAL": 13,
+    "USER_MANUAL": 16,
     "TECHNICAL_DOCUMENT": 1,
-    "QUICK_START": 1
+    "QUICK_START": 1,
+    "SPEC_SHEET": 2
   },
   "by_rights": {
-    "LINK_ONLY": 52
+    "LINK_ONLY": 71
   },
   "by_manufacturer": [
     {
@@ -68,6 +70,13 @@
       "country": "IT",
       "models": 6,
       "documents": 6
+    },
+    {
+      "name": "Becker",
+      "slug": "becker",
+      "country": "DE",
+      "models": 3,
+      "documents": 3
     },
     {
       "name": "Benincà",
@@ -112,6 +121,13 @@
       "documents": 4
     },
     {
+      "name": "GEZE",
+      "slug": "geze",
+      "country": "DE",
+      "models": 2,
+      "documents": 2
+    },
+    {
       "name": "Gliderol",
       "slug": "gliderol",
       "country": "AU",
@@ -124,6 +140,13 @@
       "country": "DE",
       "models": 4,
       "documents": 3
+    },
+    {
+      "name": "LiftMaster",
+      "slug": "liftmaster",
+      "country": "US",
+      "models": 6,
+      "documents": 6
     },
     {
       "name": "Marantec",
@@ -147,6 +170,13 @@
       "documents": 3
     },
     {
+      "name": "Roger Technology",
+      "slug": "roger-technology",
+      "country": "IT",
+      "models": 2,
+      "documents": 3
+    },
+    {
       "name": "Rollease Acmeda",
       "slug": "rollease-acmeda",
       "country": "AU",
@@ -166,6 +196,20 @@
       "country": "AU",
       "models": 1,
       "documents": 1
+    },
+    {
+      "name": "dormakaba",
+      "slug": "dormakaba",
+      "country": "CH",
+      "models": 2,
+      "documents": 2
+    },
+    {
+      "name": "elero",
+      "slug": "elero",
+      "country": "DE",
+      "models": 3,
+      "documents": 3
     }
   ]
 }

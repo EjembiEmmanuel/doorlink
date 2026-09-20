@@ -1,0 +1,138 @@
+{
+  "manufacturer": {
+    "name": "LiftMaster",
+    "slug": "liftmaster",
+    "country": "US",
+    "website": "https://www.liftmaster.com/",
+    "supportUrl": "https://partner.liftmaster.com/",
+    "note": "US gate and door operator brand, part of the Chamberlain group. Documentation is split between a partner portal and the shared Chamberlain support site."
+  },
+  "models": [
+    {
+      "modelCode": "CSW24U",
+      "name": "CSW24U Commercial DC Vehicular Swing Gate Operator",
+      "category": "gate-motors",
+      "region": "US",
+      "aliases": ["CSW24UL", "CSW 24U"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "CSW24U Commercial DC Vehicular Swing Gate Operator Installation Manual",
+          "documentCode": "0139380",
+          "sourceUrl": "https://partner.liftmaster.com/medias/CSW24UL-0139380.pdf",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "region": "US",
+          "rights": "LINK_ONLY",
+          "evidence": "Manufacturer's own partner portal. The surfaced URL carried a long base64 context parameter, which is a CMS token rather than part of the document address; the bare path is recorded and the harvester will confirm whether it resolves. Document code 0139380 read from the filename. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "https://www.afence.com/mm5/graphics/pdf/LiftMaster/CSW24Umanual.pdf",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "A-Fence mirror"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "modelCode": "CSL24U",
+      "name": "CSL24U Commercial Slide Gate Operator",
+      "category": "gate-motors",
+      "region": "US",
+      "aliases": ["CSL24VDC", "CSL 24U"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "CSL24U Slide Gate Operator Installation Manual",
+          "sourceUrl": "https://support.chamberlaingroup.com/s/article/GATE-LiftMaster-CSL24U-Slide-Gate-Operator-Installation-Manual-1484145708732",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "region": "US",
+          "rights": "LINK_ONLY",
+          "evidence": "Chamberlain group support portal, which is LiftMaster's own publisher. This is a support article rather than a direct PDF. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "http://ldi.com/liftmaster-csl-manual.pdf",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "LDI mirror, document 01-37011"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "modelCode": "LA400",
+      "name": "LA400 Residential Swing Gate Operator",
+      "category": "gate-motors",
+      "region": "US",
+      "aliases": ["LA 400"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "LA400 Installation / Operation Manual",
+          "sourceUrl": "https://support.chamberlaingroup.com/s/article/GATE-LiftMaster-LA400-Installation-Operation-Manual-1484145525245",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "region": "US",
+          "rights": "LINK_ONLY",
+          "evidence": "Chamberlain group support portal. Support article rather than a direct PDF. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "SL585UL",
+      "name": "SL585UL Elite Series Industrial AC Slide Gate Operator",
+      "category": "gate-motors",
+      "region": "US",
+      "aliases": ["SL585", "SL 585UL"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "SL585UL Elite Series Industrial AC Slide Gate Operator Installation Manual",
+          "sourceUrl": "https://www.doordoctor.com/wp-content/uploads/2018/12/585-installation-manual.pdf",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "Door Doctor",
+          "region": "US",
+          "rights": "LINK_ONLY",
+          "evidence": "Third-party copy. No manufacturer-hosted URL for this model was surfaced. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "SL3000",
+      "name": "SL3000 Slide Gate Operator",
+      "category": "gate-motors",
+      "region": "US",
+      "aliases": ["SL 3000"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "SL3000 Gate Operator Manual",
+          "sourceUrl": "https://www.aegates.com/wp-content/uploads/2021/07/liftmaster-gate-operator-sl3000-gate-manual.pdf",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "Automated Entry Gates",
+          "region": "US",
+          "rights": "LINK_ONLY",
+          "evidence": "Third-party copy. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "RSL12UL",
+      "name": "RSL12UL Residential DC Vehicular Slide Gate Operator",
+      "category": "gate-motors",
+      "region": "US",
+      "aliases": ["RSL12", "RSL 12UL"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "RSL12UL Residential DC Vehicular Slide Gate Operator Installation Manual",
+          "sourceUrl": "https://igate.multisalesinc.com/WOEB/Docs/RSL12UL_Manual.pdf",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "Multi Sales",
+          "region": "US",
+          "rights": "LINK_ONLY",
+          "evidence": "Distributor copy. Not fetched - egress blocked."
+        }
+      ]
+    }
+  ]
+}

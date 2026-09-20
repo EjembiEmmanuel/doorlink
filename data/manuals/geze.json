@@ -1,0 +1,57 @@
+{
+  "manufacturer": {
+    "name": "GEZE",
+    "slug": "geze",
+    "country": "DE",
+    "website": "https://www.geze.com/",
+    "supportUrl": "https://www.geze.com/en/download",
+    "note": "German manufacturer of automatic pedestrian door systems. Publishes installation and service instructions on its own download area."
+  },
+  "models": [
+    {
+      "modelCode": "Slimdrive SL",
+      "name": "Slimdrive SL Automatic Sliding Door Operator",
+      "category": "automatic-pedestrian-doors",
+      "region": "EU",
+      "aliases": ["SlimdriveSL"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "Slimdrive SL Product Family Installation and Service Instructions (EN)",
+          "documentCode": "200277-00",
+          "language": "en",
+          "sourceUrl": "https://www.geze.com/en/download/file/GEZE_Installation-instructions_EN_mw1793670.pdf",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "region": "EU",
+          "rights": "LINK_ONLY",
+          "evidence": "Manufacturer's own download area. Document code 200277-00 comes from the search result title. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "https://www.manualslib.com/manual/1762745/Geze-Slimdrive-Sl.html",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "ManualsLib listing"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "modelCode": "Slimdrive SLT",
+      "name": "Slimdrive SLT Telescopic Sliding Door Operator",
+      "category": "automatic-pedestrian-doors",
+      "region": "EU",
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "Slimdrive SLT Product Family Installation and Service Instructions (EN)",
+          "language": "en",
+          "sourceUrl": "https://www.geze.com/en/download/file/GEZE_Installation-instructions_EN_mw1790574.pdf",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "region": "EU",
+          "rights": "LINK_ONLY",
+          "evidence": "Manufacturer's own download area. A different document from the SL family manual, so recorded separately. Not fetched - egress blocked."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "manufacturer": {
+    "name": "Becker",
+    "slug": "becker",
+    "country": "DE",
+    "website": "https://www.becker-antriebe.com/",
+    "supportUrl": "https://beckeraustralia.com.au/product-centre/download/",
+    "note": "German tubular drive manufacturer for roller shutters, with an Australian arm publishing its own download centre."
+  },
+  "models": [
+    {
+      "modelCode": "E03a",
+      "name": "R12-17 to R30-17 Tubular Drive (E03a)",
+      "category": "roller-shutter-motors",
+      "region": "AU",
+      "aliases": ["E03A", "R12-17", "R30-17"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "R12-17…R30-17 (E03a) Assembly and Operating Instructions",
+          "language": "en",
+          "sourceUrl": "https://beckeraustralia.com.au/product-centre/download/16",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "region": "AU",
+          "rights": "LINK_ONLY",
+          "evidence": "Becker's Australian download centre. The URL addresses a download by numeric id rather than filename, so it may be a redirect to the PDF; the harvester will record where it lands. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "https://www.manualslib.com/manual/3266607/Becker-E03a.html",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "ManualsLib listing"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "modelCode": "R8-17",
+      "name": "R8-17 Tubular Drive for Roller Shutters",
+      "category": "roller-shutter-motors",
+      "region": "GLOBAL",
+      "aliases": ["R8/17", "R817"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "R8-17 Assembly and Operating Instructions",
+          "sourceUrl": "https://www.manualslib.com/manual/2761574/Becker-R8-17.html",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "ManualsLib",
+          "region": "GLOBAL",
+          "rights": "LINK_ONLY",
+          "evidence": "Aggregator listing. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "R8-17R",
+      "name": "R8/17R Tubular Drive for Roller Shutters",
+      "category": "roller-shutter-motors",
+      "region": "GLOBAL",
+      "aliases": ["R8/17R"],
+      "documents": [
+        {
+          "kind": "USER_MANUAL",
+          "title": "R8/17R Operating Instructions",
+          "sourceUrl": "https://www.manualslib.com/manual/2055041/Becker-R8-17r.html",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "ManualsLib",
+          "region": "GLOBAL",
+          "rights": "LINK_ONLY",
+          "evidence": "Aggregator listing. Recorded separately from the R8-17 because the model designations differ by suffix and the manuals are listed separately. Not fetched - egress blocked."
+        }
+      ]
+    }
+  ]
+}

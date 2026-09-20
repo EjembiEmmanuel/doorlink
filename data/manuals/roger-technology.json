@@ -1,0 +1,72 @@
+{
+  "manufacturer": {
+    "name": "Roger Technology",
+    "slug": "roger-technology",
+    "country": "IT",
+    "website": "https://www.rogertechnology.com/",
+    "supportUrl": null,
+    "note": "Italian gate automation manufacturer. No manufacturer-hosted documentation index was surfaced; the download pages found belong to regional distributors, so supportUrl is left null rather than guessed."
+  },
+  "models": [
+    {
+      "modelCode": "BE20",
+      "name": "BRUSHLESS BE20 Series Swing Gate Automation",
+      "category": "gate-motors",
+      "region": "GLOBAL",
+      "aliases": ["BE 20", "BE20 Series"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "BE20 Series Instructions and Recommendations for the Installer",
+          "sourceUrl": "https://www.manualslib.com/manual/3603950/Roger-Technology-Be20-Series.html",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "ManualsLib",
+          "region": "GLOBAL",
+          "rights": "LINK_ONLY",
+          "evidence": "Aggregator listing. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "https://www.manualslib.com/manual/2073680/Roger-Technology-Be20-Series.html",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "ManualsLib — use and maintenance manual"
+            },
+            {
+              "url": "https://accesssystems.ie/index.php/information/documentation/115-roger-technology-manuals",
+              "authority": "AUTHORISED_DISTRIBUTOR",
+              "label": "Access Systems Ireland manual index"
+            }
+          ]
+        },
+        {
+          "kind": "USER_MANUAL",
+          "title": "Use and Maintenance Manual — Swing Gates (Rev. 02)",
+          "revision": "02",
+          "sourceUrl": "https://knowledgebase.egates.co.uk/wp-content/uploads/2021/02/Use-Maintenance-Manual-Swing-Gates.pdf",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "eGates (UK)",
+          "region": "UK",
+          "rights": "LINK_ONLY",
+          "evidence": "Distributor knowledge base. Revision 02 and the 30/03/2020 date come from the search result title. This is a range-level swing gate manual rather than BE20-specific; attached here because BE20 is the swing series it names. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "TW110",
+      "name": "TW110 Box",
+      "category": "gate-motors",
+      "region": "GLOBAL",
+      "documents": [
+        {
+          "kind": "SPEC_SHEET",
+          "title": "TW110 Box Technical Specification (2025-06)",
+          "sourceUrl": "https://cdn.shopify.com/s/files/1/0652/9433/6177/files/2025-06_Roger_TW110_Box_Tech_Spec.pdf",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "Distributor storefront",
+          "region": "GLOBAL",
+          "rights": "LINK_ONLY",
+          "evidence": "Hosted on a Shopify CDN belonging to a reseller rather than on a manufacturer domain, so the publisher is recorded generically rather than named with false precision. Date 2025-06 read from the filename. Not fetched - egress blocked."
+        }
+      ]
+    }
+  ]
+}

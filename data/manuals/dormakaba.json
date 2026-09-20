@@ -1,0 +1,51 @@
+{
+  "manufacturer": {
+    "name": "dormakaba",
+    "slug": "dormakaba",
+    "country": "CH",
+    "website": "https://www.dormakaba.com/",
+    "supportUrl": "https://my.dormakaba.com/",
+    "note": "Swiss manufacturer of automatic pedestrian door systems, formed from Dorma and Kaba. Older documentation still carries the Dorma name."
+  },
+  "models": [
+    {
+      "modelCode": "ES 200 EASY",
+      "name": "ES 200 EASY Sliding Door Operator",
+      "category": "automatic-pedestrian-doors",
+      "region": "EU",
+      "aliases": ["ES200 EASY", "ES200EASY"],
+      "documents": [
+        {
+          "kind": "SPEC_SHEET",
+          "title": "ES 200 EASY Sliding Door Operator Technical Product Brochure (EN)",
+          "language": "en",
+          "sourceUrl": "https://my.dormakaba.com/medias/dormakaba-sliding-door-operator-ES200EASY-technical-brochure-en.pdf",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "region": "EU",
+          "rights": "LINK_ONLY",
+          "evidence": "Manufacturer's own media domain. The surfaced URL carried a long base64 context query string, which is a session or CMS parameter rather than part of the document's address; the bare path is recorded and the harvester will confirm whether it resolves. Recorded as a spec sheet, not an installation manual, because the title says brochure. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "ES 200",
+      "name": "ES 200 Sliding Door Operator",
+      "category": "automatic-pedestrian-doors",
+      "region": "NZ",
+      "aliases": ["ES200"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "Dorma ES 200 Sliding Door Operator Guide (NZ, 2016)",
+          "documentCode": "120000000582",
+          "sourceUrl": "https://www.scribd.com/document/701060338/120000000582-ES200-NZ-2016-6-LR",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "Scribd",
+          "region": "NZ",
+          "rights": "LINK_ONLY",
+          "evidence": "Document-sharing site, not a manufacturer source, and Scribd commonly gates downloads. Recorded because the document code and the NZ regional edition are identifiable from the title. The harvester will likely mark this RESTRICTED. Not fetched - egress blocked."
+        }
+      ]
+    }
+  ]
+}
