@@ -1,19 +1,19 @@
 {
-  "generatedAt": "2026-09-20T11:01:34.432Z",
+  "generatedAt": "2026-09-20T11:03:02.606Z",
   "caveat": "verified_documents counts links that were actually fetched and resolved. A document can be from an official manufacturer domain and still be unverified. Run `npm run manuals:verify` in an environment with outbound network access to raise this number. All figures below EXCLUDE the demo catalogue, whose manufacturers are invented for demonstration and are reported separately under demo_catalogue.",
   "totals": {
     "total_manufacturers": 71,
-    "total_models": 180,
-    "total_documents": 195,
-    "total_model_aliases": 344,
-    "total_alternate_sources": 107,
-    "official_documents": 75,
-    "third_party_documents": 120,
+    "total_models": 183,
+    "total_documents": 199,
+    "total_model_aliases": 352,
+    "total_alternate_sources": 110,
+    "official_documents": 76,
+    "third_party_documents": 123,
     "verified_documents": 0,
-    "unverified_documents": 195,
+    "unverified_documents": 199,
     "documents_needing_review": 0,
-    "models_without_documentation": 3,
-    "link_only_documents": 195,
+    "models_without_documentation": 2,
+    "link_only_documents": 199,
     "hosted_documents": 3
   },
   "demo_catalogue": {
@@ -23,33 +23,33 @@
     "documents": 10
   },
   "by_verification": {
-    "UNVERIFIED": 195
+    "UNVERIFIED": 199
   },
   "by_origin": {
-    "MANUFACTURER_ORIGINAL": 75,
-    "THIRD_PARTY_GUIDE": 120
+    "MANUFACTURER_ORIGINAL": 76,
+    "THIRD_PARTY_GUIDE": 123
   },
   "by_region": {
     "UNKNOWN": 3,
     "AU": 29,
     "GLOBAL": 32,
-    "US": 55,
-    "EU": 60,
-    "UK": 13,
+    "US": 56,
+    "EU": 62,
+    "UK": 14,
     "NZ": 1,
     "ASIA": 2
   },
   "by_document_kind": {
-    "INSTALL_MANUAL": 132,
+    "INSTALL_MANUAL": 135,
     "PROGRAMMING_GUIDE": 6,
-    "USER_MANUAL": 39,
+    "USER_MANUAL": 40,
     "TECHNICAL_DOCUMENT": 4,
     "QUICK_START": 7,
     "SPEC_SHEET": 6,
     "PARTS_LIST": 1
   },
   "by_rights": {
-    "LINK_ONLY": 195
+    "LINK_ONLY": 199
   },
   "by_manufacturer": [
     {
@@ -140,8 +140,8 @@
       "name": "CAME",
       "slug": "came",
       "country": "IT",
-      "models": 2,
-      "documents": 2
+      "models": 3,
+      "documents": 3
     },
     {
       "name": "Centurion Systems",
@@ -294,8 +294,8 @@
       "name": "Hörmann",
       "slug": "hormann",
       "country": "DE",
-      "models": 4,
-      "documents": 3
+      "models": 6,
+      "documents": 6
     },
     {
       "name": "Key Automation",

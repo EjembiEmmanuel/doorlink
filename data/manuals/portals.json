@@ -921,6 +921,48 @@
       "authority": "MANUFACTURER_OFFICIAL",
       "region": "EU",
       "note": "Second Wiśniowski shop domain's product-files directory, carrying English-language guides."
+    },
+    {
+      "manufacturer": "Hörmann",
+      "slug": "hormann",
+      "url": "https://www.thegaragedoorcentre.co.uk/download/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "UK",
+      "note": "Reseller download directory serving direct PDFs for Hörmann and other UK brands."
+    },
+    {
+      "manufacturer": "Hörmann",
+      "slug": "hormann",
+      "url": "https://www.northshorecommercialdoor.com/hormann/manuals",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "US",
+      "note": "Distributor index of Hörmann operator and parts manuals.",
+      "follow": true
+    },
+    {
+      "manufacturer": "Hörmann",
+      "slug": "hormann",
+      "url": "https://shopactiondirect.com/hormann-product-manuals/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "US",
+      "note": "Second distributor index of Hörmann manuals and programming instructions.",
+      "follow": true
+    },
+    {
+      "manufacturer": "CAME",
+      "slug": "came",
+      "url": "https://www.ardengateautomation.co.uk/downloads/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "UK",
+      "note": "Reseller download directory carrying CAME manuals with the manufacturer's own FA-series document codes on their covers."
+    },
+    {
+      "manufacturer": "CAME",
+      "slug": "came",
+      "url": "https://motepro.com.au/Manuals/CAME/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "AU",
+      "note": "Reseller directory subfoldered by gate type; source of the BX-74/BX-78 PDF."
     }
   ]
 }
