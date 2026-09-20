@@ -797,6 +797,38 @@
       "authority": "THIRD_PARTY_MIRROR",
       "region": "US",
       "note": "Distributor PDF directory spanning several US gate operator brands."
+    },
+    {
+      "manufacturer": "Linear / OSCO",
+      "slug": "linear",
+      "url": "https://linear-solutions.com/wp-content/uploads/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "US",
+      "note": "Manufacturer's uploads directory, serving guides named by document number with a _WEB suffix. Flat, so a listing would map the range directly."
+    },
+    {
+      "manufacturer": "Alutech",
+      "slug": "alutech",
+      "url": "https://www.gliderol.co.uk/downloads/",
+      "authority": "AUTHORISED_DISTRIBUTOR",
+      "region": "UK",
+      "note": "Gliderol UK's downloads directory; it carries Alutech Levigato documentation as well as its own."
+    },
+    {
+      "manufacturer": "Alutech",
+      "slug": "alutech",
+      "url": "https://www.manualslib.com/brand/alutech/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "GLOBAL",
+      "note": "Aggregator brand index. No alutech-group.com documentation path surfaced."
+    },
+    {
+      "manufacturer": "Linear / OSCO",
+      "slug": "linear",
+      "url": "https://www.devancocanada.com/files/manuals/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "CA",
+      "note": "Distributor manual directory spanning several North American opener brands."
     }
   ]
 }
