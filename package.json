@@ -17,7 +17,8 @@
     "test": "vitest run",
     "manuals:import": "tsx scripts/manuals/import.ts",
     "manuals:verify": "tsx scripts/manuals/verify.ts",
-    "manuals:report": "tsx scripts/manuals/report.ts"
+    "manuals:report": "tsx scripts/manuals/report.ts",
+    "manuals:harvest": "tsx scripts/manuals/harvest.ts"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"

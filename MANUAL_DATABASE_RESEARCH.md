@@ -154,13 +154,68 @@ than as six duplicate documents. The importer is idempotent on
 `(model, sourceUrl)` — re-running it changed nothing and produced zero
 duplicate URLs.
 
+## Getting to thousands: the harvester
+
+Searching model by model yields a handful of documents per query. A
+manufacturer's own download index lists hundreds on one page. That
+difference is the whole scaling story, and it is why the second half of
+this work is a crawler rather than more searching.
+
+`data/manuals/portals.json` holds **19 documentation portals** across 14
+manufacturers — every one surfaced by a real search, none a guessed URL
+pattern. `npm run manuals:harvest` walks them, extracts document links,
+and writes candidates to `data/manuals/harvested/` for review.
+
+Rough arithmetic for the target: aggregator listings seen during this
+research report 98 Somfy and 151 BFT opener manuals for those two brands
+alone. At even 100 documents per portal, 100 portals reaches five
+figures. The registry is the thing to grow — each entry is worth
+hundreds of records, where each search is worth two or three.
+
+**What the harvester will not do**, by construction:
+
+- Ignore `robots.txt`.
+- Touch anything behind a login, paywall or CAPTCHA. A 401 or 403 is
+  recorded and the URL is left alone.
+- Request faster than one page at a time, spaced, under a user agent
+  that identifies itself.
+- Write to the database. Output is candidates for a person to review,
+  because a crawler's guess at "which model is this manual for" is a
+  guess, and guesses should not become catalogue records silently.
+
+It collects URLs, link text and file names — metadata about where a
+document lives. Never the document's contents.
+
+### It has not successfully harvested anything yet
+
+Run against all 19 portals in this environment, every one returned 403
+from the egress proxy:
+
+```
+  403  restricted   0 docs  B&D — https://www.bnd.com.au/trade-resources/...
+  403  restricted   0 docs  Somfy — https://www.somfy.co.uk/support/downloads
+  ... 19 of 19
+  0 candidate document(s) from 0/19 portal(s).
+```
+
+That is the harvester behaving correctly — it recorded the refusal,
+did not retry, did not work around it, and wrote an honest empty
+result. But it means the extraction path has been proven by unit tests
+against fixture HTML, not against a real portal. **The first real run
+should be treated as a shakedown**: portals that build their index in
+JavaScript will return zero links, and the harvester reports that
+distinctly (`no-documents`) rather than silently succeeding.
+
 ## What remains
 
 Ordered by value, not by the brief's phase numbering — the network
 constraint changed what is worth doing next.
 
-1. **Run `npm run manuals:verify`** somewhere with normal egress. Until
-   this happens the library is a set of candidates, not a reference.
+1. **Run `npm run manuals:harvest` then `npm run manuals:verify`**
+   somewhere with normal egress. Harvesting is what grows the library
+   by orders of magnitude; verification is what makes any of it
+   trustworthy. Until both run, this is a set of candidates, not a
+   reference.
 2. **Australian manufacturers not yet touched**: Boss, Danmar, Taurean,
    Ozroll, Rollease Acmeda, Dominator.
 3. **International openers and gate automation**: LiftMaster, FAAC

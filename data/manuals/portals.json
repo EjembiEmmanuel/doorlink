@@ -1,0 +1,140 @@
+{
+  "note": "Documentation portals — the harvest targets. Each is an index page that lists many documents. `npm run manuals:harvest` crawls these and writes candidate records to data/manuals/harvested/ for review. This registry is how the library scales: one portal can yield hundreds of documents, which searching model-by-model never will. Every URL here was surfaced by a real search. None is a guessed URL pattern.",
+  "portals": [
+    {
+      "manufacturer": "B&D",
+      "slug": "bnd",
+      "url": "https://www.bnd.com.au/trade-resources/installation-manuals/opener-manuals/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "AU"
+    },
+    {
+      "manufacturer": "Gliderol",
+      "slug": "gliderol",
+      "url": "https://gliderol.com.au/support/user-manuals-guides/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "AU"
+    },
+    {
+      "manufacturer": "Automatic Technology",
+      "slug": "automatic-technology",
+      "url": "https://www.automatictechnology.com/au/resources/installation-manuals",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "AU"
+    },
+    {
+      "manufacturer": "Steel-Line",
+      "slug": "steel-line",
+      "url": "https://www.steel-lineautomation.com.au/technical-support.html",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "AU"
+    },
+    {
+      "manufacturer": "Chamberlain",
+      "slug": "chamberlain",
+      "url": "https://www.chamberlaindiy.com.au/documents-and-downloads/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "AU"
+    },
+    {
+      "manufacturer": "Chamberlain",
+      "slug": "chamberlain",
+      "url": "https://support.chamberlaingroup.com/s/manuals-parts",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "GLOBAL"
+    },
+    {
+      "manufacturer": "Dominator",
+      "slug": "dominator",
+      "url": "https://www.dominator.co.nz/resources/owners-manuals",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "NZ"
+    },
+    {
+      "manufacturer": "Nice",
+      "slug": "nice",
+      "url": "https://www.niceforyou.com/en/professional-area/download",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "GLOBAL"
+    },
+    {
+      "manufacturer": "Somfy",
+      "slug": "somfy",
+      "url": "https://www.somfy.co.uk/support/downloads",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "UK"
+    },
+    {
+      "manufacturer": "Somfy",
+      "slug": "somfy",
+      "url": "https://www.somfysystems.com/en-us/support/documentation",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "US"
+    },
+    {
+      "manufacturer": "Somfy",
+      "slug": "somfy",
+      "url": "https://www.somfy.me/en-gc/support-and-assistance/downloads",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "GLOBAL"
+    },
+    {
+      "manufacturer": "BFT",
+      "slug": "bft",
+      "url": "https://bftgateopeners.com/store/manuals",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "GLOBAL"
+    },
+    {
+      "manufacturer": "Hörmann",
+      "slug": "hormann",
+      "url": "https://www.hormann.us/high-performance/tech-support/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "US"
+    },
+    {
+      "manufacturer": "ASSA ABLOY Entrance Systems",
+      "slug": "assa-abloy-entrance-systems",
+      "url": "https://www.assaabloyentrance.com/us/en/solutions/products/automatic-doors/revolving-doors/manual",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "US"
+    },
+    {
+      "manufacturer": "Dominator",
+      "slug": "dominator",
+      "url": "https://www.dominatornsw.com.au/resources/ata-dominator-owner-s-manuals",
+      "authority": "AUTHORISED_DISTRIBUTOR",
+      "region": "AU"
+    },
+    {
+      "manufacturer": "Merlin",
+      "slug": "merlin",
+      "url": "https://www.dominatornsw.com.au/resources/merlin-owner-s-manuals",
+      "authority": "AUTHORISED_DISTRIBUTOR",
+      "region": "AU"
+    },
+    {
+      "manufacturer": "Boss",
+      "slug": "boss",
+      "url": "https://www.egaragesystems.com.au/manuals/boss-manuals",
+      "authority": "AUTHORISED_DISTRIBUTOR",
+      "region": "AU"
+    },
+    {
+      "manufacturer": "multiple",
+      "slug": null,
+      "url": "https://garagedooropenerremotes.com.au/manuals-and-downloads",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "AU",
+      "note": "Aggregator index spanning many Australian brands. Harvested records from here are third-party by definition and must not be presented as manufacturer documents."
+    },
+    {
+      "manufacturer": "multiple",
+      "slug": null,
+      "url": "https://automaticgaragesolutions.com.au/brochure_manual/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "AU",
+      "note": "Aggregator index spanning many Australian brands."
+    }
+  ]
+}
