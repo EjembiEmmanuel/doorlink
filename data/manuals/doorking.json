@@ -1,0 +1,39 @@
+{
+  "manufacturer": {
+    "name": "DoorKing",
+    "slug": "doorking",
+    "country": "US",
+    "website": "https://www.doorking.com/",
+    "supportUrl": "https://www.doorking.com/",
+    "note": "US manufacturer of vehicular gate operators and access control. Publishes owner's manuals on its own domain with a document code and revision in the filename."
+  },
+  "models": [
+    {
+      "modelCode": "6300",
+      "name": "Series 6300 Vehicular Swing Gate Operator",
+      "category": "gate-motors",
+      "region": "US",
+      "aliases": ["Series 6300", "DKS 6300"],
+      "documents": [
+        {
+          "kind": "USER_MANUAL",
+          "title": "Series 6300 Vehicular Swing Gate Operator Owner's Manual",
+          "documentCode": "1601-065-H",
+          "revision": "2-04",
+          "sourceUrl": "https://www.doorking.com/wp-content/uploads/2013/09/1601-065-H-2-04.pdf",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "region": "US",
+          "rights": "LINK_ONLY",
+          "evidence": "Manufacturer's own domain. Document code 1601-065-H and revision 2-04 read from the filename. The search result titled this simply Owner's Manual; the 6300 attribution comes from the separate Gates'n'Fences copy naming the series, so it is a cross-reference rather than a direct reading of this file. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "http://www.gatesnfences.com/files/doorking_openers_pdf/DoorKing_6300_Swing_Gate_Opener_Manual.pdf",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "Gates'n'Fences mirror naming the 6300 series"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

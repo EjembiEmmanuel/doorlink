@@ -1,0 +1,78 @@
+{
+  "manufacturer": {
+    "name": "Ozroll",
+    "slug": "ozroll",
+    "country": "AU",
+    "website": "https://www.ozroll.com.au/",
+    "supportUrl": "https://ozrolltech.com.au/rollashield/installation-advice/",
+    "note": "Australian roller shutter drive and control manufacturer. Its Ozroll Tech site carries an installation advice area listing E-Port, 3-way switch and ODS instructions."
+  },
+  "models": [
+    {
+      "modelCode": "ODS-L10",
+      "name": "ODS-L10 Roller Shutter Drive (end plate)",
+      "category": "roller-shutter-motors",
+      "region": "AU",
+      "aliases": ["ODS L10", "ODSL10"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "ODS-L10 Installation Instructions",
+          "sourceUrl": "https://www.rollershutters.com.au/wp-content/uploads/2018/08/ODS-How-to-install-L10.pdf",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "Roller Shutters Australia",
+          "region": "AU",
+          "rights": "LINK_ONLY",
+          "evidence": "Australian reseller copy. Ozroll's own installation advice page lists ODS instructions but did not expose a direct PDF URL, so the official link is recorded at manufacturer level instead of guessed. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "ODS-T20",
+      "name": "ODS-T20 Roller Shutter Drive (in-axle)",
+      "category": "roller-shutter-motors",
+      "region": "AU",
+      "aliases": ["ODS T20", "ODST20"],
+      "documents": [],
+      "note": "Model named in search results alongside the L10, but no documentation URL specific to it was surfaced. Recorded so the model is searchable and the gap is visible."
+    },
+    {
+      "modelCode": "E-Port",
+      "name": "E-Port Removable Roller Shutter Controller",
+      "category": "remotes-accessories",
+      "region": "AU",
+      "aliases": ["EPort", "E Port"],
+      "documents": [
+        {
+          "kind": "USER_MANUAL",
+          "title": "Ozroll E-Port Controller Manual and Setup Guide",
+          "sourceUrl": "https://rollershutterrepairsadelaide.com.au/roller-shutter-parts/ozroll-e-port-controller-manual/",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "Roller Shutter Repairs Adelaide",
+          "region": "AU",
+          "rights": "LINK_ONLY",
+          "evidence": "Australian repairer's guide page rather than a manufacturer PDF. Recorded as third-party and as a web page, not a document file. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "ODS",
+      "name": "Ozroll Drive System (range brochure)",
+      "category": "roller-shutter-motors",
+      "region": "AU",
+      "documents": [
+        {
+          "kind": "SPEC_SHEET",
+          "title": "Ozroll Drive System Components Brochure",
+          "documentCode": "cr1055",
+          "sourceUrl": "https://www.waverleygaragedoors.com.au/pdf/cr1055-ods-brochure.pdf",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "Waverley Garage Doors",
+          "region": "AU",
+          "rights": "LINK_ONLY",
+          "evidence": "Reseller-hosted range brochure, not a model manual — recorded as a spec sheet against the range rather than attributed to L10 or T20. Document code cr1055 read from the filename. Not fetched - egress blocked."
+        }
+      ]
+    }
+  ]
+}

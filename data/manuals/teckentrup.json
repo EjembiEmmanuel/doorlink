@@ -1,0 +1,11 @@
+{
+  "manufacturer": {
+    "name": "Teckentrup",
+    "slug": "teckentrup",
+    "country": "DE",
+    "website": "https://www.teckentrup.biz/",
+    "supportUrl": "https://www.teckentrup.biz/en/downloadcenter",
+    "note": "German door manufacturer with a download centre carrying brochures, data sheets, approvals and installation instructions. No model-level PDF URL was surfaced, so none is claimed."
+  },
+  "models": []
+}

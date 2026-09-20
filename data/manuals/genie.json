@@ -1,0 +1,31 @@
+{
+  "manufacturer": {
+    "name": "Genie",
+    "slug": "genie",
+    "country": "US",
+    "website": "https://www.geniecompany.com/",
+    "supportUrl": "https://support.geniecompany.com/app/answers/detail/a_id/1308/~/owners-manuals",
+    "note": "US garage door opener manufacturer. Owner's manuals are served from its own support portal."
+  },
+  "models": [
+    {
+      "modelCode": "Series IS",
+      "name": "Series IS / ISL / IC / H Garage Door Openers",
+      "category": "garage-door-openers",
+      "region": "US",
+      "aliases": ["IS", "ISL", "IC"],
+      "documents": [
+        {
+          "kind": "USER_MANUAL",
+          "title": "Series IS, ISL, IC, H Owner's Manual",
+          "sourceUrl": "https://bluemate.com/garage-door-openers/pdf/genie-manual.pdf",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "Bluemate",
+          "region": "US",
+          "rights": "LINK_ONLY",
+          "evidence": "Third-party copy. One manual covers four series, so the record names all four rather than implying it is specific to one. No manufacturer-hosted PDF URL was surfaced; the Genie support portal is recorded at manufacturer level instead. Not fetched - egress blocked."
+        }
+      ]
+    }
+  ]
+}

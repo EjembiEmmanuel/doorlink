@@ -186,6 +186,90 @@
       "authority": "THIRD_PARTY_MIRROR",
       "region": "GLOBAL",
       "note": "Aggregator index. Listings report several hundred Beninc\u00e0 manuals."
+    },
+    {
+      "manufacturer": "Novoferm",
+      "slug": "novoferm",
+      "url": "https://www.novoferm.com/downloads/installation-assembly-instructions",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "EU"
+    },
+    {
+      "manufacturer": "Teckentrup",
+      "slug": "teckentrup",
+      "url": "https://www.teckentrup.biz/en/downloadcenter",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "EU"
+    },
+    {
+      "manufacturer": "EFAFLEX",
+      "slug": "efaflex",
+      "url": "https://www.efaflex.com/download-area/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "EU"
+    },
+    {
+      "manufacturer": "Genie",
+      "slug": "genie",
+      "url": "https://support.geniecompany.com/app/answers/detail/a_id/1308/~/owners-manuals",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "US"
+    },
+    {
+      "manufacturer": "GEZE",
+      "slug": "geze",
+      "url": "https://www.geze.com/en/download",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "EU"
+    },
+    {
+      "manufacturer": "Becker",
+      "slug": "becker",
+      "url": "https://beckeraustralia.com.au/product-centre/download/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "AU"
+    },
+    {
+      "manufacturer": "elero",
+      "slug": "elero",
+      "url": "https://www.elero.com/en/downloads-service/downloads",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "EU"
+    },
+    {
+      "manufacturer": "Roger Technology",
+      "slug": "roger-technology",
+      "url": "https://rtnorth.co.uk/downloads",
+      "authority": "AUTHORISED_DISTRIBUTOR",
+      "region": "UK"
+    },
+    {
+      "manufacturer": "LiftMaster",
+      "slug": "liftmaster",
+      "url": "https://www.aegates.com/liftmaster-gate-manuals/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "US"
+    },
+    {
+      "manufacturer": "Ozroll",
+      "slug": "ozroll",
+      "url": "https://ozrolltech.com.au/rollashield/installation-advice/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "AU"
+    },
+    {
+      "manufacturer": "Ozroll",
+      "slug": "ozroll",
+      "url": "https://ozrolltech.com.au/rollashield/product-information/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "AU"
+    },
+    {
+      "manufacturer": "DoorKing",
+      "slug": "doorking",
+      "url": "https://www.doorking.com/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "US"
     }
   ]
 }
