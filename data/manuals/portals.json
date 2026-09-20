@@ -390,6 +390,46 @@
       "authority": "THIRD_PARTY_MIRROR",
       "region": "GLOBAL",
       "note": "Aggregator brand index for Fadini."
+    },
+    {
+      "manufacturer": "Cherubini",
+      "slug": "cherubini",
+      "url": "https://www.cherubini-group.com/files/uploads/istruzioni/ist_standard/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "EU",
+      "note": "Manufacturer's standard-instructions tree, foldered by year, serving static PDFs named <product>_<codes>_<lang>.pdf."
+    },
+    {
+      "manufacturer": "VDS Automation",
+      "slug": "vds",
+      "url": "https://www.vdsautomation.com/istruzioni/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "EU",
+      "note": "Manufacturer's instructions directory, language-suffixed static PDFs."
+    },
+    {
+      "manufacturer": "GiBiDi",
+      "slug": "gibidi",
+      "url": "https://www.manualslib.com/brand/gibidi/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "GLOBAL",
+      "note": "Aggregator brand index. No gibidi.com documentation path surfaced, so this is the only index available for the brand."
+    },
+    {
+      "manufacturer": "Dooya",
+      "slug": "dooya",
+      "url": "https://manuals.plus/category/dooya/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "GLOBAL",
+      "note": "Aggregator brand index, paginated - the search surfaced page 3, so the listing runs deep."
+    },
+    {
+      "manufacturer": "Dooya",
+      "slug": "dooya",
+      "url": "https://fccid.io/VYYDM350328/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "US",
+      "note": "FCC filing mirror for Dooya grantee code VYY. Regulatory filings are public records and carry the manufacturer's own manuals; the mirror is still third-party."
     }
   ]
 }

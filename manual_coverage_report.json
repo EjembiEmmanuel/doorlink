@@ -1,19 +1,19 @@
 {
-  "generatedAt": "2026-09-20T10:37:05.730Z",
+  "generatedAt": "2026-09-20T10:38:55.724Z",
   "caveat": "verified_documents counts links that were actually fetched and resolved. A document can be from an official manufacturer domain and still be unverified. Run `npm run manuals:verify` in an environment with outbound network access to raise this number. All figures below EXCLUDE the demo catalogue, whose manufacturers are invented for demonstration and are reported separately under demo_catalogue.",
   "totals": {
-    "total_manufacturers": 39,
-    "total_models": 110,
-    "total_documents": 114,
-    "total_model_aliases": 164,
-    "total_alternate_sources": 55,
-    "official_documents": 40,
-    "third_party_documents": 74,
+    "total_manufacturers": 43,
+    "total_models": 121,
+    "total_documents": 126,
+    "total_model_aliases": 197,
+    "total_alternate_sources": 61,
+    "official_documents": 42,
+    "third_party_documents": 84,
     "verified_documents": 0,
-    "unverified_documents": 114,
+    "unverified_documents": 126,
     "documents_needing_review": 0,
     "models_without_documentation": 3,
-    "link_only_documents": 114,
+    "link_only_documents": 126,
     "hosted_documents": 3
   },
   "demo_catalogue": {
@@ -23,32 +23,32 @@
     "documents": 10
   },
   "by_verification": {
-    "UNVERIFIED": 114
+    "UNVERIFIED": 126
   },
   "by_origin": {
-    "MANUFACTURER_ORIGINAL": 40,
-    "THIRD_PARTY_GUIDE": 74
+    "MANUFACTURER_ORIGINAL": 42,
+    "THIRD_PARTY_GUIDE": 84
   },
   "by_region": {
     "UNKNOWN": 3,
     "AU": 26,
-    "GLOBAL": 29,
-    "US": 17,
-    "EU": 31,
+    "GLOBAL": 31,
+    "US": 19,
     "UK": 6,
+    "EU": 39,
     "NZ": 1,
     "ASIA": 1
   },
   "by_document_kind": {
-    "INSTALL_MANUAL": 74,
+    "INSTALL_MANUAL": 83,
     "PROGRAMMING_GUIDE": 4,
-    "USER_MANUAL": 26,
+    "USER_MANUAL": 28,
     "TECHNICAL_DOCUMENT": 4,
-    "SPEC_SHEET": 3,
-    "QUICK_START": 3
+    "QUICK_START": 4,
+    "SPEC_SHEET": 3
   },
   "by_rights": {
-    "LINK_ONLY": 114
+    "LINK_ONLY": 126
   },
   "by_manufacturer": [
     {
@@ -115,6 +115,13 @@
       "documents": 0
     },
     {
+      "name": "Cherubini",
+      "slug": "cherubini",
+      "country": "IT",
+      "models": 4,
+      "documents": 4
+    },
+    {
       "name": "DEA System",
       "slug": "dea",
       "country": "IT",
@@ -134,6 +141,13 @@
       "country": "US",
       "models": 1,
       "documents": 1
+    },
+    {
+      "name": "Dooya",
+      "slug": "dooya",
+      "country": "CN",
+      "models": 3,
+      "documents": 4
     },
     {
       "name": "EFAFLEX",
@@ -169,6 +183,13 @@
       "country": "US",
       "models": 1,
       "documents": 1
+    },
+    {
+      "name": "GiBiDi",
+      "slug": "gibidi",
+      "country": "IT",
+      "models": 3,
+      "documents": 3
     },
     {
       "name": "Gilgen Door Systems",
@@ -302,6 +323,13 @@
       "country": "IT",
       "models": 2,
       "documents": 2
+    },
+    {
+      "name": "VDS Automation",
+      "slug": "vds",
+      "country": "IT",
+      "models": 1,
+      "documents": 1
     },
     {
       "name": "dormakaba",

@@ -1,0 +1,91 @@
+{
+  "manufacturer": {
+    "name": "Dooya",
+    "slug": "dooya",
+    "country": "CN",
+    "website": "https://dooya.in/tubular-motors/",
+    "supportUrl": null,
+    "note": "Ningbo Dooya Mechanic & Electronic Technology - Chinese tubular motor manufacturer for roller blinds and shutters, widely rebadged. The only dooya domain that surfaced is an Indian product page, not a documentation index, so supportUrl is null. Documents below are a regulatory filing, a distributor copy and aggregator listings."
+  },
+  "models": [
+    {
+      "modelCode": "DM35",
+      "name": "Dooya DM35 Series Tubular Motor",
+      "category": "roller-shutter-motors",
+      "region": "GLOBAL",
+      "aliases": ["DM35R", "DM35S", "DM350328", "DM35R 10/17", "DM35S 6/28"],
+      "documents": [
+        {
+          "kind": "USER_MANUAL",
+          "title": "Dooya DM350328 Tubular Motor User Manual (FCC filing)",
+          "sourceUrl": "https://fccid.io/VYYDM350328/User-Manual/User-manual-3034652",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "fccid.io",
+          "region": "US",
+          "rights": "LINK_ONLY",
+          "evidence": "The manual as filed with the FCC under grantee code VYY, mirrored by fccid.io. That makes it the manufacturer's own document in a regulatory record, but the host is a third-party mirror of public filings, not Dooya - so origin stays third-party. Region is US because an FCC filing is a US regulatory document, not because the motor is US-only. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "https://manuals.plus/ae/1005004514136889",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "manuals.plus listing for the DM35R 10/17"
+            },
+            {
+              "url": "https://manuals.plus/ae/1005004712973564",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "manuals.plus listing for the DM35S 6/28"
+            }
+          ]
+        },
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "Dooya Manual Override Tubular Motor Instructions",
+          "sourceUrl": "https://rollac.com/wp-content/uploads/downloads/Downloads/Shutter%20Support/Wiring%20Diagrams%20and%20Limit%20Switch%20Adjustments/Dooya%20Motors/dooya_override_motor_instr.pdf",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "Rollac Shutters",
+          "region": "US",
+          "rights": "LINK_ONLY",
+          "evidence": "Distributor copy, filed by Rollac under wiring diagrams and limit-switch adjustments. Covers the manual-override variant. The file name does not carry a model code, so it is attached to the DM35 series on the strength of the directory naming it Dooya Motors - that attribution is weaker than the others here and should be checked when the link is verified. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "DM45",
+      "name": "Dooya DM45 Series Tubular Motor",
+      "category": "roller-shutter-motors",
+      "region": "GLOBAL",
+      "aliases": ["DM45R", "DM45S", "DM45R 50/12", "DM45S 50/12"],
+      "documents": [
+        {
+          "kind": "USER_MANUAL",
+          "title": "Dooya DM45R / DM45S 50/12 Tubular Motor Instruction Manual",
+          "sourceUrl": "https://manuals.plus/ae/1005004263638656",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "manuals.plus",
+          "region": "GLOBAL",
+          "rights": "LINK_ONLY",
+          "evidence": "Aggregator listing covering the R and S variants together, for rolling blinds, canopies and lift systems. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "DM59",
+      "name": "Dooya DM59 Series Tubular Motor",
+      "category": "roller-shutter-motors",
+      "region": "GLOBAL",
+      "aliases": ["DM59S"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "Dooya DM35 / DM45 / DM59 Series Motorized Shutter and Blind Actuator Instruction Manual",
+          "sourceUrl": "https://manuals.plus/m/2dd2546f126213f0b8406d6c57fa15fa898fc5307cfd86f0aed1f0fcd6d24701",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "manuals.plus",
+          "region": "GLOBAL",
+          "rights": "LINK_ONLY",
+          "evidence": "Aggregator listing of a combined manual covering the DM35S, DM45S and DM59S. Attached to the DM59 because that is the series with no manual of its own here; the DM35 and DM45 keep their model-specific documents rather than this one being duplicated onto all three. Not fetched - egress blocked."
+        }
+      ]
+    }
+  ]
+}
