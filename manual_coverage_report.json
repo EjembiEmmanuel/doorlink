@@ -1,19 +1,19 @@
 {
-  "generatedAt": "2026-09-20T11:03:02.606Z",
+  "generatedAt": "2026-09-20T11:04:31.098Z",
   "caveat": "verified_documents counts links that were actually fetched and resolved. A document can be from an official manufacturer domain and still be unverified. Run `npm run manuals:verify` in an environment with outbound network access to raise this number. All figures below EXCLUDE the demo catalogue, whose manufacturers are invented for demonstration and are reported separately under demo_catalogue.",
   "totals": {
     "total_manufacturers": 71,
-    "total_models": 183,
-    "total_documents": 199,
-    "total_model_aliases": 352,
-    "total_alternate_sources": 110,
-    "official_documents": 76,
+    "total_models": 189,
+    "total_documents": 205,
+    "total_model_aliases": 369,
+    "total_alternate_sources": 116,
+    "official_documents": 82,
     "third_party_documents": 123,
     "verified_documents": 0,
-    "unverified_documents": 199,
+    "unverified_documents": 205,
     "documents_needing_review": 0,
     "models_without_documentation": 2,
-    "link_only_documents": 199,
+    "link_only_documents": 205,
     "hosted_documents": 3
   },
   "demo_catalogue": {
@@ -23,24 +23,24 @@
     "documents": 10
   },
   "by_verification": {
-    "UNVERIFIED": 199
+    "UNVERIFIED": 205
   },
   "by_origin": {
-    "MANUFACTURER_ORIGINAL": 76,
+    "MANUFACTURER_ORIGINAL": 82,
     "THIRD_PARTY_GUIDE": 123
   },
   "by_region": {
     "UNKNOWN": 3,
     "AU": 29,
     "GLOBAL": 32,
-    "US": 56,
-    "EU": 62,
+    "US": 57,
+    "EU": 67,
     "UK": 14,
     "NZ": 1,
     "ASIA": 2
   },
   "by_document_kind": {
-    "INSTALL_MANUAL": 135,
+    "INSTALL_MANUAL": 141,
     "PROGRAMMING_GUIDE": 6,
     "USER_MANUAL": 40,
     "TECHNICAL_DOCUMENT": 4,
@@ -49,7 +49,7 @@
     "PARTS_LIST": 1
   },
   "by_rights": {
-    "LINK_ONLY": 199
+    "LINK_ONLY": 205
   },
   "by_manufacturer": [
     {
@@ -238,8 +238,8 @@
       "name": "FAAC",
       "slug": "faac",
       "country": "IT",
-      "models": 3,
-      "documents": 4
+      "models": 4,
+      "documents": 5
     },
     {
       "name": "GEZE",
@@ -364,8 +364,8 @@
       "name": "Nice",
       "slug": "nice",
       "country": "IT",
-      "models": 3,
-      "documents": 3
+      "models": 8,
+      "documents": 8
     },
     {
       "name": "Nice | HySecurity",

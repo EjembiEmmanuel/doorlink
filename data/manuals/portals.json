@@ -963,6 +963,48 @@
       "authority": "THIRD_PARTY_MIRROR",
       "region": "AU",
       "note": "Reseller directory subfoldered by gate type; source of the BX-74/BX-78 PDF."
+    },
+    {
+      "manufacturer": "Nice",
+      "slug": "nice",
+      "url": "https://www.niceforyou.com/sites/default/files/upload/manuals/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "GLOBAL",
+      "note": "One flat directory holding Nice's instruction PDFs, named by document code (idv####a##<lang>.pdf and similar). If it serves a listing, this single target maps the whole Nice range - the highest-value entry in this registry."
+    },
+    {
+      "manufacturer": "Nice",
+      "slug": "nice",
+      "url": "https://www.niceforyou.com/en/professional-area/download",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "GLOBAL",
+      "note": "Paginated instruction-manual index; a search result surfaced page 71, so the set behind it runs to hundreds of documents. Paginate with ?st=<offset>&v=7.",
+      "follow": true
+    },
+    {
+      "manufacturer": "FAAC",
+      "slug": "faac",
+      "url": "https://www.faac.help/en/documents/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "GLOBAL",
+      "note": "FAAC's dedicated documentation site, one page per model under /en/documents/<model>. Pages rather than PDFs, so this needs the follow step.",
+      "follow": true
+    },
+    {
+      "manufacturer": "FAAC",
+      "slug": "faac",
+      "url": "https://faac.blob.core.windows.net/web/1/gate-automation/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "GLOBAL",
+      "note": "FAAC's own Azure blob host serving PDFs directly - a manufacturer host despite the windows.net address."
+    },
+    {
+      "manufacturer": "FAAC",
+      "slug": "faac",
+      "url": "http://www.faacgateopeners.com/FAAC-Manuals/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "US",
+      "note": "Distributor manual directory for the FAAC US range. Plain HTTP as surfaced."
     }
   ]
 }
