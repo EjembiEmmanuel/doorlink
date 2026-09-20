@@ -1,19 +1,19 @@
 {
-  "generatedAt": "2026-09-20T10:15:20.834Z",
+  "generatedAt": "2026-09-20T10:34:28.155Z",
   "caveat": "verified_documents counts links that were actually fetched and resolved. A document can be from an official manufacturer domain and still be unverified. Run `npm run manuals:verify` in an environment with outbound network access to raise this number. All figures below EXCLUDE the demo catalogue, whose manufacturers are invented for demonstration and are reported separately under demo_catalogue.",
   "totals": {
-    "total_manufacturers": 30,
-    "total_models": 80,
-    "total_documents": 81,
-    "total_model_aliases": 115,
-    "total_alternate_sources": 29,
-    "official_documents": 28,
-    "third_party_documents": 53,
+    "total_manufacturers": 34,
+    "total_models": 93,
+    "total_documents": 97,
+    "total_model_aliases": 135,
+    "total_alternate_sources": 40,
+    "official_documents": 36,
+    "third_party_documents": 61,
     "verified_documents": 0,
-    "unverified_documents": 81,
+    "unverified_documents": 97,
     "documents_needing_review": 0,
     "models_without_documentation": 3,
-    "link_only_documents": 81,
+    "link_only_documents": 97,
     "hosted_documents": 3
   },
   "demo_catalogue": {
@@ -23,31 +23,32 @@
     "documents": 10
   },
   "by_verification": {
-    "UNVERIFIED": 81
+    "UNVERIFIED": 97
   },
   "by_origin": {
-    "MANUFACTURER_ORIGINAL": 28,
-    "THIRD_PARTY_GUIDE": 53
+    "MANUFACTURER_ORIGINAL": 36,
+    "THIRD_PARTY_GUIDE": 61
   },
   "by_region": {
     "UNKNOWN": 3,
     "AU": 26,
-    "GLOBAL": 21,
-    "US": 14,
-    "EU": 14,
-    "UK": 2,
-    "NZ": 1
+    "GLOBAL": 29,
+    "US": 17,
+    "EU": 16,
+    "UK": 4,
+    "NZ": 1,
+    "ASIA": 1
   },
   "by_document_kind": {
-    "INSTALL_MANUAL": 52,
+    "INSTALL_MANUAL": 59,
     "PROGRAMMING_GUIDE": 4,
-    "USER_MANUAL": 20,
-    "TECHNICAL_DOCUMENT": 1,
-    "QUICK_START": 1,
-    "SPEC_SHEET": 3
+    "USER_MANUAL": 25,
+    "TECHNICAL_DOCUMENT": 4,
+    "SPEC_SHEET": 3,
+    "QUICK_START": 2
   },
   "by_rights": {
-    "LINK_ONLY": 81
+    "LINK_ONLY": 97
   },
   "by_manufacturer": [
     {
@@ -107,6 +108,13 @@
       "documents": 0
     },
     {
+      "name": "Ditec Entrematic",
+      "slug": "ditec",
+      "country": "IT",
+      "models": 7,
+      "documents": 8
+    },
+    {
       "name": "DoorKing",
       "slug": "doorking",
       "country": "US",
@@ -147,6 +155,13 @@
       "country": "US",
       "models": 1,
       "documents": 1
+    },
+    {
+      "name": "Gilgen Door Systems",
+      "slug": "gilgen",
+      "country": "CH",
+      "models": 2,
+      "documents": 2
     },
     {
       "name": "Gliderol",
@@ -247,6 +262,13 @@
       "documents": 0
     },
     {
+      "name": "V2 Elettronica",
+      "slug": "v2",
+      "country": "IT",
+      "models": 2,
+      "documents": 2
+    },
+    {
       "name": "dormakaba",
       "slug": "dormakaba",
       "country": "CH",
@@ -259,6 +281,13 @@
       "country": "DE",
       "models": 3,
       "documents": 3
+    },
+    {
+      "name": "record",
+      "slug": "record",
+      "country": "CH",
+      "models": 2,
+      "documents": 4
     }
   ]
 }

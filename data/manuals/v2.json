@@ -1,0 +1,73 @@
+{
+  "manufacturer": {
+    "name": "V2 Elettronica",
+    "slug": "v2",
+    "country": "IT",
+    "website": "https://v2home.com/",
+    "supportUrl": "https://v2home.com/en/manuals/",
+    "note": "Italian gate automation manufacturer. v2home.com/en/manuals is the manufacturer's own manuals index, organised by gate automations, control units and motors; it is recorded as a portal and harvest target. No direct model-level PDF URL on v2home.com was surfaced by search, so the documents below are aggregator listings."
+  },
+  "models": [
+    {
+      "modelCode": "AYROS",
+      "name": "V2 AYROS Series Sliding Gate Actuator",
+      "category": "gate-motors",
+      "region": "EU",
+      "aliases": ["Ayros Series"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "V2 AYROS Series Installer Manual",
+          "sourceUrl": "https://www.manualslib.com/manual/1776848/V2-Ayros-Series.html",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "ManualsLib",
+          "region": "EU",
+          "rights": "LINK_ONLY",
+          "evidence": "Aggregator listing of the installer manual. Search describes the Ayros as a 230V/120V irreversible rack actuator for sliding gates to 1200 kg; that description is not recorded as a specification because it was read from a search summary, not from the document. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "https://manualzz.com/doc/en/20396298/v2-elettronica-v2-ayros-sliding-gate-opener-owner-s-manual",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "Manualzz copy of the owner's manual"
+            },
+            {
+              "url": "https://manualmachine.com/v2elettronica/ayros/2592169-user-manual/",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "ManualMachine copy of the user manual"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "modelCode": "ALFARISS",
+      "name": "V2 ALFARISS Sliding Gate Actuator",
+      "category": "gate-motors",
+      "region": "EU",
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "V2 ALFARISS Manual",
+          "sourceUrl": "https://www.manualslib.com/manual/1851728/V2-Alfariss.html",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "ManualsLib",
+          "region": "EU",
+          "rights": "LINK_ONLY",
+          "evidence": "Aggregator listing. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "https://www.remootio.com/pages/v2-alfariss-instruction-manual",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "Remootio instruction-manual page"
+            },
+            {
+              "url": "https://manualzz.com/doc/en/20396296/v2-elettronica-v2-alfariss-sliding-gate-opener-owner-s-manual",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "Manualzz copy of the owner's manual"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

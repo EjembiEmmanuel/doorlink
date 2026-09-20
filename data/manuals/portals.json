@@ -1,5 +1,5 @@
 {
-  "note": "Documentation portals \u2014 the harvest targets. Each is an index page that lists many documents. `npm run manuals:harvest` crawls these and writes candidate records to data/manuals/harvested/ for review. This registry is how the library scales: one portal can yield hundreds of documents, which searching model-by-model never will. Every URL here was surfaced by a real search. None is a guessed URL pattern.",
+  "note": "Documentation portals — the harvest targets. Each is an index page that lists many documents. `npm run manuals:harvest` crawls these and writes candidate records to data/manuals/harvested/ for review. This registry is how the library scales: one portal can yield hundreds of documents, which searching model-by-model never will. Every URL here was surfaced by a real search. None is a guessed URL pattern.",
   "portals": [
     {
       "manufacturer": "B&D",
@@ -86,7 +86,7 @@
       "region": "GLOBAL"
     },
     {
-      "manufacturer": "H\u00f6rmann",
+      "manufacturer": "Hörmann",
       "slug": "hormann",
       "url": "https://www.hormann.us/high-performance/tech-support/",
       "authority": "MANUFACTURER_OFFICIAL",
@@ -158,7 +158,7 @@
       "region": "UK"
     },
     {
-      "manufacturer": "Beninc\u00e0",
+      "manufacturer": "Benincà",
       "slug": "beninca",
       "url": "https://www.beninca.com/en/beninca-products/automations-for-swinging-gates.html",
       "authority": "MANUFACTURER_OFFICIAL",
@@ -185,7 +185,7 @@
       "url": "https://manuals.plus/category/beninca",
       "authority": "THIRD_PARTY_MIRROR",
       "region": "GLOBAL",
-      "note": "Aggregator index. Listings report several hundred Beninc\u00e0 manuals."
+      "note": "Aggregator index. Listings report several hundred Benincà manuals."
     },
     {
       "manufacturer": "Novoferm",
@@ -270,6 +270,62 @@
       "url": "https://www.doorking.com/",
       "authority": "MANUFACTURER_OFFICIAL",
       "region": "US"
+    },
+    {
+      "manufacturer": "record",
+      "slug": "record",
+      "url": "https://www.recorddoors.com/master-blueprint/en/downloads/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "GLOBAL",
+      "note": "Directory the manufacturer-hosted STA 20 installation manual sits under. Likely a deep tree of per-product download folders."
+    },
+    {
+      "manufacturer": "record",
+      "slug": "record",
+      "url": "https://www.recordukdirect.co.uk/media/Sliding%20Doors/",
+      "authority": "AUTHORISED_DISTRIBUTOR",
+      "region": "UK",
+      "note": "UK arm's media directory. May index rather than list; the harvester reports no-documents if so."
+    },
+    {
+      "manufacturer": "Gilgen Door Systems",
+      "slug": "gilgen",
+      "url": "https://www.gilgendoorsystems.com/en/downloadcenter/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "GLOBAL",
+      "note": "Named download centre spanning brochures, data sheets and documents for the whole range."
+    },
+    {
+      "manufacturer": "V2 Elettronica",
+      "slug": "v2",
+      "url": "https://v2home.com/en/manuals/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "EU",
+      "note": "Manufacturer's own manuals index, organised by gate automations, control units and motors."
+    },
+    {
+      "manufacturer": "Ditec Entrematic",
+      "slug": "ditec",
+      "url": "https://www.ditecautomations.com/global/en/images/downloads/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "GLOBAL",
+      "note": "Downloads tree the Rex user manual sits under; product folders branch from here."
+    },
+    {
+      "manufacturer": "Ditec Entrematic",
+      "slug": "ditec",
+      "url": "https://www.ditecautomations.com/Entrematic/ditecentrematicCOM/QR/Multilanguages/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "GLOBAL",
+      "note": "Multilingual QR-code asset tree - the copies the labels on installed doors point at. One folder per product family."
+    },
+    {
+      "manufacturer": "V2 Elettronica",
+      "slug": "v2",
+      "url": "https://www.manualslib.com/brand/v2/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "GLOBAL",
+      "note": "Aggregator brand index spanning the V2 range."
     }
   ]
 }

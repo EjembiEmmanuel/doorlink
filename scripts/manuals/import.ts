@@ -26,7 +26,12 @@ function slugify(value: string): string {
 }
 
 async function main() {
-  const files = readdirSync(DATA_DIR).filter((f) => f.endsWith('.json'))
+  // portals.json shares this directory but is a registry of harvest
+  // targets, not a seed file. Letting it fall through printed a
+  // "not valid" warning on every run, which is exactly the warning a
+  // genuinely malformed seed file needs to stand out with.
+  const NOT_SEED_FILES = new Set(['portals.json'])
+  const files = readdirSync(DATA_DIR).filter((f) => f.endsWith('.json') && !NOT_SEED_FILES.has(f))
   if (files.length === 0) {
     console.log('No seed files in data/manuals — nothing to import.')
     return
