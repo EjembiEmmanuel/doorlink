@@ -1,19 +1,19 @@
 {
-  "generatedAt": "2026-09-20T10:45:59.636Z",
+  "generatedAt": "2026-09-20T10:48:31.287Z",
   "caveat": "verified_documents counts links that were actually fetched and resolved. A document can be from an official manufacturer domain and still be unverified. Run `npm run manuals:verify` in an environment with outbound network access to raise this number. All figures below EXCLUDE the demo catalogue, whose manufacturers are invented for demonstration and are reported separately under demo_catalogue.",
   "totals": {
-    "total_manufacturers": 57,
-    "total_models": 142,
-    "total_documents": 152,
-    "total_model_aliases": 256,
-    "total_alternate_sources": 78,
-    "official_documents": 56,
-    "third_party_documents": 96,
+    "total_manufacturers": 62,
+    "total_models": 154,
+    "total_documents": 164,
+    "total_model_aliases": 286,
+    "total_alternate_sources": 90,
+    "official_documents": 64,
+    "third_party_documents": 100,
     "verified_documents": 0,
-    "unverified_documents": 152,
+    "unverified_documents": 164,
     "documents_needing_review": 0,
     "models_without_documentation": 3,
-    "link_only_documents": 152,
+    "link_only_documents": 164,
     "hosted_documents": 3
   },
   "demo_catalogue": {
@@ -23,32 +23,32 @@
     "documents": 10
   },
   "by_verification": {
-    "UNVERIFIED": 152
+    "UNVERIFIED": 164
   },
   "by_origin": {
-    "MANUFACTURER_ORIGINAL": 56,
-    "THIRD_PARTY_GUIDE": 96
+    "MANUFACTURER_ORIGINAL": 64,
+    "THIRD_PARTY_GUIDE": 100
   },
   "by_region": {
     "UNKNOWN": 3,
     "AU": 29,
     "GLOBAL": 32,
-    "US": 40,
-    "EU": 39,
+    "US": 41,
+    "EU": 50,
     "UK": 6,
     "NZ": 1,
     "ASIA": 2
   },
   "by_document_kind": {
-    "INSTALL_MANUAL": 98,
+    "INSTALL_MANUAL": 108,
     "PROGRAMMING_GUIDE": 5,
-    "USER_MANUAL": 34,
+    "USER_MANUAL": 36,
     "TECHNICAL_DOCUMENT": 4,
-    "SPEC_SHEET": 5,
-    "QUICK_START": 6
+    "QUICK_START": 6,
+    "SPEC_SHEET": 5
   },
   "by_rights": {
-    "LINK_ONLY": 152
+    "LINK_ONLY": 164
   },
   "by_manufacturer": [
     {
@@ -169,6 +169,13 @@
       "country": "IT",
       "models": 7,
       "documents": 8
+    },
+    {
+      "name": "DoorHan",
+      "slug": "doorhan",
+      "country": "RU",
+      "models": 3,
+      "documents": 3
     },
     {
       "name": "DoorKing",
@@ -360,11 +367,25 @@
       "documents": 7
     },
     {
+      "name": "Ryterna",
+      "slug": "ryterna",
+      "country": "LT",
+      "models": 1,
+      "documents": 1
+    },
+    {
       "name": "SEA (Seateam)",
       "slug": "sea",
       "country": "IT",
       "models": 5,
       "documents": 5
+    },
+    {
+      "name": "SOMMER",
+      "slug": "sommer",
+      "country": "DE",
+      "models": 2,
+      "documents": 2
     },
     {
       "name": "Somfy",
@@ -409,6 +430,13 @@
       "documents": 0
     },
     {
+      "name": "Tousek",
+      "slug": "tousek",
+      "country": "AT",
+      "models": 4,
+      "documents": 4
+    },
+    {
       "name": "V2 Elettronica",
       "slug": "v2",
       "country": "IT",
@@ -427,6 +455,13 @@
       "slug": "wayne-dalton",
       "country": "US",
       "models": 1,
+      "documents": 2
+    },
+    {
+      "name": "Wiśniowski",
+      "slug": "wisniowski",
+      "country": "PL",
+      "models": 2,
       "documents": 2
     },
     {

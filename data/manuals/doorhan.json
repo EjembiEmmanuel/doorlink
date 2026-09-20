@@ -1,0 +1,94 @@
+{
+  "manufacturer": {
+    "name": "DoorHan",
+    "slug": "doorhan",
+    "country": "RU",
+    "website": "https://www.doorhan.com/",
+    "supportUrl": null,
+    "note": "Manufacturer of gate, garage and industrial door operators. No doorhan.com documentation URL surfaced, so supportUrl is null; the direct PDFs below are on a smart-controller vendor and a Danish reseller, both of which carry DoorHan's own copyright line."
+  },
+  "models": [
+    {
+      "modelCode": "SLIDING-1300",
+      "name": "DoorHan Sliding-1300 Sliding Gate Operator",
+      "category": "gate-motors",
+      "region": "EU",
+      "aliases": ["SLIDING 1300", "SLIDING-2100"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "Installation and Operating Manual for SLIDING-1300 / 2100",
+          "sourceUrl": "https://vihepo.dk/wp-content/uploads/2018/09/SLIDING-1300-2100.pdf",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "Vihepo",
+          "region": "EU",
+          "rights": "LINK_ONLY",
+          "evidence": "Reseller copy, a direct PDF. One manual covers the 1300 and 2100, so the 2100 is recorded as an alias rather than given a copy of the same file. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "https://www.manualslib.com/manual/1267875/Doorhan-Sliding-1300.html",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "ManualsLib listing, installation and operation manual"
+            },
+            {
+              "url": "https://www.manualslib.com/manual/953744/Doorhan-Sliding-1300.html",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "Second ManualsLib listing, titled installation and operating manual; edition difference unknown"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "modelCode": "SLIDING-300",
+      "name": "DoorHan Sliding-300 / 800 Sliding Gate Operator",
+      "category": "gate-motors",
+      "region": "EU",
+      "aliases": ["SLIDING-800", "SLIDING 300", "SLIDING 800"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "Operator Sliding-300 / 800 Installation and Operating Manual (2012)",
+          "version": "2012",
+          "sourceUrl": "https://ismartgate.com/manuals/DoorHan_300-800_manual.pdf",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "ismartgate",
+          "region": "EU",
+          "rights": "LINK_ONLY",
+          "evidence": "Hosted by a smart-controller vendor. The document's own copyright line reads (C) DoorHan, 2012, which is where the version comes from - a date printed in the document, not one inferred from the URL. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "SHAFT-30",
+      "name": "DoorHan Shaft-30 Industrial Door Operator",
+      "category": "garage-door-openers",
+      "region": "EU",
+      "aliases": ["SHAFT 30"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "DoorHan Shaft-30 Installation Manual",
+          "sourceUrl": "https://www.manualslib.com/manual/1182850/Doorhan-Shaft-30.html",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "ManualsLib",
+          "region": "EU",
+          "rights": "LINK_ONLY",
+          "evidence": "Aggregator listing. Search reports three Shaft-30 manuals exist there under two titles (Installation Manual, and Installation and Operating Manual); only the one with a stable listing URL is recorded, so the others are a known gap rather than a guess at their addresses. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "https://www.manualslib.com/products/Doorhan-Shaft-30-5131952.html",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "ManualsLib product page listing all Shaft-30 manuals"
+            },
+            {
+              "url": "https://guidesimo.com/document/1097690/doorhan-shaft-30-installation-manual-8.html",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "Guidesimo copy"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -654,6 +654,86 @@
       "authority": "THIRD_PARTY_MIRROR",
       "region": "GLOBAL",
       "note": "Aggregator brand index."
+    },
+    {
+      "manufacturer": "SOMMER",
+      "slug": "sommer",
+      "url": "https://www.sommer.eu/SOMMER/Downloads/Montageanleitung/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "EU",
+      "note": "Manufacturer's assembly-instruction tree, split by product type and market, with an Archiv branch for superseded ranges. Well structured; a good early harvest target."
+    },
+    {
+      "manufacturer": "SOMMER",
+      "slug": "sommer",
+      "url": "https://www.sommer.eu/SOMMER/Downloads/Montageanleitung/Garagentorantriebe/USA/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "US",
+      "note": "US market branch of that tree, where the evo+ manual sits. File names carry document code, date and revision."
+    },
+    {
+      "manufacturer": "DoorHan",
+      "slug": "doorhan",
+      "url": "https://www.manualslib.com/brand/doorhan/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "GLOBAL",
+      "note": "Aggregator brand index. No doorhan.com documentation path surfaced, so this is the only index for the brand so far."
+    },
+    {
+      "manufacturer": "multiple",
+      "slug": null,
+      "url": "https://ismartgate.com/manuals/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "GLOBAL",
+      "note": "Smart-controller vendor's manual directory, spanning many gate and garage brands - it carries DoorHan and Sommer documents among others. Third-party throughout."
+    },
+    {
+      "manufacturer": "Tousek",
+      "slug": "tousek",
+      "url": "https://tousek.com/download/EN/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "EU",
+      "note": "Manufacturer's English document folder. Names are EN_<section>_<models>.pdf, section 01 sliding and 03 swing - so the folder listing, if served, maps the range directly."
+    },
+    {
+      "manufacturer": "Tousek",
+      "slug": "tousek",
+      "url": "http://download.tousek.at/montage/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "EU",
+      "note": "Tousek's second document host, mounting-instruction branch, filed by part number. Plain HTTP as surfaced."
+    },
+    {
+      "manufacturer": "Tousek",
+      "slug": "tousek",
+      "url": "http://download.tousek.at/part/E/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "EU",
+      "note": "Parts branch of the same host, English. Plain HTTP as surfaced."
+    },
+    {
+      "manufacturer": "Ryterna",
+      "slug": "ryterna",
+      "url": "https://www.ryternagaragedoors.co.uk/partnership/installation-manuals/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "UK",
+      "note": "UK arm's installation-manual index; search named an R40 and two TL LHR sectional manuals on it."
+    },
+    {
+      "manufacturer": "Ryterna",
+      "slug": "ryterna",
+      "url": "https://www.ryterna.com/mediasenter/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "EU",
+      "note": "Ryterna's own media centre."
+    },
+    {
+      "manufacturer": "Wiśniowski",
+      "slug": "wisniowski",
+      "url": "https://sklep.wisniowski.pl/img/products_certificates/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "EU",
+      "note": "Product-certificates directory on the manufacturer's shop, subfoldered by product type. Polish-language documents."
     }
   ]
 }
