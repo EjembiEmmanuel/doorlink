@@ -1099,6 +1099,65 @@
       "authority": "THIRD_PARTY_MIRROR",
       "region": "UK",
       "note": "Second download directory on the same reseller as its /download/ path - both are needed to cover what it hosts."
+    },
+    {
+      "manufacturer": "Centurion Systems",
+      "slug": "centurion",
+      "url": "https://www.centsys.co.za/pdf/prod/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "GLOBAL",
+      "note": "Centurion South Africa's product document tree, foldered by range. File names carry document code and ddmmyyyy date."
+    },
+    {
+      "manufacturer": "Centurion Systems",
+      "slug": "centurion",
+      "url": "https://www.centsys.co.za/upload/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "GLOBAL",
+      "note": "Older upload directory on the same host, using the earlier 0_07_A_#### numbering. Both schemes are live, so both directories are needed."
+    },
+    {
+      "manufacturer": "Centurion Systems",
+      "slug": "centurion",
+      "url": "https://www.centsys.com.au/wp-content/uploads/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "AU",
+      "note": "Centurion Australia's uploads tree. Its editions carry different document codes and dates from the South African ones for the same manual - separate documents, not mirrors."
+    },
+    {
+      "manufacturer": "Gliderol",
+      "slug": "gliderol",
+      "url": "https://www.gliderol.com.au/wp-content/uploads/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "AU",
+      "note": "Manufacturer's uploads tree, year/month foldered. Source of the GTS+ manual that closed a first-pass gap."
+    },
+    {
+      "manufacturer": "Gliderol",
+      "slug": "gliderol",
+      "url": "https://wholesalegaragedoors.com.au/gliderol-manuals/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "AU",
+      "note": "Reseller index of Gliderol manuals.",
+      "follow": true
+    },
+    {
+      "manufacturer": "Gliderol",
+      "slug": "gliderol",
+      "url": "https://garagedooropenerremotes.com.au/manuals-and-downloads/gliderol-manuals",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "AU",
+      "note": "Gliderol section of the AU aggregator index.",
+      "follow": true
+    },
+    {
+      "manufacturer": "Centurion Systems",
+      "slug": "centurion",
+      "url": "https://progatemotorrepairs.co.za/technical-info/centurion-gate-motor-manuals/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "GLOBAL",
+      "note": "Installer index of Centurion swing and sliding gate motor manuals.",
+      "follow": true
     }
   ]
 }

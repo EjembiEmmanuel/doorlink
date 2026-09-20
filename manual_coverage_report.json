@@ -1,19 +1,19 @@
 {
-  "generatedAt": "2026-09-20T11:08:05.639Z",
+  "generatedAt": "2026-09-20T11:09:35.745Z",
   "caveat": "verified_documents counts links that were actually fetched and resolved. A document can be from an official manufacturer domain and still be unverified. Run `npm run manuals:verify` in an environment with outbound network access to raise this number. All figures below EXCLUDE the demo catalogue, whose manufacturers are invented for demonstration and are reported separately under demo_catalogue.",
   "totals": {
     "total_manufacturers": 71,
-    "total_models": 197,
-    "total_documents": 216,
-    "total_model_aliases": 393,
-    "total_alternate_sources": 122,
-    "official_documents": 87,
+    "total_models": 200,
+    "total_documents": 221,
+    "total_model_aliases": 404,
+    "total_alternate_sources": 129,
+    "official_documents": 92,
     "third_party_documents": 129,
     "verified_documents": 0,
-    "unverified_documents": 216,
+    "unverified_documents": 221,
     "documents_needing_review": 0,
     "models_without_documentation": 2,
-    "link_only_documents": 216,
+    "link_only_documents": 221,
     "hosted_documents": 3
   },
   "demo_catalogue": {
@@ -23,16 +23,16 @@
     "documents": 10
   },
   "by_verification": {
-    "UNVERIFIED": 216
+    "UNVERIFIED": 221
   },
   "by_origin": {
-    "MANUFACTURER_ORIGINAL": 87,
+    "MANUFACTURER_ORIGINAL": 92,
     "THIRD_PARTY_GUIDE": 129
   },
   "by_region": {
     "UNKNOWN": 3,
-    "AU": 29,
-    "GLOBAL": 37,
+    "AU": 32,
+    "GLOBAL": 39,
     "US": 60,
     "EU": 68,
     "UK": 16,
@@ -40,7 +40,7 @@
     "ASIA": 2
   },
   "by_document_kind": {
-    "INSTALL_MANUAL": 150,
+    "INSTALL_MANUAL": 155,
     "PROGRAMMING_GUIDE": 7,
     "USER_MANUAL": 41,
     "TECHNICAL_DOCUMENT": 4,
@@ -49,7 +49,7 @@
     "PARTS_LIST": 1
   },
   "by_rights": {
-    "LINK_ONLY": 216
+    "LINK_ONLY": 221
   },
   "by_manufacturer": [
     {
@@ -147,8 +147,8 @@
       "name": "Centurion Systems",
       "slug": "centurion-systems",
       "country": "AU",
-      "models": 2,
-      "documents": 4
+      "models": 5,
+      "documents": 8
     },
     {
       "name": "Chamberlain",
@@ -281,7 +281,7 @@
       "slug": "gliderol",
       "country": "AU",
       "models": 3,
-      "documents": 3
+      "documents": 4
     },
     {
       "name": "Horton Automatics",

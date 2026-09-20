@@ -51,6 +51,21 @@
               "url": "https://therollerdoordoctor.com.au/wp-content/uploads/GLID-GR2-MANUAL.pdf",
               "authority": "THIRD_PARTY_MIRROR",
               "label": "The Roller Door Doctor mirror"
+            },
+            {
+              "url": "https://www.manualslib.com/manual/2598015/Gliderol-Glidermatic-Grd.html",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "ManualsLib listing of the installation instructions"
+            },
+            {
+              "url": "https://www.manualslib.com/manual/817825/Gliderol-Glidermatic-Grd.html",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "ManualsLib listing of the installation instructions and owner's manual"
+            },
+            {
+              "url": "https://www.thegaragedoorcentre.co.uk/userfiles/downloads/gliderol_installation_roller_door_electric_tgdc_51820.pdf",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "UK reseller copy of the GRD roller door operator instructions"
             }
           ]
         }
@@ -71,6 +86,28 @@
           "region": "AU",
           "rights": "LINK_ONLY",
           "evidence": "Only an aggregator listing was surfaced for this model. No manufacturer-hosted URL was found, so none is recorded. Not fetched - egress blocked."
+        },
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "Glidermatic GTS+ Installation Instructions and Owner's Manual",
+          "sourceUrl": "https://www.gliderol.com.au/wp-content/uploads/2025/02/GTS2000-Owners-Manual-amp-Install-Instructions.pdf",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "publisher": "Gliderol",
+          "region": "AU",
+          "rights": "LINK_ONLY",
+          "evidence": "On gliderol.com.au, the manufacturer's own domain. This closes a gap recorded in the first research pass, which noted Gliderol's support page but no direct PDF on its domain, so a reseller copy was used instead. Worth flagging: the file is named GTS2000 while the document is titled Glidermatic GTS+, so the GTS2000 and the GTS+ are either the same operator under two names or the file name is stale - both are already models in this file, and which is right should be settled on verification. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "https://www.manualslib.com/manual/2212666/Gliderol-Glidermatic-GtsPlus.html",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "ManualsLib listing; describes it as the heavy duty automatic tilt and sectional door operator"
+            },
+            {
+              "url": "https://www.manualslib.com/manual/1047029/Gliderol-Glidermatic-GtsPlus.html",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "ManualsLib listing of the owner's manual alone"
+            }
+          ]
         }
       ]
     }
