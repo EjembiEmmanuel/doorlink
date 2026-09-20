@@ -1,19 +1,19 @@
 {
-  "generatedAt": "2026-09-20T10:42:54.025Z",
+  "generatedAt": "2026-09-20T10:44:37.951Z",
   "caveat": "verified_documents counts links that were actually fetched and resolved. A document can be from an official manufacturer domain and still be unverified. Run `npm run manuals:verify` in an environment with outbound network access to raise this number. All figures below EXCLUDE the demo catalogue, whose manufacturers are invented for demonstration and are reported separately under demo_catalogue.",
   "totals": {
-    "total_manufacturers": 50,
-    "total_models": 135,
-    "total_documents": 141,
-    "total_model_aliases": 231,
-    "total_alternate_sources": 65,
-    "official_documents": 51,
-    "third_party_documents": 90,
+    "total_manufacturers": 54,
+    "total_models": 140,
+    "total_documents": 149,
+    "total_model_aliases": 244,
+    "total_alternate_sources": 72,
+    "official_documents": 55,
+    "third_party_documents": 94,
     "verified_documents": 0,
-    "unverified_documents": 141,
+    "unverified_documents": 149,
     "documents_needing_review": 0,
     "models_without_documentation": 3,
-    "link_only_documents": 141,
+    "link_only_documents": 149,
     "hosted_documents": 3
   },
   "demo_catalogue": {
@@ -23,32 +23,32 @@
     "documents": 10
   },
   "by_verification": {
-    "UNVERIFIED": 141
+    "UNVERIFIED": 149
   },
   "by_origin": {
-    "MANUFACTURER_ORIGINAL": 51,
-    "THIRD_PARTY_GUIDE": 90
+    "MANUFACTURER_ORIGINAL": 55,
+    "THIRD_PARTY_GUIDE": 94
   },
   "by_region": {
     "UNKNOWN": 3,
     "AU": 29,
     "GLOBAL": 32,
-    "US": 29,
+    "US": 37,
     "EU": 39,
     "UK": 6,
     "NZ": 1,
     "ASIA": 2
   },
   "by_document_kind": {
-    "INSTALL_MANUAL": 91,
+    "INSTALL_MANUAL": 97,
     "PROGRAMMING_GUIDE": 5,
-    "USER_MANUAL": 32,
+    "USER_MANUAL": 33,
     "TECHNICAL_DOCUMENT": 4,
-    "QUICK_START": 4,
+    "QUICK_START": 5,
     "SPEC_SHEET": 5
   },
   "by_rights": {
-    "LINK_ONLY": 141
+    "LINK_ONLY": 149
   },
   "by_manufacturer": [
     {
@@ -99,6 +99,13 @@
       "country": "IT",
       "models": 4,
       "documents": 4
+    },
+    {
+      "name": "Besam",
+      "slug": "besam",
+      "country": "SE",
+      "models": 2,
+      "documents": 3
     },
     {
       "name": "Boss (Garage Door Operators)",
@@ -241,6 +248,13 @@
       "documents": 3
     },
     {
+      "name": "Horton Automatics",
+      "slug": "horton",
+      "country": "US",
+      "models": 0,
+      "documents": 0
+    },
+    {
       "name": "Hörmann",
       "slug": "hormann",
       "country": "DE",
@@ -281,6 +295,13 @@
       "country": "AU",
       "models": 3,
       "documents": 3
+    },
+    {
+      "name": "NABCO Entrances",
+      "slug": "nabco",
+      "country": "US",
+      "models": 2,
+      "documents": 4
     },
     {
       "name": "Nice",
@@ -337,6 +358,13 @@
       "country": "FR",
       "models": 3,
       "documents": 3
+    },
+    {
+      "name": "Stanley Access Technologies",
+      "slug": "stanley-access",
+      "country": "US",
+      "models": 1,
+      "documents": 1
     },
     {
       "name": "Steel-Line",

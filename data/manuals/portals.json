@@ -566,6 +566,54 @@
       "authority": "THIRD_PARTY_MIRROR",
       "region": "AU",
       "note": "Reseller manual directory, subfoldered by door type - the BOL4 PDF came from its Sectional folder."
+    },
+    {
+      "manufacturer": "NABCO Entrances",
+      "slug": "nabco",
+      "url": "https://www.nabcoentrances.com/literature/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "US",
+      "note": "Manufacturer's literature index, one page per document. Links through to the PDFs in the uploads tree."
+    },
+    {
+      "manufacturer": "NABCO Entrances",
+      "slug": "nabco",
+      "url": "https://www.nabcoentrances.com/wp-content/uploads/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "US",
+      "note": "WordPress uploads tree, year/month foldered, serving the manuals directly. May not index; the literature page above is the reliable route in."
+    },
+    {
+      "manufacturer": "Horton Automatics",
+      "slug": "horton",
+      "url": "https://www.hortondoors.com/resources/pdf-library/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "US",
+      "note": "Manufacturer's PDF library. A second Horton index at autodoorandhardware.com is marked registered-members-only and is deliberately NOT listed here - it must not be crawled."
+    },
+    {
+      "manufacturer": "Besam",
+      "slug": "besam",
+      "url": "https://www.assaabloyentrance.com/master-blueprint/en-us/product-assets/automatic-doors/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "US",
+      "note": "ASSA ABLOY product-asset tree for automatic doors, one folder per model with user-manuals beneath. Where the Besam SL500 owner's manual came from."
+    },
+    {
+      "manufacturer": "Besam",
+      "slug": "besam",
+      "url": "https://techhub.doorcontrolsusa.com/exploded-parts-breakdowns/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "US",
+      "note": "Distributor tech hub holding install and service manuals plus parts breakdowns for Besam and Stanley. Third-party throughout."
+    },
+    {
+      "manufacturer": "multiple",
+      "slug": null,
+      "url": "https://www.addisonautomatics.com/wp-content/uploads/manuals/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "US",
+      "note": "Distributor manual tree, subfoldered by brand - Tormax, Besam and NABCO/Gyro Tech documents in this library all came from it. One of the higher-yield US pedestrian-door targets, and third-party throughout."
     }
   ]
 }
