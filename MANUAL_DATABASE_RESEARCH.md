@@ -163,10 +163,42 @@ manufacturer's own download index lists hundreds on one page. That
 difference is the whole scaling story, and it is why the second half of
 this work is a crawler rather than more searching.
 
-`data/manuals/portals.json` holds **26 documentation portals** across 17
-manufacturers — every one surfaced by a real search, none a guessed URL
-pattern. `npm run manuals:harvest` walks them, extracts document links,
-and writes candidates to `data/manuals/harvested/` for review.
+`data/manuals/portals.json` is the registry — every entry surfaced by a
+real search, none a guessed URL pattern. `npm run manuals:harvest` walks
+them, extracts document links, and writes candidates to
+`data/manuals/harvested/` for review. Live counts are in
+`manual_coverage_report.json`; the registry itself is the file to read
+for what is targeted.
+
+### Portals that link articles, not documents
+
+Some indexes list one HTML page per manual with the PDF inside it —
+HySecurity's support centre and NABCO's literature index both work this
+way. Against those, link extraction on the index alone finds nothing
+and reports `no-documents`, which is accurate and useless.
+
+Portals can now set `"follow": true`, and the harvester takes **one**
+step further in: it collects same-origin HTML page links from the index,
+fetches up to `MANUALS_HARVEST_FOLLOW_BUDGET` of them (default 40, one
+at a time at the normal rate limit), and extracts documents from each.
+Fifteen portals are marked this way.
+
+The limits are deliberate:
+
+- **One level.** Deeper turns a portal crawl into a site crawl.
+- **Same origin only.** Following off-site links crawls the web.
+- **HTML-ish paths only**, and never the page it is already on.
+- **A budget, reported when reached.** Hitting it means the portal has
+  more to give, not that it is exhausted — the run says so and names the
+  variable to raise.
+- **A refusal on one article is that article's answer**, not the
+  portal's: skipped, never retried, never worked around.
+
+**The follow path has not run against a live portal.** Its extraction is
+covered by unit tests against fixture HTML, and the harvester was run
+end-to-end here, but every host still returns 403 from the egress proxy,
+so the only branch exercised in the wild is the refusal branch. Treat
+the first successful run as a shakedown.
 
 Rough arithmetic for the target: aggregator listings seen during this
 research report 98 Somfy and 151 BFT opener manuals for those two brands
@@ -190,8 +222,12 @@ document lives. Never the document's contents.
 
 ### It has not successfully harvested anything yet
 
-Run against all 19 portals in this environment, every one returned 403
-from the egress proxy:
+Re-tested in this session, and still true: the egress proxy refuses
+every documentation host. `curl` returns `000` for rytecdoors.com,
+nabcoentrances.com, download.seateam.com, keyautomation.com and
+manualslib.com alike, and the proxy's own status endpoint records the
+refusals as `connect_rejected`. Run against the registry here, every
+portal returned 403:
 
 ```
   403  restricted   0 docs  B&D — https://www.bnd.com.au/trade-resources/...

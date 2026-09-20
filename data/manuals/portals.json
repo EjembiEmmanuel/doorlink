@@ -162,7 +162,8 @@
       "slug": "beninca",
       "url": "https://www.beninca.com/en/beninca-products/automations-for-swinging-gates.html",
       "authority": "MANUFACTURER_OFFICIAL",
-      "region": "GLOBAL"
+      "region": "GLOBAL",
+      "follow": true
     },
     {
       "manufacturer": "Rollease Acmeda",
@@ -293,7 +294,8 @@
       "url": "https://www.gilgendoorsystems.com/en/downloadcenter/",
       "authority": "MANUFACTURER_OFFICIAL",
       "region": "GLOBAL",
-      "note": "Named download centre spanning brochures, data sheets and documents for the whole range."
+      "note": "Named download centre spanning brochures, data sheets and documents for the whole range.",
+      "follow": true
     },
     {
       "manufacturer": "V2 Elettronica",
@@ -301,7 +303,8 @@
       "url": "https://v2home.com/en/manuals/",
       "authority": "MANUFACTURER_OFFICIAL",
       "region": "EU",
-      "note": "Manufacturer's own manuals index, organised by gate automations, control units and motors."
+      "note": "Manufacturer's own manuals index, organised by gate automations, control units and motors.",
+      "follow": true
     },
     {
       "manufacturer": "Ditec Entrematic",
@@ -333,7 +336,8 @@
       "url": "https://www.keyautomation.com/media/products/images/MANUALS/",
       "authority": "MANUFACTURER_OFFICIAL",
       "region": "EU",
-      "note": "Manufacturer's own MANUALS media directory, serving files named <code> <rev>.PDF. If it indexes, one crawl covers the range."
+      "note": "Manufacturer's own MANUALS media directory, serving files named <code> <rev>.PDF. If it indexes, one crawl covers the range.",
+      "follow": true
     },
     {
       "manufacturer": "Aprimatic",
@@ -357,7 +361,8 @@
       "url": "https://download.seateam.com/",
       "authority": "MANUFACTURER_OFFICIAL",
       "region": "EU",
-      "note": "Public file-browser index of SEA installation manuals, organised by language, product family and type. The most productive-looking target in this registry. SEA's separate reserved area needs registration and is deliberately not listed here."
+      "note": "Public file-browser index of SEA installation manuals, organised by language, product family and type. The most productive-looking target in this registry. SEA's separate reserved area needs registration and is deliberately not listed here.",
+      "follow": true
     },
     {
       "manufacturer": "SEA (Seateam)",
@@ -477,7 +482,8 @@
       "url": "https://www.danmardoorswa.com.au/service/installation-guides/",
       "authority": "MANUFACTURER_OFFICIAL",
       "region": "AU",
-      "note": "Danmar WA's own installation-guides page, described as carrying downloadable PDF guides. The only Danmar documentation index found."
+      "note": "Danmar WA's own installation-guides page, described as carrying downloadable PDF guides. The only Danmar documentation index found.",
+      "follow": true
     },
     {
       "manufacturer": "Danmar Doors",
@@ -517,7 +523,8 @@
       "url": "https://www.garador.co.uk/installer-support/fitting-instructions/",
       "authority": "MANUFACTURER_OFFICIAL",
       "region": "UK",
-      "note": "Manufacturer's fitting-instructions index, covering Up & Over, Sectional (L, N and Z track), GaraRoll and Side Hinged."
+      "note": "Manufacturer's fitting-instructions index, covering Up & Over, Sectional (L, N and Z track), GaraRoll and Side Hinged.",
+      "follow": true
     },
     {
       "manufacturer": "Garador",
@@ -525,7 +532,8 @@
       "url": "https://www.garador.co.nz/resources/owner-manuals",
       "authority": "MANUFACTURER_OFFICIAL",
       "region": "NZ",
-      "note": "Garador New Zealand's owner-manual index - a separate arm with its own documents."
+      "note": "Garador New Zealand's owner-manual index - a separate arm with its own documents.",
+      "follow": true
     },
     {
       "manufacturer": "Garador",
@@ -573,7 +581,8 @@
       "url": "https://www.nabcoentrances.com/literature/",
       "authority": "MANUFACTURER_OFFICIAL",
       "region": "US",
-      "note": "Manufacturer's literature index, one page per document. Links through to the PDFs in the uploads tree."
+      "note": "Manufacturer's literature index, one page per document. Links through to the PDFs in the uploads tree.",
+      "follow": true
     },
     {
       "manufacturer": "NABCO Entrances",
@@ -589,7 +598,8 @@
       "url": "https://www.hortondoors.com/resources/pdf-library/",
       "authority": "MANUFACTURER_OFFICIAL",
       "region": "US",
-      "note": "Manufacturer's PDF library. A second Horton index at autodoorandhardware.com is marked registered-members-only and is deliberately NOT listed here - it must not be crawled."
+      "note": "Manufacturer's PDF library. A second Horton index at autodoorandhardware.com is marked registered-members-only and is deliberately NOT listed here - it must not be crawled.",
+      "follow": true
     },
     {
       "manufacturer": "Besam",
@@ -621,7 +631,8 @@
       "url": "https://www.wayne-dalton.com/resources/support/installation",
       "authority": "MANUFACTURER_OFFICIAL",
       "region": "US",
-      "note": "Manufacturer's installation-documents index; search describes it as covering the 9100, 9605, 9405, 5120 and 5145."
+      "note": "Manufacturer's installation-documents index; search describes it as covering the 9100, 9605, 9405, 5120 and 5145.",
+      "follow": true
     },
     {
       "manufacturer": "Overhead Door",
@@ -629,7 +640,8 @@
       "url": "https://www.overheaddoor.com/resources/owner-manuals",
       "authority": "MANUFACTURER_OFFICIAL",
       "region": "US",
-      "note": "Manufacturer's owner-manual index. The reliable route to the CDN files, whose URLs carry changeable cache-buster parameters."
+      "note": "Manufacturer's owner-manual index. The reliable route to the CDN files, whose URLs carry changeable cache-buster parameters.",
+      "follow": true
     },
     {
       "manufacturer": "Overhead Door",
@@ -717,7 +729,8 @@
       "url": "https://www.ryternagaragedoors.co.uk/partnership/installation-manuals/",
       "authority": "MANUFACTURER_OFFICIAL",
       "region": "UK",
-      "note": "UK arm's installation-manual index; search named an R40 and two TL LHR sectional manuals on it."
+      "note": "UK arm's installation-manual index; search named an R40 and two TL LHR sectional manuals on it.",
+      "follow": true
     },
     {
       "manufacturer": "Ryterna",
@@ -741,7 +754,8 @@
       "url": "https://support.hysecurity.com/hc/en-us/sections/360007387533-Manuals-Accessories",
       "authority": "MANUFACTURER_OFFICIAL",
       "region": "US",
-      "note": "Manufacturer support centre, one article per document across the range. The articles are HTML pages linking the PDFs, not the PDFs - the harvester only extracts direct document links, so this target needs a follow-through step and will otherwise report no-documents."
+      "note": "Manufacturer support centre, one article per document across the range. The articles are HTML pages linking the PDFs, not the PDFs - the harvester only extracts direct document links, so this target needs a follow-through step and will otherwise report no-documents.",
+      "follow": true
     },
     {
       "manufacturer": "Viking Access Systems",
@@ -749,7 +763,8 @@
       "url": "https://www.vikingaccess.com/download-page",
       "authority": "MANUFACTURER_OFFICIAL",
       "region": "US",
-      "note": "Manufacturer download page, described as split into swing, slide, underground and solar operators."
+      "note": "Manufacturer download page, described as split into swing, slide, underground and solar operators.",
+      "follow": true
     },
     {
       "manufacturer": "Viking Access Systems",

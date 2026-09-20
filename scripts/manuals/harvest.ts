@@ -2,6 +2,7 @@ import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import {
   extractDocumentLinks,
+  extractPageLinks,
   isDisallowed,
   parseRobots,
   type HarvestCandidate,
@@ -35,6 +36,12 @@ import {
 const USER_AGENT =
   'DoorlinkDocHarvester/1.0 (+https://doorlink.example/manuals; collecting documentation links)'
 const DELAY_MS = Number(process.env.MANUALS_HARVEST_DELAY_MS ?? 2000)
+// How many article pages one portal may cost when `follow` is set. A
+// support centre can list hundreds, and at one rate-limited request
+// each that is hours against a single host. The cap is a spend limit,
+// not a correctness limit: hitting it means the portal has more to give
+// and is worth a second pass, which the output says.
+const FOLLOW_BUDGET = Number(process.env.MANUALS_HARVEST_FOLLOW_BUDGET ?? 40)
 const TIMEOUT_MS = Number(process.env.MANUALS_HARVEST_TIMEOUT_MS ?? 20000)
 
 const DATA_DIR = join(process.cwd(), 'data', 'manuals')
@@ -47,6 +54,11 @@ interface Portal {
   authority: string
   region: string
   note?: string
+  // Set where the index links HTML pages rather than documents — a
+  // support centre with one article per manual, for instance. Off by
+  // default: following costs a request per page, and on a portal that
+  // already lists its PDFs it buys nothing.
+  follow?: boolean
 }
 
 // Always unreviewed out of the harvester: a person decides.
@@ -103,6 +115,10 @@ interface PortalResult {
   httpStatus: number | null
   reason?: string
   candidates: Candidate[]
+  /** Article pages fetched beyond the index, when `follow` is set. */
+  pagesFollowed?: number
+  /** True when FOLLOW_BUDGET ran out with pages still unvisited. */
+  followTruncated?: boolean
 }
 
 async function harvestPortal(portal: Portal): Promise<PortalResult> {
@@ -139,19 +155,70 @@ async function harvestPortal(portal: Portal): Promise<PortalResult> {
     }
 
     const html = await response.text()
-    const candidates = extractDocumentLinks(html, response.url)
+    const found = new Map<string, Candidate>()
+    for (const candidate of extractDocumentLinks(html, response.url)) {
+      found.set(candidate.url, candidate)
+    }
+
+    let pagesFollowed = 0
+    let followTruncated = false
+
+    if (portal.follow) {
+      // One level, and one level only. A support centre lists an HTML
+      // article per manual and the PDF sits inside it, so the index
+      // alone yields nothing. Going deeper than this turns a portal
+      // crawl into a site crawl, which is not what the portal list is
+      // for and not something a host should have to absorb.
+      const pages = extractPageLinks(html, response.url)
+      followTruncated = pages.length > FOLLOW_BUDGET
+
+      for (const page of pages.slice(0, FOLLOW_BUDGET)) {
+        await sleep(DELAY_MS)
+        if (!(await allowed(page))) continue
+
+        try {
+          const inner = await fetch(page, {
+            headers: { 'User-Agent': USER_AGENT, Accept: 'text/html' },
+            redirect: 'follow',
+            signal: AbortSignal.timeout(TIMEOUT_MS),
+          })
+          pagesFollowed += 1
+          // A refusal on one article is that article's answer, not the
+          // portal's. Skipped, never retried, never worked around.
+          if (!inner.ok) continue
+
+          for (const candidate of extractDocumentLinks(await inner.text(), inner.url)) {
+            if (!found.has(candidate.url)) found.set(candidate.url, candidate)
+          }
+        } catch {
+          // Timed out or refused connection. Same treatment.
+        }
+      }
+    }
+
+    const candidates = [...found.values()]
 
     if (candidates.length === 0) {
       return {
         ...base,
         status: 'no-documents',
         httpStatus: response.status,
-        reason:
-          'No document links in the served HTML. The index may be built by JavaScript, which this harvester does not execute.',
+        pagesFollowed,
+        followTruncated,
+        reason: portal.follow
+          ? `No document links on the index or in ${pagesFollowed} page(s) followed from it. The documents may be behind JavaScript, which this harvester does not execute.`
+          : 'No document links in the served HTML. If this index links article pages rather than documents, set follow on the portal. It may also be built by JavaScript, which this harvester does not execute.',
       }
     }
 
-    return { portal, status: 'ok', httpStatus: response.status, candidates }
+    return {
+      portal,
+      status: 'ok',
+      httpStatus: response.status,
+      candidates,
+      pagesFollowed,
+      followTruncated,
+    }
   } catch (error) {
     return {
       ...base,
@@ -184,9 +251,13 @@ async function main() {
   for (const portal of portals) {
     const result = await harvestPortal(portal)
     results.push(result)
+    const followed = result.pagesFollowed
+      ? `  (+${result.pagesFollowed} page${result.pagesFollowed === 1 ? '' : 's'}` +
+        `${result.followTruncated ? ', budget reached' : ''})`
+      : ''
     console.log(
       `  ${String(result.httpStatus ?? '---').padEnd(4)} ${result.status.padEnd(18)} ` +
-        `${String(result.candidates.length).padStart(4)} docs  ${portal.manufacturer} — ${portal.url}` +
+        `${String(result.candidates.length).padStart(4)} docs  ${portal.manufacturer} — ${portal.url}${followed}` +
         (result.reason ? `\n         ${result.reason}` : '')
     )
     await sleep(DELAY_MS)
@@ -220,6 +291,10 @@ async function main() {
           status: r.status,
           httpStatus: r.httpStatus,
           reason: r.reason ?? null,
+          pagesFollowed: r.pagesFollowed ?? 0,
+          // True means the portal had more article pages than the
+          // budget allowed. Worth a second pass with a raised budget.
+          followTruncated: r.followTruncated ?? false,
           candidates: r.candidates,
         })),
       },
@@ -228,7 +303,14 @@ async function main() {
     )}\n`
   )
 
+  const truncated = results.filter((r) => r.followTruncated)
   console.log(`\n${total} candidate document(s) from ${harvested.length}/${results.length} portal(s).`)
+  if (truncated.length > 0) {
+    console.log(
+      `${truncated.length} portal(s) had more article pages than the follow budget of ${FOLLOW_BUDGET}. ` +
+        'Raise MANUALS_HARVEST_FOLLOW_BUDGET and re-run those to go further.'
+    )
+  }
   console.log(`Written to ${outFile}`)
   console.log(
     '\nNothing was imported. Review the candidates, fold the good ones into a ' +

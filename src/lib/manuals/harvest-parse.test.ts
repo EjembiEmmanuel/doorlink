@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import {
   extractDocumentLinks,
+  extractPageLinks,
   inferKind,
   inferModel,
   isDisallowed,
@@ -72,6 +73,65 @@ describe('document link extraction', () => {
   it('marks everything unreviewed', () => {
     const [found] = extractDocumentLinks('<a href="/a.pdf">Manual</a>', BASE)
     expect(found.reviewed).toBe(false)
+  })
+})
+
+describe('page links for one-level follow', () => {
+  it('finds same-site article pages', () => {
+    const html = `
+      <a href="/hc/en-us/articles/123-SlideDriver-Installation">Installation manual</a>
+      <a href="/hc/en-us/articles/456-SlideDriver-Parts">Parts diagrams</a>
+    `
+    expect(extractPageLinks(html, BASE)).toEqual([
+      'https://example.com/hc/en-us/articles/123-SlideDriver-Installation',
+      'https://example.com/hc/en-us/articles/456-SlideDriver-Parts',
+    ])
+  })
+
+  // The refusals are what keep a portal crawl from becoming a crawl of
+  // the web, so they matter more than the hits.
+  it('refuses to leave the origin', () => {
+    const html = `<a href="https://elsewhere.example/articles/1">Elsewhere</a>`
+    expect(extractPageLinks(html, BASE)).toEqual([])
+  })
+
+  it('ignores links that are not pages', () => {
+    const html = `
+      <a href="/logo.png">Logo</a>
+      <a href="/bundle.zip">Everything</a>
+      <a href="/style.css">Style</a>
+    `
+    expect(extractPageLinks(html, BASE)).toEqual([])
+  })
+
+  it('accepts an extensionless path and the page extensions', () => {
+    const html = `
+      <a href="/downloads">Downloads</a>
+      <a href="/a.html">A</a>
+      <a href="/b.php">B</a>
+      <a href="/c.aspx">C</a>
+    `
+    expect(extractPageLinks(html, BASE)).toHaveLength(4)
+  })
+
+  it('does not follow the page it is already on', () => {
+    const html = `<a href="/support/downloads">This page</a><a href="/other">Other</a>`
+    expect(extractPageLinks(html, BASE)).toEqual(['https://example.com/other'])
+  })
+
+  it('treats a fragment on the current page as the current page', () => {
+    const html = `<a href="/support/downloads#section">Jump</a>`
+    expect(extractPageLinks(html, BASE)).toEqual([])
+  })
+
+  it('counts one page linked twice as one', () => {
+    const html = `<a href="/a.html">A</a><a href="/a.html">A again</a>`
+    expect(extractPageLinks(html, BASE)).toHaveLength(1)
+  })
+
+  it('survives a malformed href instead of throwing', () => {
+    const html = `<a href="ht tp://broken">Broken</a><a href="/ok.html">Fine</a>`
+    expect(extractPageLinks(html, BASE)).toEqual(['https://example.com/ok.html'])
   })
 })
 

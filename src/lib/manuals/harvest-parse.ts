@@ -128,6 +128,69 @@ export function extractDocumentLinks(html: string, baseUrl: string): HarvestCand
 }
 
 /**
+ * Same-site page links worth following one level for documents.
+ *
+ * Some manufacturers do not link PDFs from their index at all. A
+ * support centre lists one HTML article per document, and the file sits
+ * behind that article. `extractDocumentLinks` sees nothing on such a
+ * page and the harvester reports `no-documents`, which is accurate and
+ * useless.
+ *
+ * This finds the article links so the harvester can take one step
+ * further in. It is deliberately narrow:
+ *
+ * - Same origin only. Following off-site links turns a portal crawl
+ *   into a crawl of the web.
+ * - HTML-ish paths only — no extension, or one of the page extensions.
+ *   A link to an image or a zip is not an article.
+ * - No query-only or fragment variants of a path already seen, because
+ *   those are usually the same article sorted differently.
+ *
+ * It does not decide whether a page is worth fetching. That judgement
+ * belongs to the caller, which has the budget and the rate limit.
+ */
+export function extractPageLinks(html: string, baseUrl: string): string[] {
+  const base = new URL(baseUrl)
+  const found = new Set<string>()
+  const anchor = /<a\b[^>]*href\s*=\s*["']([^"']+)["']/gi
+
+  let match: RegExpExecArray | null
+  while ((match = anchor.exec(html)) !== null) {
+    const rawHref = match[1].trim()
+    if (/^(mailto:|tel:|javascript:|#)/i.test(rawHref)) continue
+    // A malformed absolute href like `ht tp://broken` does not throw
+    // when resolved — it silently becomes a relative path under the
+    // current directory, and the harvester would then spend a request
+    // on it. There is no valid page link with whitespace inside it.
+    if (/\s/.test(rawHref)) continue
+
+    let absolute: URL
+    try {
+      absolute = new URL(decodeEntities(rawHref), baseUrl)
+    } catch {
+      continue
+    }
+
+    if (absolute.origin !== base.origin) continue
+
+    const last = absolute.pathname.split('/').pop() ?? ''
+    const dot = last.lastIndexOf('.')
+    if (dot > 0) {
+      const extension = last.slice(dot + 1).toLowerCase()
+      if (!['html', 'htm', 'php', 'asp', 'aspx', 'jsp'].includes(extension)) continue
+    }
+
+    // The page we are already on is not a link to follow.
+    absolute.hash = ''
+    if (absolute.pathname === base.pathname && absolute.search === base.search) continue
+
+    found.add(absolute.href)
+  }
+
+  return [...found]
+}
+
+/**
  * Disallow rules from a robots.txt body, for our agent or `*`.
  * Returned as plain prefixes; matching is deliberately simple and errs
  * toward not fetching.
