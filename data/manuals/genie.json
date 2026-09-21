@@ -1,0 +1,103 @@
+{
+  "manufacturer": {
+    "name": "Genie",
+    "slug": "genie",
+    "country": "US",
+    "website": "https://www.geniecompany.com/",
+    "supportUrl": "https://support.geniecompany.com/app/answers/detail/a_id/1308/~/owners-manuals",
+    "note": "US garage door opener manufacturer. Owner's manuals are served from its own support portal. Genie publishes per-model product-support pages rather than linking PDFs that search can reach; several searches have surfaced those pages and retailer-hosted copies, but no geniecompany.com PDF. Its support site tells owners to phone or visit the site to download, which is why the records here point at support pages and retailer copies."
+  },
+  "models": [
+    {
+      "modelCode": "Series IS",
+      "name": "Series IS / ISL / IC / H Garage Door Openers",
+      "category": "garage-door-openers",
+      "region": "US",
+      "aliases": [
+        "IS",
+        "ISL",
+        "IC"
+      ],
+      "documents": [
+        {
+          "kind": "USER_MANUAL",
+          "title": "Series IS, ISL, IC, H Owner's Manual",
+          "sourceUrl": "https://bluemate.com/garage-door-openers/pdf/genie-manual.pdf",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "Bluemate",
+          "region": "US",
+          "rights": "LINK_ONLY",
+          "evidence": "Third-party copy. One manual covers four series, so the record names all four rather than implying it is specific to one. No manufacturer-hosted PDF URL was surfaced; the Genie support portal is recorded at manufacturer level instead. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "3055",
+      "name": "Genie SilentMax 750 Garage Door Opener (Model 3055)",
+      "category": "garage-door-openers",
+      "region": "US",
+      "aliases": [
+        "SilentMax 750",
+        "SilentMax750",
+        "ChainMax 750"
+      ],
+      "documents": [
+        {
+          "kind": "USER_MANUAL",
+          "title": "Genie Model 3055 SilentMax 750 Product Support",
+          "sourceUrl": "https://www.geniecompany.com/product-support/model-3055---silentmax%C2%AE-750",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "publisher": "The Genie Company",
+          "region": "US",
+          "rights": "LINK_ONLY",
+          "evidence": "On geniecompany.com, the manufacturer's own domain. This is the model's support page, not a PDF - no geniecompany.com document URL surfaced. Recorded because the page is the manufacturer's own entry point for this model and a technician can get to the manual from it; typed USER_MANUAL as the closest honest fit, with this note saying plainly it is a page. ChainMax 750 is an alias because the search conflated the two names; whether they are the same opener was not established. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "https://images.thdstatic.com/catalog/pdfImages/e4/e4daaa1e-a25c-4230-bd48-90f4d1f49e79.pdf",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "Retailer-hosted PDF whose cover cites geniecompany.com"
+            },
+            {
+              "url": "https://ismartgate.com/genie-silentmax-750-instruction-manual/",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "ismartgate instruction-manual page"
+            },
+            {
+              "url": "https://www.remootio.com/pages/genie-silentmax-750-instruction-manual",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "Remootio instruction-manual page"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "modelCode": "SilentMax 1000",
+      "name": "Genie SilentMax 1000 Chain / Belt Garage Door Opener",
+      "category": "garage-door-openers",
+      "region": "US",
+      "aliases": [
+        "SilentMax1000"
+      ],
+      "documents": [
+        {
+          "kind": "USER_MANUAL",
+          "title": "Genie SilentMax 1000 Chain / Belt User Manual",
+          "sourceUrl": "https://manuals.plus/genie/genie-silentmax-1000-chain-belt-user-manual",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "manuals.plus",
+          "region": "US",
+          "rights": "LINK_ONLY",
+          "evidence": "Aggregator listing. Kept separate from the SilentMax 750: different model, different manual. A retailer-hosted PDF for this opener also surfaced on an Amazon media host, recorded as an alternate - those URLs are transient and should not be relied on. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "https://m.media-amazon.com/images/I/C1OKkcskmHL.pdf",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "Retailer media-host copy; opaque asset URL, expect it to rot"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

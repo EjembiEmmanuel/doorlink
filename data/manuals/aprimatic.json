@@ -1,0 +1,72 @@
+{
+  "manufacturer": {
+    "name": "Aprimatic",
+    "slug": "aprimatic",
+    "country": "IT",
+    "website": "https://www.aprimatic.com/",
+    "supportUrl": null,
+    "note": "Italian gate and door automation manufacturer. Search returned no aprimatic.com documentation URL, so supportUrl is null and every document here is an aggregator or reseller copy."
+  },
+  "models": [
+    {
+      "modelCode": "ZT4",
+      "name": "Aprimatic ZT4 Swing Gate Operator",
+      "category": "gate-motors",
+      "region": "EU",
+      "aliases": ["ZT4 C", "ZT SF"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "Aprimatic ZT4 Installation and User Manual",
+          "sourceUrl": "https://www.intelligentsecurity.org/resources/gates/Aprimatic-ZT4-Manual_Watermark.pdf",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "Intelligent Security",
+          "region": "EU",
+          "rights": "LINK_ONLY",
+          "evidence": "Reseller copy, and the file name says it is watermarked - so it is a marked-up redistribution, not a clean manufacturer PDF. Recorded as the source because it is a direct PDF; the aggregator listings below carry the same document. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "https://www.manualslib.com/manual/1889795/Aprimatic-Zt4-C.html",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "ManualsLib listing for the ZT4 C"
+            },
+            {
+              "url": "https://manuals.easygates.co.uk/aprimatic-zt4/",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "EasyGates manuals copy"
+            },
+            {
+              "url": "https://techfile.org/manuals/185-1-3623",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "TechFile listing"
+            },
+            {
+              "url": "https://guidessimo.com/document/1881221/aprimatic-zt4-c-manual-12.html",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "Guidessimo listing for the ZT4 C"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "modelCode": "R251FM",
+      "name": "Aprimatic R251FM 24V Swing Gate Operator",
+      "category": "gate-motors",
+      "region": "EU",
+      "aliases": ["R251", "R251 FM"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "Aprimatic R251FM Installation, Use and Maintenance Instructions",
+          "sourceUrl": "https://www.manualslib.com/manual/2135936/Aprimatic-R251fm.html",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "ManualsLib",
+          "region": "EU",
+          "rights": "LINK_ONLY",
+          "evidence": "Aggregator listing. Recorded under the full R251FM designation with R251 as an alias, because the document names the FM variant and the bare R251 was not separately confirmed. Not fetched - egress blocked."
+        }
+      ]
+    }
+  ]
+}

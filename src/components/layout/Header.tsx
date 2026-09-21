@@ -18,7 +18,7 @@ const NAV_LINKS = [
   { href: '/request-technician', label: 'Find a professional' },
   { href: '/configure', label: 'Design a door' },
   { href: '/find', label: 'Door systems' },
-  { href: '/manuals', label: 'Manuals' },
+  { href: '/manuals/finder', label: 'Manuals' },
   { href: '/marketplace', label: 'Parts' },
   { href: '/compliance', label: 'Compliance' },
 ]

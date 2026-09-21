@@ -1,0 +1,11 @@
+{
+  "manufacturer": {
+    "name": "Danmar Doors",
+    "slug": "danmar",
+    "country": "AU",
+    "website": "https://danmardoors.com.au/",
+    "supportUrl": "https://www.danmardoorswa.com.au/service/installation-guides/",
+    "note": "Australian garage door manufacturer. Recorded with no documents on purpose. Its WA arm publishes an installation-guides page, which is registered as a harvest target, but no Danmar-branded manual PDF surfaced. Search did return two Australian roller-door opener manuals - an MR555MYQ and an ET30 - but neither carries Danmar branding, and attaching another brand's opener manual to this record is exactly the substitution this library refuses to make."
+  },
+  "models": []
+}

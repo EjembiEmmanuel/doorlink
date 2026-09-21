@@ -1,0 +1,207 @@
+{
+  "manufacturer": {
+    "name": "Nice",
+    "slug": "nice",
+    "country": "IT",
+    "website": "https://www.niceforyou.com/",
+    "supportUrl": "https://www.niceforyou.com/en/professional-area/download",
+    "note": "Italian gate, door and barrier automation manufacturer. It serves its instruction PDFs from one flat directory, sites/default/files/upload/manuals, named by document code - which makes that directory the single highest-value harvest target in this registry. Its professional-area download index is paginated and a search result surfaced page 71, so the manual set behind it runs to hundreds of documents; what is recorded here is a sample."
+  },
+  "models": [
+    {
+      "modelCode": "ROBO600",
+      "name": "ROBO600 Sliding Gate Gearmotor",
+      "category": "gate-motors",
+      "region": "GLOBAL",
+      "aliases": [
+        "ROBO 600"
+      ],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "ROBO600 Instructions and Warnings for Installation",
+          "documentCode": "IDV0772A01EN",
+          "language": "en",
+          "sourceUrl": "https://www.niceforyou.com/sites/default/files/upload/manuals/IDV0772A01EN.pdf",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "region": "GLOBAL",
+          "rights": "LINK_ONLY",
+          "evidence": "Manufacturer's own domain, and the search result title names ROBO600 explicitly. Document code read from the filename. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "RBS600HS",
+      "name": "Robus RBS600HS Hi-Speed Sliding Gate Gearmotor",
+      "category": "gate-motors",
+      "region": "GLOBAL",
+      "aliases": [
+        "RBS 600HS",
+        "ROBUS 600HS"
+      ],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "Robus RBS600HS Instructions and Warnings for Installation",
+          "sourceUrl": "https://www.manualslib.com/manual/3936195/Nice-Robus-Rbs600hs.html",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "ManualsLib",
+          "region": "GLOBAL",
+          "rights": "LINK_ONLY",
+          "evidence": "Aggregator listing. A manufacturer-hosted sliding-gate manual was also surfaced but its title did not name a model, so it was not attributed to this one. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "RB400",
+      "name": "Robus RB400 Sliding Gate Gearmotor",
+      "category": "gate-motors",
+      "region": "GLOBAL",
+      "aliases": [
+        "ROBUS 400",
+        "RB 400"
+      ],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "Robus RB400 Instructions and Warnings for Installation and Use",
+          "sourceUrl": "https://www.manualslib.com/manual/1919215/Nice-Robus-Rb400.html",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "ManualsLib",
+          "region": "GLOBAL",
+          "rights": "LINK_ONLY",
+          "evidence": "Aggregator listing. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "https://www.manualslib.com/manual/2670668/Nice-Robus-400.html",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "ManualsLib — Robus 400 instruction manual"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "modelCode": "Wingo 3524 HS",
+      "name": "Nice Wingo 3524 HS Swing Gate Operator",
+      "category": "gate-motors",
+      "region": "EU",
+      "aliases": [
+        "WG3524HS",
+        "Wingo 3524HS",
+        "WG4000",
+        "WG5000",
+        "WG4024",
+        "WG5024"
+      ],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "Wingo 3524 HS Swing Gate Operator Installer Instructions",
+          "documentCode": "et_wingo_installer_2016.003.001",
+          "version": "2016.003.001",
+          "sourceUrl": "https://www.niceforyou.com/sites/default/files/upload/manuals/et_wingo_installer_2016.003.001.pdf",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "publisher": "Nice",
+          "region": "EU",
+          "rights": "LINK_ONLY",
+          "evidence": "On niceforyou.com, the manufacturer's own manuals directory. The file name is the document code and carries the edition 2016.003.001. The WG-series aliases come from a Wingo declaration document that lists WG4000, WG5000, WG4024, WG5024 and WG3524HS together - they are recorded as aliases so a search lands, not as a claim that this installer manual covers all five. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "https://www.niceforyou.com/sites/default/files/upload/manuals/istwingor02.4865.pdf",
+              "authority": "MANUFACTURER_OFFICIAL",
+              "label": "Nice document istwingor02.4865, instructions and warnings for installation and use - a separate Wingo document in the same directory"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "modelCode": "RB500HS",
+      "name": "Nice Robus RB500HS / RB600 / RB1000 Sliding Gate Operator",
+      "category": "gate-motors",
+      "region": "EU",
+      "aliases": [
+        "RB600",
+        "RB1000",
+        "Robus 500HS",
+        "Robus 600",
+        "Robus 1000"
+      ],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "Nice RB500HS / RB600 / RB1000 Instructions and Warnings for Installation and Use (EN)",
+          "documentCode": "idv0620a01en",
+          "sourceUrl": "https://www.niceforyou.com/sites/default/files/upload/manuals/idv0620a01en.pdf",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "publisher": "Nice",
+          "region": "EU",
+          "rights": "LINK_ONLY",
+          "evidence": "On niceforyou.com. Document code idv0620a01en is the file name; the trailing en is the language and a01 the edition. One manual covers three drives, so they share this record. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "RUN1500",
+      "name": "Nice RUN1500 Sliding Gate Operator",
+      "category": "gate-motors",
+      "region": "EU",
+      "aliases": [
+        "RUN 1500",
+        "RUN1500 "
+      ],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "Nice RUN1500 for Sliding Gates - Instructions and Warnings for Installation and Use (EN)",
+          "documentCode": "idv0659a01en",
+          "sourceUrl": "https://www.niceforyou.com/sites/default/files/upload/manuals/idv0659a01en.pdf",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "publisher": "Nice",
+          "region": "EU",
+          "rights": "LINK_ONLY",
+          "evidence": "On niceforyou.com, document code idv0659a01en from the file name. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "idv0420a00en",
+      "name": "Nice Sliding Gate Operator (document idv0420a00en)",
+      "category": "gate-motors",
+      "region": "EU",
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "Nice - Instructions and Warnings for Installation and Use, For Sliding Gates (EN)",
+          "documentCode": "idv0420a00en",
+          "sourceUrl": "https://www.niceforyou.com/sites/default/files/upload/manuals/idv0420a00en.pdf",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "publisher": "Nice",
+          "region": "EU",
+          "rights": "LINK_ONLY",
+          "evidence": "On niceforyou.com. The model code here is the document code, because neither the file name nor the search result named the product - only that it is for sliding gates. Recorded that way rather than guessed into an existing Robus or Run record, since attaching it to the wrong drive is worse than an unlovely model code. Whoever verifies this link should retitle the record from the document's cover. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "IDV0777A00EN",
+      "name": "Nice (document IDV0777A00EN)",
+      "category": "gate-motors",
+      "region": "EU",
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "Nice instruction manual IDV0777A00EN",
+          "documentCode": "IDV0777A00EN",
+          "sourceUrl": "https://www.niceforyou.com/sites/default/files/upload/manuals/IDV0777A00EN.pdf",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "publisher": "Nice",
+          "region": "EU",
+          "rights": "LINK_ONLY",
+          "evidence": "On niceforyou.com. The search result gave no title or product for this document at all - only the URL. It is recorded by its document code alone so the file is not lost, and nothing about its product, type or scope is asserted. This is the weakest record in the library and is exactly what the review queue is for. Not fetched - egress blocked."
+        }
+      ]
+    }
+  ]
+}

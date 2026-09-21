@@ -263,6 +263,62 @@ enum NotificationType {
   VERIFICATION_STATUS
 }
 
+// Which market a document was published for. A US opener manual and its
+// Australian counterpart differ in wiring, voltage and compliance text,
+// so "there is a manual for this model" is not the same claim as "there
+// is a manual for this model here".
+enum Region {
+  AU
+  NZ
+  UK
+  US
+  CA
+  EU
+  ASIA
+  GLOBAL
+  UNKNOWN
+}
+
+// Whether Doorlink may host a copy of a document, as opposed to linking
+// to it. Decided per document and never inferred from the fact that a
+// file happened to be downloadable — publicly reachable and free to
+// redistribute are different things.
+enum DocumentRights {
+  // Link to the manufacturer's copy. The safe default.
+  LINK_ONLY
+  // The publisher grants redistribution, recorded in rightsNote.
+  REDISTRIBUTABLE
+  // Doorlink wrote it.
+  OWN_CONTENT
+  // Someone needs to look at this before it is shown.
+  UNCLEAR
+}
+
+// The outcome of actually requesting the document's URL. Never guessed.
+enum VerificationState {
+  // Nobody has checked. Not a claim that the link is broken.
+  UNVERIFIED
+  // Fetched, and the response was the expected document.
+  REACHABLE
+  // Fetched, and the server said it is gone.
+  BROKEN
+  // Fetched, but it moved; the new location is recorded.
+  REDIRECTED
+  // Behind a login, a paywall or a portal. Recorded and left alone —
+  // Doorlink does not attempt to get past any of those.
+  RESTRICTED
+}
+
+// How much authority an alternate source carries, kept separate from
+// DocumentOrigin so "the manufacturer's own site" and "a reseller who
+// mirrors the PDF" cannot be presented as the same thing.
+enum SourceAuthority {
+  MANUFACTURER_OFFICIAL
+  AUTHORISED_DISTRIBUTOR
+  THIRD_PARTY_MIRROR
+  UNKNOWN
+}
+
 enum ImportJobStatus {
   PENDING
   VALIDATING
@@ -509,6 +565,13 @@ model Manufacturer {
   createdAt      DateTime      @default(now())
   updatedAt      DateTime      @updatedAt
 
+  // Where the company actually is, and where it publishes documents.
+  // Recorded so a technician can tell an Australian B&D manual from a
+  // same-named product sold elsewhere.
+  country      String?
+  website      String?
+  supportUrl   String?
+
   productLines ProductLine[]
   models       Model[]
   documents    Document[]
@@ -572,6 +635,7 @@ model Model {
   jobs           Job[]
   leads          Lead[]
   configurations DoorConfiguration[]
+  aliases        ModelAlias[]
   assets         Asset[]
 
   @@unique([manufacturerId, modelCode])
@@ -610,7 +674,13 @@ model Document {
   kind           DocumentKind
   title          String
   description    String?
-  fileKey        String
+
+  // Nullable on purpose. Most manufacturer documentation may be linked
+  // to but not rehosted, so the common case is a verified record that
+  // points at the manufacturer's own PDF and stores no file at all.
+  // A required fileKey made that case impossible to express, which
+  // meant the only way to list a manual was to copy it.
+  fileKey        String?
   version        String       @default("1")
 
   // Printed on the document itself, not invented — a FAAC manual carries
@@ -639,6 +709,31 @@ model Document {
   downloadCount  Int          @default(0)
   publishedAt    DateTime?
 
+  // Where the manufacturer publishes this document for this market. A
+  // US opener manual and its Australian equivalent are different
+  // documents with different wiring and different compliance text, and
+  // handing a technician the wrong one is worse than handing them none.
+  region         Region       @default(UNKNOWN)
+
+  // Whether Doorlink may host a copy, decided per document rather than
+  // assumed. LINK_ONLY is the default because it is the assumption that
+  // cannot infringe: publicly downloadable is not the same as free to
+  // redistribute.
+  rights         DocumentRights @default(LINK_ONLY)
+  rightsNote     String?
+
+  // The result of actually fetching the URL, never inferred. UNVERIFIED
+  // means nobody has checked, which is different from checked-and-broken
+  // and is displayed differently.
+  verification   VerificationState @default(UNVERIFIED)
+  lastVerifiedAt DateTime?
+  lastHttpStatus Int?
+  // Set when a check fails. A document is flagged for review rather than
+  // deleted: a manufacturer's site being down for an afternoon is not
+  // evidence the manual no longer exists.
+  needsReview    Boolean      @default(false)
+  reviewReason   String?
+
   supersedes   Document?    @relation("DocumentRevision", fields: [supersedesId], references: [id])
   supersedesId String?      @unique
   supersededBy Document?    @relation("DocumentRevision")
@@ -646,6 +741,7 @@ model Document {
   updatedAt    DateTime     @updatedAt @default(now())
 
   savedBy      SavedManual[]
+  altSources   DocumentSource[]
   complianceReferences ComplianceReference[]
 
   @@index([manufacturerId])
@@ -1458,6 +1554,55 @@ model CompliancePackPurchase {
   updatedAt DateTime @updatedAt
 
   @@index([userId, status])
+}
+
+// ---------------------------------------------------------------------
+// Manual library: aliases and alternate sources
+// ---------------------------------------------------------------------
+
+// The same model is written a dozen ways: MT60, MT-60, MT 60, mt60, and
+// whatever the installer typed on the job sheet. An alias row lets a
+// search match any of them without ever changing the manufacturer's own
+// designation, which is what the result page must display (brief §17).
+model ModelAlias {
+  id      String @id @default(cuid())
+  model   Model  @relation(fields: [modelId], references: [id], onDelete: Cascade)
+  modelId String
+
+  // As a human would write it.
+  alias      String
+  // Case- and separator-stripped, which is what queries match against.
+  normalised String
+
+  // Where the alias came from: a manufacturer's own alternate spelling,
+  // a distributor's catalogue, or a pattern Doorlink generated.
+  source    String?
+  createdAt DateTime @default(now())
+
+  @@unique([modelId, normalised])
+  @@index([normalised])
+}
+
+// The same manual is mirrored across resellers and manual sites. Rather
+// than storing the document fifteen times, one canonical Document keeps
+// the most authoritative source and the rest hang off it here (§8).
+model DocumentSource {
+  id         String   @id @default(cuid())
+  document   Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  documentId String
+
+  url       String
+  authority SourceAuthority @default(UNKNOWN)
+  label     String?
+
+  verification   VerificationState @default(UNVERIFIED)
+  lastVerifiedAt DateTime?
+  lastHttpStatus Int?
+
+  createdAt DateTime @default(now())
+
+  @@unique([documentId, url])
+  @@index([documentId])
 }
 
 // ---------------------------------------------------------------------

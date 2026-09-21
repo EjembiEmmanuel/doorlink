@@ -1,0 +1,88 @@
+{
+  "manufacturer": {
+    "name": "GiBiDi",
+    "slug": "gibidi",
+    "country": "IT",
+    "website": "https://www.gibidi.com/",
+    "supportUrl": null,
+    "note": "Italian gate automation manufacturer. No gibidi.com documentation URL was surfaced by search, so supportUrl is null rather than a guess at a downloads path, and every document here is an aggregator copy."
+  },
+  "models": [
+    {
+      "modelCode": "PASS 600",
+      "name": "GiBiDi PASS 600 Sliding Gate Operator",
+      "category": "gate-motors",
+      "region": "EU",
+      "aliases": ["PASS600", "PASS 800", "PASS 1200", "PASS 1800", "PASS 2500", "PASS 800 24VDC"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "GiBiDi PASS 600 Instructions for Installation",
+          "sourceUrl": "https://www.manualslib.com/manual/1154766/Gibidi-Pass-600.html",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "ManualsLib",
+          "region": "EU",
+          "rights": "LINK_ONLY",
+          "evidence": "Aggregator listing, 14 pages. Search reports this manual also covers the PASS 800, 1200, 1800, 2500 and PASS 800 24VDC, so those are recorded as aliases on this model - one document, found under any of its names - rather than as separate models each holding a copy of the same PDF. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "https://www.manualslib.com/manual/1390000/Gibidi-Pass-600.html",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "Second ManualsLib listing of the installation instructions; edition difference unknown"
+            },
+            {
+              "url": "https://www.remootio.com/pages/gibidi-pass-600-instruction-manual",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "Remootio instruction-manual page"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "modelCode": "PASS 600 REGO",
+      "name": "GiBiDi PASS 600 REGO",
+      "category": "gate-motors",
+      "region": "EU",
+      "aliases": ["PASS600 REGO"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "GiBiDi PASS 600 REGO Instructions for Installation",
+          "sourceUrl": "https://www.manualslib.com/manual/1136306/Gibidi-Pass-600-Rego.html",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "ManualsLib",
+          "region": "EU",
+          "rights": "LINK_ONLY",
+          "evidence": "Aggregator listing, filed by the aggregator under garage door openers rather than gate operators. Kept as its own model because REGO is listed as a distinct product with its own manual, not as a variant sharing the PASS 600 document. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "F12E",
+      "name": "GiBiDi F12E",
+      "category": "gate-motors",
+      "region": "EU",
+      "aliases": ["F12"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "GiBiDi F12E Instructions for Installation",
+          "sourceUrl": "https://www.manualslib.com/manual/1209942/Gibidi-F12e.html",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "ManualsLib",
+          "region": "EU",
+          "rights": "LINK_ONLY",
+          "evidence": "Aggregator listing, 33 pages. Recorded under F12E because that is the designation on the document; the bare F12 is kept only as an alias, since whether it is the same product was not established. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "https://www.manualslib.com/manual/1773681/Gibidi-F12e.html",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "Second ManualsLib listing of the same manual"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

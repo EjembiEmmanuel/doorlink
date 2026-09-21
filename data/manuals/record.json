@@ -1,0 +1,94 @@
+{
+  "manufacturer": {
+    "name": "record",
+    "slug": "record",
+    "country": "CH",
+    "website": "https://www.recorddoors.com/",
+    "supportUrl": "https://www.recorddoors.com/master-blueprint/en/downloads/",
+    "note": "Swiss manufacturer of automatic pedestrian door operators (agtatec / record group). The downloads path under master-blueprint is the directory the manufacturer-hosted PDF below sits in; it was not opened, so it is recorded as the support entry point rather than as a document."
+  },
+  "models": [
+    {
+      "modelCode": "STA 20",
+      "name": "record STA 20 Sliding Door Operator",
+      "category": "automatic-pedestrian-doors",
+      "region": "GLOBAL",
+      "aliases": ["STA20", "system 20", "record system 20"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "record STA 20 Sliding Door Installation Manual",
+          "sourceUrl": "https://www.recorddoors.com/master-blueprint/en/downloads/english/sliding-doors/standard-sliding-doors/record-sta-20-sliding-door/installation-manual/Record%20STA%2020%20Sliding%20Door%20Installation%20Manual.pdf",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "publisher": "record",
+          "region": "GLOBAL",
+          "rights": "LINK_ONLY",
+          "evidence": "On recorddoors.com, the manufacturer's own domain, under an English sliding-doors downloads path. Origin is recorded as manufacturer but verification stays unset - not fetched, egress blocked - so this does not show an Official badge.",
+          "altSources": [
+            {
+              "url": "http://doormanuals.co.uk/wp-content/uploads/2018/06/record-sta20-slide-doors.pdf",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "doormanuals.co.uk copy of the installation and commissioning manual"
+            },
+            {
+              "url": "https://manuals.plus/m/ae3bf925739526420cf529d21ff6771f43047088bd716476a60844331149bc44",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "manuals.plus listing: installation and commissioning"
+            }
+          ]
+        },
+        {
+          "kind": "USER_MANUAL",
+          "title": "User manual record system 20",
+          "sourceUrl": "https://www.recordukdirect.co.uk/media/Sliding%20Doors/STA20/STA20Manual.pdf",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "record UK Direct",
+          "region": "UK",
+          "rights": "LINK_ONLY",
+          "evidence": "Hosted by record UK Direct, the UK arm's own web shop. Recorded as third-party rather than manufacturer because recordukdirect.co.uk is a separate domain from recorddoors.com and the relationship was not confirmed. Search describes it as the operating manual covering handling and fault rectification. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "http://www.swiftaluminiumsystems.co.uk/uploads/7/2/5/9/72590099/record_sta20.pdf",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "Swift Aluminium Systems copy of the same user manual"
+            },
+            {
+              "url": "https://www.scribd.com/document/489397816/record-sta20",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "Scribd copy; document-sharing sites commonly gate downloads"
+            }
+          ]
+        },
+        {
+          "kind": "QUICK_START",
+          "title": "record STA20 Retro-Fit Guide (replacing a Besam SL500) - basic quick setup",
+          "sourceUrl": "https://www.recordukdirect.co.uk/media/Redesign/Manuals%20with%20QR%20Codes/STA20BasicquicksetupBesamSL500.pdf",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "record UK Direct",
+          "region": "UK",
+          "rights": "LINK_ONLY",
+          "evidence": "Retrofit guide dated 25-03-2019 per the search result title. Covers fitting an STA20 in place of a Besam SL500, so it is filed under the STA20 rather than under Besam. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "STM 20",
+      "name": "record STM 20",
+      "category": "automatic-pedestrian-doors",
+      "region": "GLOBAL",
+      "aliases": ["STM20"],
+      "documents": [
+        {
+          "kind": "USER_MANUAL",
+          "title": "record STM 20 Manual",
+          "sourceUrl": "https://www.manualslib.com/manual/1187813/Record-Stm-20.html",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "ManualsLib",
+          "region": "GLOBAL",
+          "rights": "LINK_ONLY",
+          "evidence": "Aggregator listing. The listing title says only \"Manual\" with no document type, so the kind here is the aggregator's framing rather than a type read off the document. No recorddoors.com URL for the STM 20 was surfaced. Not fetched - egress blocked."
+        }
+      ]
+    }
+  ]
+}

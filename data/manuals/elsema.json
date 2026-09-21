@@ -1,0 +1,119 @@
+{
+  "manufacturer": {
+    "name": "Elsema",
+    "slug": "elsema",
+    "country": "AU",
+    "website": "https://www.elsema.com/",
+    "supportUrl": "https://elsema.com/transmitters/",
+    "note": "Australian manufacturer of remote controls and receivers for gates and doors. Its FMT and KEY series are widely installed in Australia."
+  },
+  "models": [
+    {
+      "modelCode": "PCR-43302",
+      "name": "PCR Series Receiver",
+      "category": "remotes-accessories",
+      "region": "AU",
+      "documents": [
+        {
+          "kind": "TECHNICAL_DOCUMENT",
+          "title": "PCR Series Receiver Documentation",
+          "sourceUrl": "https://www.elsema.com/wp-content/uploads/2019/05/pcr43302240r.pdf",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "region": "AU",
+          "rights": "LINK_ONLY",
+          "evidence": "Manufacturer's own domain. The model code is taken from the filename (pcr43302240r); the exact product designation was not confirmed because the file was not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "FMT-301",
+      "name": "FMT-301 Handheld 27MHz Remote Control Digital Transmitter",
+      "category": "remotes-accessories",
+      "region": "AU",
+      "aliases": [
+        "FMT301",
+        "FMT 301"
+      ],
+      "documents": [
+        {
+          "kind": "PROGRAMMING_GUIDE",
+          "title": "FMT-301 27MHz Transmitter Instructions",
+          "sourceUrl": "https://www.waverleygaragedoors.com.au/instruction-manuals/Elsema%20fmt301.pdf",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "Waverley Garage Doors",
+          "region": "AU",
+          "rights": "LINK_ONLY",
+          "evidence": "Australian installer-hosted copy. No manufacturer-hosted URL for this model was surfaced. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "FMT-302",
+      "name": "FMT-302 27MHz 2-Channel Remote Control Digital Transmitter",
+      "category": "remotes-accessories",
+      "region": "AU",
+      "aliases": [
+        "FMT302",
+        "FMT 302"
+      ],
+      "documents": [
+        {
+          "kind": "USER_MANUAL",
+          "title": "FMT-302 Remote Control Operating Manual",
+          "sourceUrl": "https://www.manualslib.com/manual/1504112/Elsema-Fmt-302.html",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "ManualsLib",
+          "region": "AU",
+          "rights": "LINK_ONLY",
+          "evidence": "Aggregator listing only. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "KEY-301",
+      "name": "KEY-301 27.145MHz Transmitter",
+      "category": "remotes-accessories",
+      "region": "AU",
+      "aliases": [
+        "KEY301",
+        "KEY 301"
+      ],
+      "documents": [
+        {
+          "kind": "PROGRAMMING_GUIDE",
+          "title": "Elsema FMT & KEY Coding Sheet",
+          "sourceUrl": "https://www.lsc.com.au/Documents/ELSEMA%20FMT%20&%20KEY%20INSTRUCTIONS.pdf",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "LSC Security Supplies",
+          "region": "AU",
+          "rights": "LINK_ONLY",
+          "evidence": "Distributor-hosted coding sheet covering both the FMT and KEY series. Attached to KEY-301 because that is the series it names; it is not specific to this one model. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "KEY-304",
+      "name": "Elsema KEY-304 Keyring Transmitter (superseded)",
+      "category": "remotes-accessories",
+      "region": "AU",
+      "aliases": [
+        "KEY304",
+        "FMT-204",
+        "FMT-304",
+        "FMT-404"
+      ],
+      "documents": [
+        {
+          "kind": "SERVICE_BULLETIN",
+          "title": "Elsema Replacement Guide: FMT-204, FMT-304, FMT-404 and KEY-304 superseded by Penta PCK43304 / FOB43304",
+          "sourceUrl": "https://elsema.com/blogs/fmt-301-replacement/",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "publisher": "Elsema",
+          "region": "AU",
+          "rights": "LINK_ONLY",
+          "evidence": "On elsema.com, the manufacturer's own domain. Typed SERVICE_BULLETIN because that is what it is - a supersession notice, not an installation manual. It states that the FMT-204, FMT-304, FMT-404 and KEY-304 are replaced by the Penta PCK43304 or FOB43304. Recorded because a discontinued-part notice is exactly what a technician holding a dead remote needs, and it is the kind of document a catalogue of manuals usually loses. The superseded part numbers are aliases so a search for any of them lands here. Not fetched - egress blocked."
+        }
+      ]
+    }
+  ]
+}

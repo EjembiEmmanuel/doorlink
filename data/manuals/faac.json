@@ -1,0 +1,113 @@
+{
+  "manufacturer": {
+    "name": "FAAC",
+    "slug": "faac",
+    "country": "IT",
+    "website": "https://www.faac.co.uk/",
+    "supportUrl": "https://www.faac.co.uk/support/knowledge-base",
+    "note": "Italian gate automation manufacturer. Publishes manuals on its own CDN with document code and revision in the filename. FAAC runs a dedicated documentation site at faac.help, one page per model, alongside its knowledge base and an Azure blob host that serves some PDFs directly. All three are registered as harvest targets."
+  },
+  "models": [
+    {
+      "modelCode": "740",
+      "name": "740 230V Sliding Gate Operator",
+      "category": "gate-motors",
+      "region": "GLOBAL",
+      "aliases": [
+        "FAAC 740"
+      ],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "740 / 741 Sliding Gate Operator Manual (Rev. D)",
+          "documentCode": "732484",
+          "revision": "D",
+          "language": "en",
+          "sourceUrl": "https://faac.blob.core.windows.net/web/1/gate-automation/faac-sliding-gates/740-230v-sliding-gate-operator/740-741-732484-revd-en.pdf",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "region": "GLOBAL",
+          "rights": "LINK_ONLY",
+          "evidence": "FAAC's own CDN. Document code 732484 and revision D read from the filename. One manual covers both 740 and 741. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "https://www.global-access.com.au/wp-content/uploads/2025/04/FAAC-740-741-Gate-Motor-Manual.pdf",
+              "authority": "AUTHORISED_DISTRIBUTOR",
+              "label": "Global Access (AU) copy"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "modelCode": "741",
+      "name": "741 230V Sliding Gate Operator",
+      "category": "gate-motors",
+      "region": "GLOBAL",
+      "aliases": [
+        "FAAC 741"
+      ],
+      "documents": [
+        {
+          "kind": "USER_MANUAL",
+          "title": "741 User Manual",
+          "sourceUrl": "https://www.manualslib.com/manual/1339777/Faac-741.html",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "ManualsLib",
+          "region": "GLOBAL",
+          "rights": "LINK_ONLY",
+          "evidence": "Aggregator listing for the 741 entry of the shared 740/741 documentation. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "S418",
+      "name": "FAAC S418 Electromechanical Swing Gate Operator",
+      "category": "gate-motors",
+      "region": "US",
+      "aliases": [
+        "S 418",
+        "104301.5"
+      ],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "FAAC S418 Electromechanical Swing Gate Operator Manual",
+          "documentCode": "104301.5",
+          "sourceUrl": "https://www.faac.help/en/documents/s418",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "publisher": "FAAC",
+          "region": "US",
+          "rights": "LINK_ONLY",
+          "evidence": "On faac.help, FAAC's own documentation site. This URL is the model's document page, not the PDF itself. Document code 104301.5 is read from the file name of the Encon Electronics copy recorded below, which is the manufacturer's numbering rather than the distributor's. Region is US because the distributor copies print FAAC International Inc.'s US address on their covers. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "https://enconelectronics.com/images/FAAC-104301.5%20S418%20Manual.pdf",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "Encon Electronics copy; its file name carries FAAC's document number 104301.5"
+            },
+            {
+              "url": "http://www.faacgateopeners.com/FAAC-Manuals/FAAC-S418-Electromechanical-Swing-Gate-Operator.pdf",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "Distributor copy, direct PDF"
+            },
+            {
+              "url": "https://fastgateopeners.com/store/media/pdf/S418-manual.pdf",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "Distributor copy whose cover cites UL325 and UL991"
+            },
+            {
+              "url": "https://www.manualslib.com/manual/910994/Faac-S418.html",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "ManualsLib listing of the instruction manual"
+            },
+            {
+              "url": "https://www.manualslib.com/manual/869026/Faac-S418.html",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "ManualsLib listing of the user manual - a different document for a different reader"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

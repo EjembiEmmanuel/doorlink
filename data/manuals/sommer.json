@@ -1,0 +1,70 @@
+{
+  "manufacturer": {
+    "name": "SOMMER",
+    "slug": "sommer",
+    "country": "DE",
+    "website": "https://www.sommer.eu/",
+    "supportUrl": "https://www.sommer.eu/SOMMER/Downloads/Montageanleitung/",
+    "note": "German garage door and gate drive manufacturer. Serves its assembly instructions as static PDFs from a Montageanleitung tree, split by product type and market and with an Archiv branch for superseded models; that tree is registered as a harvest target and looks like one of the better-structured ones in this registry."
+  },
+  "models": [
+    {
+      "modelCode": "duo vision 650",
+      "name": "SOMMER duo vision 650 Garage Door Drive",
+      "category": "garage-door-openers",
+      "region": "EU",
+      "aliases": ["duo vision 500", "duo vision 800", "duo rapido 650", "duo vision", "3010V000"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "duo vision 500, 650, 800 and duo rapido 650 Assembly Instructions (EN)",
+          "sourceUrl": "https://www.sommer.eu/SOMMER/Downloads/Montageanleitung/Archiv/Garagentorantriebe/duo%20vision%20-%20duo%20rapido/duo-vision-rapido-EN.pdf",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "publisher": "SOMMER",
+          "region": "EU",
+          "rights": "LINK_ONLY",
+          "evidence": "On sommer.eu, the manufacturer's own domain, English edition. Note the Archiv path segment: SOMMER files this under archived instructions, so it covers a superseded range and a current replacement may exist elsewhere in the tree. Recorded anyway, because installed duo vision drives still need it. One document covers all four drives, so they share this record as aliases. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "https://www.libble.eu/sommer-duo-vision-650/online-manual-844984/",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "Libble copy, 30 pages, English"
+            },
+            {
+              "url": "https://www.remootio.com/pages/sommer-duo-vision-650-instruction-manual-1",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "Remootio instruction-manual page"
+            },
+            {
+              "url": "https://ismartgate.com/sommer-duo-vision-650-instruction-manual/",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "ismartgate instruction-manual page"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "modelCode": "2060 evo+",
+      "name": "SOMMER 2060 evo+ / 2080 Garage Door Opener (US)",
+      "category": "garage-door-openers",
+      "region": "US",
+      "aliases": ["2080", "evo+", "evo plus", "46900V024"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "2060 evo+ / 2080 Garage Door Opener Manual, Rev C (US-EN)",
+          "documentCode": "46900V024",
+          "revision": "Rev-C",
+          "version": "12-2022",
+          "sourceUrl": "https://www.sommer.eu/SOMMER/Downloads/Montageanleitung/Garagentorantriebe/USA/evo/usa_evo-plus_46900V024_122022_0-DRE_Rev-C_US-EN.pdf",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "publisher": "SOMMER",
+          "region": "US",
+          "rights": "LINK_ONLY",
+          "evidence": "On sommer.eu, in the current (non-archive) branch of the instructions tree, under a USA folder - which is why the region is US even though the host is the German site. Document code 46900V024, date 122022 and Rev-C are all segments of the file name. Not fetched - egress blocked."
+        }
+      ]
+    }
+  ]
+}

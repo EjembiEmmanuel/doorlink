@@ -1,0 +1,92 @@
+{
+  "manufacturer": {
+    "name": "Linear / OSCO",
+    "slug": "linear",
+    "country": "US",
+    "website": "https://linear-solutions.com/",
+    "supportUrl": "https://linear-solutions.com/wp-content/uploads/",
+    "note": "US gate and garage operator manufacturer; its slide gate operators carry both the Linear and OSCO names on the same documents, which is why the two are recorded as one manufacturer rather than split. linearproaccess.com was searched for by name and returned nothing, so it is not recorded as the site."
+  },
+  "models": [
+    {
+      "modelCode": "SLC",
+      "name": "Linear / OSCO SLR, SLC, SLD Slide Gate Operator",
+      "category": "gate-motors",
+      "region": "US",
+      "aliases": ["SLR", "SLD", "OSCO SLC"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "SLR / SLC / SLD Slide Gate Operator Installation Guide",
+          "documentCode": "227968-X26",
+          "sourceUrl": "https://linear-solutions.com/wp-content/uploads/227968-X26_WEB.pdf",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "publisher": "Linear",
+          "region": "US",
+          "rights": "LINK_ONLY",
+          "evidence": "On linear-solutions.com, the manufacturer's own domain. Document number 227968-X26 from the file name; the _WEB suffix marks it as the web edition of that document. One guide covers all three operators, so they share this record. Search reports the guide states conformance with UL325 - noted here, not recorded as a compliance claim, since this library does not assert regulatory status. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "http://www.gatesnfences.com/files/OSCO_Linear_SLR_SLC_SLD_Sliding_Gate_Operators_Manual.pdf",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "Distributor copy, filed under both the OSCO and Linear names"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "modelCode": "LDCO800",
+      "name": "Linear LDCO800 Belt or Chain Drive DC Garage Door Operator",
+      "category": "garage-door-openers",
+      "region": "US",
+      "aliases": ["LDCO 800", "228355C"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "Linear LDCO800 Installation Manual",
+          "sourceUrl": "https://www.devancocanada.com/files/manuals/LDCO800:Installation-manual.pdf",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "Devanco Canada",
+          "region": "US",
+          "rights": "LINK_ONLY",
+          "evidence": "Distributor copy, direct PDF. No linear-solutions.com URL for the LDCO800 surfaced, so it stays third-party while the SLC guide is manufacturer-hosted. The document number 228355C appears in a usermanual.wiki listing title; it is kept as an alias rather than recorded as this document's code, because it was read from an aggregator's page title, not from this file. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "https://continentaldoorco.com/content/uploads/2016/02/LDCO800.pdf",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "Distributor copy titled for the belt-drive or chain-drive DC motor operator"
+            },
+            {
+              "url": "https://www.manualslib.com/manual/258310/Linear-Ldco800.html",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "ManualsLib listing of the installation instructions"
+            },
+            {
+              "url": "https://support.garagedoorzone.com/ldco800-opener-manual.html",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "Garage Door Zone support page"
+            }
+          ]
+        },
+        {
+          "kind": "USER_MANUAL",
+          "title": "Linear LDCO800 Homeowner's Instructions",
+          "sourceUrl": "https://www.manualslib.com/manual/928755/Linear-Ldco800.html",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "ManualsLib",
+          "region": "US",
+          "rights": "LINK_ONLY",
+          "evidence": "Aggregator listing of the homeowner-facing document, kept separate from the installation manual because they are different documents for different readers. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "https://archive.org/details/manualsonline-id-56d39b3a-f784-4a4d-96f5-2f9b1d632916",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "Internet Archive copy of the LDCO800 user guide"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
