@@ -81,6 +81,12 @@ export async function Header() {
       accountLinks.push({ href: '/earnings', label: 'Earnings' })
     }
     accountLinks.push({ href: '/jobs', label: 'Jobs' })
+    // The asset register and its inspections. Gated on the permission
+    // rather than the role, and only useful inside an organisation — the
+    // page itself says so when someone has none.
+    if (can(session.role, 'inspection:read')) {
+      accountLinks.push({ href: '/inspections', label: 'Inspections' })
+    }
     accountLinks.push({ href: '/account/subscription', label: 'Subscription' })
     accountLinks.push({ href: '/support', label: 'Support' })
     if (can(session.role, 'catalogue:write')) {
