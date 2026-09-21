@@ -6,3 +6,9 @@ node_modules
 .DS_Store
 *.tsbuildinfo
 coverage
+
+# Agent working memory (.agents/memory) is committed on purpose — it is
+# how context survives between sessions. Rendered output is not: page
+# images and similar artefacts are derived from source already in the
+# repo, and 64 of them had grown to dominate the checkout.
+.agents/outputs/
