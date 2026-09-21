@@ -1,43 +1,31 @@
 'use server'
 
-import { DocumentKind } from '@prisma/client'
+import { DocumentKind, ManualSubmissionStatus } from '@prisma/client'
 import { redirect } from 'next/navigation'
-import { z } from 'zod'
 import { getSession } from '@/lib/auth'
 import { isDatabaseUnreachable } from '@/lib/db-errors'
 import { requireSession, RbacError } from '@/lib/rbac'
 import { prisma } from '@/lib/prisma'
+import { canUpload, uploadFile } from '@/lib/storage'
+import {
+  manualSubmissionFileKey,
+  manualSubmissionMetadataSchema,
+  normalizePublicSourceUrl,
+  sha256File,
+  verifyManualSubmissionMetadata,
+} from '@/lib/manual-submissions'
 
 export type ManualSubmissionState = { error?: string }
-
-const KINDS = [
-  'INSTALL_MANUAL',
-  'USER_MANUAL',
-  'WIRING_DIAGRAM',
-  'PARTS_LIST',
-  'SPEC_SHEET',
-  'WARRANTY',
-  'SERVICE_BULLETIN',
-  'PROGRAMMING_GUIDE',
-  'TROUBLESHOOTING_GUIDE',
-  'TECHNICAL_DOCUMENT',
-  'SAFETY_DOCUMENT',
-  'QUICK_START',
-  'DECLARATION_OF_CONFORMITY',
-] as const
-
-const submissionSchema = z.object({
-  title: z.string().trim().min(1, 'Enter the document title.').max(160),
-  kind: z.enum(KINDS),
-  manufacturer: z.string().trim().max(120).optional(),
-  modelCode: z.string().trim().max(120).optional(),
-  sourceUrl: z.string().trim().url('Enter a valid public link to the document.'),
-  notes: z.string().trim().max(2000).optional(),
-})
 
 function optionalString(value: FormDataEntryValue | null): string | undefined {
   const text = typeof value === 'string' ? value.trim() : ''
   return text.length > 0 ? text : undefined
+}
+
+function uploadedFile(value: FormDataEntryValue | null): File | undefined {
+  if (!value || typeof value === 'string' || typeof value.arrayBuffer !== 'function') return undefined
+  if (value.size === 0) return undefined
+  return value
 }
 
 export async function submitManualAction(
@@ -52,47 +40,126 @@ export async function submitManualAction(
     throw error
   }
 
-  const parsed = submissionSchema.safeParse({
-    title: formData.get('title'),
+  let sourceUrl: string | undefined
+  try {
+    sourceUrl = normalizePublicSourceUrl(optionalString(formData.get('sourceUrl')))
+  } catch (error) {
+    return { error: error instanceof Error ? error.message : 'Enter a valid public document link.' }
+  }
+
+  const file = uploadedFile(formData.get('file'))
+  if (file && !canUpload()) {
+    return {
+      error:
+        'File uploads are not connected yet. Use a public source link, or ask an administrator to configure document storage.',
+    }
+  }
+
+  const parsed = manualSubmissionMetadataSchema.safeParse({
+    title: optionalString(formData.get('title')),
     kind: formData.get('kind'),
     manufacturer: optionalString(formData.get('manufacturer')),
+    productName: optionalString(formData.get('productName')),
+    productType: optionalString(formData.get('productType')),
     modelCode: optionalString(formData.get('modelCode')),
-    sourceUrl: formData.get('sourceUrl'),
+    description: optionalString(formData.get('description')),
     notes: optionalString(formData.get('notes')),
+    sourceUrl,
+    rightsAcknowledged: formData.get('rightsAcknowledged') === 'on',
   })
 
   if (!parsed.success) {
     return { error: parsed.error.issues[0]?.message ?? 'Check the form and try again.' }
   }
 
-  const body = [
-    'A user submitted a manual for review.',
-    '',
-    `Title: ${parsed.data.title}`,
-    `Document type: ${DocumentKind[parsed.data.kind]}`,
-    `Manufacturer: ${parsed.data.manufacturer ?? 'Not supplied'}`,
-    `Model code: ${parsed.data.modelCode ?? 'Not supplied'}`,
-    `Public document link: ${parsed.data.sourceUrl}`,
-    '',
-    parsed.data.notes ? `Contributor notes:\n${parsed.data.notes}` : 'Contributor notes: None',
-    '',
-    'This submission must be checked for provenance and file availability before it is added to the public manuals library.',
-  ].join('\n')
+  if (!sourceUrl && !file) {
+    return { error: 'Add a public source link or choose a document file.' }
+  }
 
+  let fileHash: string | undefined
   try {
-    const ticket = await prisma.supportTicket.create({
+    fileHash = file ? await sha256File(file) : undefined
+
+    const duplicateDocument = await prisma.document.findFirst({
+      where: {
+        OR: [
+          ...(sourceUrl
+            ? [
+                { sourceUrl },
+                { altSources: { some: { url: sourceUrl } } },
+              ]
+            : []),
+          ...(fileHash ? [{ fileKey: { not: null } }] : []),
+        ],
+      },
+      select: { id: true, title: true, sourceUrl: true, fileKey: true },
+    })
+
+    const duplicateSubmission = await prisma.manualSubmission.findFirst({
+      where: {
+        OR: [
+          ...(sourceUrl ? [{ sourceUrl }] : []),
+          ...(fileHash ? [{ fileHash }] : []),
+        ],
+        status: { not: ManualSubmissionStatus.REJECTED },
+      },
+      select: { id: true, title: true, documentId: true },
+      orderBy: { createdAt: 'desc' },
+    })
+
+    // A file hash can only be compared with previous submissions until
+    // imported documents carry an ingest hash. Do not pretend a filename
+    // is a content duplicate.
+    const duplicate = duplicateDocument && sourceUrl ? duplicateDocument : duplicateSubmission
+    const verification = verifyManualSubmissionMetadata({
+      sourceUrl,
+      hasFile: Boolean(file),
+      fileName: file?.name,
+      mimeType: file?.type,
+      duplicateFound: Boolean(duplicate),
+    })
+
+    const submission = await prisma.manualSubmission.create({
       data: {
         userId: session.userId,
-        subject: `Manual contribution: ${parsed.data.title}`,
-        messages: { create: { senderId: session.userId, body } },
+        title: parsed.data.title,
+        kind: parsed.data.kind as DocumentKind,
+        manufacturer: parsed.data.manufacturer,
+        productName: parsed.data.productName,
+        productType: parsed.data.productType,
+        modelCode: parsed.data.modelCode,
+        description: parsed.data.description,
+        notes: parsed.data.notes,
+        sourceUrl,
+        originalFilename: file?.name,
+        mimeType: file?.type || undefined,
+        fileSizeBytes: file?.size,
+        fileHash,
+        status: ManualSubmissionStatus.AWAITING_ADMIN_REVIEW,
+        verificationResult: verification.result,
+        verificationScore: verification.score,
+        verificationNotes: verification.notes.join(' '),
+        rightsAcknowledged: parsed.data.rightsAcknowledged,
+        duplicateOfId: duplicate?.documentId ?? (duplicate && 'id' in duplicate ? duplicate.id : undefined),
       },
     })
 
-    redirect(`/support/${ticket.id}`)
-  } catch (error) {
-    if (isDatabaseUnreachable(error)) {
-      return { error: 'The submission database is not reachable right now.' }
+    if (file) {
+      try {
+        const stored = await uploadFile(file, manualSubmissionFileKey(submission.id, file.name))
+        await prisma.manualSubmission.update({
+          where: { id: submission.id },
+          data: { fileKey: stored.key },
+        })
+      } catch (error) {
+        await prisma.manualSubmission.delete({ where: { id: submission.id } }).catch(() => undefined)
+        return { error: error instanceof Error ? error.message : 'The document could not be uploaded.' }
+      }
     }
+
+    redirect(`/manuals/submissions/${submission.id}`)
+  } catch (error) {
+    if (isDatabaseUnreachable(error)) return { error: 'The submission database is not reachable right now.' }
     throw error
   }
 }
