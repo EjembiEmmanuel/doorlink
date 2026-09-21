@@ -85,6 +85,30 @@ export default async function CompliancePage() {
         ) : (
           <PurchaseButton signedIn={Boolean(session)} canPay={canPay} />
         )}
+
+        {/* Someone deciding whether to spend money on documents should be
+            able to read them first. Deliberately not called "the pack":
+            this is the unbranded master the documents were written from,
+            and it runs to a different page count than the {TOTAL_PAGES}
+            advertised above, which Doorlink generates from its own
+            catalogue. Calling two different artefacts by one name on a
+            compliance product is the kind of small inaccuracy this
+            page's own caution panel exists to avoid. */}
+        <div className="flex flex-col gap-1">
+          <a
+            href="/downloads/doorlink-compliance-safety-pack.pdf"
+            target="_blank"
+            rel="noreferrer"
+            className="text-sm font-medium text-signal hover:text-signal-hover"
+          >
+            Read the source documents before buying (PDF)
+            <span aria-hidden="true"> →</span>
+          </a>
+          <p className="text-micro text-zinc-deep">
+            The unbranded master these templates are written from. What you buy is Doorlink&rsquo;s
+            version, carrying your business details.
+          </p>
+        </div>
       </header>
 
       {/* Said before the money, not after. Someone deciding whether to buy

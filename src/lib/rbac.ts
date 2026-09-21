@@ -26,6 +26,15 @@ export type Permission =
   | 'support:write:any'
   | 'import:write'
   | 'admin:settings'
+  // The inspection engine. Carrying out an inspection and administering
+  // the asset register are separate powers: a subcontracted technician
+  // may need the first without the second. `inspection:template:write`
+  // is separate again — editing the questions everyone is asked is a
+  // bigger power than answering them.
+  | 'inspection:read'
+  | 'inspection:write'
+  | 'asset:write'
+  | 'inspection:template:write'
 
 // listing:write:own is granted to every role — Doorlink's marketplace is
 // peer-to-peer (anyone with an account can list an item, business or
@@ -56,6 +65,9 @@ const MATRIX: Record<Role, Permission[]> = {
     'marketplace:quote',
     'marketplace:hire',
     'support:read:own',
+    'inspection:read',
+    'inspection:write',
+    'asset:write',
   ],
   SUPPLIER: [
     'catalogue:read',
@@ -91,6 +103,10 @@ const MATRIX: Record<Role, Permission[]> = {
     'support:write:any',
     'import:write',
     'admin:settings',
+    'inspection:read',
+    'inspection:write',
+    'asset:write',
+    'inspection:template:write',
   ],
 }
 
