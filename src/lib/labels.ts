@@ -1,7 +1,13 @@
 import type {
+  ActionStatus,
+  AnswerStatus,
+  AssetType,
   AiVerdict,
   DocumentKind,
   DocumentOrigin,
+  FindingSeverity,
+  InspectionResult,
+  InspectionStatus,
   JobStatus,
   LeadStatus,
   QuoteStatus,
@@ -164,6 +170,105 @@ export const SUBSCRIPTION_STATUS_LABELS: Record<SubscriptionStatus, string> = {
   PAST_DUE: 'Past due',
   CANCELLED: 'Cancelled',
   EXPIRED: 'Expired',
+}
+
+// ---------------------------------------------------------------------
+// Inspection engine
+// ---------------------------------------------------------------------
+
+export const ASSET_TYPE_LABELS: Record<AssetType, string> = {
+  ROLLER_SHUTTER: 'Roller shutter',
+  SECTIONAL_DOOR: 'Sectional door',
+  GARAGE_DOOR: 'Garage door',
+  AUTOMATIC_GATE: 'Automatic gate',
+  SLIDING_GATE: 'Sliding gate',
+  SWING_GATE: 'Swing gate',
+  INDUSTRIAL_DOOR: 'Industrial door',
+  MANUAL_DOOR: 'Manual door',
+  OTHER: 'Other',
+}
+
+export const INSPECTION_STATUS_LABELS: Record<InspectionStatus, string> = {
+  DRAFT: 'Draft',
+  IN_PROGRESS: 'In progress',
+  AWAITING_REVIEW: 'Awaiting review',
+  COMPLETED: 'Completed',
+  CANCELLED: 'Cancelled',
+}
+
+export const INSPECTION_STATUS_TONE: Record<InspectionStatus, Tone> = {
+  DRAFT: 'neutral',
+  IN_PROGRESS: 'signal',
+  AWAITING_REVIEW: 'caution',
+  COMPLETED: 'good',
+  CANCELLED: 'neutral',
+}
+
+export const INSPECTION_RESULT_LABELS: Record<InspectionResult, string> = {
+  PASS: 'Pass',
+  ATTENTION_REQUIRED: 'Attention required',
+  FAILED: 'Failed',
+  INCOMPLETE: 'Incomplete',
+}
+
+export const INSPECTION_RESULT_TONE: Record<InspectionResult, Tone> = {
+  PASS: 'good',
+  ATTENTION_REQUIRED: 'caution',
+  FAILED: 'bad',
+  INCOMPLETE: 'neutral',
+}
+
+export const ANSWER_STATUS_LABELS: Record<AnswerStatus, string> = {
+  PASS: 'Pass',
+  FAIL: 'Fail',
+  NOT_APPLICABLE: 'N/A',
+  NOT_TESTED: 'Not tested',
+}
+
+export const ANSWER_STATUS_TONE: Record<AnswerStatus, Tone> = {
+  PASS: 'good',
+  FAIL: 'bad',
+  NOT_APPLICABLE: 'neutral',
+  NOT_TESTED: 'caution',
+}
+
+// Severity is the technician's assessment of how serious a condition
+// is. It is never, on its own, a statement that a law has been broken —
+// the UI keeps regulatory citations in a separate, sourced panel.
+export const SEVERITY_LABELS: Record<FindingSeverity, string> = {
+  INFO: 'Information',
+  OBSERVATION: 'Observation',
+  LOW: 'Low',
+  MEDIUM: 'Medium',
+  HIGH: 'High',
+  CRITICAL: 'Critical',
+}
+
+export const SEVERITY_TONE: Record<FindingSeverity, Tone> = {
+  INFO: 'neutral',
+  OBSERVATION: 'neutral',
+  LOW: 'signal',
+  MEDIUM: 'caution',
+  HIGH: 'bad',
+  CRITICAL: 'bad',
+}
+
+export const ACTION_STATUS_LABELS: Record<ActionStatus, string> = {
+  OPEN: 'Open',
+  ASSIGNED: 'Assigned',
+  IN_PROGRESS: 'In progress',
+  COMPLETED: 'Completed',
+  VERIFIED: 'Verified',
+  CLOSED: 'Closed',
+}
+
+export const ACTION_STATUS_TONE: Record<ActionStatus, Tone> = {
+  OPEN: 'bad',
+  ASSIGNED: 'caution',
+  IN_PROGRESS: 'signal',
+  COMPLETED: 'good',
+  VERIFIED: 'good',
+  CLOSED: 'neutral',
 }
 
 // Submitted-manual wording.

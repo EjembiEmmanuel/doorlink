@@ -362,25 +362,33 @@ model User {
   notifications     Notification[]
   auditLogs         AuditLog[]
 
-  requestedLeads         Lead[]                    @relation("LeadCustomer")
-  quotes                 Quote[]                   @relation("QuoteWorker")
-  workerJobs             Job[]                     @relation("JobWorker")
-  jobStatusEvents        JobStatusEvent[]
-  conversations          ConversationParticipant[]
-  messages               Message[]
-  reviewsWritten         WorkerReview[]            @relation("ReviewAuthor")
-  reviewsReceived        WorkerReview[]            @relation("ReviewSubject")
-  transactionsAsCustomer Transaction[]             @relation("TransactionCustomer")
-  transactionsAsWorker   Transaction[]             @relation("TransactionWorker")
-  payouts                Payout[]                  @relation("PayoutWorker")
-  subscriptions          Subscription[]
-  savedManuals           SavedManual[]
-  doorConfigurations     DoorConfiguration[]
-  disputesRaised         Dispute[]                 @relation("DisputeRaiser")
-  reportsFiled           Report[]                  @relation("ReportAuthor")
-  complianceProfile      ComplianceProfile?
-  compliancePurchases    CompliancePackPurchase[]
-  reportsReviewed        Report[]                  @relation("ReportReviewer")
+  requestedLeads        Lead[]                    @relation("LeadCustomer")
+  quotes                Quote[]                   @relation("QuoteWorker")
+  workerJobs            Job[]                     @relation("JobWorker")
+  jobStatusEvents       JobStatusEvent[]
+  conversations         ConversationParticipant[]
+  messages              Message[]
+  reviewsWritten        WorkerReview[]            @relation("ReviewAuthor")
+  reviewsReceived       WorkerReview[]            @relation("ReviewSubject")
+  transactionsAsCustomer Transaction[]            @relation("TransactionCustomer")
+  transactionsAsWorker  Transaction[]             @relation("TransactionWorker")
+  payouts               Payout[]                  @relation("PayoutWorker")
+  subscriptions         Subscription[]
+  savedManuals          SavedManual[]
+  doorConfigurations    DoorConfiguration[]
+  disputesRaised        Dispute[]                 @relation("DisputeRaiser")
+  reportsFiled          Report[]                  @relation("ReportAuthor")
+  complianceProfile     ComplianceProfile?
+  compliancePurchases   CompliancePackPurchase[]
+  reportsReviewed       Report[]                  @relation("ReportReviewer")
+
+  clientRecords         Client[]                  @relation("ClientUser")
+  inspections           Inspection[]              @relation("InspectionTechnician")
+  inspectionStatusEvents InspectionStatusEvent[]  @relation("InspectionStatusActor")
+  evidenceCaptured      InspectionEvidence[]      @relation("EvidenceCapturedBy")
+  actionsAssigned       CorrectiveAction[]        @relation("ActionAssignee")
+  actionsVerified       CorrectiveAction[]        @relation("ActionVerifier")
+  inspectionReports     InspectionReportVersion[] @relation("ReportGeneratedBy")
   submittedManuals       ManualSubmission[]        @relation("SubmittedManuals")
   reviewedManuals        ManualSubmission[]        @relation("ReviewedManuals")
   manualSubmissionEvents ManualSubmissionEvent[]   @relation("ManualSubmissionEvents")
@@ -401,6 +409,13 @@ model Organization {
   jobs            Job[]                @relation("JobOrganization")
   leads           Lead[]
   importJobs      ImportJob[]
+
+  clients             Client[]
+  sites               Site[]
+  assets              Asset[]
+  inspectionTemplates InspectionTemplate[]
+  inspections         Inspection[]
+  correctiveActions   CorrectiveAction[]
 }
 
 model OrganizationMember {
@@ -624,6 +639,7 @@ model Model {
   leads          Lead[]
   configurations DoorConfiguration[]
   aliases        ModelAlias[]
+  assets         Asset[]
 
   @@unique([manufacturerId, modelCode])
 }
@@ -727,8 +743,9 @@ model Document {
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @default(now()) @updatedAt
 
-  savedBy    SavedManual[]
-  altSources DocumentSource[]
+  savedBy      SavedManual[]
+  altSources   DocumentSource[]
+  complianceReferences ComplianceReference[]
 
   duplicateSubmissions ManualSubmission[] @relation("SubmissionDuplicate")
   sourceSubmission     ManualSubmission?  @relation("SubmissionPublished")
@@ -1037,11 +1054,12 @@ model Job {
   createdAt          DateTime           @default(now())
   updatedAt          DateTime           @updatedAt
 
-  statusEvents  JobStatusEvent[]
-  transactions  Transaction[]
-  workerReview  WorkerReview?
-  conversations Conversation[]
-  disputes      Dispute[]
+  statusEvents   JobStatusEvent[]
+  transactions   Transaction[]
+  workerReview   WorkerReview?
+  conversations  Conversation[]
+  disputes       Dispute[]
+  inspections    Inspection[]
 
   @@index([status])
   @@index([customerId])
@@ -1591,6 +1609,703 @@ model DocumentSource {
 
   @@unique([documentId, url])
   @@index([documentId])
+}
+
+// ---------------------------------------------------------------------
+// Inspection engine
+//
+// A technician company's own asset register and the inspections carried
+// out against it. Deliberately separate from Lead/Job: those are
+// marketplace transactions between two parties, while an Asset is a
+// piece of equipment with a service life that outlives any one job, and
+// its inspection history is the thing that makes a recurring defect
+// visible. An Inspection may reference a Job, but never depends on one.
+//
+// Everything here is scoped to an Organization. That scope is the
+// isolation boundary — a query that forgets it leaks one company's
+// customer list to another, so reads go through the helpers in
+// src/lib/inspections/scope.ts rather than hand-written where clauses.
+// ---------------------------------------------------------------------
+
+enum AssetType {
+  ROLLER_SHUTTER
+  SECTIONAL_DOOR
+  GARAGE_DOOR
+  AUTOMATIC_GATE
+  SLIDING_GATE
+  SWING_GATE
+  INDUSTRIAL_DOOR
+  MANUAL_DOOR
+  OTHER
+}
+
+enum InspectionStatus {
+  DRAFT
+  IN_PROGRESS
+  AWAITING_REVIEW
+  COMPLETED
+  CANCELLED
+}
+
+// The headline outcome. Deliberately not a percentage: a door with a
+// dead emergency stop is not "92% safe". A numeric score may be
+// computed alongside this, but never instead of it.
+enum InspectionResult {
+  PASS
+  ATTENTION_REQUIRED
+  FAILED
+  INCOMPLETE
+}
+
+// How a technician answered the pass/fail axis of a question.
+// NOT_TESTED is distinct from NOT_APPLICABLE on purpose: "this door has
+// no safety edge" and "I could not test the safety edge" mean opposite
+// things to whoever reads the report.
+enum AnswerStatus {
+  PASS
+  FAIL
+  NOT_APPLICABLE
+  NOT_TESTED
+}
+
+enum QuestionType {
+  YES_NO
+  YES_NO_NA
+  PASS_FAIL
+  PASS_FAIL_NA
+  OBSERVATION
+  SINGLE_SELECT
+  MULTI_SELECT
+  TEXT
+  NUMBER
+  MEASUREMENT
+  DATE
+  TIME
+  PHOTO
+  VIDEO
+  SIGNATURE
+  CHECKBOX
+  DROPDOWN
+  SEARCHABLE_DROPDOWN
+}
+
+// Technician assessment of how serious an observation is. This is an
+// engineering judgement recorded by a person — it is never, on its own,
+// a statement that a law has been broken. Regulatory interpretation
+// lives in ComplianceReference and is rendered as a separate, sourced
+// claim (brief §13).
+enum FindingSeverity {
+  INFO
+  OBSERVATION
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+enum ActionStatus {
+  OPEN
+  ASSIGNED
+  IN_PROGRESS
+  COMPLETED
+  VERIFIED
+  CLOSED
+}
+
+enum EvidenceKind {
+  PHOTO
+  VIDEO
+  SIGNATURE
+  DOCUMENT
+}
+
+// A technician company's client. Distinct from User(role: CUSTOMER):
+// that is someone with a Doorlink login, whereas most clients in an
+// inspection round are a business name and a site contact who will
+// never sign in. Linking the two is optional and does not change who
+// owns the record.
+model Client {
+  id             String       @id @default(cuid())
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  organizationId String
+  name           String
+  contactName    String?
+  email          String?
+  phone          String?
+  notes          String?
+
+  // Set when this client also holds a Doorlink account, so the customer
+  // report view can be shown to them. Null is the normal case.
+  user   User?   @relation("ClientUser", fields: [userId], references: [id])
+  userId String?
+
+  archivedAt DateTime?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  sites       Site[]
+  assets      Asset[]
+  inspections Inspection[]
+
+  @@index([organizationId, name])
+  @@index([userId])
+}
+
+model Site {
+  id             String       @id @default(cuid())
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  organizationId String
+  client         Client       @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  clientId       String
+
+  name        String
+  addressLine String?
+  suburb      String?
+  state       String?
+  postcode    String?
+  contactName String?
+  contactPhone String?
+  notes       String?
+
+  archivedAt DateTime?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  assets      Asset[]
+  inspections Inspection[]
+
+  @@index([organizationId])
+  @@index([clientId])
+}
+
+// A single piece of equipment with a service life. The asset — not the
+// inspection — is what carries history, which is what lets Doorlink say
+// "this was also reported in June" from stored data rather than a guess.
+model Asset {
+  id             String       @id @default(cuid())
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  organizationId String
+  client         Client       @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  clientId       String
+  site           Site         @relation(fields: [siteId], references: [id], onDelete: Cascade)
+  siteId         String
+
+  // Human-readable, printed on the report and stuck on the door:
+  // DL-ASSET-7F3K2QX. Not the cuid.
+  reference String    @unique
+  name      String
+  assetType AssetType
+  location  String?
+
+  // Identification as found on the equipment. Nullable throughout
+  // because a 20-year-old shutter frequently has no legible plate, and
+  // recording "unknown" honestly beats inventing a serial number.
+  serialNumber     String?
+  manufacturerName String?
+  modelName        String?
+  installedAt      DateTime?
+  approximateAge   String?
+
+  // Optional link into the Doorlink catalogue when the equipment is a
+  // model the platform already knows. Advisory only — an asset is never
+  // blocked on the catalogue having an entry.
+  catalogueModel   Model?  @relation(fields: [catalogueModelId], references: [id])
+  catalogueModelId String?
+
+  // Answers to the asset-type-specific configuration step (drive type,
+  // safety devices fitted, control method…). Json because the fields
+  // differ per asset type and are admin-editable in the template
+  // builder; the shape is validated in src/lib/inspections.
+  configuration Json?
+
+  notes      String?
+  archivedAt DateTime?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  inspections Inspection[]
+  actions     CorrectiveAction[]
+
+  @@index([organizationId])
+  @@index([siteId])
+  @@index([clientId])
+  @@index([assetType])
+}
+
+// ---------------------------------------------------------------------
+// Templates — the inspection engine's content, held as data
+//
+// Questions live in the database rather than in a checklist component so
+// an admin can add one without a migration and a redeploy, and so an
+// inspection can record which version of a template it was carried out
+// against. A published template is never edited in place: changing the
+// wording of a question after an inspection cited it would rewrite what
+// a technician was asked, which is exactly the kind of quiet history
+// change a report has to be able to rule out.
+// ---------------------------------------------------------------------
+
+model InspectionTemplate {
+  id             String        @id @default(cuid())
+  // Null for Doorlink-supplied templates available to every company; set
+  // when a company writes its own.
+  organization   Organization? @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  organizationId String?
+
+  name        String
+  slug        String
+  description String?
+
+  // Which equipment this template is offered for. A template with an
+  // empty list is generic and offered for any asset, which is what
+  // AssetType.OTHER falls back to.
+  assetTypes AssetType[]
+
+  // Bumped on every publish. An Inspection stores the number it ran
+  // against so an old report stays readable as the template moves on.
+  version Int @default(1)
+
+  publishedAt DateTime?
+  archivedAt  DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  sections    TemplateSection[]
+  inspections Inspection[]
+
+  @@unique([organizationId, slug, version])
+  @@index([organizationId])
+}
+
+model TemplateSection {
+  id         String             @id @default(cuid())
+  template   InspectionTemplate @relation(fields: [templateId], references: [id], onDelete: Cascade)
+  templateId String
+
+  title       String
+  description String?
+  sortOrder   Int     @default(0)
+
+  // Narrows a section to particular equipment within a template that
+  // otherwise applies broadly. Empty means "every asset this template
+  // covers".
+  assetTypes AssetType[]
+
+  questions TemplateQuestion[]
+
+  @@index([templateId])
+}
+
+model TemplateQuestion {
+  id        String          @id @default(cuid())
+  section   TemplateSection @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+  sectionId String
+
+  // Stable across template versions so "the same question" can be
+  // compared between two inspections of one asset years apart, even
+  // after the wording is revised. This is what recurring-defect
+  // detection keys on — never the row id, which changes on republish.
+  code String
+
+  prompt   String
+  helpText String?
+  type     QuestionType @default(PASS_FAIL_NA)
+  sortOrder Int         @default(0)
+
+  required Boolean @default(true)
+
+  // Options for the select/dropdown types, ignored by the others.
+  options String[]
+
+  // Unit shown beside a MEASUREMENT answer ("mm", "N", "s"). Recorded so
+  // a number in a report is never unitless.
+  unit String?
+
+  // Evidence policy. requirePhoto forces one before the inspection can
+  // be completed; recommendPhoto only prompts. Both are honoured by the
+  // engine, not by the form component, so the rule holds on the server.
+  requirePhoto   Boolean @default(false)
+  recommendPhoto Boolean @default(false)
+
+  // Shows this question only when another question in the same template
+  // holds a given answer. Shape:
+  //   { "questionCode": "ASSET_HAS_MOTOR", "equals": ["YES"] }
+  // Null means always shown.
+  showWhen Json?
+
+  rules      QuestionRule[]
+  references QuestionComplianceReference[]
+  answers    InspectionAnswer[]
+
+  @@unique([sectionId, code])
+  @@index([sectionId])
+}
+
+// The configurable half of the failure logic (brief §12). A rule fires
+// when a question is answered a particular way and says what should
+// happen — flag it, how serious, whether to demand an explanation or a
+// photo, what to recommend, what action to offer. Held as rows so the
+// behaviour is editable in the template builder instead of scattered
+// through components as `if (answer === 'NO')`.
+model QuestionRule {
+  id         String           @id @default(cuid())
+  question   TemplateQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  questionId String
+
+  // Fires when the answer status matches, e.g. FAIL. Null matches any
+  // status and is used with whenValue for the non-pass/fail types.
+  whenStatus AnswerStatus?
+  // Fires when the recorded value matches, for select/text answers.
+  whenValue  String?
+
+  severity       FindingSeverity @default(MEDIUM)
+  flag           Boolean         @default(true)
+  requireNote    Boolean         @default(true)
+  requirePhoto   Boolean         @default(false)
+  // Offered to the technician as a starting point, never written into
+  // the report unless they accept or edit it.
+  recommendation String?
+  suggestedActionTitle String?
+
+  createdAt DateTime @default(now())
+
+  @@index([questionId])
+}
+
+// ---------------------------------------------------------------------
+// Compliance references
+//
+// Regulatory material attached to a question, carrying its own
+// provenance. Every field that says "how current is this" is required
+// reading in the UI: a standard that was last reviewed three years ago
+// is presented as exactly that, not as today's law. Nothing here
+// concludes that a given answer is or is not lawful — that judgement
+// needs a person, and the UI says so.
+// ---------------------------------------------------------------------
+
+model ComplianceReference {
+  id String @id @default(cuid())
+
+  // e.g. "AS/NZS 60335.2.95", "Work Health and Safety Regulation 2017"
+  title  String
+  clause String?
+
+  // "NSW", "VIC", "CTH". Free text rather than an enum because the set
+  // differs per instrument and inventing a closed list would quietly
+  // drop the ones that do not fit.
+  jurisdiction String
+
+  edition       String?
+  effectiveFrom DateTime?
+  sourceName    String?
+  sourceUrl     String?
+
+  // When a person last checked this entry against the source. Rendered
+  // beside every citation. Null means never verified, and is shown as
+  // "not verified" rather than hidden.
+  lastReviewedAt DateTime?
+  reviewedBy     String?
+
+  // Set when the entry needs professional or legal interpretation
+  // before it can be relied on. Rendered as a caution beside the
+  // citation.
+  interpretationNote String?
+
+  assetTypes AssetType[]
+
+  // Optional link to a stored PDF of the instrument itself.
+  document   Document? @relation(fields: [documentId], references: [id])
+  documentId String?
+
+  archivedAt DateTime?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  questions QuestionComplianceReference[]
+
+  @@index([jurisdiction])
+}
+
+model QuestionComplianceReference {
+  id          String              @id @default(cuid())
+  question    TemplateQuestion    @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  questionId  String
+  reference   ComplianceReference @relation(fields: [referenceId], references: [id], onDelete: Cascade)
+  referenceId String
+  note        String?
+
+  @@unique([questionId, referenceId])
+}
+
+// ---------------------------------------------------------------------
+// Inspections
+// ---------------------------------------------------------------------
+
+model Inspection {
+  id             String       @id @default(cuid())
+  reference      String       @unique
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  organizationId String
+
+  client   Client @relation(fields: [clientId], references: [id])
+  clientId String
+  site     Site   @relation(fields: [siteId], references: [id])
+  siteId   String
+  asset    Asset  @relation(fields: [assetId], references: [id], onDelete: Cascade)
+  assetId  String
+
+  template   InspectionTemplate @relation(fields: [templateId], references: [id])
+  templateId String
+  // The template version this was carried out against. Stored, not
+  // joined, so republishing a template never changes what an existing
+  // report says was asked.
+  templateVersion Int @default(1)
+
+  // Free text ("Preventative maintenance", "6-monthly service") rather
+  // than an enum: companies name their own inspection rounds and a
+  // closed list would force them into someone else's vocabulary.
+  inspectionType String
+
+  technician   User   @relation("InspectionTechnician", fields: [technicianId], references: [id])
+  technicianId String
+  // Licence or qualification as the technician states it. Recorded as
+  // supplied and labelled that way — Doorlink does not check it against
+  // any register, and the report must not imply otherwise.
+  technicianLicence String?
+
+  // Optional link to the marketplace job this was carried out under.
+  job   Job?    @relation(fields: [jobId], references: [id])
+  jobId String?
+
+  jobNumber     String?
+  siteContact   String?
+  contactPhone  String?
+  scheduledFor  DateTime?
+  startedAt     DateTime?
+  submittedAt   DateTime?
+  notes         String?
+
+  status InspectionStatus @default(DRAFT)
+  // Derived by the engine from the answers, recomputed on submit rather
+  // than typed in. Null until there is enough answered to derive one.
+  result InspectionResult?
+
+  // The technician's statement that the record reflects what they did.
+  // Without it an inspection cannot leave AWAITING_REVIEW, because a
+  // report nobody stands behind is worse than no report.
+  reviewedAt          DateTime?
+  reviewStatement     String?
+  customerAckName     String?
+  customerAckAt       DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  answers        InspectionAnswer[]
+  findings       InspectionFinding[]
+  actions        CorrectiveAction[]
+  evidence       InspectionEvidence[]
+  reportVersions InspectionReportVersion[]
+  statusEvents   InspectionStatusEvent[]
+
+  @@index([organizationId, status])
+  @@index([assetId, submittedAt])
+  @@index([technicianId])
+  @@index([clientId])
+}
+
+model InspectionAnswer {
+  id           String     @id @default(cuid())
+  inspection   Inspection @relation(fields: [inspectionId], references: [id], onDelete: Cascade)
+  inspectionId String
+  question     TemplateQuestion @relation(fields: [questionId], references: [id])
+  questionId   String
+
+  // Copied from the question at answer time so an answer stays readable
+  // against the template version it belongs to, and so recurring-defect
+  // comparison has a stable key without a join.
+  questionCode String
+
+  status AnswerStatus?
+
+  // The non-pass/fail payload. One column per shape rather than a single
+  // Json blob so a number stays a number for comparison between
+  // inspections.
+  valueText   String?
+  valueNumber Float?
+  valueDate   DateTime?
+  valueChoices String[]
+
+  note String?
+
+  // Set by the engine when a rule fires. Kept on the answer as well as
+  // on the finding so "was this flagged" survives a finding being
+  // dismissed by a reviewer.
+  flagged Boolean @default(false)
+
+  answeredAt DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  evidence InspectionEvidence[]
+  findings InspectionFinding[]
+
+  @@unique([inspectionId, questionId])
+  @@index([inspectionId])
+  @@index([questionCode])
+}
+
+// A photo, video, signature or document captured against a specific
+// question — never a loose pile attached to the inspection. The report
+// prints the question beside the image because an untitled photo of a
+// bracket tells the customer nothing.
+//
+// fileKey is required: a row exists only once a file is actually
+// stored. src/lib/storage.ts has no working upload backend until
+// Supabase Storage is configured, so the capture UI reports that
+// plainly rather than creating rows that point at nothing.
+model InspectionEvidence {
+  id           String     @id @default(cuid())
+  inspection   Inspection @relation(fields: [inspectionId], references: [id], onDelete: Cascade)
+  inspectionId String
+  answer       InspectionAnswer? @relation(fields: [answerId], references: [id], onDelete: Cascade)
+  answerId     String?
+
+  kind        EvidenceKind @default(PHOTO)
+  fileKey     String
+  caption     String?
+  mimeType    String?
+  fileSizeBytes Int?
+
+  // When and by whom, recorded at capture. Printed under the image in
+  // the report so a photo can be placed in time.
+  capturedAt   DateTime @default(now())
+  capturedBy   User?    @relation("EvidenceCapturedBy", fields: [capturedById], references: [id])
+  capturedById String?
+
+  sortOrder Int @default(0)
+
+  @@index([inspectionId])
+  @@index([answerId])
+}
+
+// Something the inspection turned up that a person needs to read. Split
+// from the answer because one failed answer can raise a finding that is
+// later re-graded, dismissed with a reason, or carried forward — and
+// none of that should overwrite what the technician originally recorded.
+model InspectionFinding {
+  id           String     @id @default(cuid())
+  inspection   Inspection @relation(fields: [inspectionId], references: [id], onDelete: Cascade)
+  inspectionId String
+  answer       InspectionAnswer? @relation(fields: [answerId], references: [id], onDelete: SetNull)
+  answerId     String?
+
+  questionCode String?
+  title        String
+  // What the technician saw. An observed condition, stated plainly.
+  observation  String?
+  // What they suggest doing about it. Separate from the observation so
+  // the report can show the difference between fact and advice.
+  recommendation String?
+
+  severity FindingSeverity @default(MEDIUM)
+
+  // True when the engine raised it from a rule; false when the
+  // technician added it by hand. Printed nowhere, used to explain the
+  // finding's origin in the review step.
+  ruleGenerated Boolean @default(false)
+
+  dismissedAt     DateTime?
+  dismissedReason String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  actions CorrectiveAction[]
+
+  @@index([inspectionId])
+  @@index([severity])
+}
+
+model CorrectiveAction {
+  id           String     @id @default(cuid())
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  organizationId String
+
+  inspection   Inspection? @relation(fields: [inspectionId], references: [id], onDelete: SetNull)
+  inspectionId String?
+  finding      InspectionFinding? @relation(fields: [findingId], references: [id], onDelete: SetNull)
+  findingId    String?
+  // Kept even when the inspection is deleted: an outstanding action on a
+  // piece of equipment outlives the visit that found it.
+  asset        Asset  @relation(fields: [assetId], references: [id], onDelete: Cascade)
+  assetId      String
+
+  title       String
+  description String?
+  severity    FindingSeverity @default(MEDIUM)
+  recommendedSolution String?
+
+  status     ActionStatus @default(OPEN)
+  assignee   User?        @relation("ActionAssignee", fields: [assigneeId], references: [id])
+  assigneeId String?
+  dueAt      DateTime?
+
+  completedAt DateTime?
+  verifiedAt  DateTime?
+  verifiedBy  User?    @relation("ActionVerifier", fields: [verifiedById], references: [id])
+  verifiedById String?
+  closingNote String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([organizationId, status])
+  @@index([assetId, status])
+  @@index([assigneeId])
+}
+
+// An immutable snapshot of a generated report. Editing an inspection
+// after issue produces V2 — it never rewrites V1, because the customer
+// already has V1 and a document that silently changes under them is not
+// a record of anything (brief §32).
+model InspectionReportVersion {
+  id           String     @id @default(cuid())
+  inspection   Inspection @relation(fields: [inspectionId], references: [id], onDelete: Cascade)
+  inspectionId String
+
+  version Int
+
+  // The full rendered content at issue time: answers, findings, actions,
+  // evidence keys, the profile and template wording as they then stood.
+  // Frozen, so the report does not re-derive itself from rows that have
+  // since moved on.
+  payload Json
+
+  result InspectionResult
+
+  generatedAt   DateTime @default(now())
+  generatedBy   User?    @relation("ReportGeneratedBy", fields: [generatedById], references: [id])
+  generatedById String?
+  supersedeReason String?
+
+  @@unique([inspectionId, version])
+  @@index([inspectionId])
+}
+
+// Append-only lifecycle history, the same pattern as JobStatusEvent:
+// "who moved this to completed, and when" answered from data rather
+// than inferred from timestamps.
+model InspectionStatusEvent {
+  id           String     @id @default(cuid())
+  inspection   Inspection @relation(fields: [inspectionId], references: [id], onDelete: Cascade)
+  inspectionId String
+  fromStatus   InspectionStatus?
+  toStatus     InspectionStatus
+  actor        User?      @relation("InspectionStatusActor", fields: [actorId], references: [id])
+  actorId      String?
+  note         String?
+  createdAt    DateTime   @default(now())
+
+  @@index([inspectionId])
 }
 
 // ---------------------------------------------------------------------
