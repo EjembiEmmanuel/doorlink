@@ -106,6 +106,36 @@ export async function uploadFile(file: File, key: string): Promise<StoredFileRef
   return { key }
 }
 
+/**
+ * Resolve a private contribution only for a short-lived admin review link.
+ * Public manual pages must continue to use manualAccess(), never this
+ * helper, so an uploaded file cannot become public by accident.
+ */
+export async function createSignedFileUrl(key: string, expiresIn = 300): Promise<string | null> {
+  if (activeStorageBackend() !== 'supabase') return null
+  const base = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const bucket = process.env.SUPABASE_STORAGE_BUCKET
+  const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
+  if (!base || !bucket || !serviceKey) return null
+
+  const response = await fetch(`${base.replace(/\/$/, '')}/storage/v1/object/sign/${bucket}/${key}`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${serviceKey}`,
+      apikey: serviceKey,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ expiresIn }),
+  })
+  if (!response.ok) return null
+
+  const body = (await response.json()) as { signedURL?: string }
+  if (!body.signedURL) return null
+  return body.signedURL.startsWith('http')
+    ? body.signedURL
+    : `${base.replace(/\/$/, '')}/storage/v1${body.signedURL}`
+}
+
 export class StorageUnavailableError extends Error {
   constructor(message: string) {
     super(message)
