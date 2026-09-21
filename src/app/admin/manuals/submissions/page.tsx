@@ -139,6 +139,16 @@ export default async function AdminManualSubmissionsPage() {
                           Open source <span aria-hidden="true">&#8599;</span>
                         </a>
                       )}
+                      {submission.fileKey && (
+                        <a
+                          href={`/api/admin/manual-submissions/${submission.id}/file`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="ml-4 text-sm font-medium text-signal hover:text-signal-hover"
+                        >
+                          Preview uploaded file <span aria-hidden="true">&#8599;</span>
+                        </a>
+                      )}
                       <ReviewForm submissionId={submission.id} />
                     </div>
                   </PanelBody>

@@ -43,6 +43,9 @@ export async function decideManualSubmissionAction(
   if (parsed.data.decision !== 'APPROVE' && !parsed.data.note) {
     return { error: 'Add a note explaining the decision. The contributor needs a useful review record.' }
   }
+  if (parsed.data.decision === 'APPROVE' && parsed.data.rights === DocumentRights.UNCLEAR) {
+    return { error: 'Choose a clear hosting-rights decision before publishing.' }
+  }
 
   try {
     const submission = await prisma.manualSubmission.findUnique({

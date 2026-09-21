@@ -58,6 +58,15 @@ export default async function SubmitManualPage() {
           </div>
         </div>
       )}
+      {session && (
+        <p className="mt-5 text-sm text-graphite-soft">
+          Already sent one?{' '}
+          <Link href="/manuals/submissions" className="font-medium text-signal hover:text-signal-hover">
+            View your submission history
+          </Link>
+          .
+        </p>
+      )}
     </div>
   )
 }

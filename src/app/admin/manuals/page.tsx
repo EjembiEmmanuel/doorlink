@@ -97,7 +97,17 @@ export default async function AdminManualsPage() {
     return (
       <div className="flex flex-col gap-6">
         <header>
-          <h1 className="text-2xl font-semibold tracking-tight text-graphite">Manual library</h1>
+          <div className="flex flex-wrap items-start justify-between gap-4">
+            <h1 className="text-2xl font-semibold tracking-tight text-graphite">Manual library</h1>
+            {can(session.role, 'admin:settings') && (
+              <Link
+                href="/admin/manuals/submissions"
+                className="text-sm font-medium text-signal hover:text-signal-hover"
+              >
+                Review community submissions
+              </Link>
+            )}
+          </div>
           <p className="mt-1 text-graphite-soft">
             {total} document{total === 1 ? '' : 's'} outside the demo catalogue. Maintained by editing{' '}
             <span className="font-code text-sm">data/manuals/*.json</span> and re-running{' '}
