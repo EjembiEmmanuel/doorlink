@@ -54,6 +54,14 @@ export async function decideManualSubmissionAction(
     })
     if (!submission) return { error: 'That submission no longer exists.' }
     if (submission.status === ManualSubmissionStatus.APPROVED) return { error: 'That submission is already published.' }
+    if (
+      parsed.data.decision === 'APPROVE' &&
+      submission.fileKey &&
+      !submission.sourceUrl &&
+      parsed.data.rights === DocumentRights.LINK_ONLY
+    ) {
+      return { error: 'An uploaded-only document needs redistribution permission before it can be published.' }
+    }
 
     await prisma.$transaction(async (tx) => {
       let documentId: string | undefined

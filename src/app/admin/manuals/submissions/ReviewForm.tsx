@@ -47,7 +47,6 @@ export function ReviewForm({ submissionId }: { submissionId: string }) {
         <Select id={`rights-${submissionId}`} name="rights" defaultValue="LINK_ONLY">
           <option value="LINK_ONLY">Link to source only</option>
           <option value="REDISTRIBUTABLE">Contributor permits redistribution</option>
-          <option value="OWN_CONTENT">Doorlink-owned content</option>
           <option value="UNCLEAR">Rights unclear — do not publish</option>
         </Select>
       </Field>
