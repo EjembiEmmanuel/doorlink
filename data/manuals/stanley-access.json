@@ -1,0 +1,33 @@
+{
+  "manufacturer": {
+    "name": "Stanley Access Technologies",
+    "slug": "stanley-access",
+    "country": "US",
+    "website": "https://www.stanleyaccess.com/",
+    "supportUrl": null,
+    "note": "US automatic door manufacturer. One document surfaced and it is distributor-hosted, so supportUrl is null. Its Dura-Glide and Magic-Force ranges were searched for by name and returned descriptions but no document URLs; no records are made for them."
+  },
+  "models": [
+    {
+      "modelCode": "MC521",
+      "name": "Stanley MC521 Slide Door Controller",
+      "category": "remotes-accessories",
+      "region": "US",
+      "aliases": ["MC-521", "MC521 Plus"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "Stanley MC521 Slide Door Installation and Operations Manual, Rev D",
+          "revision": "Rev D",
+          "version": "3-11-07",
+          "sourceUrl": "https://d3eu1jnerk19h.cloudfront.net/documents/MC521-Slide-Door-Installation-and-Operations-Manual-Rev-D-3-11-07.pdf",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "Door Controls USA",
+          "region": "US",
+          "rights": "LINK_ONLY",
+          "evidence": "Distributor CDN copy - the same cloudfront host that serves their Besam documents, which is why it is recorded as Door Controls USA rather than as an anonymous CDN. Revision D and the date 3-11-07 are both in the file name; the date is recorded verbatim as a version because its day/month order is not stated. Filed under accessories because the MC521 is the controller, not the operator. Not fetched - egress blocked."
+        }
+      ]
+    }
+  ]
+}

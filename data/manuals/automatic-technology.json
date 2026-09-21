@@ -1,0 +1,155 @@
+{
+  "manufacturer": {
+    "name": "Automatic Technology",
+    "slug": "automatic-technology",
+    "country": "AU",
+    "website": "https://www.automatictechnology.com/au/",
+    "supportUrl": "https://www.automatictechnology.com/au/resources/installation-manuals",
+    "note": "Australian garage door opener manufacturer, commonly written ATA. Publishes an installation-manual index on its own site."
+  },
+  "models": [
+    {
+      "modelCode": "GDO-8 v1",
+      "name": "EasyRoller II",
+      "category": "garage-door-openers",
+      "region": "AU",
+      "aliases": [
+        "GDO8",
+        "GDO-8"
+      ],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "GDO-8 v1 EasyRoller II Installation Instructions",
+          "sourceUrl": "https://www.manualslib.com/manual/965901/Automatic-Technology-Australia-Gdo-8-V1-Easyroller-Ii.html",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "ManualsLib",
+          "region": "AU",
+          "rights": "LINK_ONLY",
+          "evidence": "Aggregator listing. ATA's own manual index exists but the search result did not expose a direct PDF URL for this model, so none is recorded. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "GDO-4 v4",
+      "name": "EasyRoller",
+      "category": "garage-door-openers",
+      "region": "AU",
+      "aliases": [
+        "GDO4",
+        "GDO-4"
+      ],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "GDO-4 v4 EasyRoller Installation Instructions",
+          "sourceUrl": "https://www.manualslib.com/manual/945897/Automatic-Technology-Australia-Gdo-4-V4-Easyroller.html",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "ManualsLib",
+          "region": "AU",
+          "rights": "LINK_ONLY",
+          "evidence": "Aggregator listing only. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "GDO-5-AS",
+      "name": "GDO-5 AS Garage Door Opener",
+      "category": "garage-door-openers",
+      "region": "AU",
+      "aliases": [
+        "GDO5",
+        "GDO-5"
+      ],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "GDO-5 AS Instruction Manual",
+          "sourceUrl": "https://motepro.com.au/Manuals/ATA/GDO-5.pdf",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "Motepro",
+          "region": "AU",
+          "rights": "LINK_ONLY",
+          "evidence": "Australian trade supplier mirror. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "https://www.manualslib.com/products/Automatic-Technology-Australia-Gdo-5-As-3924351.html",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "ManualsLib listing"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "modelCode": "GDO-11v5",
+      "name": "EasyRoller (GDO-11 series)",
+      "category": "garage-door-openers",
+      "region": "AU",
+      "documents": [],
+      "note": "Model searched for explicitly; no documentation URL was surfaced for this version. Recorded with no documents so the model is searchable and the gap is visible, rather than substituting another version's manual."
+    },
+    {
+      "modelCode": "GDO-6",
+      "name": "ATA GDO-6 EasyRoller Rolling Door Opener",
+      "category": "garage-door-openers",
+      "region": "AU",
+      "aliases": [
+        "GDO-6 v4",
+        "GDO-6v4",
+        "GDO-6 v3",
+        "GDO-6v3",
+        "GDO-6 v2",
+        "EasyRoller",
+        "Easy Roller",
+        "Slim-Drive EasyRoller"
+      ],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "GDO-6v4 EasyRoller Rolling Door Opener Installation Manual (AU)",
+          "documentCode": "160422_02",
+          "sourceUrl": "https://media.umbraco.io/ata-automation/xovk2qbc/160422_02_gdo-6v4_online-installation_manual_1.pdf",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "publisher": "Automatic Technology",
+          "region": "AU",
+          "rights": "LINK_ONLY",
+          "evidence": "On media.umbraco.io under an ata-automation path - ATA's own CMS media host. Document number 160422_02 and the v4 revision are in the file name. As with B&D's CMS host, the opaque key segment makes this a link to expect to rot. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "https://therollerdoordoctor.com.au/wp-content/uploads/ATA-GDO-6V4_V3_Instruction_Manual.pdf",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "Reseller copy covering V4 and V3; its cover carries Doc # 160072_00"
+            },
+            {
+              "url": "https://cdn.prod.website-files.com/648bd9b37006cdce1a249e1d/64cce8cb705ace1f1a64740a_GDO-6%20Easyroller.pdf",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "Webflow-hosted copy of the installation manual"
+            },
+            {
+              "url": "https://www.manualslib.com/manual/932276/Automatic-Technology-Gdo-6-V2-Slim-Drive-Easyroller.html",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "ManualsLib listing for the v2 Slim-Drive EasyRoller"
+            },
+            {
+              "url": "https://archive.org/details/manualzilla-id-7365959",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "Internet Archive copy of the GDO-6v3 instruction manual"
+            }
+          ]
+        },
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "GDO-6 EasyRoller Rolling Door Opener Installation Manual (NZ edition)",
+          "documentCode": "nz160422_04",
+          "sourceUrl": "https://media.umbraco.io/ata-automation/nybf5rbf/nz160422_04_gdo-6_online-installation_manual.pdf",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "publisher": "Automatic Technology",
+          "region": "NZ",
+          "rights": "LINK_ONLY",
+          "evidence": "Also on ATA's CMS media host. The nz prefix and the _04 suffix mark this as the New Zealand edition at a later revision than the Australian 160422_02 - the same regional-edition pattern as Centurion, so it is stored as a separate document rather than an alternate link on the AU one. Not fetched - egress blocked."
+        }
+      ]
+    }
+  ]
+}

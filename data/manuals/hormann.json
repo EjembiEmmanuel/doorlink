@@ -1,0 +1,209 @@
+{
+  "manufacturer": {
+    "name": "Hörmann",
+    "slug": "hormann",
+    "country": "DE",
+    "website": "https://www.hormann.com/",
+    "supportUrl": "https://www.hormann.us/high-performance/tech-support/",
+    "note": "German door and operator manufacturer. Search surfaced only third-party copies of its operator manuals, so no manufacturer-hosted document URL is claimed below. Hörmann publishes per market: hormann.us serves US documents through a hashed download handler, while the UK and EU documents found so far are all on resellers. Series numbers matter here - SupraMatic E2, S, Series 3 and P Series 4 are different operators, not editions of one, and are recorded separately."
+  },
+  "models": [
+    {
+      "modelCode": "SupraMatic E2",
+      "name": "SupraMatic E2 Garage Door Operator",
+      "category": "garage-door-openers",
+      "region": "EU",
+      "aliases": [
+        "SupraMatic E 2"
+      ],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "SupraMatic E2 Operator Fitting Instructions",
+          "sourceUrl": "https://easyfitgaragedoor.co.uk/wp-content/uploads/2021/05/Hormann-SupraMatic-E2-Operator-Fitting-Instructions.pdf",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "Easyfit Garage Door",
+          "region": "UK",
+          "rights": "LINK_ONLY",
+          "evidence": "UK installer-hosted copy. No hormann.com URL was surfaced for this model. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "SupraMatic S",
+      "name": "SupraMatic S Garage Door Operator",
+      "category": "garage-door-openers",
+      "region": "EU",
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "SupraMatic S / SupraMatic K Installation and Operating Instructions",
+          "sourceUrl": "https://bluemate.com/garage-door-openers/pdf/SupraMatic_S_Garage_Door_Operator_Text.pdf",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "Bluemate",
+          "region": "EU",
+          "rights": "LINK_ONLY",
+          "evidence": "Third-party copy. The search result title is in German, so the language of this copy was not confirmed and is left at the default. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "SupraMatic P Series 4",
+      "name": "SupraMatic P Series 4 Garage Door Operator",
+      "category": "garage-door-openers",
+      "region": "EU",
+      "documents": [
+        {
+          "kind": "USER_MANUAL",
+          "title": "SupraMatic P Series 4 Instruction Manual",
+          "sourceUrl": "https://manuals.plus/asin/B07Z87MTHZ",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "Manuals+",
+          "region": "EU",
+          "rights": "LINK_ONLY",
+          "evidence": "Aggregator listing keyed by retail ASIN rather than a manufacturer part number, which is a weaker identification. Recorded as such. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "ProMatic Series 4",
+      "name": "ProMatic Series 4 Garage Door Operator",
+      "category": "garage-door-openers",
+      "region": "EU",
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "Hörmann ProMatic Series 4 Garage Door Operator Installation Instructions (GDO 94205)",
+          "documentCode": "GDO 94205",
+          "sourceUrl": "https://www.scribd.com/document/678497572/hormann-installation-operator-promatic-series-4-gdo-94205",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "Scribd",
+          "region": "EU",
+          "rights": "LINK_ONLY",
+          "evidence": "This model was previously recorded as a gap - searched for, nothing found. A document-sharing copy has now surfaced, carrying Hörmann's own document number GDO 94205 in its title, so the gap is closed with a weak source rather than left open. Two caveats stand: document-sharing sites commonly gate downloads, so verification will likely mark this restricted, and no hormann.com URL for the ProMatic Series 4 has been found. Not fetched - egress blocked."
+        }
+      ],
+      "aliases": [
+        "ProMatic 4",
+        "GDO 94205"
+      ]
+    },
+    {
+      "modelCode": "SupraMatic Series 3",
+      "name": "Hörmann SupraMatic Series 3 Garage Door Operator (BiSecur)",
+      "category": "garage-door-openers",
+      "region": "UK",
+      "aliases": [
+        "SupraMatic 3",
+        "Supramatic Series 3"
+      ],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "Hörmann SupraMatic (Series 3) Instructions for Fitting, Operating and Maintenance",
+          "sourceUrl": "https://www.thegaragedoorcentre.co.uk/download/Hormann%20Supramatic%20(Series%203).pdf",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "The Garage Door Centre",
+          "region": "UK",
+          "rights": "LINK_ONLY",
+          "evidence": "Reseller copy, direct PDF. Search describes the Series 3 documentation as covering BiSecur technology, which is why that appears in the model name; the file name itself says only Supramatic (Series 3). Kept separate from the SupraMatic P Series 4 and the E2 and S records already here, because Hörmann's series numbers mark genuinely different operators. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "https://www.scribd.com/document/884939206/Hormann-Supramatic-Series-3",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "Scribd copy; document-sharing sites commonly gate downloads"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "modelCode": "FCT3b",
+      "name": "Hörmann FCT3b Covered Wireless Keypad",
+      "category": "remotes-accessories",
+      "region": "US",
+      "aliases": [
+        "FCT 3b",
+        "FCT3B"
+      ],
+      "documents": [
+        {
+          "kind": "USER_MANUAL",
+          "title": "Hörmann Covered Wireless Keypad Model FCT3b Owner's Manual and Instructions",
+          "sourceUrl": "https://www.hormann.us/residential/openers/hoermann-silentdrive-garage-door-openers/dfp/26028/2fe8c0d68a0419ba949fd63842546b444d4240e1f5a2ce260eacc3c7/download-file/",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "publisher": "Hörmann",
+          "region": "US",
+          "rights": "LINK_ONLY",
+          "evidence": "On hormann.us, the manufacturer's US domain, served through a download handler. The URL carries an opaque hash segment, so it is the kind of link that rots without warning - the tech-support index already registered for this manufacturer is the route back in if it does. Filed under accessories because the FCT3b is a keypad. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "SPU F42",
+      "name": "Hörmann SPU F42 Industrial Sectional Door (42 mm depth)",
+      "category": "industrial-high-speed-doors",
+      "region": "EU",
+      "aliases": [
+        "SPU F 42",
+        "SPU 67 Thermo",
+        "Series 50",
+        "Series 60"
+      ],
+      "documents": [
+        {
+          "kind": "TECHNICAL_DOCUMENT",
+          "title": "Industrial Sectional Doors, Depth 42 mm - Technical Manual, Issue 01.03.2019 (Series 50)",
+          "documentCode": "EBD_INDBR50_Sectionaltor_42_EN",
+          "version": "01.03.2019",
+          "sourceUrl": "https://www.hoermann.com/fileadmin/_country/dok/EBD_INDBR50_Sectionaltor_42_EN.pdf",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "publisher": "Hörmann",
+          "region": "EU",
+          "rights": "LINK_ONLY",
+          "evidence": "On hoermann.com, the manufacturer's own domain, in its document tree. The EBD prefix and INDBR50 (industrial, series 50) are Hörmann's own naming; the issue date 01.03.2019 is from the document's own title line. Typed TECHNICAL_DOCUMENT rather than INSTALL_MANUAL because Hörmann calls it a technical manual and it covers specifications and track applications across the range, not one door's fitting steps. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "https://hoermann-uk.iokmx.de/fileadmin/_country/hoermann.uk/dok/Industrial_Sectional_Doors_Depth_42_mm.pdf",
+              "authority": "MANUFACTURER_OFFICIAL",
+              "label": "Hörmann UK's copy, an earlier issue dated 01.04.2014 - kept because doors fitted under it are still in service"
+            },
+            {
+              "url": "https://asset-center.com/original/419/320419_originalfile.pdf",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "Series 60 technical manual as of 01.10.2024 (EBD 3097452), on a third-party asset host - a later series than this record covers"
+            },
+            {
+              "url": "https://manuals.plus/m/9253840263bae021746290567c7b8c9ef16c10259cae403fcf47f121ebdf7675",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "manuals.plus copy of the 42 mm technical manual"
+            }
+          ]
+        },
+        {
+          "kind": "SPEC_SHEET",
+          "title": "Industrial Sectional Door SPU F42 - Product Catalogue (EN)",
+          "documentCode": "86786",
+          "sourceUrl": "https://cdn.hoermann-cloud.de/fileadmin/_country/kataloge/pdf/86786_Ind_Sec_Doors_SPU_F42_EN.pdf?v=1508834138",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "publisher": "Hörmann",
+          "region": "EU",
+          "rights": "LINK_ONLY",
+          "evidence": "On cdn.hoermann-cloud.de, Hörmann's own CDN. Typed SPEC_SHEET because its path says kataloge - this is the product catalogue, not a manual, and search renders its cover as sales copy. Recorded honestly so nobody reaches for it expecting fitting steps. The v= query parameter is a cache-buster and may change. Document number 86786 from the file name. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "https://www.hoermann.com/fileadmin/_country/kataloge/pdf/86465-Industrie-Sectionaltore-EN.pdf",
+              "authority": "MANUFACTURER_OFFICIAL",
+              "label": "Document 86465, the wider Industrial Sectional Doors catalogue"
+            },
+            {
+              "url": "https://www.samsondoors.co.uk/downloads/hormann_brochure_industrial_sectional_spu_f42___spu_67_79740.pdf",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "Reseller copy of the SPU F42 and SPU 67 Thermo brochure"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,119 @@
+{
+  "manufacturer": {
+    "name": "Rollease Acmeda",
+    "slug": "rollease-acmeda",
+    "country": "AU",
+    "website": "https://www.rolleaseacmeda.com/au/",
+    "supportUrl": "https://www.rolleaseacmeda.com/au/member-documents",
+    "note": "Tubular motor and control manufacturer for roller shutters and blinds, with an Australian division. The documentation area is named member-documents, which suggests it may be gated; the harvester will record that honestly rather than assume either way. Beyond the sign-in-gated member area, it also serves instruction PDFs openly from rolleaseacmeda.com/docs/default-source, foldered by market and motor family, and runs a separate brand site at automateshades.com. Both are registered as harvest targets and neither needs a login."
+  },
+  "models": [
+    {
+      "modelCode": "Automate ARC FT",
+      "name": "Automate ARC Tubular FT Motor 433MHz Bi-Directional",
+      "category": "roller-shutter-motors",
+      "region": "AU",
+      "aliases": [
+        "ARC FT",
+        "Automate ARC"
+      ],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "Automate ARC Tubular FT Motor 433MHz Bi-Directional Electronic Limit",
+          "sourceUrl": "https://www.candccurtainsandblinds.com.au/uploads/default/files/acmeda-external.pdf",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "C&C Curtains and Blinds",
+          "region": "AU",
+          "rights": "LINK_ONLY",
+          "evidence": "Australian reseller copy. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "Automate Li-Ion Q10 DC",
+      "name": "Automate Li-Ion Q10 DC ARC Tubular Motor",
+      "category": "roller-shutter-motors",
+      "region": "AU",
+      "aliases": [
+        "Q10 DC",
+        "Li-Ion Q10"
+      ],
+      "documents": [
+        {
+          "kind": "USER_MANUAL",
+          "title": "Automate Li-Ion Q10 DC ARC Tubular Motor User Manual",
+          "sourceUrl": "https://manuals.plus/rollease-acmeda/automate-li-ion-q10-dc-arc-tubular-motor-manual-pdf",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "Manuals+",
+          "region": "AU",
+          "rights": "LINK_ONLY",
+          "evidence": "Aggregator listing. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "AC RF",
+      "name": "AC RF Tubular Motor",
+      "category": "roller-shutter-motors",
+      "region": "GLOBAL",
+      "documents": [
+        {
+          "kind": "PROGRAMMING_GUIDE",
+          "title": "AC RF Motor Programming Instructions",
+          "sourceUrl": "https://www.avoutlet.com/images/product/additional/r/rollease-ac-motor-programming.pdf",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "AV Outlet",
+          "region": "US",
+          "rights": "LINK_ONLY",
+          "evidence": "US reseller copy. Region recorded from the reseller's market, not confirmed from the document. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "Automate Li-ion ARC",
+      "name": "Rollease Acmeda Automate Li-ion ARC Tubular Motor (433 MHz bi-directional)",
+      "category": "roller-shutter-motors",
+      "region": "US",
+      "aliases": [
+        "ARC Li-ion",
+        "MTDCBRF",
+        "Automate Li-ion 10.0"
+      ],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "Automate Li-ion ARC Tubular Motor Instructions, v1.2",
+          "sourceUrl": "https://www.rolleaseacmeda.com/docs/default-source/us/automate-li-ion/automate-li-ion-10.0/mtdcbrf_automate_li-ion_inst_v1-2.pdf?sfvrsn=8",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "publisher": "Rollease Acmeda",
+          "region": "US",
+          "rights": "LINK_ONLY",
+          "evidence": "On rolleaseacmeda.com, the manufacturer's own domain, in its open docs tree - not the sign-in-gated member area. Part code MTDCBRF and version v1.2 are in the file name; the 433 MHz bi-directional description is from the document's own title line. The sfvrsn query parameter is the CMS cache-buster and may change. Region is US from the /us/ path segment, not from the motor's market. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "Automate Switch Motor",
+      "name": "Rollease Acmeda Automate Switch Motor and Wand Control",
+      "category": "roller-shutter-motors",
+      "region": "US",
+      "aliases": [
+        "MTDCBSW25",
+        "Switch Motor"
+      ],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "Automate Switch Motor & Wand Control Instructions, v1.0",
+          "sourceUrl": "https://www.rolleaseacmeda.com/docs/default-source/us/automate-li-ion/automate-lion-sw/instr_mtdcbsw25-1-1_switchmotorwand-v1-0.pdf?sfvrsn=c174ed3c_6",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "publisher": "Rollease Acmeda",
+          "region": "US",
+          "rights": "LINK_ONLY",
+          "evidence": "On rolleaseacmeda.com's open docs tree. Part code MTDCBSW25-1-1 and version v1.0 from the file name. Kept separate from the ARC motor: a wand-controlled switch motor and a 433 MHz radio motor are commissioned differently. Region is US from the /us/ path segment, not from the motor's market. Not fetched - egress blocked."
+        }
+      ]
+    }
+  ]
+}

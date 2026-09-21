@@ -1,0 +1,58 @@
+{
+  "manufacturer": {
+    "name": "Wayne Dalton",
+    "slug": "wayne-dalton",
+    "country": "US",
+    "website": "https://www.wayne-dalton.com/",
+    "supportUrl": "https://www.wayne-dalton.com/resources/support/installation",
+    "note": "US garage door manufacturer. Its installation-documents index is registered as a harvest target; search described it as covering the 9100, 9605, 9405, 5120 and 5145 but surfaced no PDF URL on wayne-dalton.com, so the documents here are a retailer copy and aggregator listings."
+  },
+  "models": [
+    {
+      "modelCode": "9100",
+      "name": "Wayne-Dalton 9100 Garage Door (TorqueMaster)",
+      "category": "garage-door-openers",
+      "region": "US",
+      "aliases": ["TorqueMaster 9100", "TorqueMaster Plus 9100", "9400", "9600", "TorqueMaster Plus 9400", "TorqueMaster Plus 9600"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "Wayne-Dalton Installation Instructions and Owner's Manual (TorqueMaster)",
+          "sourceUrl": "https://pdf.lowes.com/productdocuments/6bd14ab1-fde6-474e-ae27-c00d6c83c21b/41427492.pdf",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "Lowe's",
+          "region": "US",
+          "rights": "LINK_ONLY",
+          "evidence": "Retailer-hosted product document. Search reports the manual covers the TorqueMaster Plus 9100, 9400 and 9600 as well as the 9400 and 9600, so those are recorded as aliases on one record rather than as six models each holding the same PDF. Two cautions: the aggregators file this under \"garage door opener\", but the 9100 is a door and TorqueMaster is its counterbalance system, so the title here says door rather than opener; and the file name is a retailer part number, not a Wayne-Dalton document code, so none is recorded. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "https://www.manualslib.com/manual/838138/Wayne-Dalton-Torquemaster-9100.html",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "ManualsLib listing of the installation instructions and owner's manual"
+            },
+            {
+              "url": "https://www.manualslib.com/manual/1316741/Wayne-Dalton-9100.html",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "ManualsLib listing filed as installation manual"
+            },
+            {
+              "url": "https://www.manualslib.com/manual/945149/Wayne-Dalton-9100.html",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "Third ManualsLib listing; edition differences between the three are unknown"
+            }
+          ]
+        },
+        {
+          "kind": "QUICK_START",
+          "title": "Wayne-Dalton 9100 Quick Start Owner's Manual",
+          "sourceUrl": "https://www.manualslib.com/manual/1269604/Wayne-Dalton-9100.html",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "ManualsLib",
+          "region": "US",
+          "rights": "LINK_ONLY",
+          "evidence": "Aggregator listing of the quick-start edition, kept separate from the full manual above because it is a different document, not another copy. Not fetched - egress blocked."
+        }
+      ]
+    }
+  ]
+}

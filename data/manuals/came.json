@@ -1,0 +1,119 @@
+{
+  "manufacturer": {
+    "name": "CAME",
+    "slug": "came",
+    "country": "IT",
+    "website": "https://www.came.com/",
+    "supportUrl": null,
+    "note": "Italian gate and door automation manufacturer, widely installed in Australia through distributors. No manufacturer-hosted documentation index was surfaced by search, so supportUrl is left null rather than guessed."
+  },
+  "models": [
+    {
+      "modelCode": "BX-74",
+      "name": "BX-74 Sliding Gate Operator",
+      "category": "gate-motors",
+      "region": "GLOBAL",
+      "aliases": [
+        "BX74",
+        "BX 74"
+      ],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "BX-74 / BX-78 Sliding Gate Operator Installation Manual",
+          "documentCode": "FA00127-EN",
+          "sourceUrl": "https://motepro.com.au/Manuals/CAME/Slide/BX-74_BX-78.pdf",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "Motepro",
+          "region": "AU",
+          "rights": "LINK_ONLY",
+          "evidence": "Australian trade supplier mirror, chosen as canonical over the UK mirrors because Doorlink serves Australia. Document code FA00127-EN read from a search result title. One manual covers both BX-74 and BX-78, so the same document is recorded against each model rather than split. Not fetched - egress blocked. Document code FA00127-EN comes from the manual's own cover, as rendered in a search result for the Arden Gate Automation copy recorded below; the same document circulates on several UK resellers.",
+          "altSources": [
+            {
+              "url": "https://www.manualslib.com/manual/1438888/Came-Bx-74.html",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "ManualsLib listing"
+            },
+            {
+              "url": "https://www.ardengateautomation.co.uk/downloads/1435242990CAME_BX-74_BX-78_manual.pdf",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "Arden Gate Automation (UK) mirror"
+            },
+            {
+              "url": "https://trade.electricgatesuk.net/wp-content/uploads/2015/02/CAME-BX-74-78.pdf",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "Electric Gates UK trade mirror"
+            },
+            {
+              "url": "https://www.ardengateautomation.co.uk/downloads/1435242990CAME_BX-74_BX-78_manual.pdf",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "Arden Gate Automation copy; its cover carries the code FA00127-EN"
+            },
+            {
+              "url": "https://trade.electricgatesuk.net/wp-content/uploads/2015/02/CAME-BX-74-78.pdf",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "Electric Gates UK trade copy of the BX series manual"
+            },
+            {
+              "url": "https://manualzz.com/doc/54731040/came-bx-74--bx-78-installation-manual",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "Manualzz copy"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "modelCode": "BX-78",
+      "name": "BX-78 Sliding Gate Operator",
+      "category": "gate-motors",
+      "region": "GLOBAL",
+      "aliases": [
+        "BX78",
+        "BX 78"
+      ],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "BX-74 / BX-78 Sliding Gate Operator Installation Manual",
+          "documentCode": "FA00127-EN",
+          "sourceUrl": "https://www.manualslib.com/manual/1195425/Came-Bx-78.html",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "ManualsLib",
+          "region": "GLOBAL",
+          "rights": "LINK_ONLY",
+          "evidence": "Aggregator listing for the BX-78 entry of the shared BX-74/BX-78 manual. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "BX Series",
+      "name": "CAME BX Series Sliding Gate Operator",
+      "category": "gate-motors",
+      "region": "EU",
+      "aliases": [
+        "BX-74 Kit",
+        "BX-78 Kit"
+      ],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "CAME BX Series Gate Opener Installation Manual",
+          "sourceUrl": "https://www.manualslib.com/manual/1507141/Came-Bx-Series.html",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "ManualsLib",
+          "region": "EU",
+          "rights": "LINK_ONLY",
+          "evidence": "Aggregator listing for the series as a whole, kept alongside the model-specific BX-74 and BX-78 records rather than merged into them: whether it is the same document under a broader title or a separate series manual could not be established. The Kit variants are aliases here because a search result lists them together with the bare model numbers. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "https://www.manualsdir.com/manuals/332457/came-bx-78-kit-bx-74-kit-bx74-bx78.html",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "ManualsDir listing, 24 pages, covering BX-78 Kit, BX-74 Kit, BX74 and BX78"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

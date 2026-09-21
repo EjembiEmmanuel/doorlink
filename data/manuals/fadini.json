@@ -1,0 +1,67 @@
+{
+  "manufacturer": {
+    "name": "Meccanica Fadini",
+    "slug": "fadini",
+    "country": "IT",
+    "website": "https://www.fadini.net/",
+    "supportUrl": null,
+    "note": "Italian gate, barrier and bollard automation manufacturer. fadini.net is named as the manufacturer's site in the documents themselves, but no fadini.net documentation URL was surfaced, so supportUrl is null and every document here is a reseller or aggregator copy. The Nyota drive was searched for and returned nothing; no record is made for it."
+  },
+  "models": [
+    {
+      "modelCode": "BAYT 980",
+      "name": "Fadini Bayt 980 Oil-Hydraulic Traffic Barrier",
+      "category": "gate-motors",
+      "region": "EU",
+      "aliases": ["BAYT980", "Bayt 980 INOX"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "Bayt 980 Instruction Booklet - INOX Stainless Steel and Painted Versions (GB)",
+          "sourceUrl": "https://trade.electricgatesuk.net/wp-content/uploads/2015/10/Bayt-980-Manual.pdf",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "Electric Gates UK (trade)",
+          "region": "UK",
+          "rights": "LINK_ONLY",
+          "evidence": "Reseller copy, and a direct PDF rather than a listing page. The title names both the stainless and painted versions, so both are covered by one document. The URL path dates the upload to 2015, which is when the reseller posted it, not necessarily the document's own revision - no revision is recorded because none was visible. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "https://www.manualslib.com/manual/1381195/Fadini-Bayt-980.html",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "ManualsLib listing of the instruction booklet"
+            },
+            {
+              "url": "https://manualzz.com/doc/23378716/bayt-980",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "Manualzz copy"
+            },
+            {
+              "url": "https://manuals.plus/m/b8b7b6f2b413881eb2ca393d09d1af3591f644f1cb50fcc623d6375f590f6384",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "manuals.plus listing"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "modelCode": "ELPRO 980",
+      "name": "Fadini Elpro 980 Control Unit",
+      "category": "remotes-accessories",
+      "region": "EU",
+      "aliases": ["Elpro980"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "Elpro 980 Instructions (GB)",
+          "sourceUrl": "https://manuals.easygates.co.uk/PDF/fadini/control/istr_elpro980_gb.pdf",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "EasyGates",
+          "region": "UK",
+          "rights": "LINK_ONLY",
+          "evidence": "Reseller copy. The file name's istr_ prefix and _gb suffix match Fadini's own document naming, which is why the GB edition is recorded, but the file sits on a reseller domain. Filed under accessories because the Elpro 980 is the control unit that pairs with the Bayt 980 barrier, not a drive in its own right. Not fetched - egress blocked."
+        }
+      ]
+    }
+  ]
+}

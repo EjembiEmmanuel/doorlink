@@ -1,0 +1,589 @@
+{
+  "generatedAt": "2026-09-20T12:58:12.521Z",
+  "caveat": "verified_documents counts links that were actually fetched and resolved. A document can be from an official manufacturer domain and still be unverified. Run `npm run manuals:verify` in an environment with outbound network access to raise this number. All figures below EXCLUDE the demo catalogue, whose manufacturers are invented for demonstration and are reported separately under demo_catalogue.",
+  "totals": {
+    "total_manufacturers": 76,
+    "total_models": 245,
+    "total_documents": 276,
+    "total_model_aliases": 543,
+    "total_alternate_sources": 169,
+    "official_documents": 121,
+    "third_party_documents": 155,
+    "verified_documents": 0,
+    "unverified_documents": 276,
+    "documents_needing_review": 0,
+    "models_without_documentation": 1,
+    "link_only_documents": 276,
+    "hosted_documents": 3
+  },
+  "demo_catalogue": {
+    "note": "Invented sample data shipped by prisma/seed.ts. Not real manufacturers or manuals.",
+    "manufacturers": 3,
+    "models": 5,
+    "documents": 10
+  },
+  "by_verification": {
+    "UNVERIFIED": 276
+  },
+  "by_origin": {
+    "MANUFACTURER_ORIGINAL": 121,
+    "THIRD_PARTY_GUIDE": 155
+  },
+  "by_region": {
+    "UNKNOWN": 3,
+    "UK": 21,
+    "AU": 40,
+    "EU": 81,
+    "GLOBAL": 39,
+    "US": 85,
+    "NZ": 5,
+    "ASIA": 2
+  },
+  "by_document_kind": {
+    "INSTALL_MANUAL": 196,
+    "PROGRAMMING_GUIDE": 7,
+    "USER_MANUAL": 47,
+    "TECHNICAL_DOCUMENT": 5,
+    "SPEC_SHEET": 10,
+    "QUICK_START": 8,
+    "SERVICE_BULLETIN": 1,
+    "PARTS_LIST": 2
+  },
+  "by_rights": {
+    "LINK_ONLY": 276
+  },
+  "by_manufacturer": [
+    {
+      "name": "ASSA ABLOY Albany",
+      "slug": "albany",
+      "country": "SE",
+      "models": 4,
+      "documents": 4
+    },
+    {
+      "name": "Aluroll",
+      "slug": "aluroll",
+      "country": "GB",
+      "models": 1,
+      "documents": 1
+    },
+    {
+      "name": "Alutech",
+      "slug": "alutech",
+      "country": "BY",
+      "models": 1,
+      "documents": 1
+    },
+    {
+      "name": "Amarr",
+      "slug": "amarr",
+      "country": "US",
+      "models": 1,
+      "documents": 1
+    },
+    {
+      "name": "Aprimatic",
+      "slug": "aprimatic",
+      "country": "IT",
+      "models": 2,
+      "documents": 2
+    },
+    {
+      "name": "Automatic Technology",
+      "slug": "automatic-technology",
+      "country": "AU",
+      "models": 5,
+      "documents": 5
+    },
+    {
+      "name": "B&D",
+      "slug": "bnd",
+      "country": "AU",
+      "models": 3,
+      "documents": 4
+    },
+    {
+      "name": "BFT",
+      "slug": "bft",
+      "country": "IT",
+      "models": 6,
+      "documents": 7
+    },
+    {
+      "name": "Becker",
+      "slug": "becker",
+      "country": "DE",
+      "models": 5,
+      "documents": 5
+    },
+    {
+      "name": "Benincà",
+      "slug": "beninca",
+      "country": "IT",
+      "models": 6,
+      "documents": 7
+    },
+    {
+      "name": "Berner Torantriebe",
+      "slug": "berner",
+      "country": "DE",
+      "models": 4,
+      "documents": 4
+    },
+    {
+      "name": "Besam",
+      "slug": "besam",
+      "country": "SE",
+      "models": 2,
+      "documents": 3
+    },
+    {
+      "name": "Boss (Garage Door Operators)",
+      "slug": "boss",
+      "country": "AU",
+      "models": 2,
+      "documents": 2
+    },
+    {
+      "name": "CAME",
+      "slug": "came",
+      "country": "IT",
+      "models": 3,
+      "documents": 3
+    },
+    {
+      "name": "Centurion Systems",
+      "slug": "centurion-systems",
+      "country": "AU",
+      "models": 5,
+      "documents": 8
+    },
+    {
+      "name": "Chamberlain",
+      "slug": "chamberlain",
+      "country": "AU",
+      "models": 0,
+      "documents": 0
+    },
+    {
+      "name": "Cherubini",
+      "slug": "cherubini",
+      "country": "IT",
+      "models": 4,
+      "documents": 4
+    },
+    {
+      "name": "Clopay",
+      "slug": "clopay",
+      "country": "US",
+      "models": 0,
+      "documents": 0
+    },
+    {
+      "name": "DEA System",
+      "slug": "dea",
+      "country": "IT",
+      "models": 4,
+      "documents": 4
+    },
+    {
+      "name": "Danmar Doors",
+      "slug": "danmar",
+      "country": "AU",
+      "models": 0,
+      "documents": 0
+    },
+    {
+      "name": "Ditec Entrematic",
+      "slug": "ditec",
+      "country": "IT",
+      "models": 7,
+      "documents": 8
+    },
+    {
+      "name": "Dominator",
+      "slug": "dominator",
+      "country": "NZ",
+      "models": 3,
+      "documents": 3
+    },
+    {
+      "name": "DoorHan",
+      "slug": "doorhan",
+      "country": "RU",
+      "models": 3,
+      "documents": 3
+    },
+    {
+      "name": "DoorKing",
+      "slug": "doorking",
+      "country": "US",
+      "models": 4,
+      "documents": 5
+    },
+    {
+      "name": "Dooya",
+      "slug": "dooya",
+      "country": "CN",
+      "models": 3,
+      "documents": 4
+    },
+    {
+      "name": "Dynaco",
+      "slug": "dynaco",
+      "country": "BE",
+      "models": 1,
+      "documents": 1
+    },
+    {
+      "name": "EFAFLEX",
+      "slug": "efaflex",
+      "country": "DE",
+      "models": 0,
+      "documents": 0
+    },
+    {
+      "name": "Elsema",
+      "slug": "elsema",
+      "country": "AU",
+      "models": 5,
+      "documents": 5
+    },
+    {
+      "name": "FAAC",
+      "slug": "faac",
+      "country": "IT",
+      "models": 4,
+      "documents": 5
+    },
+    {
+      "name": "GEZE",
+      "slug": "geze",
+      "country": "DE",
+      "models": 2,
+      "documents": 2
+    },
+    {
+      "name": "Garador",
+      "slug": "garador",
+      "country": "GB",
+      "models": 0,
+      "documents": 0
+    },
+    {
+      "name": "Genie",
+      "slug": "genie",
+      "country": "US",
+      "models": 3,
+      "documents": 3
+    },
+    {
+      "name": "GiBiDi",
+      "slug": "gibidi",
+      "country": "IT",
+      "models": 3,
+      "documents": 3
+    },
+    {
+      "name": "Gilgen Door Systems",
+      "slug": "gilgen",
+      "country": "CH",
+      "models": 2,
+      "documents": 2
+    },
+    {
+      "name": "Gliderol",
+      "slug": "gliderol",
+      "country": "AU",
+      "models": 3,
+      "documents": 4
+    },
+    {
+      "name": "Horton Automatics",
+      "slug": "horton",
+      "country": "US",
+      "models": 0,
+      "documents": 0
+    },
+    {
+      "name": "Hörmann",
+      "slug": "hormann",
+      "country": "DE",
+      "models": 7,
+      "documents": 8
+    },
+    {
+      "name": "Key Automation",
+      "slug": "key-automation",
+      "country": "IT",
+      "models": 4,
+      "documents": 4
+    },
+    {
+      "name": "Krispol",
+      "slug": "krispol",
+      "country": "PL",
+      "models": 0,
+      "documents": 0
+    },
+    {
+      "name": "LiftMaster",
+      "slug": "liftmaster",
+      "country": "US",
+      "models": 8,
+      "documents": 9
+    },
+    {
+      "name": "Linear / OSCO",
+      "slug": "linear",
+      "country": "US",
+      "models": 2,
+      "documents": 3
+    },
+    {
+      "name": "Magnetic Autocontrol",
+      "slug": "magnetic-autocontrol",
+      "country": "DE",
+      "models": 2,
+      "documents": 3
+    },
+    {
+      "name": "Marantec",
+      "slug": "marantec",
+      "country": "DE",
+      "models": 5,
+      "documents": 5
+    },
+    {
+      "name": "Meccanica Fadini",
+      "slug": "fadini",
+      "country": "IT",
+      "models": 2,
+      "documents": 2
+    },
+    {
+      "name": "Merlin",
+      "slug": "merlin",
+      "country": "AU",
+      "models": 4,
+      "documents": 5
+    },
+    {
+      "name": "Mighty Mule (GTO Access Systems)",
+      "slug": "mighty-mule",
+      "country": "US",
+      "models": 4,
+      "documents": 4
+    },
+    {
+      "name": "NABCO Entrances",
+      "slug": "nabco",
+      "country": "US",
+      "models": 2,
+      "documents": 4
+    },
+    {
+      "name": "Nice",
+      "slug": "nice",
+      "country": "IT",
+      "models": 8,
+      "documents": 8
+    },
+    {
+      "name": "Nice | HySecurity",
+      "slug": "hysecurity",
+      "country": "US",
+      "models": 2,
+      "documents": 5
+    },
+    {
+      "name": "Novoferm",
+      "slug": "novoferm",
+      "country": "DE",
+      "models": 6,
+      "documents": 6
+    },
+    {
+      "name": "Overhead Door",
+      "slug": "overhead-door",
+      "country": "US",
+      "models": 1,
+      "documents": 1
+    },
+    {
+      "name": "Ozroll",
+      "slug": "ozroll",
+      "country": "AU",
+      "models": 4,
+      "documents": 5
+    },
+    {
+      "name": "Ramset",
+      "slug": "ramset",
+      "country": "US",
+      "models": 6,
+      "documents": 6
+    },
+    {
+      "name": "Raynor Garage Doors",
+      "slug": "raynor",
+      "country": "US",
+      "models": 6,
+      "documents": 6
+    },
+    {
+      "name": "Roger Technology",
+      "slug": "roger-technology",
+      "country": "IT",
+      "models": 4,
+      "documents": 5
+    },
+    {
+      "name": "Rollease Acmeda",
+      "slug": "rollease-acmeda",
+      "country": "AU",
+      "models": 5,
+      "documents": 5
+    },
+    {
+      "name": "Rytec",
+      "slug": "rytec",
+      "country": "US",
+      "models": 6,
+      "documents": 7
+    },
+    {
+      "name": "Ryterna",
+      "slug": "ryterna",
+      "country": "LT",
+      "models": 1,
+      "documents": 1
+    },
+    {
+      "name": "SEA (Seateam)",
+      "slug": "sea",
+      "country": "IT",
+      "models": 5,
+      "documents": 5
+    },
+    {
+      "name": "SOMMER",
+      "slug": "sommer",
+      "country": "DE",
+      "models": 2,
+      "documents": 2
+    },
+    {
+      "name": "SWS UK",
+      "slug": "sws",
+      "country": "GB",
+      "models": 4,
+      "documents": 4
+    },
+    {
+      "name": "Somfy",
+      "slug": "somfy",
+      "country": "FR",
+      "models": 7,
+      "documents": 8
+    },
+    {
+      "name": "Stanley Access Technologies",
+      "slug": "stanley-access",
+      "country": "US",
+      "models": 1,
+      "documents": 1
+    },
+    {
+      "name": "Steel-Line",
+      "slug": "steel-line",
+      "country": "AU",
+      "models": 1,
+      "documents": 2
+    },
+    {
+      "name": "TORMAX",
+      "slug": "tormax",
+      "country": "CH",
+      "models": 5,
+      "documents": 5
+    },
+    {
+      "name": "Taurean Door Systems",
+      "slug": "taurean",
+      "country": "AU",
+      "models": 1,
+      "documents": 1
+    },
+    {
+      "name": "Teckentrup",
+      "slug": "teckentrup",
+      "country": "DE",
+      "models": 4,
+      "documents": 4
+    },
+    {
+      "name": "Tousek",
+      "slug": "tousek",
+      "country": "AT",
+      "models": 4,
+      "documents": 4
+    },
+    {
+      "name": "V2 Elettronica",
+      "slug": "v2",
+      "country": "IT",
+      "models": 2,
+      "documents": 2
+    },
+    {
+      "name": "VDS Automation",
+      "slug": "vds",
+      "country": "IT",
+      "models": 1,
+      "documents": 1
+    },
+    {
+      "name": "Viking Access Systems",
+      "slug": "viking-access",
+      "country": "US",
+      "models": 6,
+      "documents": 6
+    },
+    {
+      "name": "Wayne Dalton",
+      "slug": "wayne-dalton",
+      "country": "US",
+      "models": 1,
+      "documents": 2
+    },
+    {
+      "name": "Wiśniowski",
+      "slug": "wisniowski",
+      "country": "PL",
+      "models": 3,
+      "documents": 3
+    },
+    {
+      "name": "dormakaba",
+      "slug": "dormakaba",
+      "country": "CH",
+      "models": 3,
+      "documents": 4
+    },
+    {
+      "name": "elero",
+      "slug": "elero",
+      "country": "DE",
+      "models": 3,
+      "documents": 3
+    },
+    {
+      "name": "record",
+      "slug": "record",
+      "country": "CH",
+      "models": 2,
+      "documents": 4
+    }
+  ]
+}

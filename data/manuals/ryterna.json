@@ -1,0 +1,31 @@
+{
+  "manufacturer": {
+    "name": "Ryterna",
+    "slug": "ryterna",
+    "country": "LT",
+    "website": "https://www.ryterna.com/",
+    "supportUrl": "https://www.ryternagaragedoors.co.uk/partnership/installation-manuals/",
+    "note": "Lithuanian garage and industrial door manufacturer. Its UK arm publishes an installation-manuals index; search named an R40 and two TL LHR manuals on it but gave no PDF URLs, so those are recorded as a harvest target rather than as documents. Ryterna's own media centre is registered too."
+  },
+  "models": [
+    {
+      "modelCode": "Side-hinged",
+      "name": "Ryterna Side-Hinged Garage Door",
+      "category": "garage-door-openers",
+      "region": "EU",
+      "aliases": ["Side hinged"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "Side-Hinged Garage Door Fitting, Operating and Maintenance Instructions",
+          "sourceUrl": "https://www.ryterna.com/wp-content/uploads/Side-hinged-garage-door-instruction.pdf",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "publisher": "Ryterna",
+          "region": "EU",
+          "rights": "LINK_ONLY",
+          "evidence": "On ryterna.com, the manufacturer's own domain. The model code is the door type rather than a product code, because the document covers the side-hinged range and none was visible. Not fetched - egress blocked."
+        }
+      ]
+    }
+  ]
+}

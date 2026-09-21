@@ -1,0 +1,31 @@
+{
+  "manufacturer": {
+    "name": "Amarr",
+    "slug": "amarr",
+    "country": "US",
+    "website": "https://www.amarr.com/",
+    "supportUrl": "https://www.amarr.com/us/en/support/garage-door-and-commercial-door-installation-instructions",
+    "note": "US garage and commercial door manufacturer. Its installation instructions are served from a separate asset host, sites.myamarr.biz, under a dam (digital asset management) tree foldered by market and product type; both the support index and that tree are registered as harvest targets."
+  },
+  "models": [
+    {
+      "modelCode": "2002/2012/2022",
+      "name": "Amarr 2002 / 2012 / 2022 Commercial Aluminium Sectional Doors",
+      "category": "garage-door-openers",
+      "region": "US",
+      "aliases": ["2002", "2012", "2022"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "Amarr 2002 / 2012 / 2022 Commercial Sectional Doors Installation Instructions",
+          "sourceUrl": "https://sites.myamarr.biz/content/dam/amarr/com/us/en/documents/commercial/commercial-doors/aluminum-sectional-doors/installation-instructions/Commercial_Door_Installation_Instructions.pdf",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "publisher": "Amarr",
+          "region": "US",
+          "rights": "LINK_ONLY",
+          "evidence": "On sites.myamarr.biz, Amarr's own asset host. The model numbers come from the document's own heading as rendered in the search result; the file name is generic (Commercial_Door_Installation_Instructions.pdf), which is a reason to re-check that this URL still serves this document on verification rather than assuming the path is model-specific. One document covers all three. Not fetched - egress blocked."
+        }
+      ]
+    }
+  ]
+}

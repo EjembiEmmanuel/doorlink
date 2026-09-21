@@ -1,0 +1,60 @@
+{
+  "manufacturer": {
+    "name": "Gilgen Door Systems",
+    "slug": "gilgen",
+    "country": "CH",
+    "website": "https://www.gilgendoorsystems.com/",
+    "supportUrl": "https://www.gilgendoorsystems.com/en/downloadcenter/",
+    "note": "Swiss manufacturer of automatic door and gate systems. The download centre is recorded as a portal and is a harvest target; no direct model-level PDF URL on gilgendoorsystems.com was surfaced by search, so none is claimed."
+  },
+  "models": [
+    {
+      "modelCode": "SLM",
+      "name": "Gilgen SLM Sliding Door Operator",
+      "category": "automatic-pedestrian-doors",
+      "region": "GLOBAL",
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "Gilgen SLM Manual",
+          "sourceUrl": "https://www.manualslib.com/manual/2184474/Gilgen-Slm.html",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "ManualsLib",
+          "region": "GLOBAL",
+          "rights": "LINK_ONLY",
+          "evidence": "Aggregator listing, 24 pages per the result. A 2006 SLM installation manual also circulates as \"Gildor SLM\" (see alternate sources); the two are recorded together because the aggregator files both under Gilgen SLM, but the name difference is unresolved and neither was fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "https://s3.amazonaws.com/s3-absupply-net/pdf/Gildor%20SLM%20Installation%20Manual%202006.pdf",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "AB Supply copy, titled \"Gildor SLM Installation Manual 2006\""
+            },
+            {
+              "url": "https://www.scribd.com/document/495702228/Gildor-SLM-Installation-Manual-2006",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "Scribd copy of the same 2006 document"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "modelCode": "SLX",
+      "name": "Gilgen SLX Sliding Door Operator",
+      "category": "automatic-pedestrian-doors",
+      "region": "GLOBAL",
+      "documents": [
+        {
+          "kind": "USER_MANUAL",
+          "title": "Gilgen SLX Operator's Manual",
+          "sourceUrl": "https://www.manualslib.com/manual/3020961/Gilgen-Slx.html",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "ManualsLib",
+          "region": "GLOBAL",
+          "rights": "LINK_ONLY",
+          "evidence": "Aggregator listing. Not fetched - egress blocked."
+        }
+      ]
+    }
+  ]
+}

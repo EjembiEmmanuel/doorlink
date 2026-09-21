@@ -1,0 +1,48 @@
+{
+  "manufacturer": {
+    "name": "Overhead Door",
+    "slug": "overhead-door",
+    "country": "US",
+    "website": "https://www.overheaddoor.com/",
+    "supportUrl": "https://www.overheaddoor.com/resources/owner-manuals",
+    "note": "US garage door and operator manufacturer. Serves its manuals from its own Azure CDN at overheaddoor-production-assets.azureedge.net; that host and the owner-manuals index are both registered as harvest targets. Several independent Overhead Door dealers mirror the same manuals, and those are recorded as distributor sources rather than as separate documents."
+  },
+  "models": [
+    {
+      "modelCode": "Legacy 650",
+      "name": "Overhead Door Legacy 650 Garage Door Opener (Model 1029)",
+      "category": "garage-door-openers",
+      "region": "US",
+      "aliases": ["Legacy650", "Model 1029", "Legacy 850", "Model 2029", "Legacy Series"],
+      "documents": [
+        {
+          "kind": "USER_MANUAL",
+          "title": "Legacy 650 (Model 1029) and Legacy 850 (Model 2029) Owner's Manual",
+          "sourceUrl": "https://overheaddoor-production-assets.azureedge.net/assets/docs/default-source/owner's-manuals/legacy-owners-manual.pdf?sfvrsn=3230b530_4",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "publisher": "Overhead Door",
+          "region": "US",
+          "rights": "LINK_ONLY",
+          "evidence": "On overheaddoor-production-assets.azureedge.net, Overhead Door's own CDN - a manufacturer host despite the azureedge.net address, same reasoning as Rytec's S3 bucket. The model numbers 1029 and 2029 come from the search result's rendering of the document's own cover. The sfvrsn query parameter is the CMS cache-buster and may change; if the link later breaks, the owner-manuals index is the route back in. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "https://www.manualslib.com/manual/1291935/Overhead-Door-Legacy-650.html",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "ManualsLib listing of the programming and operating manual; search reports it also covers Destiny 1500, Destiny 1200, Odyssey 1200 and Odyssey 1000"
+            },
+            {
+              "url": "https://manuals.plus/m/e842c3212e2bd6de84a5699f8d852f10a8497771cd9e5099f3d09806948ec1b1",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "manuals.plus copy of the Legacy series programming, operation and maintenance manual"
+            },
+            {
+              "url": "https://www.ohdconcord.com/owners-manuals",
+              "authority": "AUTHORISED_DISTRIBUTOR",
+              "label": "Overhead Door of Concord manual index"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

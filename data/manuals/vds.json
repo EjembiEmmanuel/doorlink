@@ -1,0 +1,30 @@
+{
+  "manufacturer": {
+    "name": "VDS Automation",
+    "slug": "vds",
+    "country": "IT",
+    "website": "https://www.vdsautomation.com/",
+    "supportUrl": "https://www.vdsautomation.com/istruzioni/",
+    "note": "Italian gate and shutter automation manufacturer. Serves instructions as static PDFs from an istruzioni directory, language-suffixed; that directory is registered as a harvest target. Recorded from a single document found while researching tubular motors, so the range here is certainly incomplete."
+  },
+  "models": [
+    {
+      "modelCode": "Tapparella",
+      "name": "VDS Tubular Motors for Roller Shutters",
+      "category": "roller-shutter-motors",
+      "region": "EU",
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "Installation Instructions for Tubular Motors (ENG)",
+          "sourceUrl": "https://www.vdsautomation.com/istruzioni/tapparella_ENG.pdf",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "publisher": "VDS Automation",
+          "region": "EU",
+          "rights": "LINK_ONLY",
+          "evidence": "On vdsautomation.com, the manufacturer's own domain, in its istruzioni directory; English edition per the _ENG suffix. The model code here is the document's own name - tapparella, Italian for roller shutter - because the instructions cover the tubular motor range rather than one motor, and no individual model code was visible. Not fetched - egress blocked."
+        }
+      ]
+    }
+  ]
+}
