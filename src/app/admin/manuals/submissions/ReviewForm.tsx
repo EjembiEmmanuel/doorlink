@@ -21,7 +21,7 @@ export function ReviewForm({ submissionId }: { submissionId: string }) {
         <Button type="button" size="sm" variant="secondary" onClick={() => setDecision('NEEDS_CHANGES')}>
           Request changes
         </Button>
-        <Button type="button" size="sm" variant="danger" onClick={() => setDecision('REJECT')}>
+        <Button type="button" size="sm" className="bg-bad text-paper hover:bg-bad/90" onClick={() => setDecision('REJECT')}>
           Reject
         </Button>
       </div>
