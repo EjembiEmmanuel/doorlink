@@ -389,6 +389,9 @@ model User {
   actionsAssigned        CorrectiveAction[]        @relation("ActionAssignee")
   actionsVerified        CorrectiveAction[]        @relation("ActionVerifier")
   inspectionReports      InspectionReportVersion[] @relation("ReportGeneratedBy")
+  submittedManuals       ManualSubmission[]        @relation("SubmittedManuals")
+  reviewedManuals        ManualSubmission[]        @relation("ReviewedManuals")
+  manualSubmissionEvents ManualSubmissionEvent[]   @relation("ManualSubmissionEvents")
   springCalculations     SpringCalculation[]       @relation("SpringCalculations")
 }
 
@@ -744,6 +747,9 @@ model Document {
   savedBy              SavedManual[]
   altSources           DocumentSource[]
   complianceReferences ComplianceReference[]
+
+  duplicateSubmissions ManualSubmission[] @relation("SubmissionDuplicate")
+  sourceSubmission     ManualSubmission?  @relation("SubmissionPublished")
 
   @@index([manufacturerId])
   @@index([categoryId])
@@ -2302,6 +2308,152 @@ model InspectionStatusEvent {
   createdAt    DateTime          @default(now())
 
   @@index([inspectionId])
+}
+
+// ---------------------------------------------------------------------
+// Community manual submissions
+// ---------------------------------------------------------------------
+//
+// A submission is deliberately NOT a Document. Everything that reads the
+// published library reads Document, so an unapproved upload living there
+// — even with isPublished false — would be one forgotten `where` clause
+// away from being served. Keeping them in a separate table means the
+// default state of a submission is invisible, and publishing is an
+// explicit act that creates a Document row.
+
+enum SubmissionStatus {
+  // Uploaded, nothing has looked at it yet.
+  RECEIVED
+  // Sent to the AI check; a result has not come back.
+  CHECKING
+  // The AI check finished. Which of these it lands on is decided by
+  // `decideStatus`, never by the model itself — the model reports what
+  // it saw and the policy decides what that means.
+  AWAITING_REVIEW
+  FLAGGED
+  POSSIBLE_DUPLICATE
+  // An admin asked the submitter for something.
+  INFO_REQUESTED
+  // Terminal states. APPROVED is the only one that has a Document.
+  APPROVED
+  REJECTED
+  WITHDRAWN
+}
+
+// What the AI check reported. Separate from SubmissionStatus because
+// "the model thinks this is fine" and "this is ready for a human" are
+// different facts, and collapsing them is how a model ends up publishing
+// things on its own.
+enum AiVerdict {
+  // No check ran — no AI provider configured, or the file could not be
+  // read. NOT the same as a check that found nothing wrong.
+  NOT_RUN
+  VERIFIED
+  NEEDS_REVIEW
+  REJECTED
+  POSSIBLE_DUPLICATE
+  // The check was attempted and failed (timeout, API error). Recorded so
+  // a failed check is never mistaken for a clean one.
+  ERRORED
+}
+
+// Whether the file was scanned for malware. There is no scanning service
+// connected, so the honest answer today is UNAVAILABLE on every row —
+// which is exactly why this is stored rather than assumed.
+enum ScanState {
+  UNAVAILABLE
+  PENDING
+  CLEAN
+  INFECTED
+}
+
+model ManualSubmission {
+  id        String @id @default(cuid())
+  // Human-readable, for talking to a submitter about their upload.
+  reference String @unique
+
+  submittedBy   User   @relation("SubmittedManuals", fields: [submittedById], references: [id], onDelete: Cascade)
+  submittedById String
+
+  // Free text, not a Manufacturer relation. The point of the feature is
+  // manuals Doorlink does not have, which routinely means manufacturers
+  // it does not have either. Linking happens at approval, not upload.
+  manufacturerName String
+  productName      String
+  modelCode        String
+  categorySlug     String
+  // Optional because the brief is explicit that a submitter must not be
+  // forced to supply what they cannot reasonably know.
+  serialNumber     String?
+  year             Int?
+  description      String?
+
+  // Null until the file reaches storage. A submission row with no
+  // fileKey is a record of an attempt that could not be stored, which is
+  // worth keeping rather than silently dropping.
+  fileKey          String?
+  originalFilename String
+  mimeType         String
+  fileSizeBytes    Int
+  // SHA-256 of the bytes. The first and cheapest duplicate check.
+  sha256           String
+
+  status SubmissionStatus @default(RECEIVED)
+
+  aiVerdict    AiVerdict @default(NOT_RUN)
+  // 0-100. Null when no check ran — a missing confidence and a
+  // confidence of zero mean different things.
+  aiConfidence Int?
+  aiReasoning  String?
+  aiCheckedAt  DateTime?
+  // Which model produced the verdict, so an old verdict can be told
+  // apart from one made by current software.
+  aiModel      String?
+
+  scanState ScanState @default(UNAVAILABLE)
+
+  // Set when the file or its metadata matches something already public.
+  duplicateOf   Document? @relation("SubmissionDuplicate", fields: [duplicateOfId], references: [id], onDelete: SetNull)
+  duplicateOfId String?
+
+  reviewedBy   User?     @relation("ReviewedManuals", fields: [reviewedById], references: [id], onDelete: SetNull)
+  reviewedById String?
+  reviewedAt   DateTime?
+  reviewNote   String?
+
+  // The Document created on approval. Null for everything else.
+  publishedDocument   Document? @relation("SubmissionPublished", fields: [publishedDocumentId], references: [id], onDelete: SetNull)
+  publishedDocumentId String?   @unique
+
+  events ManualSubmissionEvent[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+
+  @@index([status])
+  @@index([submittedById])
+  @@index([sha256])
+}
+
+// Append-only history. Who did what to a submission and when, including
+// what the AI said, so a published manual can always be traced back to
+// the decision that let it through.
+model ManualSubmissionEvent {
+  id           String           @id @default(cuid())
+  submission   ManualSubmission @relation(fields: [submissionId], references: [id], onDelete: Cascade)
+  submissionId String
+
+  from SubmissionStatus?
+  to   SubmissionStatus
+  note String?
+
+  // Null for events the system raised itself.
+  actor   User?   @relation("ManualSubmissionEvents", fields: [actorId], references: [id], onDelete: SetNull)
+  actorId String?
+
+  createdAt DateTime @default(now())
+
+  @@index([submissionId])
 }
 
 // ---------------------------------------------------------------------
