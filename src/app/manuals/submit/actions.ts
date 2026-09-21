@@ -142,7 +142,9 @@ export async function submitManualAction(
         verificationScore: verification.score,
         verificationNotes: verification.notes.join(' '),
         rightsAcknowledged: parsed.data.rightsAcknowledged,
-        duplicateOfId: duplicate?.documentId ?? (duplicate && 'id' in duplicate ? duplicate.id : undefined),
+        duplicateOfId:
+          (duplicate && 'documentId' in duplicate ? duplicate.documentId : undefined) ??
+          (duplicate && 'sourceUrl' in duplicate ? duplicate.id : undefined),
       },
     })
 
