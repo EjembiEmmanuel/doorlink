@@ -13,6 +13,16 @@ export interface StoredFileRef {
   key: string
 }
 
+export const MANUAL_UPLOAD_MAX_BYTES = 25 * 1024 * 1024
+export const MANUAL_UPLOAD_MIME_TYPES = [
+  'application/pdf',
+  'application/msword',
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+  'image/jpeg',
+  'image/png',
+  'image/webp',
+] as const
+
 export type StorageBackend = 'local-public' | 'supabase'
 
 export function activeStorageBackend(): StorageBackend {
@@ -57,10 +67,43 @@ export function resolveFileUrl(key: string): string | null {
  * avoids. Until Supabase Storage is configured, uploads report as
  * unavailable and the UI says so.
  */
-export async function uploadFile(): Promise<never> {
-  throw new StorageUnavailableError(
-    'File upload needs Supabase Storage. Configure SUPABASE_SERVICE_ROLE_KEY and SUPABASE_STORAGE_BUCKET.'
-  )
+export async function uploadFile(file: File, key: string): Promise<StoredFileRef> {
+  if (!canUpload()) {
+    throw new StorageUnavailableError(
+      'File upload needs Supabase Storage. Configure Supabase Storage before uploading a manual.'
+    )
+  }
+
+  if (!MANUAL_UPLOAD_MIME_TYPES.includes(file.type as (typeof MANUAL_UPLOAD_MIME_TYPES)[number])) {
+    throw new Error('That file type is not supported. Use PDF, DOC, DOCX, JPG, PNG, or WEBP.')
+  }
+  if (file.size > MANUAL_UPLOAD_MAX_BYTES) {
+    throw new Error('That file is too large. Manual files must be 25 MB or smaller.')
+  }
+
+  const base = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const bucket = process.env.SUPABASE_STORAGE_BUCKET
+  const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
+  if (!base || !bucket || !serviceKey) {
+    throw new StorageUnavailableError('Supabase Storage is not fully configured.')
+  }
+
+  const response = await fetch(`${base.replace(/\/$/, '')}/storage/v1/object/${bucket}/${key}`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${serviceKey}`,
+      apikey: serviceKey,
+      'Content-Type': file.type || 'application/octet-stream',
+      'x-upsert': 'false',
+    },
+    body: Buffer.from(await file.arrayBuffer()),
+  })
+
+  if (!response.ok) {
+    throw new Error(`Storage rejected the upload (${response.status}). Try again or use a public source link.`)
+  }
+
+  return { key }
 }
 
 export class StorageUnavailableError extends Error {

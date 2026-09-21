@@ -334,6 +334,22 @@ enum ImportRowStatus {
   APPLIED
 }
 
+enum ManualSubmissionStatus {
+  PENDING_REVIEW
+  AI_VERIFICATION
+  AWAITING_ADMIN_REVIEW
+  NEEDS_CHANGES
+  APPROVED
+  REJECTED
+}
+
+enum ManualVerificationResult {
+  NOT_RUN
+  PASS
+  REVIEW_REQUIRED
+  REJECTED
+}
+
 // ---------------------------------------------------------------------
 // Identity and organisations
 // ---------------------------------------------------------------------
@@ -375,6 +391,8 @@ model User {
   payouts               Payout[]                  @relation("PayoutWorker")
   subscriptions         Subscription[]
   savedManuals          SavedManual[]
+  manualSubmissions     ManualSubmission[]       @relation("ManualSubmissionOwner")
+  reviewedManuals       ManualSubmission[]       @relation("ManualSubmissionReviewer")
   doorConfigurations    DoorConfiguration[]
   disputesRaised        Dispute[]                 @relation("DisputeRaiser")
   reportsFiled          Report[]                  @relation("ReportAuthor")
@@ -743,6 +761,8 @@ model Document {
   savedBy      SavedManual[]
   altSources   DocumentSource[]
   complianceReferences ComplianceReference[]
+  manualSubmissions ManualSubmission[] @relation("ManualSubmissionDocument")
+  duplicateSubmissions ManualSubmission[] @relation("ManualSubmissionDuplicate")
 
   @@index([manufacturerId])
   @@index([categoryId])
@@ -1603,6 +1623,49 @@ model DocumentSource {
 
   @@unique([documentId, url])
   @@index([documentId])
+}
+
+model ManualSubmission {
+  id            String                    @id @default(cuid())
+  user          User                      @relation("ManualSubmissionOwner", fields: [userId], references: [id], onDelete: Cascade)
+  userId        String
+  reviewer      User?                     @relation("ManualSubmissionReviewer", fields: [reviewerId], references: [id])
+  reviewerId    String?
+
+  title         String
+  kind          DocumentKind
+  manufacturer  String?
+  brand         String?
+  productName   String?
+  modelCode     String?
+  productType   String?
+  description   String?
+  notes         String?
+  sourceUrl     String?
+
+  originalFilename String?
+  mimeType         String?
+  fileSizeBytes    Int?
+  fileKey          String?
+  fileHash         String?
+
+  status              ManualSubmissionStatus   @default(PENDING_REVIEW)
+  verificationResult  ManualVerificationResult @default(NOT_RUN)
+  verificationScore   Int?
+  verificationNotes   String?
+  duplicateOf         Document?                @relation("ManualSubmissionDuplicate", fields: [duplicateOfId], references: [id])
+  duplicateOfId       String?
+  document            Document?                @relation("ManualSubmissionDocument", fields: [documentId], references: [id])
+  documentId          String?
+  adminNote           String?
+  createdAt           DateTime                  @default(now())
+  updatedAt           DateTime                  @updatedAt
+  reviewedAt          DateTime?
+
+  @@index([userId, createdAt])
+  @@index([status, createdAt])
+  @@index([duplicateOfId])
+  @@index([fileHash])
 }
 
 // ---------------------------------------------------------------------
