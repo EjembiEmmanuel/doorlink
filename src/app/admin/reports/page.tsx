@@ -59,7 +59,7 @@ export default async function AdminReportsPage() {
       <section>
         <h2 className="text-lg font-semibold text-graphite">Open reports ({open.length})</h2>
         <p className="mt-1 max-w-prose text-sm text-graphite-soft">
-          Things people have flagged — a listing, a message, a review, an account. Nothing in Doorlink files a
+          Things people have flagged: a listing, a message, a review, an account. Nothing in Doorlink files a
           report automatically; every one of these was written by a person.
         </p>
 

@@ -73,11 +73,12 @@ export default async function ManualDetailPage({ params }: PageProps) {
   // out rather than filled with a plausible-looking default.
   const specs: Array<{ label: string; value: string }> = []
   if (doc.manufacturer) specs.push({ label: 'Manufacturer', value: doc.manufacturer.name })
-  if (doc.model) specs.push({ label: 'Model', value: `${doc.model.modelCode} — ${doc.model.name}` })
+  if (doc.model) specs.push({ label: 'Model', value: `${doc.model.modelCode} | ${doc.model.name}` })
   if (doc.category) specs.push({ label: 'Category', value: doc.category.name })
   specs.push({ label: 'Document type', value: DOCUMENT_KIND_LABELS[doc.kind] })
   if (doc.documentCode) specs.push({ label: 'Document code', value: doc.documentCode })
   if (doc.revision) specs.push({ label: 'Revision', value: doc.revision })
+  if (doc.version && doc.version !== '1') specs.push({ label: 'Version', value: doc.version })
   if (doc.publisher) specs.push({ label: 'Published by', value: doc.publisher })
   specs.push({ label: 'Language', value: doc.language.toUpperCase() })
   if (doc.pageCount) specs.push({ label: 'Pages', value: String(doc.pageCount) })

@@ -94,7 +94,7 @@ export default async function CartPage() {
           </div>
 
           <div className="rounded-md border border-line bg-rail p-4 text-sm text-graphite-soft">
-            Doorlink doesn&apos;t have an in-app checkout — it&apos;s a peer-to-peer marketplace. Use
+            Doorlink doesn&apos;t have an in-app checkout. It&apos;s a peer-to-peer marketplace. Use
             &quot;I&apos;m interested&quot; on an item to get the seller&apos;s contact details and arrange payment
             and pickup directly with them.
           </div>

@@ -117,7 +117,7 @@ export async function saveComplianceProfileAction(
     })
   } catch (error) {
     if (isDatabaseUnreachable(error)) {
-      return { error: "Couldn't save that — the database is not reachable right now." }
+      return { error: "Couldn't save that. The database is not reachable right now." }
     }
     throw error
   }
@@ -158,7 +158,7 @@ export async function saveComplianceLogoAction(
     })
   } catch (error) {
     if (isDatabaseUnreachable(error)) {
-      return { error: "Couldn't save that — the database is not reachable right now." }
+      return { error: "Couldn't save that. The database is not reachable right now." }
     }
     throw error
   }
@@ -184,7 +184,7 @@ export async function removeComplianceLogoAction(
     await prisma.complianceProfile.updateMany({ where: { userId }, data: { logoDataUri: null } })
   } catch (error) {
     if (isDatabaseUnreachable(error)) {
-      return { error: "Couldn't remove it — the database is not reachable right now." }
+      return { error: "Couldn't remove it. The database is not reachable right now." }
     }
     throw error
   }
@@ -242,7 +242,7 @@ export async function startCompliancePurchaseAction(
       revalidatePath('/compliance')
       return {
         error:
-          'Doorlink cannot take payments yet — no payment provider is connected. Your interest has been recorded and you will be able to complete this purchase once one is.',
+          'Doorlink cannot take payments yet. No payment provider is connected. Your interest has been recorded and you will be able to complete this purchase once one is.',
       }
     }
 

@@ -52,7 +52,7 @@ export default async function AdminVerificationPage() {
         <h2 className="text-lg font-semibold text-graphite">Waiting for review ({queue.length})</h2>
         <p className="mt-1 max-w-prose text-sm text-graphite-soft">
           Verifying a business is a claim Doorlink makes to customers about someone&apos;s credentials. There is
-          no verification service connected and nothing here is checked automatically — read the licence and
+          no verification service connected and nothing here is checked automatically. Read the licence and
           insurance details, satisfy yourself they belong to this account, and only then verify. If you cannot,
           reject it and say why.
         </p>
@@ -117,7 +117,7 @@ export default async function AdminVerificationPage() {
                         {profile.certifications.map((cert) => (
                           <li key={cert.id}>
                             {cert.name}
-                            {cert.issuer && ` — ${cert.issuer}`}
+                            {cert.issuer && ` | ${cert.issuer}`}
                             {cert.reference && ` (${cert.reference})`}
                           </li>
                         ))}

@@ -19,7 +19,11 @@ export const integrations: Record<IntegrationKey, IntegrationStatus> = {
         enabled: false,
         reason: 'Supabase auth is not configured. The dev session provider is active instead.',
       },
-  storage: configured(process.env.SUPABASE_SERVICE_ROLE_KEY, process.env.SUPABASE_STORAGE_BUCKET)
+  storage: configured(
+    process.env.NEXT_PUBLIC_SUPABASE_URL,
+    process.env.SUPABASE_SERVICE_ROLE_KEY,
+    process.env.SUPABASE_STORAGE_BUCKET
+  )
     ? { enabled: true }
     : { enabled: false, reason: 'Supabase storage is not configured. Document uploads are disabled.' },
   payments: configured(process.env.STRIPE_SECRET_KEY)

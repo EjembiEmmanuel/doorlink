@@ -3,6 +3,7 @@ import { prisma } from '@/lib/prisma'
 import { getSession } from '@/lib/auth'
 import { isDatabaseUnreachable } from '@/lib/db-errors'
 import { NotConnected } from '@/components/ui/NotConnected'
+import Link from 'next/link'
 import { describeSpec, parseSpec, specAsBrief } from '@/lib/configurator/options'
 import { RequestForm } from './RequestForm'
 
@@ -29,7 +30,7 @@ export default async function RequestTechnicianPage({ searchParams }: PageProps)
       const parsed = parseSpec(JSON.parse(spec))
       const type = describeSpec(parsed)[0]?.value ?? 'garage door'
       prefill = {
-        title: `New ${type.toLowerCase()} garage door — supply and install`,
+        title: `New ${type.toLowerCase()} garage door: supply and install`,
         message: `I've designed a door in the Doorlink configurator and would like a price to supply and install it.\n\n${specAsBrief(parsed)}\n\nThese are Doorlink's generic options rather than a specific product, so let me know the nearest equivalent you can supply.`,
       }
     } catch {
@@ -63,10 +64,21 @@ export default async function RequestTechnicianPage({ searchParams }: PageProps)
   return (
     <div className="mx-auto max-w-3xl px-4 py-10 sm:py-14">
       <header className="mb-8">
-        <h1 className="text-2xl font-semibold tracking-tight text-graphite sm:text-3xl">Post a job</h1>
-        <p className="mt-2 max-w-prose text-graphite-soft">
+        <div className="flex flex-wrap items-start justify-between gap-5">
+          <div>
+            <p className="text-micro font-semibold uppercase tracking-[0.18em] text-signal">Marketplace</p>
+            <h1 className="mt-2 text-2xl font-semibold tracking-tight text-graphite sm:text-3xl">Post a job</h1>
+          </div>
+          <Link
+            href="/manuals"
+            className="text-sm font-medium text-signal hover:text-signal-hover"
+          >
+            Browse manuals
+          </Link>
+        </div>
+        <p className="mt-3 max-w-prose text-graphite-soft">
           Describe what needs doing. Technicians in your area can quote on it, and you choose who to
-          hire — nobody gets your phone number until you do.
+          hire. Nobody gets your phone number until you do.
         </p>
       </header>
 
@@ -80,7 +92,7 @@ export default async function RequestTechnicianPage({ searchParams }: PageProps)
         }))}
         models={models.map((model) => ({
           id: model.id,
-          label: `${model.modelCode} — ${model.manufacturer.name} ${model.name}`,
+          label: `${model.modelCode} | ${model.manufacturer.name} ${model.name}`,
         }))}
       />
     </div>

@@ -60,7 +60,7 @@ export async function updateContactAction(
     })
   } catch (error) {
     if (isDatabaseUnreachable(error)) {
-      return { error: "Couldn't save that — the database is not reachable right now." }
+      return { error: "Couldn't save that. The database is not reachable right now." }
     }
     throw error
   }

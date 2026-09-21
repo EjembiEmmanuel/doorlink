@@ -114,7 +114,7 @@ export default async function JobBoardPage() {
       <header>
         <h1 className="text-xl font-semibold text-graphite">Job board</h1>
         <p className="mt-1 max-w-prose text-sm text-zinc-deep">
-          Open requests from customers. Send a quote to be considered — the customer chooses who to hire, and
+          Open requests from customers. Send a quote to be considered. The customer chooses who to hire, and
           only then do you exchange contact details.
         </p>
         {matcher ? (
@@ -205,11 +205,11 @@ export default async function JobBoardPage() {
                   </dl>
 
                   {/* Contact details are deliberately absent until the
-                      customer accepts a quote — the board shows the work,
+                      customer accepts a quote, the board shows the work,
                       not the person. */}
                   <details className="mt-4 border-t border-line pt-4" open={Boolean(mine)}>
                     <summary className="cursor-pointer text-sm font-medium text-signal hover:text-signal-hover">
-                      {mine ? `Your quote: ${formatMoney(mine.amountCents)} — edit` : 'Send a quote'}
+                      {mine ? `Your quote: ${formatMoney(mine.amountCents)} | edit` : 'Send a quote'}
                     </summary>
                     <div className="mt-4">
                       <QuoteForm
@@ -258,7 +258,7 @@ export default async function JobBoardPage() {
                   </div>
                 </div>
                 {quote.status === QuoteStatus.ACCEPTED && (
-                  <p className="mt-2 text-sm text-good">Accepted — this job is now in your jobs list.</p>
+                  <p className="mt-2 text-sm text-good">Accepted. This job is now in your jobs list.</p>
                 )}
               </li>
             ))}

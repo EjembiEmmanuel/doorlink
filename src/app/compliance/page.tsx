@@ -80,7 +80,7 @@ export default async function CompliancePage() {
         ) : !access.known ? (
           <p className="text-sm text-caution">
             Your purchase could not be confirmed right now because the database is unreachable. This is not a
-            statement that you have not bought it — try again shortly.
+            statement that you have not bought it. Try again shortly.
           </p>
         ) : (
           <PurchaseButton signedIn={Boolean(session)} canPay={canPay} />

@@ -90,7 +90,7 @@ export default async function RequestDetailPage({ params }: PageProps) {
   if (lead.serviceCategory) details.push({ label: 'Service', value: lead.serviceCategory.name })
   if (location) details.push({ label: 'Location', value: location })
   if (lead.preferredTiming) details.push({ label: 'Preferred times', value: lead.preferredTiming })
-  if (lead.model) details.push({ label: 'Product', value: `${lead.model.modelCode} — ${lead.model.name}` })
+  if (lead.model) details.push({ label: 'Product', value: `${lead.model.modelCode} | ${lead.model.name}` })
   const budget = formatBudgetRange(lead.budgetMinCents, lead.budgetMaxCents)
   if (budget) details.push({ label: 'Budget', value: budget })
 

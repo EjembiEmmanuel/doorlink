@@ -263,7 +263,7 @@ export default async function JobDetailPage({ params }: PageProps) {
                 <div className="mt-3">
                   <NotConnected
                     feature="Taking payment"
-                    reason="No payment provider is connected, so this records the agreed split only — no money moves through Doorlink yet. Settle directly with each other for now."
+                    reason="No payment provider is connected, so this records the agreed split only. No money moves through Doorlink yet. Settle directly with each other for now."
                   />
                 </div>
               )}

@@ -25,7 +25,7 @@ export default async function RequestTechnicianThanksPage({
           </p>
           <p className="mt-1 font-code text-lg text-graphite">{ref}</p>
           <p className="mt-2 text-sm text-graphite-soft">
-            Keep this — it identifies your job if you need to get in touch.
+            Keep this. It identifies your job if you need to get in touch.
           </p>
         </div>
       )}
@@ -37,7 +37,7 @@ export default async function RequestTechnicianThanksPage({
         </p>
         <p className="rounded-md border border-caution/30 bg-caution-tint p-3 text-sm text-graphite">
           Email notifications aren&apos;t connected in this build yet, so nothing will actually be sent
-          — check back here for quotes in the meantime.
+          Check back here for quotes in the meantime.
         </p>
       </div>
 

@@ -36,7 +36,7 @@ export function MessageForm({ conversationId }: { conversationId: string }) {
           {isPending ? 'Sending…' : 'Send'}
         </Button>
         <p className="text-micro text-zinc-deep">
-          Phone numbers and email addresses are not shared here — Doorlink exchanges those when a job is agreed.
+          Phone numbers and email addresses are not shared here. Doorlink exchanges those when a job is agreed.
         </p>
       </div>
     </form>

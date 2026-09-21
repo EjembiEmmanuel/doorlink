@@ -72,7 +72,7 @@ export default async function AdminMetricsPage() {
           provider has confirmed.{' '}
           {live
             ? 'Both are real figures.'
-            : 'No provider is connected, so collected is zero — that is the true answer, not a broken one.'}
+            : 'No provider is connected, so collected is zero. That is the true answer, not a broken one.'}
         </p>
 
         <Grid className="mt-5">
@@ -120,7 +120,7 @@ export default async function AdminMetricsPage() {
           <Figure
             label="Average rating"
             // No reviews is not an average of nought.
-            value={metrics.community.averageRating?.toFixed(2) ?? '—'}
+            value={metrics.community.averageRating?.toFixed(2) ?? 'Not set'}
             detail={metrics.community.averageRating === null ? 'No reviews yet' : 'Across all reviews'}
           />
           <Figure

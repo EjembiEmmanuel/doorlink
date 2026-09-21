@@ -24,7 +24,7 @@ export default async function EditCompatibilityPage({ params }: PageProps) {
 
   const options = models.map((model) => ({
     id: model.id,
-    label: `${model.modelCode} — ${model.manufacturer.name} ${model.name}`,
+    label: `${model.modelCode} | ${model.manufacturer.name} ${model.name}`,
   }))
 
   return (

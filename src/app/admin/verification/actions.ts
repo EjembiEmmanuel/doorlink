@@ -48,7 +48,7 @@ export async function decideVerificationAction(
 
   // Rejecting without saying why leaves a technician with nothing to fix.
   if (parsed.data.decision === 'REJECTED' && !parsed.data.note) {
-    return { error: 'Say why it was rejected — the technician sees this note and needs it to fix things.' }
+    return { error: 'Say why it was rejected. The technician sees this note and needs it to fix things.' }
   }
 
   const status = VerificationStatus[parsed.data.decision]

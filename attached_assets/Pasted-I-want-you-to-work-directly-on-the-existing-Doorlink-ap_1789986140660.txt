@@ -1,0 +1,407 @@
+I want you to work directly on the existing Doorlink app and implement the following improvements.
+
+IMPORTANT:
+
+* Do NOT rebuild the app from scratch.
+* Do NOT remove, overwrite or break existing Doorlink features.
+* Preserve the existing UI, navigation, authentication, database structure and functionality wherever possible.
+* Inspect the existing codebase first and understand how the current User Manual section works before making changes.
+* Make the implementation production-ready, not a mockup or placeholder.
+* Keep the existing Claude Code/GitHub work intact.
+* Make changes in a clean, modular way so future development can continue safely.
+
+1. ADD ALL EXISTING DOORLINK USER MANUALS
+
+Take all of the user manuals/documents that have already been generated and supplied for Doorlink and integrate them into the existing User Manuals section of the app.
+
+The manuals should NOT simply be displayed as random files.
+
+Create a proper searchable manual library.
+
+Each manual should have structured information such as:
+
+* Manufacturer
+* Brand
+* Product/system name
+* Product type
+* Model number
+* Manual title
+* Manual category
+* File type
+* Date added
+* Verification status
+* Search keywords/tags
+* Manual file
+* Optional description
+
+Support relevant categories including:
+
+* Garage Doors
+* Roller Shutters
+* Automated Gates
+* Sliding Gates
+* Swing Gates
+* Garage Door Openers
+* Gate Openers
+* Motors
+* Controllers
+* Remotes
+* Safety Systems
+* Sensors
+* Access Control
+* Installation Manuals
+* User Manuals
+* Service Manuals
+* Troubleshooting Manuals
+* Technical Documentation
+
+Make the library scalable so thousands of manuals can eventually be added.
+
+2. IMPROVE THE USER MANUAL SEARCH
+
+Users should be able to quickly find the correct manual.
+
+Add a clean search system that allows searches by:
+
+* Manufacturer
+* Brand
+* Model
+* Product name
+* Product type
+* Manual title
+* Keywords
+
+Add filters where appropriate.
+
+For example:
+
+Manufacturer → Product Type → Model → Manual
+
+Search results should clearly display:
+
+Manufacturer
+Product
+Model
+Manual type
+Verification status
+View/Open Manual button
+
+Do not make the interface cluttered.
+
+Keep it professional, clean and easy for technicians and customers to use.
+
+3. NEW “ADD A MANUAL” FEATURE
+
+Inside the existing User Manuals section, add a clearly visible:
+
++ Add a Manual
+
+button.
+
+This allows a Doorlink user to submit a manual that is not currently available in the library.
+
+The user should NOT be able to immediately publish the manual.
+
+Instead, submissions must enter an admin verification workflow.
+
+4. USER MANUAL SUBMISSION FORM
+
+Create a professional submission form containing:
+
+* Manufacturer
+* Brand
+* Product/system name
+* Model number
+* Product type
+* Manual type
+* Description
+* Upload manual
+* Optional additional information
+* Submit for verification
+
+Supported file types should include appropriate document formats such as:
+
+* PDF
+* DOC
+* DOCX
+* Images where appropriate
+
+Set reasonable file-size limits.
+
+Show clear validation errors if something is missing or invalid.
+
+5. AI + ADMIN VERIFICATION WORKFLOW
+
+Every user-submitted manual must go through verification BEFORE becoming publicly searchable.
+
+Workflow:
+
+User uploads manual
+↓
+System validates file
+↓
+AI/document verification checks the file
+↓
+Submission enters admin review
+↓
+Admin approves or rejects
+↓
+If approved → manual becomes available in User Manuals
+↓
+If rejected → manual remains unpublished
+
+The AI verification should check for things such as:
+
+* Is the uploaded file actually a manual/document?
+* Does the document appear legitimate?
+* Is there a manufacturer/brand identified?
+* Does the model/product information make sense?
+* Is the document readable?
+* Is the file corrupted?
+* Is it obviously unrelated to garage doors, roller shutters, automated gates or related systems?
+* Is it potentially a duplicate?
+* Does the metadata supplied by the user match the contents of the document?
+* Does the document appear to contain suspicious, malicious or inappropriate content?
+
+The AI should NEVER automatically approve a questionable document.
+
+If confidence is low, send it to manual admin review.
+
+6. ADMIN REVIEW DASHBOARD
+
+Create or extend the existing admin area with a:
+
+Manual Verification Queue
+
+Admins should be able to see:
+
+* Pending submissions
+* Submitted by
+* Date submitted
+* Manufacturer
+* Product
+* Model
+* Manual type
+* AI verification result
+* AI confidence/status
+* Duplicate warning
+* File preview
+* Download/open manual
+
+Admin actions:
+
+Approve
+
+Reject
+
+Request Changes
+
+If rejected, allow the admin to enter a reason.
+
+The user should be able to see the status of their submission.
+
+Example statuses:
+
+* Pending Review
+* AI Verification
+* Awaiting Admin Review
+* Approved
+* Rejected
+* Needs Changes
+
+7. DUPLICATE DETECTION
+
+Before a new manual is approved, check whether the same or substantially similar manual already exists.
+
+Check using:
+
+* Manufacturer
+* Model
+* Product name
+* File metadata
+* Document content
+* Document hash where appropriate
+
+If a likely duplicate is detected, flag it for the admin instead of automatically publishing it.
+
+8. MANUAL VERSIONING
+
+Where possible, support different versions of the same manual.
+
+For example:
+
+Manufacturer:
+XYZ Doors
+
+Model:
+ABC-500
+
+Versions:
+
+* V1
+* V2
+* V3
+
+Do not delete older manuals automatically.
+
+Allow administrators to mark the newest verified version as the current version.
+
+9. SECURITY
+
+Treat uploaded files as untrusted user content.
+
+Implement appropriate security measures including:
+
+* File type validation
+* File size limits
+* Safe file storage
+* Authentication requirements
+* Authorization checks
+* Admin-only approval actions
+* Protection against unauthorized file access
+* Protection against malicious uploads
+* Secure download/view permissions
+
+Users must never be able to bypass the admin approval process through a direct URL, API request or frontend manipulation.
+
+10. USER SUBMISSION HISTORY
+
+Add a section where users can see manuals they have submitted.
+
+Display:
+
+Manual
+Date submitted
+Status
+Verification result
+Admin message/rejection reason where applicable
+
+Users should NOT be able to modify an approved manual directly.
+
+11. EXISTING MANUALS
+
+All currently available Doorlink manuals should be treated as existing verified content where appropriate.
+
+Do not accidentally send the existing trusted manual library through the new user-submission workflow.
+
+Clearly distinguish:
+
+Doorlink Verified Manual
+
+from
+
+Pending User Submission
+
+and any other appropriate status.
+
+12. UI/UX
+
+Keep the existing Doorlink design language.
+
+The User Manual section should feel like a professional technical documentation library rather than a generic file-storage page.
+
+Use:
+
+* Clean cards/list layouts
+* Manufacturer logos only where already available/licensed
+* Clear model information
+* Search
+* Filters
+* Verification badges
+* Easy document preview/opening
+* Mobile-friendly design
+
+Do not introduce unnecessary animations or complicated graphics.
+
+The main goal is speed and usability for technicians and customers trying to find a manual quickly.
+
+13. GENERAL BUG FIX + ERROR AUDIT
+
+While implementing this, perform a complete audit of the existing Doorlink application.
+
+Look for:
+
+* Console errors
+* Runtime errors
+* Broken buttons
+* Broken links
+* Missing routes
+* Navigation issues
+* Authentication problems
+* Database errors
+* API errors
+* Form validation problems
+* Mobile layout problems
+* Desktop layout problems
+* Empty states
+* Loading states
+* Error states
+* Duplicate records
+* Incorrect data rendering
+* Broken file handling
+* Permission/security issues
+* Features that appear implemented but do not actually work
+
+Fix genuine bugs and errors you discover.
+
+Do NOT make unnecessary redesigns or unrelated changes.
+
+14. DO NOT USE FAKE DATA
+
+Do not create fake manuals just to make the interface look populated.
+
+Use the actual Doorlink manuals/files already available in the project.
+
+If a required backend/data component does not yet exist, implement the correct structure and clearly identify what configuration is required rather than silently creating fake functionality.
+
+15. TEST EVERYTHING
+
+After implementation, test the complete workflow:
+
+Existing manual → Search → Filter → Open → View
+
+New manual → Upload → Validation → AI verification → Admin queue → Admin approval → Published manual
+
+Also test:
+
+New manual → Upload → Rejection
+
+New manual → Duplicate detection
+
+Invalid file → Error
+
+Unauthenticated user → Cannot submit if authentication is required
+
+Normal user → Cannot approve manuals
+
+Admin → Can review/approve/reject
+
+Approved manual → Appears in search
+
+Rejected manual → Does NOT appear publicly
+
+Mobile layout → Works correctly
+
+Desktop layout → Works correctly
+
+16. FINAL REQUIREMENT
+
+Before finishing, inspect the entire implementation and make sure the new User Manual system integrates naturally with the existing Doorlink application.
+
+Do not just tell me what needs to be done.
+
+Actually implement the feature in the existing Replit project.
+
+At the end, provide a concise summary of:
+
+1. What was added
+2. What existing manuals were integrated
+3. What AI verification was implemented
+4. What admin controls were added
+5. What bugs/errors were fixed
+6. Any remaining configuration or setup required
+7. Any database/storage/environment variables that need to be connected
+
+Most importantly:
+
+Do not break existing Doorlink functionality while adding this system.

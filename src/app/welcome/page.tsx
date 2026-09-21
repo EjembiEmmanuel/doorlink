@@ -53,7 +53,7 @@ export default async function WelcomePage() {
             </span>{' '}
             done.{' '}
             {onboarding.complete
-              ? 'Nothing else is needed — the rest is optional.'
+              ? 'Nothing else is needed. The rest is optional.'
               : 'Each item is checked against your account when this page loads, so it stays accurate.'}
           </p>
         )}
@@ -69,7 +69,7 @@ export default async function WelcomePage() {
 
       <footer className="border-t border-line pt-6">
         <p className="text-sm text-zinc-deep">
-          You can leave this and come back — nothing here expires.{' '}
+          You can leave this and come back. Nothing here expires.{' '}
           <Link href="/account" className="font-medium text-signal hover:text-signal-hover">
             Go to your account
           </Link>

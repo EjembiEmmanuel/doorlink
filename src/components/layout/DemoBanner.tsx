@@ -11,7 +11,7 @@ export function DemoBanner() {
 
   return (
     <div className="bg-caution-tint px-4 py-2 text-center text-sm text-caution">
-      Demo mode — this build mixes real manufacturer documents with invented sample data. Every record
+      Demo mode: this build mixes real manufacturer documents with invented sample data. Every record
       is labelled with where it came from.
     </div>
   )

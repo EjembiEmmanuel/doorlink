@@ -133,7 +133,7 @@ export default async function AdminMarketplacePage() {
         <h2 className="text-lg font-semibold text-graphite">Money</h2>
         <p className="mt-1 max-w-prose text-sm text-graphite-soft">
           These are the splits Doorlink has <em>recorded</em>, not money it has collected. No payment provider
-          is connected, so nothing below has been charged, held, or paid out — customers and technicians are
+          is connected, so nothing below has been charged, held, or paid out. Customers and technicians are
           settling directly.
         </p>
 

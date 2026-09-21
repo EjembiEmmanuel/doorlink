@@ -79,8 +79,8 @@ export function ModelForm({
         htmlFor="productLineId"
         hint={
           availableProductLines.length === 0
-            ? 'This manufacturer has no product lines yet — leave as None.'
-            : 'Optional — only lines belonging to the chosen manufacturer are listed.'
+            ? 'This manufacturer has no product lines yet. Leave as None.'
+            : 'Optional. Only lines belonging to the chosen manufacturer are listed.'
         }
       >
         <Select id="productLineId" name="productLineId" defaultValue={model?.productLineId ?? ''}>

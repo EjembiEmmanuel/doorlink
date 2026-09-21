@@ -37,7 +37,7 @@ export default async function ComplianceDetailsPage() {
       <header className="flex flex-col gap-3">
         <h1 className="text-2xl font-semibold tracking-tight text-graphite">Your compliance details</h1>
         <p className="max-w-prose text-graphite-soft">
-          Entered once and repeated on every document in the pack. Saving keeps whatever you have filled in —
+          Entered once and repeated on every document in the pack. Saving keeps whatever you have filled in.
           you do not have to complete it in one sitting.
         </p>
         <p className="text-sm text-graphite-soft">
@@ -77,7 +77,7 @@ export default async function ComplianceDetailsPage() {
                 <li key={warning.label}>
                   {warning.label} {warning.expired ? 'expired' : 'expires'} on{' '}
                   {warning.date.toLocaleDateString('en-AU')}
-                  {warning.expired ? '.' : ` — ${warning.daysRemaining} days away.`}
+                  {warning.expired ? '.' : `, ${warning.daysRemaining} days away.`}
                 </li>
               ))}
             </ul>

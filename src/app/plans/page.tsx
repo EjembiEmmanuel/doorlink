@@ -54,7 +54,7 @@ export default async function PlansPage() {
         <div className="mb-8 rounded-md border border-good/30 bg-good/5 p-4">
           <p className="text-sm text-graphite">
             You are on <span className="font-medium">{entitlements.planName}</span>
-            {entitlements.status && ` — ${SUBSCRIPTION_STATUS_LABELS[entitlements.status].toLowerCase()}`}.{' '}
+            {entitlements.status && ` (${SUBSCRIPTION_STATUS_LABELS[entitlements.status].toLowerCase()})`}.{' '}
             <Link href="/account/subscription" className="font-medium text-signal hover:text-signal-hover">
               Manage your subscription
             </Link>
@@ -106,7 +106,7 @@ export default async function PlansPage() {
 
                 {/* No button. A "Subscribe" control that cannot subscribe
                     anyone is exactly the fake functionality this build
-                    does not ship — the reason it is unavailable is shown
+                    does not ship. The reason it is unavailable is shown
                     instead. */}
                 <p className="rounded border border-line bg-rail px-3 py-2.5 text-sm text-graphite-soft">
                   {reason ?? 'Ready to subscribe.'}
@@ -124,7 +124,7 @@ export default async function PlansPage() {
         {gated.length === 0 ? (
           <p className="mt-3 text-graphite-soft">
             Nothing is behind the subscription today. Which features are premium is an admin setting rather than
-            something written into the code, so it can be decided once the business model is settled — and until
+                    something written into the code, so it can be decided once the business model is settled, and until
             it is, every part of Doorlink is available to everyone.
           </p>
         ) : (
@@ -143,7 +143,7 @@ export default async function PlansPage() {
         <div className="mt-10 max-w-prose">
           <NotConnected
             feature="Subscribing"
-            reason="No payment provider is connected, so no plan can be bought yet. The plans, the billing states and the feature gate are all built — what is missing is the Stripe keys."
+              reason="No payment provider is connected, so no plan can be bought yet. The plans, the billing states and the feature gate are all built. What is missing is the Stripe keys."
           />
         </div>
       )}

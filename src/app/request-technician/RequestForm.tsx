@@ -14,10 +14,10 @@ interface Option {
 const initialState: RequestFormState = {}
 
 const URGENCY_OPTIONS = [
-  { value: 'EMERGENCY', label: 'Emergency — today if possible' },
-  { value: 'URGENT', label: 'Urgent — within a few days' },
-  { value: 'STANDARD', label: 'Standard — within a couple of weeks' },
-  { value: 'FLEXIBLE', label: 'Flexible — no rush' },
+  { value: 'EMERGENCY', label: 'Emergency, today if possible' },
+  { value: 'URGENT', label: 'Urgent, within a few days' },
+  { value: 'STANDARD', label: 'Standard, within a couple of weeks' },
+  { value: 'FLEXIBLE', label: 'Flexible, no rush' },
 ]
 
 const STATES = ['ACT', 'NSW', 'NT', 'QLD', 'SA', 'TAS', 'VIC', 'WA']
@@ -37,26 +37,28 @@ export function RequestForm({
   const [state, formAction, isPending] = useActionState(createLeadAction, initialState)
 
   return (
-    <form action={formAction} className="flex flex-col gap-8">
-      <fieldset className="flex flex-col gap-4">
-        <legend className="mb-1 text-sm font-semibold uppercase tracking-wide text-zinc-deep">
+    <form action={formAction} className="flex flex-col gap-5">
+      <fieldset className="flex flex-col gap-5 rounded-lg border border-line bg-paper p-5 shadow-sm sm:p-6">
+        <legend className="text-sm font-semibold uppercase tracking-[0.14em] text-graphite">
           What needs doing
         </legend>
 
-        <Field label="What kind of work is it?" htmlFor="serviceCategoryId">
-          <Select id="serviceCategoryId" name="serviceCategoryId" defaultValue="">
-            <option value="">Not sure / not listed</option>
-            {serviceCategories.map((option) => (
-              <option key={option.id} value={option.id}>
-                {option.label}
-              </option>
-            ))}
-          </Select>
-        </Field>
+        <div className="grid gap-5 sm:grid-cols-2">
+          <Field label="What kind of work is it?" htmlFor="serviceCategoryId">
+            <Select id="serviceCategoryId" name="serviceCategoryId" defaultValue="">
+              <option value="">Not sure / not listed</option>
+              {serviceCategories.map((option) => (
+                <option key={option.id} value={option.id}>
+                  {option.label}
+                </option>
+              ))}
+            </Select>
+          </Field>
 
-        <Field label="Job title" htmlFor="title" hint="A short summary, e.g. “Roller door won’t close fully”.">
-          <Input id="title" name="title" required maxLength={120} defaultValue={prefill?.title ?? ''} />
-        </Field>
+          <Field label="Job title" htmlFor="title" hint='A short summary, for example, "Roller door will not close fully".'>
+            <Input id="title" name="title" required maxLength={120} defaultValue={prefill?.title ?? ''} />
+          </Field>
+        </div>
 
         <Field
           label="Describe the problem"
@@ -76,7 +78,7 @@ export function RequestForm({
         <Field
           label="Which product is it?"
           htmlFor="modelId"
-          hint="Optional — skip if you don’t know. You can find it later with Find your part."
+          hint="Optional. Skip it if you do not know. You can find it later with Find your part."
         >
           <Select id="modelId" name="modelId" defaultValue="">
             <option value="">Not sure / not listed</option>
@@ -89,8 +91,8 @@ export function RequestForm({
         </Field>
       </fieldset>
 
-      <fieldset className="flex flex-col gap-4">
-        <legend className="mb-1 text-sm font-semibold uppercase tracking-wide text-zinc-deep">
+      <fieldset className="flex flex-col gap-5 rounded-lg border border-line bg-paper p-5 shadow-sm sm:p-6">
+        <legend className="text-sm font-semibold uppercase tracking-[0.14em] text-graphite">
           Where and when
         </legend>
 
@@ -100,7 +102,7 @@ export function RequestForm({
           </Field>
           <Field label="State" htmlFor="state">
             <Select id="state" name="state" defaultValue="">
-              <option value="">—</option>
+              <option value="">Select state</option>
               {STATES.map((s) => (
                 <option key={s} value={s}>
                   {s}
@@ -126,18 +128,18 @@ export function RequestForm({
         <Field
           label="Preferred times"
           htmlFor="preferredTiming"
-          hint="Optional — e.g. “weekday mornings” or “after 4pm”."
+          hint='Optional, for example, "weekday mornings" or "after 4pm".'
         >
           <Input id="preferredTiming" name="preferredTiming" />
         </Field>
       </fieldset>
 
-      <fieldset className="flex flex-col gap-4">
-        <legend className="mb-1 text-sm font-semibold uppercase tracking-wide text-zinc-deep">
+      <fieldset className="flex flex-col gap-5 rounded-lg border border-line bg-paper p-5 shadow-sm sm:p-6">
+        <legend className="text-sm font-semibold uppercase tracking-[0.14em] text-graphite">
           Budget <span className="font-normal normal-case text-zinc-deep">(optional)</span>
         </legend>
         <p className="text-sm text-zinc-deep">
-          A rough range helps technicians decide whether to quote. Leave both blank if you’d rather just
+          A rough range helps technicians decide whether to quote. Leave both blank if you would rather just
           see what comes back.
         </p>
         <div className="grid gap-4 sm:grid-cols-2">
@@ -150,8 +152,8 @@ export function RequestForm({
         </div>
       </fieldset>
 
-      <fieldset className="flex flex-col gap-4">
-        <legend className="mb-1 text-sm font-semibold uppercase tracking-wide text-zinc-deep">
+      <fieldset className="flex flex-col gap-5 rounded-lg border border-line bg-paper p-5 shadow-sm sm:p-6">
+        <legend className="text-sm font-semibold uppercase tracking-[0.14em] text-graphite">
           How to reach you
         </legend>
 
@@ -165,12 +167,12 @@ export function RequestForm({
         </div>
 
         <Field label="Phone" htmlFor="phone" hint="Optional, but technicians usually quote faster with one.">
-          <Input id="phone" name="phone" type="tel" autoComplete="tel" />
+           <Input id="phone" name="phone" type="tel" autoComplete="tel" />
         </Field>
 
         {!signedIn && (
           <p className="rounded-md border border-line bg-rail p-3 text-sm text-graphite-soft">
-            You can post without an account. Signing in first lets you track quotes and compare
+             You can post without an account. Signing in first lets you track quotes and compare
             technicians from your dashboard.
           </p>
         )}
@@ -182,11 +184,11 @@ export function RequestForm({
         </p>
       )}
 
-      <div className="flex items-center gap-3">
+      <div className="flex flex-col gap-3 rounded-lg border border-graphite bg-graphite p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
         <Button type="submit" size="lg" disabled={isPending}>
-          {isPending ? 'Posting…' : 'Post job'}
+          {isPending ? 'Posting...' : 'Post job'}
         </Button>
-        <p className="text-sm text-zinc-deep">It’s free to post. You only pay if you hire someone.</p>
+        <p className="text-sm text-paper/70">It is free to post. You only pay if you hire someone.</p>
       </div>
     </form>
   )

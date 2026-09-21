@@ -415,7 +415,9 @@ body {
   overflow: hidden;
   cursor: ns-resize;
   touch-action: none;
-  background: #101012;
+   background:
+     radial-gradient(circle at 50% 44%, rgba(255, 129, 36, 0.08), transparent 32%),
+     #101012;
   perspective: 1100px;
   perspective-origin: 52% 44%;
   user-select: none;
@@ -498,7 +500,7 @@ body {
   display: block;
   width: 18px;
   height: 9px;
-  border-top: 1px solid var(--text-muted);
+   border-top: 2px solid #5eb7ff;
   border-radius: 50% 50% 0 0;
   transform: rotate(-12deg);
 }
@@ -509,7 +511,7 @@ body {
   left: 8px;
   width: 10px;
   height: 9px;
-  border-top: 1px solid var(--text-muted);
+   border-top: 2px solid #5eb7ff;
   border-radius: 50% 50% 0 0;
   content: '';
   transform: rotate(24deg);
@@ -543,13 +545,14 @@ body {
   bottom: 0;
   width: 25%;
   height: 75%;
-  border: 1px solid #35353A;
+   border: 1px solid #2d7d4b;
   border-radius: 52% 48% 16% 16%;
   background:
-    radial-gradient(circle at 28% 35%, #46464B 0 8%, transparent 9%),
-    radial-gradient(circle at 64% 28%, #3A3A3F 0 11%, transparent 12%),
-    linear-gradient(160deg, #2A2A2E, #141416 72%);
-  box-shadow: 0 12px 18px rgba(0, 0, 0, 0.36), inset 8px 5px 0 rgba(255, 255, 255, 0.04);
+     radial-gradient(circle at 28% 35%, #83d36b 0 8%, transparent 9%),
+     radial-gradient(circle at 64% 28%, #4eaf59 0 11%, transparent 12%),
+     radial-gradient(circle at 45% 64%, #28733e 0 18%, transparent 19%),
+     linear-gradient(160deg, #3c9850, #123d27 72%);
+   box-shadow: 0 12px 18px rgba(0, 0, 0, 0.36), 0 0 22px rgba(54, 180, 91, 0.16), inset 8px 5px 0 rgba(255, 255, 255, 0.08);
 }
 
 .garage-door-bush-left {
@@ -578,7 +581,7 @@ body {
   transform: translateZ(18px) rotateY(-2deg) rotateX(1deg);
   transform-style: preserve-3d;
   background: #0B0B0C;
-  box-shadow: 0 28px 42px rgba(0, 0, 0, 0.42), inset 0 0 0 10px #1C1C1F;
+   box-shadow: 0 28px 42px rgba(0, 0, 0, 0.42), 0 0 0 1px rgba(255, 129, 36, 0.18), inset 0 0 0 10px #1C1C1F;
 }
 
 .garage-door-opening::before,
@@ -649,14 +652,15 @@ body {
   overflow: hidden;
   transform-origin: top center;
   transform-style: preserve-3d;
-  border: 1px solid #46464B;
+   border: 1px solid #636773;
   background:
     linear-gradient(105deg, rgba(255, 255, 255, 0.06), transparent 23% 73%, rgba(255, 106, 0, 0.08)),
     linear-gradient(160deg, #383A42, #242428 62%, #1D1D21);
-  box-shadow:
+   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.13),
     inset 0 -10px 20px rgba(0, 0, 0, 0.13),
-    0 8px 16px rgba(0, 0, 0, 0.22);
+     0 8px 16px rgba(0, 0, 0, 0.22),
+     0 0 18px rgba(107, 142, 184, 0.06);
   will-change: transform;
 }
 

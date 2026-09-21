@@ -79,7 +79,7 @@ export default async function SubscriptionPage() {
         ) : (
           <EmptyState
             title="You're on the free plan"
-            description="Everything in Doorlink is available to you right now — nothing is behind the subscription yet."
+            description="Everything in Doorlink is available to you right now. Nothing is behind the subscription yet."
           />
         )}
       </section>
@@ -102,7 +102,7 @@ export default async function SubscriptionPage() {
         </h2>
         {entitlements.gated.size === 0 ? (
           <p className="text-graphite-soft">
-            Nothing, today. No feature is gated behind a subscription — which features become premium is an
+            Nothing, today. No feature is gated behind a subscription. Which features become premium is an
             admin setting, not something compiled into the app, so it can be decided once the business model is.{' '}
             <Link href="/plans" className="font-medium text-signal hover:text-signal-hover">
               See the plans

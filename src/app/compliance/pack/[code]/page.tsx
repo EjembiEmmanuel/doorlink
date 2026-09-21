@@ -12,7 +12,7 @@ import '../compliance-print.css'
 export async function generateMetadata({ params }: { params: Promise<{ code: string }> }): Promise<Metadata> {
   const { code } = await params
   const doc = findDocument(code.toUpperCase())
-  return { title: doc ? `${doc.code} — ${doc.title}` : 'Document' }
+  return { title: doc ? `${doc.code}: ${doc.title}` : 'Document' }
 }
 
 export default async function ComplianceDocumentPage({ params }: { params: Promise<{ code: string }> }) {

@@ -49,7 +49,7 @@ export default async function CategoriesPage() {
               <tr key={category.id}>
                 <Td>{category.name}</Td>
                 <Td className="font-code">{category.slug}</Td>
-                <Td>{category.parent?.name ?? '—'}</Td>
+                <Td>{category.parent?.name ?? 'Not set'}</Td>
                 <Td>{category._count.models}</Td>
                 <Td>
                   <div className="flex items-center justify-end gap-3">

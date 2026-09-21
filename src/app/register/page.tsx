@@ -14,7 +14,7 @@ export default function RegisterPage() {
     <div className="mx-auto max-w-sm px-4 py-16">
       <h1 className="text-2xl font-semibold text-graphite">Create an account</h1>
       <p className="mt-2 text-sm text-graphite-soft">
-        No password is set — this creates a development-only session, not real authentication.
+        No password is set. This creates a development-only session, not real authentication.
       </p>
 
       <div className="mt-8">

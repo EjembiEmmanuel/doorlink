@@ -234,7 +234,7 @@ export function FinderCascade() {
               onClick={() => setStep('model')}
               className="mt-3 text-sm font-medium text-signal hover:text-signal-hover"
             >
-              Skip — I don&apos;t know the product line
+              Skip. I don&apos;t know the product line
             </button>
           )}
         </div>
