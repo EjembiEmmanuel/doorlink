@@ -1,0 +1,1573 @@
+{
+  "note": "Documentation portals — the harvest targets. Each is an index page that lists many documents. `npm run manuals:harvest` crawls these and writes candidate records to data/manuals/harvested/ for review. This registry is how the library scales: one portal can yield hundreds of documents, which searching model-by-model never will. Every URL here was surfaced by a real search. None is a guessed URL pattern.",
+  "portals": [
+    {
+      "manufacturer": "B&D",
+      "slug": "bnd",
+      "url": "https://www.bnd.com.au/trade-resources/installation-manuals/opener-manuals/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "AU"
+    },
+    {
+      "manufacturer": "Gliderol",
+      "slug": "gliderol",
+      "url": "https://gliderol.com.au/support/user-manuals-guides/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "AU"
+    },
+    {
+      "manufacturer": "Automatic Technology",
+      "slug": "automatic-technology",
+      "url": "https://www.automatictechnology.com/au/resources/installation-manuals",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "AU"
+    },
+    {
+      "manufacturer": "Steel-Line",
+      "slug": "steel-line",
+      "url": "https://www.steel-lineautomation.com.au/technical-support.html",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "AU"
+    },
+    {
+      "manufacturer": "Chamberlain",
+      "slug": "chamberlain",
+      "url": "https://www.chamberlaindiy.com.au/documents-and-downloads/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "AU"
+    },
+    {
+      "manufacturer": "Chamberlain",
+      "slug": "chamberlain",
+      "url": "https://support.chamberlaingroup.com/s/manuals-parts",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "GLOBAL"
+    },
+    {
+      "manufacturer": "Dominator",
+      "slug": "dominator",
+      "url": "https://www.dominator.co.nz/resources/owners-manuals",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "NZ"
+    },
+    {
+      "manufacturer": "Nice",
+      "slug": "nice",
+      "url": "https://www.niceforyou.com/en/professional-area/download",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "GLOBAL"
+    },
+    {
+      "manufacturer": "Somfy",
+      "slug": "somfy",
+      "url": "https://www.somfy.co.uk/support/downloads",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "UK"
+    },
+    {
+      "manufacturer": "Somfy",
+      "slug": "somfy",
+      "url": "https://www.somfysystems.com/en-us/support/documentation",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "US"
+    },
+    {
+      "manufacturer": "Somfy",
+      "slug": "somfy",
+      "url": "https://www.somfy.me/en-gc/support-and-assistance/downloads",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "GLOBAL"
+    },
+    {
+      "manufacturer": "BFT",
+      "slug": "bft",
+      "url": "https://bftgateopeners.com/store/manuals",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "GLOBAL"
+    },
+    {
+      "manufacturer": "Hörmann",
+      "slug": "hormann",
+      "url": "https://www.hormann.us/high-performance/tech-support/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "US"
+    },
+    {
+      "manufacturer": "ASSA ABLOY Entrance Systems",
+      "slug": "assa-abloy-entrance-systems",
+      "url": "https://www.assaabloyentrance.com/us/en/solutions/products/automatic-doors/revolving-doors/manual",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "US"
+    },
+    {
+      "manufacturer": "Dominator",
+      "slug": "dominator",
+      "url": "https://www.dominatornsw.com.au/resources/ata-dominator-owner-s-manuals",
+      "authority": "AUTHORISED_DISTRIBUTOR",
+      "region": "AU"
+    },
+    {
+      "manufacturer": "Merlin",
+      "slug": "merlin",
+      "url": "https://www.dominatornsw.com.au/resources/merlin-owner-s-manuals",
+      "authority": "AUTHORISED_DISTRIBUTOR",
+      "region": "AU"
+    },
+    {
+      "manufacturer": "Boss",
+      "slug": "boss",
+      "url": "https://www.egaragesystems.com.au/manuals/boss-manuals",
+      "authority": "AUTHORISED_DISTRIBUTOR",
+      "region": "AU"
+    },
+    {
+      "manufacturer": "multiple",
+      "slug": null,
+      "url": "https://garagedooropenerremotes.com.au/manuals-and-downloads",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "AU",
+      "note": "Aggregator index spanning many Australian brands. Harvested records from here are third-party by definition and must not be presented as manufacturer documents."
+    },
+    {
+      "manufacturer": "multiple",
+      "slug": null,
+      "url": "https://automaticgaragesolutions.com.au/brochure_manual/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "AU",
+      "note": "Aggregator index spanning many Australian brands."
+    },
+    {
+      "manufacturer": "Marantec",
+      "slug": "marantec",
+      "url": "https://www.marantec.com/en/installation-instructions",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "EU"
+    },
+    {
+      "manufacturer": "BFT",
+      "slug": "bft",
+      "url": "https://www.bftautomationuk.com/resources/instruction-manuals.html",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "UK"
+    },
+    {
+      "manufacturer": "FAAC",
+      "slug": "faac",
+      "url": "https://www.faac.co.uk/support/knowledge-base",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "UK"
+    },
+    {
+      "manufacturer": "Benincà",
+      "slug": "beninca",
+      "url": "https://www.beninca.com/en/beninca-products/automations-for-swinging-gates.html",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "GLOBAL",
+      "follow": true
+    },
+    {
+      "manufacturer": "Rollease Acmeda",
+      "slug": "rollease-acmeda",
+      "url": "https://www.rolleaseacmeda.com/au/member-documents",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "AU",
+      "note": "Named member-documents; may require sign-in. The harvester records a 401/403 rather than attempting to get past it."
+    },
+    {
+      "manufacturer": "Rollease Acmeda",
+      "slug": "rollease-acmeda",
+      "url": "https://blindmotorsonline.com.au/rollease-acmeda-products-manuals/",
+      "authority": "AUTHORISED_DISTRIBUTOR",
+      "region": "AU"
+    },
+    {
+      "manufacturer": "multiple",
+      "slug": null,
+      "url": "https://manuals.plus/category/beninca",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "GLOBAL",
+      "note": "Aggregator index. Listings report several hundred Benincà manuals."
+    },
+    {
+      "manufacturer": "Novoferm",
+      "slug": "novoferm",
+      "url": "https://www.novoferm.com/downloads/installation-assembly-instructions",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "EU"
+    },
+    {
+      "manufacturer": "Teckentrup",
+      "slug": "teckentrup",
+      "url": "https://www.teckentrup.biz/en/downloadcenter",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "EU"
+    },
+    {
+      "manufacturer": "EFAFLEX",
+      "slug": "efaflex",
+      "url": "https://www.efaflex.com/download-area/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "EU"
+    },
+    {
+      "manufacturer": "Genie",
+      "slug": "genie",
+      "url": "https://support.geniecompany.com/app/answers/detail/a_id/1308/~/owners-manuals",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "US"
+    },
+    {
+      "manufacturer": "GEZE",
+      "slug": "geze",
+      "url": "https://www.geze.com/en/download",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "EU"
+    },
+    {
+      "manufacturer": "Becker",
+      "slug": "becker",
+      "url": "https://beckeraustralia.com.au/product-centre/download/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "AU"
+    },
+    {
+      "manufacturer": "elero",
+      "slug": "elero",
+      "url": "https://www.elero.com/en/downloads-service/downloads",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "EU"
+    },
+    {
+      "manufacturer": "Roger Technology",
+      "slug": "roger-technology",
+      "url": "https://rtnorth.co.uk/downloads",
+      "authority": "AUTHORISED_DISTRIBUTOR",
+      "region": "UK"
+    },
+    {
+      "manufacturer": "LiftMaster",
+      "slug": "liftmaster",
+      "url": "https://www.aegates.com/liftmaster-gate-manuals/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "US"
+    },
+    {
+      "manufacturer": "Ozroll",
+      "slug": "ozroll",
+      "url": "https://ozrolltech.com.au/rollashield/installation-advice/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "AU"
+    },
+    {
+      "manufacturer": "Ozroll",
+      "slug": "ozroll",
+      "url": "https://ozrolltech.com.au/rollashield/product-information/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "AU"
+    },
+    {
+      "manufacturer": "DoorKing",
+      "slug": "doorking",
+      "url": "https://www.doorking.com/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "US"
+    },
+    {
+      "manufacturer": "record",
+      "slug": "record",
+      "url": "https://www.recorddoors.com/master-blueprint/en/downloads/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "GLOBAL",
+      "note": "Directory the manufacturer-hosted STA 20 installation manual sits under. Likely a deep tree of per-product download folders."
+    },
+    {
+      "manufacturer": "record",
+      "slug": "record",
+      "url": "https://www.recordukdirect.co.uk/media/Sliding%20Doors/",
+      "authority": "AUTHORISED_DISTRIBUTOR",
+      "region": "UK",
+      "note": "UK arm's media directory. May index rather than list; the harvester reports no-documents if so."
+    },
+    {
+      "manufacturer": "Gilgen Door Systems",
+      "slug": "gilgen",
+      "url": "https://www.gilgendoorsystems.com/en/downloadcenter/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "GLOBAL",
+      "note": "Named download centre spanning brochures, data sheets and documents for the whole range.",
+      "follow": true
+    },
+    {
+      "manufacturer": "V2 Elettronica",
+      "slug": "v2",
+      "url": "https://v2home.com/en/manuals/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "EU",
+      "note": "Manufacturer's own manuals index, organised by gate automations, control units and motors.",
+      "follow": true
+    },
+    {
+      "manufacturer": "Ditec Entrematic",
+      "slug": "ditec",
+      "url": "https://www.ditecautomations.com/global/en/images/downloads/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "GLOBAL",
+      "note": "Downloads tree the Rex user manual sits under; product folders branch from here."
+    },
+    {
+      "manufacturer": "Ditec Entrematic",
+      "slug": "ditec",
+      "url": "https://www.ditecautomations.com/Entrematic/ditecentrematicCOM/QR/Multilanguages/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "GLOBAL",
+      "note": "Multilingual QR-code asset tree - the copies the labels on installed doors point at. One folder per product family."
+    },
+    {
+      "manufacturer": "V2 Elettronica",
+      "slug": "v2",
+      "url": "https://www.manualslib.com/brand/v2/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "GLOBAL",
+      "note": "Aggregator brand index spanning the V2 range."
+    },
+    {
+      "manufacturer": "Key Automation",
+      "slug": "key-automation",
+      "url": "https://www.keyautomation.com/media/products/images/MANUALS/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "EU",
+      "note": "Manufacturer's own MANUALS media directory, serving files named <code> <rev>.PDF. If it indexes, one crawl covers the range.",
+      "follow": true
+    },
+    {
+      "manufacturer": "Aprimatic",
+      "slug": "aprimatic",
+      "url": "https://manuals.easygates.co.uk/category/manuals/aprimatic/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "UK",
+      "note": "Reseller index of Aprimatic manuals. Third-party by definition; harvested records must not be shown as manufacturer documents."
+    },
+    {
+      "manufacturer": "Aprimatic",
+      "slug": "aprimatic",
+      "url": "https://www.manualslib.com/brand/aprimatic/gate-opener.html",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "GLOBAL",
+      "note": "Aggregator brand index for Aprimatic gate openers."
+    },
+    {
+      "manufacturer": "SEA (Seateam)",
+      "slug": "sea",
+      "url": "https://download.seateam.com/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "EU",
+      "note": "Public file-browser index of SEA installation manuals, organised by language, product family and type. The most productive-looking target in this registry. SEA's separate reserved area needs registration and is deliberately not listed here.",
+      "follow": true
+    },
+    {
+      "manufacturer": "SEA (Seateam)",
+      "slug": "sea",
+      "url": "https://download.seateam.com/index4.php?folder=RU5HTElTSCAtIEluc3RhbGxhdGlvbiBNYW51YWxzL0VsZWN0cm9uaWMvQ09OVFJPTCBCT0FSRFMgQU5EIFBST0dSQU1NRVJT",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "EU",
+      "note": "One folder inside that index: ENGLISH - Installation Manuals/Electronic/CONTROL BOARDS AND PROGRAMMERS (the folder parameter is base64). Recorded as a worked example of the encoding, since the harvester will need to walk these folder links rather than guess paths."
+    },
+    {
+      "manufacturer": "SEA (Seateam)",
+      "slug": "sea",
+      "url": "https://www.seauk.uk/technical-page/",
+      "authority": "AUTHORISED_DISTRIBUTOR",
+      "region": "UK",
+      "note": "SEA UK technical page; search describes it as carrying control-panel instructions including the User 1 and User 2 boards."
+    },
+    {
+      "manufacturer": "Meccanica Fadini",
+      "slug": "fadini",
+      "url": "https://manuals.easygates.co.uk/PDF/fadini/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "UK",
+      "note": "Reseller directory of Fadini PDFs, subfoldered by product type. Third-party; harvested records must not be shown as manufacturer documents."
+    },
+    {
+      "manufacturer": "Meccanica Fadini",
+      "slug": "fadini",
+      "url": "https://www.manualslib.com/brand/fadini/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "GLOBAL",
+      "note": "Aggregator brand index for Fadini."
+    },
+    {
+      "manufacturer": "Cherubini",
+      "slug": "cherubini",
+      "url": "https://www.cherubini-group.com/files/uploads/istruzioni/ist_standard/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "EU",
+      "note": "Manufacturer's standard-instructions tree, foldered by year, serving static PDFs named <product>_<codes>_<lang>.pdf."
+    },
+    {
+      "manufacturer": "VDS Automation",
+      "slug": "vds",
+      "url": "https://www.vdsautomation.com/istruzioni/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "EU",
+      "note": "Manufacturer's instructions directory, language-suffixed static PDFs."
+    },
+    {
+      "manufacturer": "GiBiDi",
+      "slug": "gibidi",
+      "url": "https://www.manualslib.com/brand/gibidi/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "GLOBAL",
+      "note": "Aggregator brand index. No gibidi.com documentation path surfaced, so this is the only index available for the brand."
+    },
+    {
+      "manufacturer": "Dooya",
+      "slug": "dooya",
+      "url": "https://manuals.plus/category/dooya/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "GLOBAL",
+      "note": "Aggregator brand index, paginated - the search surfaced page 3, so the listing runs deep."
+    },
+    {
+      "manufacturer": "Dooya",
+      "slug": "dooya",
+      "url": "https://fccid.io/VYYDM350328/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "US",
+      "note": "FCC filing mirror for Dooya grantee code VYY. Regulatory filings are public records and carry the manufacturer's own manuals; the mirror is still third-party."
+    },
+    {
+      "manufacturer": "Rytec",
+      "slug": "rytec",
+      "url": "https://www.rytecdoors.com/sites/default/files/documents/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "US",
+      "note": "Manufacturer's own documents directory. Several install and owner's manuals already sourced from it; likely holds the rest of the range."
+    },
+    {
+      "manufacturer": "Rytec",
+      "slug": "rytec",
+      "url": "https://s3.amazonaws.com/ddn.rytecdoors.com/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "US",
+      "note": "Rytec's own S3 document bucket - a manufacturer host despite the amazonaws.com address. Files are named by document number, so a bucket listing, if public, maps the whole set."
+    },
+    {
+      "manufacturer": "Rytec",
+      "slug": "rytec",
+      "url": "https://riceequipment.com/rytec-high-performance-doors-literature",
+      "authority": "AUTHORISED_DISTRIBUTOR",
+      "region": "US",
+      "note": "Distributor literature index for the Rytec range."
+    },
+    {
+      "manufacturer": "ASSA ABLOY Albany",
+      "slug": "albany",
+      "url": "https://www.assaabloyentrance.com/master-blueprint/en/product-assets/high-speed-doors/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "GLOBAL",
+      "note": "Group product-asset tree for high-speed doors, one folder per model with downloads beneath. Leaflet-heavy; manuals may sit in sibling folders."
+    },
+    {
+      "manufacturer": "ASSA ABLOY Albany",
+      "slug": "albany",
+      "url": "https://www.cisco-eagle.com/uploads/AlbanyDoor-Interior/",
+      "authority": "AUTHORISED_DISTRIBUTOR",
+      "region": "US",
+      "note": "Distributor upload directory holding the Albany install and owner's manuals that the group's own tree did not surface."
+    },
+    {
+      "manufacturer": "Danmar Doors",
+      "slug": "danmar",
+      "url": "https://www.danmardoorswa.com.au/service/installation-guides/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "AU",
+      "note": "Danmar WA's own installation-guides page, described as carrying downloadable PDF guides. The only Danmar documentation index found.",
+      "follow": true
+    },
+    {
+      "manufacturer": "Danmar Doors",
+      "slug": "danmar",
+      "url": "https://www.danmardoorswa.com.au/useful-information/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "AU",
+      "note": "Care, maintenance and service downloads."
+    },
+    {
+      "manufacturer": "Taurean Door Systems",
+      "slug": "taurean",
+      "url": "https://www.taureands.com.au/safety/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "AU",
+      "note": "Taurean's safety page; the manufacturer's own documentation entry point."
+    },
+    {
+      "manufacturer": "Taurean Door Systems",
+      "slug": "taurean",
+      "url": "https://www.egaragesystems.com.au/manuals/taurean-brochures",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "AU",
+      "note": "Reseller index of Taurean literature."
+    },
+    {
+      "manufacturer": "B&D",
+      "slug": "bnd",
+      "url": "https://garagedooropenerremotes.com.au/manuals-and-downloads/bnd-manuals",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "AU",
+      "note": "B&D section of the aggregator index. The parent index describes itself as holding 500+ garage door and gate opener documents from the 1980s on, which makes it one of the higher-yield AU targets - and third-party throughout, so nothing harvested here may be shown as a manufacturer document."
+    },
+    {
+      "manufacturer": "Garador",
+      "slug": "garador",
+      "url": "https://www.garador.co.uk/installer-support/fitting-instructions/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "UK",
+      "note": "Manufacturer's fitting-instructions index, covering Up & Over, Sectional (L, N and Z track), GaraRoll and Side Hinged.",
+      "follow": true
+    },
+    {
+      "manufacturer": "Garador",
+      "slug": "garador",
+      "url": "https://www.garador.co.nz/resources/owner-manuals",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "NZ",
+      "note": "Garador New Zealand's owner-manual index - a separate arm with its own documents.",
+      "follow": true
+    },
+    {
+      "manufacturer": "Garador",
+      "slug": "garador",
+      "url": "https://www.thegaragedoorcentre.co.uk/downloads",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "UK",
+      "note": "Reseller download index spanning many UK brands, not Garador alone."
+    },
+    {
+      "manufacturer": "multiple",
+      "slug": null,
+      "url": "https://www.garagedoorsonline.co.uk/downloads",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "UK",
+      "note": "UK aggregator index of garage door manuals and catalogues across brands."
+    },
+    {
+      "manufacturer": "Boss (Garage Door Operators)",
+      "slug": "boss",
+      "url": "https://www.aggdoors.com.au/product-support/manuals/garage-door-opener-manuals/boss-garage-opener-manuals/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "AU",
+      "note": "Reseller index of Boss opener manuals. Boss has no manufacturer documentation site in this registry, so the reseller indexes are the only route to its range."
+    },
+    {
+      "manufacturer": "Boss (Garage Door Operators)",
+      "slug": "boss",
+      "url": "https://expressgarageparts.com.au/boss-operator-door-manuals/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "AU",
+      "note": "Second reseller index of Boss operator manuals."
+    },
+    {
+      "manufacturer": "Boss (Garage Door Operators)",
+      "slug": "boss",
+      "url": "https://motepro.com.au/Manuals/Boss/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "AU",
+      "note": "Reseller manual directory, subfoldered by door type - the BOL4 PDF came from its Sectional folder."
+    },
+    {
+      "manufacturer": "NABCO Entrances",
+      "slug": "nabco",
+      "url": "https://www.nabcoentrances.com/literature/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "US",
+      "note": "Manufacturer's literature index, one page per document. Links through to the PDFs in the uploads tree.",
+      "follow": true
+    },
+    {
+      "manufacturer": "NABCO Entrances",
+      "slug": "nabco",
+      "url": "https://www.nabcoentrances.com/wp-content/uploads/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "US",
+      "note": "WordPress uploads tree, year/month foldered, serving the manuals directly. May not index; the literature page above is the reliable route in."
+    },
+    {
+      "manufacturer": "Horton Automatics",
+      "slug": "horton",
+      "url": "https://www.hortondoors.com/resources/pdf-library/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "US",
+      "note": "Manufacturer's PDF library. A second Horton index at autodoorandhardware.com is marked registered-members-only and is deliberately NOT listed here - it must not be crawled.",
+      "follow": true
+    },
+    {
+      "manufacturer": "Besam",
+      "slug": "besam",
+      "url": "https://www.assaabloyentrance.com/master-blueprint/en-us/product-assets/automatic-doors/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "US",
+      "note": "ASSA ABLOY product-asset tree for automatic doors, one folder per model with user-manuals beneath. Where the Besam SL500 owner's manual came from."
+    },
+    {
+      "manufacturer": "Besam",
+      "slug": "besam",
+      "url": "https://techhub.doorcontrolsusa.com/exploded-parts-breakdowns/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "US",
+      "note": "Distributor tech hub holding install and service manuals plus parts breakdowns for Besam and Stanley. Third-party throughout."
+    },
+    {
+      "manufacturer": "multiple",
+      "slug": null,
+      "url": "https://www.addisonautomatics.com/wp-content/uploads/manuals/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "US",
+      "note": "Distributor manual tree, subfoldered by brand - Tormax, Besam and NABCO/Gyro Tech documents in this library all came from it. One of the higher-yield US pedestrian-door targets, and third-party throughout."
+    },
+    {
+      "manufacturer": "Wayne Dalton",
+      "slug": "wayne-dalton",
+      "url": "https://www.wayne-dalton.com/resources/support/installation",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "US",
+      "note": "Manufacturer's installation-documents index; search describes it as covering the 9100, 9605, 9405, 5120 and 5145.",
+      "follow": true
+    },
+    {
+      "manufacturer": "Overhead Door",
+      "slug": "overhead-door",
+      "url": "https://www.overheaddoor.com/resources/owner-manuals",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "US",
+      "note": "Manufacturer's owner-manual index. The reliable route to the CDN files, whose URLs carry changeable cache-buster parameters.",
+      "follow": true
+    },
+    {
+      "manufacturer": "Overhead Door",
+      "slug": "overhead-door",
+      "url": "https://overheaddoor-production-assets.azureedge.net/assets/docs/default-source/owner's-manuals/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "US",
+      "note": "Overhead Door's own CDN directory for owner's manuals - a manufacturer host despite the azureedge.net address."
+    },
+    {
+      "manufacturer": "Overhead Door",
+      "slug": "overhead-door",
+      "url": "https://www.ohdconcord.com/owners-manuals",
+      "authority": "AUTHORISED_DISTRIBUTOR",
+      "region": "US",
+      "note": "Dealer manual index. Several Overhead Door dealers keep near-identical indexes; two more are ohdmetromilwaukee.com and overheaddoorkearney.com."
+    },
+    {
+      "manufacturer": "Wayne Dalton",
+      "slug": "wayne-dalton",
+      "url": "https://www.manualslib.com/brand/wayne-dalton/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "GLOBAL",
+      "note": "Aggregator brand index."
+    },
+    {
+      "manufacturer": "SOMMER",
+      "slug": "sommer",
+      "url": "https://www.sommer.eu/SOMMER/Downloads/Montageanleitung/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "EU",
+      "note": "Manufacturer's assembly-instruction tree, split by product type and market, with an Archiv branch for superseded ranges. Well structured; a good early harvest target."
+    },
+    {
+      "manufacturer": "SOMMER",
+      "slug": "sommer",
+      "url": "https://www.sommer.eu/SOMMER/Downloads/Montageanleitung/Garagentorantriebe/USA/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "US",
+      "note": "US market branch of that tree, where the evo+ manual sits. File names carry document code, date and revision."
+    },
+    {
+      "manufacturer": "DoorHan",
+      "slug": "doorhan",
+      "url": "https://www.manualslib.com/brand/doorhan/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "GLOBAL",
+      "note": "Aggregator brand index. No doorhan.com documentation path surfaced, so this is the only index for the brand so far."
+    },
+    {
+      "manufacturer": "multiple",
+      "slug": null,
+      "url": "https://ismartgate.com/manuals/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "GLOBAL",
+      "note": "Smart-controller vendor's manual directory, spanning many gate and garage brands - it carries DoorHan and Sommer documents among others. Third-party throughout."
+    },
+    {
+      "manufacturer": "Tousek",
+      "slug": "tousek",
+      "url": "https://tousek.com/download/EN/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "EU",
+      "note": "Manufacturer's English document folder. Names are EN_<section>_<models>.pdf, section 01 sliding and 03 swing - so the folder listing, if served, maps the range directly."
+    },
+    {
+      "manufacturer": "Tousek",
+      "slug": "tousek",
+      "url": "http://download.tousek.at/montage/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "EU",
+      "note": "Tousek's second document host, mounting-instruction branch, filed by part number. Plain HTTP as surfaced."
+    },
+    {
+      "manufacturer": "Tousek",
+      "slug": "tousek",
+      "url": "http://download.tousek.at/part/E/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "EU",
+      "note": "Parts branch of the same host, English. Plain HTTP as surfaced."
+    },
+    {
+      "manufacturer": "Ryterna",
+      "slug": "ryterna",
+      "url": "https://www.ryternagaragedoors.co.uk/partnership/installation-manuals/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "UK",
+      "note": "UK arm's installation-manual index; search named an R40 and two TL LHR sectional manuals on it.",
+      "follow": true
+    },
+    {
+      "manufacturer": "Ryterna",
+      "slug": "ryterna",
+      "url": "https://www.ryterna.com/mediasenter/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "EU",
+      "note": "Ryterna's own media centre."
+    },
+    {
+      "manufacturer": "Wiśniowski",
+      "slug": "wisniowski",
+      "url": "https://sklep.wisniowski.pl/img/products_certificates/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "EU",
+      "note": "Product-certificates directory on the manufacturer's shop, subfoldered by product type. Polish-language documents."
+    },
+    {
+      "manufacturer": "Nice | HySecurity",
+      "slug": "hysecurity",
+      "url": "https://support.hysecurity.com/hc/en-us/sections/360007387533-Manuals-Accessories",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "US",
+      "note": "Manufacturer support centre, one article per document across the range. The articles are HTML pages linking the PDFs, not the PDFs - the harvester only extracts direct document links, so this target needs a follow-through step and will otherwise report no-documents.",
+      "follow": true
+    },
+    {
+      "manufacturer": "Viking Access Systems",
+      "slug": "viking-access",
+      "url": "https://www.vikingaccess.com/download-page",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "US",
+      "note": "Manufacturer download page, described as split into swing, slide, underground and solar operators.",
+      "follow": true
+    },
+    {
+      "manufacturer": "Viking Access Systems",
+      "slug": "viking-access",
+      "url": "https://laornamental.com/pdf-files/Viking_Access_PDF%20Files/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "US",
+      "note": "Distributor directory of Viking PDFs. Some files there are re-compressed copies rather than the manufacturer's originals."
+    },
+    {
+      "manufacturer": "Nice | HySecurity",
+      "slug": "hysecurity",
+      "url": "https://www.aegates.com/hysecurity-gate-manuals/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "US",
+      "note": "Distributor index of HySecurity manuals."
+    },
+    {
+      "manufacturer": "multiple",
+      "slug": null,
+      "url": "https://www.affordableopeners.com/manuals/Manufacturer/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "US",
+      "note": "Distributor manual tree, one folder per manufacturer, serving direct PDFs that keep the manufacturers' own document codes in their names. Third-party throughout."
+    },
+    {
+      "manufacturer": "multiple",
+      "slug": null,
+      "url": "https://www.tsdistributors.com/pdfs/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "US",
+      "note": "Distributor PDF directory spanning several US gate operator brands."
+    },
+    {
+      "manufacturer": "Linear / OSCO",
+      "slug": "linear",
+      "url": "https://linear-solutions.com/wp-content/uploads/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "US",
+      "note": "Manufacturer's uploads directory, serving guides named by document number with a _WEB suffix. Flat, so a listing would map the range directly."
+    },
+    {
+      "manufacturer": "Alutech",
+      "slug": "alutech",
+      "url": "https://www.gliderol.co.uk/downloads/",
+      "authority": "AUTHORISED_DISTRIBUTOR",
+      "region": "UK",
+      "note": "Gliderol UK's downloads directory; it carries Alutech Levigato documentation as well as its own."
+    },
+    {
+      "manufacturer": "Alutech",
+      "slug": "alutech",
+      "url": "https://www.manualslib.com/brand/alutech/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "GLOBAL",
+      "note": "Aggregator brand index. No alutech-group.com documentation path surfaced."
+    },
+    {
+      "manufacturer": "Linear / OSCO",
+      "slug": "linear",
+      "url": "https://www.devancocanada.com/files/manuals/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "CA",
+      "note": "Distributor manual directory spanning several North American opener brands."
+    },
+    {
+      "manufacturer": "Berner Torantriebe",
+      "slug": "berner",
+      "url": "https://www.berner-torantriebe.de/en/operating-instructions/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "EU",
+      "note": "Manufacturer's operating-instructions index, selectable by product category.",
+      "follow": true
+    },
+    {
+      "manufacturer": "Berner Torantriebe",
+      "slug": "berner",
+      "url": "https://www.berner-torantriebe.de/wp-content/uploads/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "EU",
+      "note": "Uploads tree serving documents named <number>-EBA-<model>_<market>-Rev.-<n>.pdf - document number, model, market and revision all in the file name."
+    },
+    {
+      "manufacturer": "Berner Torantriebe",
+      "slug": "berner",
+      "url": "https://www.berner-torantriebe.de/media/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "EU",
+      "note": "Second document location on the same host, with a different naming scheme (eba_<model>_<version>__rev._<n>__<lang>.pdf). Both are needed to cover the range."
+    },
+    {
+      "manufacturer": "Magnetic Autocontrol",
+      "slug": "magnetic-autocontrol",
+      "url": "https://magneticgateopeners.com/store/pdfs/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "US",
+      "note": "Distributor PDF directory; the only source of direct Magnetic barrier manuals found so far."
+    },
+    {
+      "manufacturer": "Berner Torantriebe",
+      "slug": "berner",
+      "url": "https://manuals.plus/category/berner-torantriebe-kg/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "GLOBAL",
+      "note": "Aggregator brand index."
+    },
+    {
+      "manufacturer": "SWS UK",
+      "slug": "sws",
+      "url": "https://www.sws.co.uk/fitting-instructions/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "UK",
+      "note": "Manufacturer's fitting-instructions index, described as covering the full Seceuro range of doors, shutters and gates.",
+      "follow": true
+    },
+    {
+      "manufacturer": "Krispol",
+      "slug": "krispol",
+      "url": "https://krispol.eu/en/download/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "EU",
+      "note": "Manufacturer's download centre. The only Krispol source found; no document URL surfaced from it.",
+      "follow": true
+    },
+    {
+      "manufacturer": "Novoferm",
+      "slug": "novoferm",
+      "url": "https://www.novoferm.co.uk/library/installation-instructions",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "UK",
+      "note": "Novoferm UK's own installation-instruction library, separate from the group downloads area.",
+      "follow": true
+    },
+    {
+      "manufacturer": "Novoferm",
+      "slug": "novoferm",
+      "url": "https://www.novoferm.pl/fileadmin/user_upload/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "EU",
+      "note": "Novoferm Poland's upload directory. Files here can carry generic names like manual.pdf, so what a URL serves needs checking rather than inferring."
+    },
+    {
+      "manufacturer": "Novoferm",
+      "slug": "novoferm",
+      "url": "https://www.manualslib.com/brand/novoferm/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "GLOBAL",
+      "note": "Aggregator brand index; listings report 93+ Novoferm manuals, which is the measure of how much of the range is still missing."
+    },
+    {
+      "manufacturer": "Wiśniowski",
+      "slug": "wisniowski",
+      "url": "https://obchod.wisniowski.eu/img/products_files/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "EU",
+      "note": "Second Wiśniowski shop domain's product-files directory, carrying English-language guides."
+    },
+    {
+      "manufacturer": "Hörmann",
+      "slug": "hormann",
+      "url": "https://www.thegaragedoorcentre.co.uk/download/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "UK",
+      "note": "Reseller download directory serving direct PDFs for Hörmann and other UK brands."
+    },
+    {
+      "manufacturer": "Hörmann",
+      "slug": "hormann",
+      "url": "https://www.northshorecommercialdoor.com/hormann/manuals",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "US",
+      "note": "Distributor index of Hörmann operator and parts manuals.",
+      "follow": true
+    },
+    {
+      "manufacturer": "Hörmann",
+      "slug": "hormann",
+      "url": "https://shopactiondirect.com/hormann-product-manuals/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "US",
+      "note": "Second distributor index of Hörmann manuals and programming instructions.",
+      "follow": true
+    },
+    {
+      "manufacturer": "CAME",
+      "slug": "came",
+      "url": "https://www.ardengateautomation.co.uk/downloads/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "UK",
+      "note": "Reseller download directory carrying CAME manuals with the manufacturer's own FA-series document codes on their covers."
+    },
+    {
+      "manufacturer": "CAME",
+      "slug": "came",
+      "url": "https://motepro.com.au/Manuals/CAME/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "AU",
+      "note": "Reseller directory subfoldered by gate type; source of the BX-74/BX-78 PDF."
+    },
+    {
+      "manufacturer": "Nice",
+      "slug": "nice",
+      "url": "https://www.niceforyou.com/sites/default/files/upload/manuals/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "GLOBAL",
+      "note": "One flat directory holding Nice's instruction PDFs, named by document code (idv####a##<lang>.pdf and similar). If it serves a listing, this single target maps the whole Nice range - the highest-value entry in this registry."
+    },
+    {
+      "manufacturer": "Nice",
+      "slug": "nice",
+      "url": "https://www.niceforyou.com/en/professional-area/download",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "GLOBAL",
+      "note": "Paginated instruction-manual index; a search result surfaced page 71, so the set behind it runs to hundreds of documents. Paginate with ?st=<offset>&v=7.",
+      "follow": true
+    },
+    {
+      "manufacturer": "FAAC",
+      "slug": "faac",
+      "url": "https://www.faac.help/en/documents/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "GLOBAL",
+      "note": "FAAC's dedicated documentation site, one page per model under /en/documents/<model>. Pages rather than PDFs, so this needs the follow step.",
+      "follow": true
+    },
+    {
+      "manufacturer": "FAAC",
+      "slug": "faac",
+      "url": "https://faac.blob.core.windows.net/web/1/gate-automation/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "GLOBAL",
+      "note": "FAAC's own Azure blob host serving PDFs directly - a manufacturer host despite the windows.net address."
+    },
+    {
+      "manufacturer": "FAAC",
+      "slug": "faac",
+      "url": "http://www.faacgateopeners.com/FAAC-Manuals/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "US",
+      "note": "Distributor manual directory for the FAAC US range. Plain HTTP as surfaced."
+    },
+    {
+      "manufacturer": "Somfy",
+      "slug": "somfy",
+      "url": "https://service.somfy.com/downloads/il_v5/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "GLOBAL",
+      "note": "Somfy's own service download host, installation-instructions directory (il = instructions d'installation, v5). Flat PDFs on a manufacturer host - the shape that scales."
+    },
+    {
+      "manufacturer": "Somfy",
+      "slug": "somfy",
+      "url": "https://www.somfy.co.za/support-and-assistance/downloads",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "GLOBAL",
+      "note": "Somfy South Africa downloads; described as carrying LT 50/60 installation guides and Oximo RTS data sheets and guides. Somfy publishes per country, so each regional index is a distinct target.",
+      "follow": true
+    },
+    {
+      "manufacturer": "Somfy",
+      "slug": "somfy",
+      "url": "https://www.manualslib.com/products/Somfy-Lt50-10747153.html",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "GLOBAL",
+      "note": "Aggregator product page listing 17 LT50 documents alone - a measure of how deep one Somfy motor's documentation runs.",
+      "follow": true
+    },
+    {
+      "manufacturer": "BFT",
+      "slug": "bft",
+      "url": "https://bftgateopeners.com/store/media/pdfs/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "US",
+      "note": "PDF directory of a BFT-branded US store. Brand in the domain, retail site in fact - harvested records here are third-party."
+    },
+    {
+      "manufacturer": "BFT",
+      "slug": "bft",
+      "url": "http://www.allgateoperatormanuals.com/bft-manuals.html",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "US",
+      "note": "Aggregator index of BFT manuals. Plain HTTP as surfaced.",
+      "follow": true
+    },
+    {
+      "manufacturer": "BFT",
+      "slug": "bft",
+      "url": "https://bftgateopeners.com/store/resources/resources-hub/bft-manuals.html",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "US",
+      "note": "Store resources hub indexing BFT manuals and quick-start guides.",
+      "follow": true
+    },
+    {
+      "manufacturer": "Marantec",
+      "slug": "marantec",
+      "url": "https://www.marantec.com/files/eba_sap/A/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "EU",
+      "note": "Marantec's static instruction directory, files named by document number (eba = Einbau- und Betriebsanleitung)."
+    },
+    {
+      "manufacturer": "Marantec",
+      "slug": "marantec",
+      "url": "https://www.marantec.com/en/installation-instructions",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "EU",
+      "note": "Searchable instruction index. Some documents are served via an eba_download handler with file and vrsn parameters rather than static paths, so this index is the reliable route in.",
+      "follow": true
+    },
+    {
+      "manufacturer": "LiftMaster",
+      "slug": "liftmaster",
+      "url": "https://support.chamberlaingroup.com/s/manuals-parts",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "US",
+      "note": "Chamberlain Group support site - one article per document across the LiftMaster and Chamberlain ranges. Articles are HTML pages linking the PDFs, so this needs the follow step.",
+      "follow": true
+    },
+    {
+      "manufacturer": "LiftMaster",
+      "slug": "liftmaster",
+      "url": "https://jansensupply.com/docs/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "US",
+      "note": "Distributor document directory carrying LiftMaster commercial operator manuals."
+    },
+    {
+      "manufacturer": "Marantec",
+      "slug": "marantec",
+      "url": "https://www.thegaragedoorcentre.co.uk/userfiles/downloads/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "UK",
+      "note": "Second download directory on the same reseller as its /download/ path - both are needed to cover what it hosts."
+    },
+    {
+      "manufacturer": "Centurion Systems",
+      "slug": "centurion",
+      "url": "https://www.centsys.co.za/pdf/prod/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "GLOBAL",
+      "note": "Centurion South Africa's product document tree, foldered by range. File names carry document code and ddmmyyyy date."
+    },
+    {
+      "manufacturer": "Centurion Systems",
+      "slug": "centurion",
+      "url": "https://www.centsys.co.za/upload/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "GLOBAL",
+      "note": "Older upload directory on the same host, using the earlier 0_07_A_#### numbering. Both schemes are live, so both directories are needed."
+    },
+    {
+      "manufacturer": "Centurion Systems",
+      "slug": "centurion",
+      "url": "https://www.centsys.com.au/wp-content/uploads/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "AU",
+      "note": "Centurion Australia's uploads tree. Its editions carry different document codes and dates from the South African ones for the same manual - separate documents, not mirrors."
+    },
+    {
+      "manufacturer": "Gliderol",
+      "slug": "gliderol",
+      "url": "https://www.gliderol.com.au/wp-content/uploads/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "AU",
+      "note": "Manufacturer's uploads tree, year/month foldered. Source of the GTS+ manual that closed a first-pass gap."
+    },
+    {
+      "manufacturer": "Gliderol",
+      "slug": "gliderol",
+      "url": "https://wholesalegaragedoors.com.au/gliderol-manuals/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "AU",
+      "note": "Reseller index of Gliderol manuals.",
+      "follow": true
+    },
+    {
+      "manufacturer": "Gliderol",
+      "slug": "gliderol",
+      "url": "https://garagedooropenerremotes.com.au/manuals-and-downloads/gliderol-manuals",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "AU",
+      "note": "Gliderol section of the AU aggregator index.",
+      "follow": true
+    },
+    {
+      "manufacturer": "Centurion Systems",
+      "slug": "centurion",
+      "url": "https://progatemotorrepairs.co.za/technical-info/centurion-gate-motor-manuals/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "GLOBAL",
+      "note": "Installer index of Centurion swing and sliding gate motor manuals.",
+      "follow": true
+    },
+    {
+      "manufacturer": "B&D",
+      "slug": "bnd",
+      "url": "https://www.bnd.com.au/trade-resources/installation-manuals/door-manuals/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "AU",
+      "note": "Door manuals section of B&D's trade resources - Panelift, Roll-A-Door, Storm-Shield, Shutters and Designer Finishes. Separate from the opener-manuals page already registered.",
+      "follow": true
+    },
+    {
+      "manufacturer": "B&D",
+      "slug": "bnd",
+      "url": "https://www.bnd.com.au/support/resources-for-owners/owner-manuals/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "AU",
+      "note": "Owner-facing manual index, distinct from the trade installation manuals.",
+      "follow": true
+    },
+    {
+      "manufacturer": "B&D",
+      "slug": "bnd",
+      "url": "https://admin.bnd.com.au/media/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "AU",
+      "note": "B&D's CMS media host. Asset paths carry opaque keys, so links here rot - use the trade-resources index as the durable entry point."
+    },
+    {
+      "manufacturer": "Automatic Technology",
+      "slug": "automatic-technology",
+      "url": "https://media.umbraco.io/ata-automation/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "AU",
+      "note": "ATA's own CMS media host. Like B&D's, asset paths carry opaque keys. File names encode document number, model, revision and market (an nz prefix marks the New Zealand edition)."
+    },
+    {
+      "manufacturer": "B&D",
+      "slug": "bnd",
+      "url": "https://wholesalegaragedoors.com.au/bnd-doors-manuals/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "AU",
+      "note": "Reseller index of B&D door manuals.",
+      "follow": true
+    },
+    {
+      "manufacturer": "B&D",
+      "slug": "bnd",
+      "url": "https://motepro.com.au/Manuals/BND/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "AU",
+      "note": "Reseller directory subfoldered by door type."
+    },
+    {
+      "manufacturer": "Merlin",
+      "slug": "merlin",
+      "url": "https://www.gomerlin.com.au/support-page/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "AU",
+      "note": "Merlin's own support centre, described as carrying spare parts books, brochures and user guides. The first Merlin manufacturer source in this registry - earlier passes found none and left the brand reseller-only.",
+      "follow": true
+    },
+    {
+      "manufacturer": "Merlin",
+      "slug": "merlin",
+      "url": "https://garagedooropenerremotes.com.au/manuals-and-downloads/merlin-downloads",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "AU",
+      "note": "Merlin section of the AU aggregator index; splits roller (MR series) from sectional and tilt (MT/MS Commander and Whisper Drive).",
+      "follow": true
+    },
+    {
+      "manufacturer": "Merlin",
+      "slug": "merlin",
+      "url": "https://wholesalegaragedoors.com.au/chamberlain-merlin-manuals/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "AU",
+      "note": "Reseller index covering Chamberlain and Merlin together - the two brands share document numbering.",
+      "follow": true
+    },
+    {
+      "manufacturer": "Merlin",
+      "slug": "merlin",
+      "url": "https://motepro.com.au/Manuals/Merlin/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "AU",
+      "note": "Reseller directory of Merlin manuals, named by model code."
+    },
+    {
+      "manufacturer": "Steel-Line",
+      "slug": "steel-line",
+      "url": "https://www.steel-lineautomation.com.au/uploads/7/2/0/3/7203835/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "AU",
+      "note": "Manufacturer's upload directory. File names encode model and edition as v<n>-<mmyy>, so several editions of one manual sit side by side - worth harvesting all of them, not just the newest."
+    },
+    {
+      "manufacturer": "Steel-Line",
+      "slug": "steel-line",
+      "url": "https://wholesalegaragedoors.com.au/steel-line-manuals/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "AU",
+      "note": "Reseller index of Steel-Line manuals.",
+      "follow": true
+    },
+    {
+      "manufacturer": "Mighty Mule (GTO Access Systems)",
+      "slug": "mighty-mule",
+      "url": "https://mightymule.com/pages/manuals",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "US",
+      "note": "Manufacturer's manuals index. Note it also pushes a 3D installation app; only the PDFs are of interest here.",
+      "follow": true
+    },
+    {
+      "manufacturer": "Mighty Mule (GTO Access Systems)",
+      "slug": "mighty-mule",
+      "url": "https://www.mightymule.com/wp-content/uploads/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "US",
+      "note": "Manufacturer's uploads directory, flat, serving the manuals directly. Some links surfaced over plain HTTP."
+    },
+    {
+      "manufacturer": "Ramset",
+      "slug": "ramset",
+      "url": "https://ramsetstore.com/store/pdfs/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "US",
+      "note": "PDF directory of a Ramset-branded store. Every Ramset manual found came from here; the brand is in the domain but it is a store, so harvested records are third-party."
+    },
+    {
+      "manufacturer": "Ramset",
+      "slug": "ramset",
+      "url": "http://ramsetgateopeners.com/manuals/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "US",
+      "note": "Second Ramset-branded distributor domain with its own manuals directory. Plain HTTP as surfaced."
+    },
+    {
+      "manufacturer": "Ramset",
+      "slug": "ramset",
+      "url": "http://www.gatesnfences.com/files/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "US",
+      "note": "Distributor file tree, subfoldered by brand - it carries Ramset and Linear/OSCO documents among others."
+    },
+    {
+      "manufacturer": "Raynor Garage Doors",
+      "slug": "raynor",
+      "url": "https://raynor.com/wp-content/uploads/literature/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "US",
+      "note": "Manufacturer's literature directory, flat, files named by part number. Language codes in the names suggest non-English editions sit alongside."
+    },
+    {
+      "manufacturer": "Raynor Garage Doors",
+      "slug": "raynor",
+      "url": "https://raynor.com/wp-content/uploads/csi/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "US",
+      "note": "CSI specification sections - architect-facing documents, not installation manuals. Worth harvesting, worth typing as spec sheets when imported."
+    },
+    {
+      "manufacturer": "Amarr",
+      "slug": "amarr",
+      "url": "https://sites.myamarr.biz/content/dam/amarr/com/us/en/documents/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "US",
+      "note": "Amarr's digital-asset tree, foldered by market, product family and document type. File names can be generic, so what a path serves needs checking rather than inferring."
+    },
+    {
+      "manufacturer": "Amarr",
+      "slug": "amarr",
+      "url": "https://www.amarr.com/us/en/support/garage-door-and-commercial-door-installation-instructions",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "US",
+      "note": "Manufacturer's installation-instruction index; links through to the asset host.",
+      "follow": true
+    },
+    {
+      "manufacturer": "Hörmann",
+      "slug": "hormann",
+      "url": "https://www.hoermann.com/fileadmin/_country/dok/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "EU",
+      "note": "Hörmann's document tree. Names encode document type, series and language (EBD_INDBR50_Sectionaltor_42_EN)."
+    },
+    {
+      "manufacturer": "Hörmann",
+      "slug": "hormann",
+      "url": "https://cdn.hoermann-cloud.de/fileadmin/_country/kataloge/pdf/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "EU",
+      "note": "Hörmann's CDN catalogue directory - product literature rather than manuals. URLs carry a v= cache-buster that may change."
+    },
+    {
+      "manufacturer": "Raynor Garage Doors",
+      "slug": "raynor",
+      "url": "https://support.garagedoorzone.com/raynor-openers.html",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "US",
+      "note": "Distributor index of Raynor opener manuals.",
+      "follow": true
+    },
+    {
+      "manufacturer": "Rollease Acmeda",
+      "slug": "rollease-acmeda",
+      "url": "https://www.rolleaseacmeda.com/docs/default-source/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "GLOBAL",
+      "note": "Open instruction tree, foldered by market and motor family. Distinct from the member-documents area already registered, which may require sign-in - this one does not."
+    },
+    {
+      "manufacturer": "Rollease Acmeda",
+      "slug": "rollease-acmeda",
+      "url": "https://www.automateshades.com/assets/uploads/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "US",
+      "note": "Rollease Acmeda's Automate brand site uploads directory, year/month foldered."
+    },
+    {
+      "manufacturer": "Elsema",
+      "slug": "elsema",
+      "url": "https://elsema.com/blogs/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "AU",
+      "note": "Manufacturer's blog, which carries supersession and replacement guidance for discontinued remotes - the kind of document a manual catalogue usually misses.",
+      "follow": true
+    },
+    {
+      "manufacturer": "Elsema",
+      "slug": "elsema",
+      "url": "https://www.waverleygaragedoors.com.au/instruction-manuals/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "AU",
+      "note": "Reseller instruction-manual directory covering several AU remote brands."
+    },
+    {
+      "manufacturer": "Elsema",
+      "slug": "elsema",
+      "url": "https://www.aggdoors.com.au/product-support/manuals/coding-instructions/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "AU",
+      "note": "Reseller coding-instruction index - remote programming steps by model, across brands.",
+      "follow": true
+    },
+    {
+      "manufacturer": "Becker",
+      "slug": "becker",
+      "url": "https://produktcenter.becker-antriebe.com/en/Drives/Roller-shutter-applications/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "EU",
+      "note": "Manufacturer's product centre, foldered by drive type. Pages rather than PDFs, so this needs the follow step - and what it yields will be product pages unless documents are linked from them.",
+      "follow": true
+    },
+    {
+      "manufacturer": "GEZE",
+      "slug": "geze",
+      "url": "https://www.geze.com/en/download/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "EU",
+      "note": "Download index. Files are served through a handler with opaque mw####### media keys, so the index is the durable route in rather than the file URLs.",
+      "follow": true
+    },
+    {
+      "manufacturer": "dormakaba",
+      "slug": "dormakaba",
+      "url": "https://www.manualslib.com/products/Dormakaba-Ed100-8830099.html",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "GLOBAL",
+      "note": "Aggregator product page reporting 24 ED100 documents. No dormakaba.com document URL has surfaced in any search, so aggregators are the only route to this brand so far.",
+      "follow": true
+    },
+    {
+      "manufacturer": "Dominator",
+      "slug": "dominator",
+      "url": "https://www.dominator.co.nz/asset/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "NZ",
+      "note": "Flat asset path serving documents under bare numeric IDs (3133.pdf, 4025.pdf, 4026.pdf all surfaced). The names carry no model information, so harvested records from here need their titles read from the documents rather than inferred."
+    },
+    {
+      "manufacturer": "Dominator",
+      "slug": "dominator",
+      "url": "https://www.dominator.co.nz/resources",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "NZ",
+      "note": "Resource index covering owner's manuals and brochures; the readable route into the numeric asset path.",
+      "follow": true
+    },
+    {
+      "manufacturer": "Dominator",
+      "slug": "dominator",
+      "url": "https://www.dominatorrodney.co.nz/resources/",
+      "authority": "AUTHORISED_DISTRIBUTOR",
+      "region": "NZ",
+      "note": "Regional dealer's manual, warranty and brochure index.",
+      "follow": true
+    },
+    {
+      "manufacturer": "Ozroll",
+      "slug": "ozroll",
+      "url": "https://ozrolltech.com.au/cms/wp-content/uploads/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "AU",
+      "note": "Manufacturer's uploads tree, year/month foldered. File names carry Ozroll's dotted part numbers and revision letters (15.920.253-B)."
+    },
+    {
+      "manufacturer": "Ozroll",
+      "slug": "ozroll",
+      "url": "https://www.manualslib.com/brand/ozroll/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "GLOBAL",
+      "note": "Aggregator brand index listing ODS T10, T20 and T35 manuals. Currently the only source for the T20.",
+      "follow": true
+    },
+    {
+      "manufacturer": "Roger Technology",
+      "slug": "roger-technology",
+      "url": "https://accesssystems.ie/index.php/information/documentation/115-roger-technology-manuals",
+      "authority": "AUTHORISED_DISTRIBUTOR",
+      "region": "EU",
+      "note": "Distributor documentation index naming Roger Technology files by model and date (BH30_Instructions_0621.pdf).",
+      "follow": true
+    },
+    {
+      "manufacturer": "Benincà",
+      "slug": "beninca",
+      "url": "https://www.intelligentsecurity.org/customers/user-guides/automatic-gates/beninca/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "UK",
+      "note": "Reseller index of Beninca user guides across the BILL, BOB and BULL lines. Currently the only source for the BILL series.",
+      "follow": true
+    },
+    {
+      "manufacturer": "Benincà",
+      "slug": "beninca",
+      "url": "https://device.report/manuals",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "GLOBAL",
+      "note": "Aggregator carrying Beninca and Roger Technology documents among many brands. Listings are per-document, so a crawl needs the follow step.",
+      "follow": true
+    },
+    {
+      "manufacturer": "DoorKing",
+      "slug": "doorking",
+      "url": "https://www.doorking.com/wp-content/uploads/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "US",
+      "note": "Manufacturer's uploads tree. Names decode as <model>-065-<revision>-<month>-<year>.pdf, so revision and date are readable from the URL - one of the cleanest schemes in this registry. Upload folder dates can disagree with the file name; trust the file name."
+    },
+    {
+      "manufacturer": "DoorKing",
+      "slug": "doorking",
+      "url": "http://www.gatesnfences.com/files/doorking_openers_pdf/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "US",
+      "note": "Distributor directory of DoorKing opener manuals. Plain HTTP as surfaced."
+    },
+    {
+      "manufacturer": "DoorKing",
+      "slug": "doorking",
+      "url": "https://www.aegates.com/doorking-gate-equipment-manuals/",
+      "authority": "THIRD_PARTY_MIRROR",
+      "region": "US",
+      "note": "Distributor index of DoorKing gate equipment manuals.",
+      "follow": true
+    },
+    {
+      "manufacturer": "Genie",
+      "slug": "genie",
+      "url": "https://www.geniecompany.com/product-support/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "US",
+      "note": "Per-model product-support pages. Pages rather than PDFs and no geniecompany.com document URL has surfaced in any search, so this needs the follow step and may still yield nothing.",
+      "follow": true
+    },
+    {
+      "manufacturer": "Teckentrup",
+      "slug": "teckentrup",
+      "url": "https://www.teckentrup.co.uk/assets/content/images/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "UK",
+      "note": "UK arm's asset path - an images directory that in fact serves installation-instruction PDFs, so a harvester filtering on directory name would miss it entirely."
+    },
+    {
+      "manufacturer": "Teckentrup",
+      "slug": "teckentrup",
+      "url": "https://www.teckentrup.co.uk/downloads",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "UK",
+      "note": "UK downloads index; names installation instructions per sectional model (SW 40, SW 80, SLW 40, SLW 80, SL 40, SL 80, SLX 40).",
+      "follow": true
+    },
+    {
+      "manufacturer": "Novoferm",
+      "slug": "novoferm",
+      "url": "https://www.novoferm.com/downloads",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "EU",
+      "note": "Group downloads root, broader than the installation-instructions page already registered.",
+      "follow": true
+    },
+    {
+      "manufacturer": "Novoferm",
+      "slug": "novoferm",
+      "url": "https://www.novoferm.com/installation-/-assembly-instructions/",
+      "authority": "MANUFACTURER_OFFICIAL",
+      "region": "EU",
+      "note": "Second spelling of the assembly-instructions path seen in search results; recorded alongside the other in case they are distinct pages rather than one redirecting.",
+      "follow": true
+    }
+  ]
+}

@@ -1,0 +1,102 @@
+{
+  "manufacturer": {
+    "name": "ASSA ABLOY Albany",
+    "slug": "albany",
+    "country": "SE",
+    "website": "https://www.assaabloyentrance.com/",
+    "supportUrl": "https://www.assaabloyentrance.com/master-blueprint/en/product-assets/high-speed-doors/",
+    "note": "High-performance industrial door brand within ASSA ABLOY Entrance Systems. The group's own product-asset tree carries leaflets; the installation and owner's manuals that surfaced are on a distributor, and are recorded as such rather than promoted."
+  },
+  "models": [
+    {
+      "modelCode": "RR300",
+      "name": "ASSA ABLOY Albany RR300 High-Performance Door",
+      "category": "industrial-high-speed-doors",
+      "region": "US",
+      "aliases": ["RR300 Stainless", "RR300 Plus"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "Albany RR300 Stainless Mechanical Install and Owner's Manual",
+          "sourceUrl": "https://www.cisco-eagle.com/uploads/AlbanyDoor-Interior/AlbanyRR300StainlessMechInstall-OwnersManual.pdf",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "Cisco-Eagle",
+          "region": "US",
+          "rights": "LINK_ONLY",
+          "evidence": "Distributor copy. Covers the stainless variant specifically, per the file name; the RR300 Plus is kept only as an alias because search listed it as a related model without a document of its own. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "https://manualzz.com/doc/6918876/albany-high-performance-doors",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "Manualzz copy of the Albany high-performance doors operating instructions, described as covering RR300, RR300 Plus and RR3000"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "modelCode": "RR200",
+      "name": "ASSA ABLOY Albany RR200 High-Performance Door",
+      "category": "industrial-high-speed-doors",
+      "region": "US",
+      "aliases": ["6410R0231"],
+      "documents": [
+        {
+          "kind": "USER_MANUAL",
+          "title": "Operating Instructions, Albany High-Performance Doors",
+          "documentCode": "6410R0231",
+          "sourceUrl": "https://www.cisco-eagle.com/uploads/AlbanyDoor-Interior/AlbanyRR200OwnersManual.pdf",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "Cisco-Eagle",
+          "region": "US",
+          "rights": "LINK_ONLY",
+          "evidence": "Distributor copy. Document number 6410R0231 from the result title; the file name assigns it to the RR200, while the document's own title says only \"Albany High-Performance Doors\" - so the model attribution comes from the distributor's naming, not the document. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "RR3000",
+      "name": "ASSA ABLOY RR3000 Series High-Performance Door",
+      "category": "industrial-high-speed-doors",
+      "region": "GLOBAL",
+      "aliases": ["RR3000 ISO", "RR3000 Exterior Rigid"],
+      "documents": [
+        {
+          "kind": "SPEC_SHEET",
+          "title": "ASSA ABLOY RR3000 Series High-Performance Door Product Leaflet",
+          "sourceUrl": "https://www.assaabloyentrance.com/master-blueprint/en/product-assets/high-speed-doors/rr3000-exterior-rigid/downloads/product-leaflets/Assa%20Abloy%20RR3000%20Series%20High-performance%20door%20-%20en.pdf",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "publisher": "ASSA ABLOY Entrance Systems",
+          "region": "GLOBAL",
+          "rights": "LINK_ONLY",
+          "evidence": "On assaabloyentrance.com, the manufacturer's own domain. Typed SPEC_SHEET, not a manual: its own path says product-leaflets, and presenting sales literature as an installation manual would be the exact substitution this library exists to avoid. The RR3000's installation manual remains a gap. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "https://pdf.archiexpo.com/pdf/assa-abloy/albany-rr3000-iso/11105-249254.html",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "ArchiExpo catalogue entry for the RR3000 ISO"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "modelCode": "RP300",
+      "name": "ASSA ABLOY RP300 High Speed Door",
+      "category": "industrial-high-speed-doors",
+      "region": "ASIA",
+      "documents": [
+        {
+          "kind": "USER_MANUAL",
+          "title": "User Manual - High Speed Door ASSA ABLOY RP300 (EN)",
+          "sourceUrl": "https://www.assaabloy.com/kr/market-images/product-assets/industrial-doors/speed-door/rp300/documents/(RP300)%20User_manual_ASSA_ABLOY_RP300_en.pdf",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "publisher": "ASSA ABLOY",
+          "region": "ASIA",
+          "rights": "LINK_ONLY",
+          "evidence": "On assaabloy.com, the group's own domain, under its Korean market tree; English edition per the file name. Region is ASIA from that path, not from reading the document. Not fetched - egress blocked."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "manufacturer": {
+    "name": "elero",
+    "slug": "elero",
+    "country": "DE",
+    "website": "https://www.elero.com/",
+    "supportUrl": "https://www.elero.com/en/downloads-service/downloads",
+    "note": "German tubular motor manufacturer for roller shutters and blinds. Its download area serves documents through a parameterised endpoint rather than static file paths."
+  },
+  "models": [
+    {
+      "modelCode": "Type 9",
+      "name": "Type 9 Tubular Motor",
+      "category": "roller-shutter-motors",
+      "region": "EU",
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "Installation Instructions for Tubular Motors Type 9",
+          "language": "en",
+          "sourceUrl": "https://www.elero.com/en/downloads-service/downloads?tx_avelero_downloads%5Bdownload%5D=2292&tx_avelero_downloads%5Baction%5D=download",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "region": "EU",
+          "rights": "LINK_ONLY",
+          "evidence": "Manufacturer's own download endpoint. The surfaced URL included a cHash token, which is a TYPO3 cache signature that may expire; it has been dropped here and the harvester will record whether the bare parameters still resolve. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "Type 11",
+      "name": "Type 11 Tubular Motor with Plug Connection",
+      "category": "roller-shutter-motors",
+      "region": "EU",
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "Installation Instructions for Tubular Motors Type 11 with Plug Connection",
+          "language": "en",
+          "sourceUrl": "https://www.elero.com/en/downloads-service/downloads/?tx_avelero_downloads%5Bdownload%5D=1271&tx_avelero_downloads%5Baction%5D=download",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "region": "EU",
+          "rights": "LINK_ONLY",
+          "evidence": "Manufacturer's own download endpoint, cHash token dropped as above. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "RolTop/D+",
+      "name": "RolTop/D+ 868/915 Radio Roller Shutter Drive",
+      "category": "roller-shutter-motors",
+      "region": "EU",
+      "aliases": ["RolTop D+", "RolTopD"],
+      "documents": [
+        {
+          "kind": "USER_MANUAL",
+          "title": "RolTop/D+ 868/915 Instruction Manual",
+          "sourceUrl": "https://device.report/manual/5077135",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "device.report",
+          "region": "EU",
+          "rights": "LINK_ONLY",
+          "evidence": "Aggregator listing. Not fetched - egress blocked."
+        }
+      ]
+    }
+  ]
+}

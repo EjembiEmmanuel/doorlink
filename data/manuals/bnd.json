@@ -1,0 +1,89 @@
+{
+  "manufacturer": {
+    "name": "B&D",
+    "slug": "bnd",
+    "country": "AU",
+    "website": "https://www.bnd.com.au/",
+    "supportUrl": "https://www.bnd.com.au/trade-resources/installation-manuals/opener-manuals/",
+    "note": "Australian garage door and opener manufacturer. Publishes installation and owner manuals on its own trade-resources area."
+  },
+  "models": [
+    {
+      "modelCode": "CAD4",
+      "name": "Controll-A-Door 4",
+      "category": "garage-door-openers",
+      "region": "AU",
+      "documents": [
+        {
+          "kind": "USER_MANUAL",
+          "title": "Controll-A-Door 4 Owner's Manual",
+          "sourceUrl": "https://www.bnd.com.au/media/2034/cad4-owners-manual.pdf",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "region": "AU",
+          "rights": "LINK_ONLY",
+          "evidence": "Surfaced by web search on the manufacturer's own domain (bnd.com.au). Not fetched — egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "RDO-1v4",
+      "name": "Roll-A-Pro Rolling Door Opener",
+      "category": "garage-door-openers",
+      "region": "AU",
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "Roll-A-Pro RDO-1v4 Instruction Manual",
+          "documentCode": "161061_04",
+          "sourceUrl": "https://admin.bnd.com.au/media/agsotypa/161061_04_rdo-1v4-roll-a-pro_-online-instruction_manual.pdf",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "region": "AU",
+          "rights": "LINK_ONLY",
+          "evidence": "Surfaced by web search on a bnd.com.au subdomain. The document code in the filename (161061_04) is taken from the URL, not inferred. Not fetched — egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "CAD-R",
+      "name": "Controll-A-Door R Automatic Rolling Garage Door Opener",
+      "category": "garage-door-openers",
+      "region": "AU",
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "Controll-A-Door R Roller Door Opener Installation Manual",
+          "sourceUrl": "https://wholesalegaragedoors.com.au/wp-content/uploads/2022/07/BnD-Doors-Australia-CADR-Roller-Door-Opener-Installation-Manual.pdf",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "Wholesale Garage Doors",
+          "region": "AU",
+          "rights": "LINK_ONLY",
+          "evidence": "Hosted by an Australian reseller, not by B&D. Recorded as third-party for that reason. Not fetched — egress blocked.",
+          "altSources": [
+            {
+              "url": "https://www.manualslib.com/manual/933573/BAndd-Controll-A-Door-R.html",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "ManualsLib listing"
+            }
+          ]
+        },
+        {
+          "kind": "USER_MANUAL",
+          "title": "B&D Controll-A-Door R Automatic Rolling Garage Door Opener Instruction Manual",
+          "sourceUrl": "https://motepro.com.au/Manuals/BND/Roller/cadr.pdf",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "Motepro",
+          "region": "AU",
+          "rights": "LINK_ONLY",
+          "evidence": "Reseller copy, direct PDF. No bnd.com.au URL for the Controll-A-Door R surfaced, so this stays third-party while the RDO-1v4 is manufacturer-hosted. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "https://www.manualslib.com/manual/933573/BAndd-Controll-A-Door-R.html",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "ManualsLib listing"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "manufacturer": {
+    "name": "Horton Automatics",
+    "slug": "horton",
+    "country": "US",
+    "website": "https://www.hortondoors.com/",
+    "supportUrl": "https://www.hortondoors.com/resources/pdf-library/",
+    "note": "US automatic door manufacturer. Recorded with no documents: its PDF library is registered as a harvest target, but no individual document URL surfaced. A second Horton index exists on a distributor and is explicitly marked registered-members-only; it is deliberately not registered as a target and must not be crawled."
+  },
+  "models": []
+}

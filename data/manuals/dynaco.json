@@ -1,0 +1,31 @@
+{
+  "manufacturer": {
+    "name": "Dynaco",
+    "slug": "dynaco",
+    "country": "BE",
+    "website": "https://www.dynacodoor.com/",
+    "supportUrl": null,
+    "note": "Belgian high-speed door brand within ASSA ABLOY Entrance Systems. Only one Dynaco document surfaced and it is a distributor-hosted brochure, not a manual, so supportUrl is null and no installation documentation is claimed. This record exists to make the gap visible; it is not coverage."
+  },
+  "models": [
+    {
+      "modelCode": "M2 Power",
+      "name": "Dynaco Power M2 High Performance Door",
+      "category": "industrial-high-speed-doors",
+      "region": "US",
+      "aliases": ["Dynaco M2", "M2"],
+      "documents": [
+        {
+          "kind": "SPEC_SHEET",
+          "title": "Dynaco Power M2 High Performance Door Brochure",
+          "sourceUrl": "https://www.rsdoors.com/wp-content/uploads/2022/12/Brochure_Dynaco-M2-Power.pdf",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "RS Doors",
+          "region": "US",
+          "rights": "LINK_ONLY",
+          "evidence": "Distributor-hosted brochure, and typed as a spec sheet because that is what it is - the file name says Brochure, and the search summary notes it merely refers the reader to a user manual it does not contain. The M2's actual installation and user manuals were not surfaced and are a recorded gap. Not fetched - egress blocked."
+        }
+      ]
+    }
+  ]
+}

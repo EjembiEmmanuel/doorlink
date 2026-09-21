@@ -1,0 +1,49 @@
+{
+  "manufacturer": {
+    "name": "Boss (Garage Door Operators)",
+    "slug": "boss",
+    "country": "AU",
+    "website": null,
+    "supportUrl": null,
+    "note": "Australian garage door operator brand. No manufacturer website or documentation index surfaced - every source below is a reseller. Name collision worth flagging: searching \"Boss SD-1 owner's manual\" surfaces boss.info, which is Roland's Boss, and the SD-1 there is a guitar pedal. Nothing from boss.info is recorded here, and a Boss opener model code must be matched against a garage-door source before it is trusted."
+  },
+  "models": [
+    {
+      "modelCode": "BOL4",
+      "name": "Boss BOL4 Sectional Door Operator",
+      "category": "garage-door-openers",
+      "region": "AU",
+      "aliases": ["BOL-4", "BOL 4"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "Boss BOL4 Garage Door Operator Manual",
+          "sourceUrl": "https://motepro.com.au/Manuals/Boss/Sectional/BOL4.pdf",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "Motepro",
+          "region": "AU",
+          "rights": "LINK_ONLY",
+          "evidence": "Reseller copy, and a direct PDF. The model code and the sectional application both come from the URL path (Manuals/Boss/Sectional/BOL4.pdf), which is the reseller's filing, not the document's own title - so the attribution is the reseller's. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "Boss Remote Handset",
+      "name": "Boss Remote Handset",
+      "category": "remotes-accessories",
+      "region": "AU",
+      "documents": [
+        {
+          "kind": "PROGRAMMING_GUIDE",
+          "title": "Boss Remote Handset Coding Instructions",
+          "sourceUrl": "https://www.eastcoastgaragedoors.com.au/site/wp-content/uploads/2016/04/BOSS.pdf",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "East Coast Garage Doors",
+          "region": "AU",
+          "rights": "LINK_ONLY",
+          "evidence": "Reseller copy. The document covers coding a handset and names no specific handset model, so the record carries no model code beyond the generic one - inventing a part number to make it look precise would be worse than the vagueness. Not fetched - egress blocked."
+        }
+      ]
+    }
+  ]
+}

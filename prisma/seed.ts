@@ -10,6 +10,7 @@ import {
   PrismaClient,
   Role,
 } from '@prisma/client'
+import { seedInspectionTemplates } from '../src/lib/inspections/seed-templates'
 
 const prisma = new PrismaClient()
 
@@ -340,9 +341,16 @@ async function main() {
     },
   })
 
+  // The Doorlink-supplied inspection templates. Unlike everything above
+  // these are not demo data — they are the questions the engine asks,
+  // and the feature does not work without them. Idempotent, so running
+  // the seed again neither duplicates nor overwrites them.
+  const templates = await seedInspectionTemplates(prisma)
+
   console.log(
     `Seed complete for ${customer.email}, ${technicianUser.email}, ${supplierUser.email}, ` +
-      `${manufacturerUser.email}, ${adminUser.email}: 3 manufacturers, 4 categories, 5 models — all DataSource.DEMO.`
+      `${manufacturerUser.email}, ${adminUser.email}: 3 manufacturers, 4 categories, 5 models — all DataSource.DEMO. ` +
+      `${templates} inspection template(s) installed.`
   )
 }
 

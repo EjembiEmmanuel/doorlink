@@ -1,0 +1,77 @@
+{
+  "manufacturer": {
+    "name": "Magnetic Autocontrol",
+    "slug": "magnetic-autocontrol",
+    "country": "DE",
+    "website": "https://www.magnetic-access.com/",
+    "supportUrl": null,
+    "note": "German manufacturer of vehicle and pedestrian barriers, part of the FAAC group. No magnetic-access.com document URL surfaced, so supportUrl is null and the direct PDFs below are on a US distributor. Search mentions document IDs 5815,5001EN and 5815,5013US for the EU and US editions, but did not tie either to a URL - so neither is recorded as a documentCode against these files."
+  },
+  "models": [
+    {
+      "modelCode": "MHTM MicroDrive",
+      "name": "Magnetic MHTM MicroDrive Barrier",
+      "category": "gate-motors",
+      "region": "EU",
+      "aliases": ["MHTM", "MicroDrive", "MHTM MicroDrive Access", "MHTM MicroDrive Parking"],
+      "documents": [
+        {
+          "kind": "USER_MANUAL",
+          "title": "MHTM MicroDrive Barrier Operating Instructions - Access and Parking",
+          "sourceUrl": "https://magneticgateopeners.com/store/pdfs/MHTM_Manual.pdf",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "Magnetic Gate Openers",
+          "region": "EU",
+          "rights": "LINK_ONLY",
+          "evidence": "Distributor copy, direct PDF, covering the Access and Parking variants together. Search reports the manual restricts the barriers to road-vehicle access control and explicitly excludes railway crossings, and requires MAGNETIC safety light barriers - noted here because a technician should know those constraints exist, not recorded as fields, since they were read from a summary rather than the document. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "https://magneticgateopeners.com/store/pdfs/microdrive-manual.pdf",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "Second PDF in the same directory; whether it is another edition or another variant is unresolved"
+            },
+            {
+              "url": "https://www.manualslib.com/manual/1227460/Magnetic-Autocontrol-Mhtm-Microdrive.html",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "ManualsLib listing"
+            },
+            {
+              "url": "https://manuals.plus/m/639979b068f7e84f49fa5bfa244662197600deaebdb4fbb2a4393a855b36ebfc",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "manuals.plus copy"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "modelCode": "MHTM MicroDrive Access",
+      "name": "Magnetic MHTM MicroDrive Access Series Barrier",
+      "category": "gate-motors",
+      "region": "EU",
+      "aliases": ["MicroDrive Access Pro L", "Access Pro L"],
+      "documents": [
+        {
+          "kind": "USER_MANUAL",
+          "title": "MHTM MicroDrive Access Series Operating Instructions",
+          "sourceUrl": "https://www.manualslib.com/manual/1743944/Magnetic-Autocontrol-Mhtm-Microdrive-Access-Series.html",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "ManualsLib",
+          "region": "EU",
+          "rights": "LINK_ONLY",
+          "evidence": "Aggregator listing for the Access series specifically. Kept apart from the combined Access-and-Parking manual above because the aggregator files them as two documents. Not fetched - egress blocked."
+        },
+        {
+          "kind": "QUICK_START",
+          "title": "FAAC Magnetic Autocontrol Access Short Instructions",
+          "sourceUrl": "https://www.manualslib.com/manual/3429779/Faac-Magnetic-Autocontrol-Access.html",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "ManualsLib",
+          "region": "EU",
+          "rights": "LINK_ONLY",
+          "evidence": "Aggregator listing, filed under the FAAC name - Magnetic is part of the FAAC group, which is why a FAAC-branded document appears here. Typed QUICK_START on the document's own terms: search quotes it saying the short instructions do not replace the full operating instructions and assume prior experience. Not fetched - egress blocked."
+        }
+      ]
+    }
+  ]
+}

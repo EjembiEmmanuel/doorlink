@@ -1,0 +1,101 @@
+{
+  "manufacturer": {
+    "name": "Nice | HySecurity",
+    "slug": "hysecurity",
+    "country": "US",
+    "website": "https://hysecurity.com/",
+    "supportUrl": "https://support.hysecurity.com/hc/en-us/sections/360007387533-Manuals-Accessories",
+    "note": "US manufacturer of heavy-duty gate operators, now branded Nice | HySecurity. Its support centre is a public help-desk site with one article per document and is registered as a harvest target; note the articles are HTML pages that link the PDFs rather than being the PDFs, so the harvester will need to follow through them. HySecurity also runs a partners portal, which may be gated - the one partner URL recorded below is marked so the link checker resolves it rather than this library guessing."
+  },
+  "models": [
+    {
+      "modelCode": "SlideDriver",
+      "name": "HySecurity SlideDriver Slide Gate Operator (all models)",
+      "category": "gate-motors",
+      "region": "US",
+      "aliases": ["Slide Driver", "MX3629-01", "MX3630-01"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "SlideDriver Installation Instructions (all models)",
+          "documentCode": "MX3629-01",
+          "sourceUrl": "https://support.hysecurity.com/hc/en-us/articles/360043212554-SlideDriver-Installation-Instructions-all-models",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "publisher": "Nice | HySecurity",
+          "region": "US",
+          "rights": "LINK_ONLY",
+          "evidence": "On support.hysecurity.com, the manufacturer's own support centre. The article names the file InstallInstructions_SlideDriver_MX3629-01.pdf at 10 MB; the document code is recorded from that, the file size is not, because a size stated in a listing is not a size confirmed by fetching. This URL is the article page, not the PDF itself. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "https://www.bbfco.com/wp-content/uploads/2019/05/SlideDriverManual.pdf",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "Distributor copy, direct PDF; edition unknown and possibly older than the current article"
+            }
+          ]
+        },
+        {
+          "kind": "PROGRAMMING_GUIDE",
+          "title": "SlideDriver Programming and Operations Manual with Smart Touch Controller (all models)",
+          "documentCode": "MX3630-01",
+          "sourceUrl": "https://www.affordableopeners.com/manuals/Manufacturer/hysecurity/Programming_OperationsManual_SlideDriver_MX3630-01.pdf",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "Affordable Openers",
+          "region": "US",
+          "rights": "LINK_ONLY",
+          "evidence": "Distributor copy, chosen as the source because it is a direct PDF carrying the manufacturer's own document code MX3630-01 in its name. The manufacturer's article page and its partner-portal copy are recorded as alternates. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "https://support.hysecurity.com/hc/en-us/articles/360043212474-SlideDriver-Programming-Operations-Manual-all-models",
+              "authority": "MANUFACTURER_OFFICIAL",
+              "label": "Manufacturer support-centre article for this document"
+            },
+            {
+              "url": "https://partners.hysecurity.com/getmedia/9CA07E30-DBE2-4043-B7CA-BA4137FEC9B2/Programming_OperationsManual_SlideDriver_MX3630-01.pdf",
+              "authority": "MANUFACTURER_OFFICIAL",
+              "label": "Manufacturer partner-portal copy; a partners host may require sign-in - recorded so the link checker resolves it, never to be worked around if it does"
+            }
+          ]
+        },
+        {
+          "kind": "SPEC_SHEET",
+          "title": "SlideDriver Spec Sheet",
+          "sourceUrl": "https://support.hysecurity.com/hc/en-us/articles/360059472814-SlideDriver-Spec-Sheet",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "publisher": "Nice | HySecurity",
+          "region": "US",
+          "rights": "LINK_ONLY",
+          "evidence": "Manufacturer support-centre article. Typed SPEC_SHEET because that is what it is. Not fetched - egress blocked."
+        },
+        {
+          "kind": "PARTS_LIST",
+          "title": "SlideDriver Parts Diagrams",
+          "sourceUrl": "https://support.hysecurity.com/hc/en-us/articles/360043213234-SlideDriver-Parts-Diagrams",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "publisher": "Nice | HySecurity",
+          "region": "US",
+          "rights": "LINK_ONLY",
+          "evidence": "Manufacturer support-centre article. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "SlideDriver II Digital",
+      "name": "HySecurity SlideDriver II Digital Slide Gate Operator",
+      "category": "gate-motors",
+      "region": "US",
+      "aliases": ["SlideDriver II", "SlideDriver 2"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "SlideDriver II Digital Installation Manual",
+          "sourceUrl": "https://support.hysecurity.com/hc/en-us/articles/12744444976151-SlideDriver-II-Digital-Installation-Manual",
+          "origin": "MANUFACTURER_ORIGINAL",
+          "publisher": "Nice | HySecurity",
+          "region": "US",
+          "rights": "LINK_ONLY",
+          "evidence": "Manufacturer support-centre article. Kept as a separate model from the SlideDriver: the first-generation manuals say \"all models\" of that line, and a II Digital with its own manual is a different machine. Search also names a SlideDriver II User Guide and Quick Start Guide, neither of which gave a URL - a recorded gap. Not fetched - egress blocked."
+        }
+      ]
+    }
+  ]
+}

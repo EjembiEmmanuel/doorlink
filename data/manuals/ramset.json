@@ -1,0 +1,145 @@
+{
+  "manufacturer": {
+    "name": "Ramset",
+    "slug": "ramset",
+    "country": "US",
+    "website": "https://www.ramsetinc.com/",
+    "supportUrl": null,
+    "note": "US vehicular gate operator manufacturer. The documents print www.ramsetinc.com on their own covers, which is what the website is recorded from; every PDF found is served from ramsetstore.com, a Ramset-branded store. Same call as BFT's store domain - a brand in a domain is not a manufacturer's own host - so those stay third-party and supportUrl is null. Its manuals state the UL325 gate class each operator is for, and that classing is kept in the model names because fitting the wrong class to a site is a safety matter, not a cataloguing one."
+  },
+  "models": [
+    {
+      "modelCode": "RAM-30 UL",
+      "name": "Ramset RAM-30 UL Gate Operator (Class I Vehicular)",
+      "category": "gate-motors",
+      "region": "US",
+      "aliases": ["RAM30UL", "RAM 30"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "Ramset RAM-30 UL Instruction Manual - For Class I Vehicular Gate Operators",
+          "sourceUrl": "https://ramsetstore.com/store/pdfs/ramset-ram-30-manual.pdf",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "Ramset Store",
+          "region": "US",
+          "rights": "LINK_ONLY",
+          "evidence": "Store copy, direct PDF. The Class I designation is from the document's own title. Search also notes the manual requires non-contact sensing devices on every installation - recorded as prose here, not as a field, because it was read from a summary rather than the document. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "https://ismartgate.com/manuals/Ramset_RAM-30UL_manual.pdf",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "ismartgate copy of the RAM-30 UL manual"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "modelCode": "RAM 100",
+      "name": "Ramset RAM 100 / 1000 / 5500 Gate Operator",
+      "category": "gate-motors",
+      "region": "US",
+      "aliases": ["RAM 1000", "RAM 5500", "RAM100", "RAM1000", "RAM5500"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "Ramset RAM 100 / 1000 / 5500 Instruction Manual",
+          "sourceUrl": "https://ramsetstore.com/store/pdfs/ramset-ram-100-manual.pdf",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "Ramset Store",
+          "region": "US",
+          "rights": "LINK_ONLY",
+          "evidence": "Store copy. One manual covers the 100, 1000 and 5500, so they share this record as aliases. The cover prints www.ramsetinc.com. Not fetched - egress blocked.",
+          "altSources": [
+            {
+              "url": "http://www.gatesnfences.com/files/RamSet_Gate_Openers_PDF_File/RamSet_Gate_Opener_Manual_100_1000_5500_Manual.pdf",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "Distributor copy of the same three-model manual"
+            },
+            {
+              "url": "https://www.manualslib.com/manual/832948/Ramset-Ram-100.html",
+              "authority": "THIRD_PARTY_MIRROR",
+              "label": "ManualsLib listing"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "modelCode": "RAM 2000",
+      "name": "Ramset RAM 2000 Gate Operator (Class II, III, IV Vehicular)",
+      "category": "gate-motors",
+      "region": "US",
+      "aliases": ["RAM2000"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "Ramset RAM 2000 Instruction Manual - For Class II, III, IV Vehicular Gate Operators",
+          "sourceUrl": "https://ramsetstore.com/store/pdfs/ramset-ram-2000-manual.pdf",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "Ramset Store",
+          "region": "US",
+          "rights": "LINK_ONLY",
+          "evidence": "Store copy. Kept apart from the RAM-30's Class I record: the gate classes are different and the operators are not interchangeable between them. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "RAM 300",
+      "name": "Ramset RAM 300 Gate Operator",
+      "category": "gate-motors",
+      "region": "US",
+      "aliases": ["RAM300"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "Ramset RAM 300 Manual",
+          "sourceUrl": "http://ramsetgateopeners.com/manuals/ram300-manual.pdf",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "Ramset Gate Openers",
+          "region": "US",
+          "rights": "LINK_ONLY",
+          "evidence": "Distributor copy on a second Ramset-branded domain, distinct from the store. Plain HTTP as surfaced, recorded that way rather than rewritten. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "DC100",
+      "name": "Ramset DC100 / DC1000 / DC5500 Automatic Gate Systems",
+      "category": "gate-motors",
+      "region": "US",
+      "aliases": ["DC1000", "DC5500"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "Ramset DC100 / DC1000 / DC5500 Automatic Gate Systems Manual",
+          "sourceUrl": "https://ramsetstore.com/store/pdfs/Ramset_DC100-1000-5500s_Manual.pdf",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "Ramset Store",
+          "region": "US",
+          "rights": "LINK_ONLY",
+          "evidence": "Store copy. The DC line mirrors the RAM 100/1000/5500 numbering, so the two are easy to confuse - recorded as a separate model family on the strength of the distinct file and title. The search result rendered the cover as garbled OCR, which is why no further detail is taken from it. Not fetched - egress blocked."
+        }
+      ]
+    },
+    {
+      "modelCode": "RAMSET 50 GB",
+      "name": "Ramset 50 GB Gate Operator",
+      "category": "gate-motors",
+      "region": "US",
+      "aliases": ["RAM 50 GB", "50GB"],
+      "documents": [
+        {
+          "kind": "INSTALL_MANUAL",
+          "title": "Ramset 50 GB Gate Operator Installation and Safety Manual",
+          "sourceUrl": "https://manuals.plus/m/837cbcad9c2b2f4f8d8b82eb0c86cf303108d66416d7bec8ee5c9892e2e302ed",
+          "origin": "THIRD_PARTY_GUIDE",
+          "publisher": "manuals.plus",
+          "region": "US",
+          "rights": "LINK_ONLY",
+          "evidence": "Aggregator listing - the only source found for this model, and no PDF on either Ramset-branded domain surfaced for it. Not fetched - egress blocked."
+        }
+      ]
+    }
+  ]
+}

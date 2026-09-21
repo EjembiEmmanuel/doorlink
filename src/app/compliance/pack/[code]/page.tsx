@@ -6,7 +6,7 @@ import { contentFor } from '@/lib/compliance/content'
 import { packGate } from '../guard'
 import { GateNotice } from '../GateNotice'
 import { DocumentView } from '../DocumentView'
-import { PrintButton } from '../PrintButton'
+import { PrintButton } from '@/components/ui/PrintButton'
 import '../compliance-print.css'
 
 export async function generateMetadata({ params }: { params: Promise<{ code: string }> }): Promise<Metadata> {

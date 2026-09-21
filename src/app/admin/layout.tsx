@@ -18,6 +18,7 @@ const ADMIN_NAV: Array<{
   { href: '/admin/categories', label: 'Categories' },
   { href: '/admin/models', label: 'Models' },
   { href: '/admin/compatibility', label: 'Compatibility' },
+  { href: '/admin/manuals', label: 'Manual library' },
   {
     href: '/admin/marketplace',
     label: 'Marketplace',
