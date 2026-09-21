@@ -101,7 +101,7 @@ export default async function AdminManualsPage() {
             <h1 className="text-2xl font-semibold tracking-tight text-graphite">Manual library</h1>
             {can(session.role, 'admin:settings') && (
               <Link
-                href="/admin/manuals/submissions"
+                href="/admin/manual-submissions"
                 className="text-sm font-medium text-signal hover:text-signal-hover"
               >
                 Review community submissions

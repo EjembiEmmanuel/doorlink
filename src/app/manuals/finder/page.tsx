@@ -72,9 +72,14 @@ export default async function ManualFinderPage({
               title={`Nothing matches “${q}”`}
               description="Try the model number stamped on the motor, the manufacturer's name, or a phrase from the manual such as “limit setting”."
               action={
-                <Link href="/manuals/finder" className="text-sm font-medium text-signal hover:underline">
-                  Start from equipment type instead
-                </Link>
+                <span className="flex flex-wrap items-center gap-3">
+                  <Link href="/manuals/finder" className="text-sm font-medium text-signal hover:underline">
+                    Start from equipment type instead
+                  </Link>
+                  <Link href="/manuals/submit" className="text-sm font-medium text-signal hover:underline">
+                    Add a manual
+                  </Link>
+                </span>
               }
             />
           ) : (
@@ -170,6 +175,7 @@ export default async function ManualFinderPage({
           )}
 
           <UnknownModel />
+        <AddManual />
         </div>
       )
     }
@@ -205,6 +211,7 @@ export default async function ManualFinderPage({
           </ul>
 
           <UnknownModel />
+        <AddManual />
         </div>
       )
     }
@@ -239,6 +246,7 @@ export default async function ManualFinderPage({
         )}
 
         <UnknownModel />
+        <AddManual />
       </div>
     )
   } catch (error) {
@@ -306,6 +314,37 @@ function UnknownModel() {
           Photo identification of a motor or serial plate is not built yet. Doorlink will not guess
           at a model from a description.
         </p>
+      </PanelBody>
+    </Panel>
+  )
+}
+
+/**
+ * The way in for a manual Doorlink does not have.
+ *
+ * Says up front that an upload is reviewed before it appears. Somebody
+ * who expects their file to be searchable immediately and finds it is
+ * not will assume it failed — the honest sentence here costs nothing and
+ * saves that.
+ */
+function AddManual() {
+  return (
+    <Panel className="mt-4">
+      <PanelBody className="flex flex-col gap-2">
+        <h2 className="text-sm font-semibold text-graphite">Can&rsquo;t find your manual?</h2>
+        <p className="text-sm text-graphite-soft">
+          If you have a copy of it, send it in and we&rsquo;ll add it for everyone else. It is checked
+          and then read by a person before it appears in the library, so it will not show up straight
+          away.
+        </p>
+        <div>
+          <Link
+            href="/manuals/submit"
+            className="inline-flex min-h-[44px] items-center rounded bg-signal px-4 py-2 text-sm font-medium text-paper hover:bg-signal-deep"
+          >
+            Add a manual
+          </Link>
+        </div>
       </PanelBody>
     </Panel>
   )

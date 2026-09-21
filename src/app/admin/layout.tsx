@@ -19,7 +19,7 @@ const ADMIN_NAV: Array<{
   { href: '/admin/models', label: 'Models' },
   { href: '/admin/compatibility', label: 'Compatibility' },
   { href: '/admin/manuals', label: 'Manual library' },
-  { href: '/admin/manuals/submissions', label: 'Manual submissions', permission: 'admin:settings' },
+  { href: '/admin/manual-submissions', label: 'Manual submissions' },
   {
     href: '/admin/marketplace',
     label: 'Marketplace',

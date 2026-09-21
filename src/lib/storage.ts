@@ -13,16 +13,6 @@ export interface StoredFileRef {
   key: string
 }
 
-export const MANUAL_UPLOAD_MAX_BYTES = 25 * 1024 * 1024
-export const MANUAL_UPLOAD_MIME_TYPES = [
-  'application/pdf',
-  'application/msword',
-  'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-  'image/jpeg',
-  'image/png',
-  'image/webp',
-] as const
-
 export type StorageBackend = 'local-public' | 'supabase'
 
 export function activeStorageBackend(): StorageBackend {
@@ -35,6 +25,10 @@ export function activeStorageBackend(): StorageBackend {
 // (verification documents, message attachments), which is why
 // `isPubliclyServable` exists and callers for private files must check
 // it rather than assuming every key can be linked to.
+// Note what is NOT here: `manual-submissions/`. An uploaded manual that
+// no administrator has approved is private, and `resolveFileUrl` returns
+// null for it on the local backend as a result. The admin queue fetches
+// those through a signed URL instead — see `signedFileUrl`.
 const PUBLIC_PREFIXES = ['manuals/']
 
 export function isPubliclyServable(key: string): boolean {
@@ -60,80 +54,67 @@ export function resolveFileUrl(key: string): string | null {
 }
 
 /**
- * Upload is deliberately not implemented against the local backend.
- * Writing into public/ at runtime would work in dev and silently fail on
- * any real deployment with a read-only or ephemeral filesystem, which is
- * exactly the kind of "works on my machine" behaviour this codebase
- * avoids. Until Supabase Storage is configured, uploads report as
- * unavailable and the UI says so.
+ * Store a file, or say why it could not be stored.
+ *
+ * Writing into public/ at runtime is still deliberately unimplemented:
+ * it would work in dev and silently fail on any real deployment with a
+ * read-only or ephemeral filesystem, which is exactly the kind of "works
+ * on my machine" behaviour this codebase avoids. So the local backend
+ * refuses, and the UI says uploads are unavailable.
+ *
+ * Against Supabase the upload is real. Note `upsert: false` — a key
+ * collision is an error rather than a silent overwrite, because the keys
+ * here are derived from record ids and a collision means something has
+ * gone wrong upstream, not that the newer file should win.
  */
-export async function uploadFile(file: File, key: string): Promise<StoredFileRef> {
-  if (!canUpload()) {
+export async function uploadFile(input: {
+  key: string
+  body: Uint8Array
+  contentType: string
+}): Promise<StoredFileRef> {
+  if (activeStorageBackend() !== 'supabase') {
     throw new StorageUnavailableError(
-      'File upload needs Supabase Storage. Configure Supabase Storage before uploading a manual.'
+      'File upload needs Supabase Storage. Configure SUPABASE_SERVICE_ROLE_KEY and SUPABASE_STORAGE_BUCKET.'
     )
-  }
-
-  if (!MANUAL_UPLOAD_MIME_TYPES.includes(file.type as (typeof MANUAL_UPLOAD_MIME_TYPES)[number])) {
-    throw new Error('That file type is not supported. Use PDF, DOC, DOCX, JPG, PNG, or WEBP.')
-  }
-  if (file.size > MANUAL_UPLOAD_MAX_BYTES) {
-    throw new Error('That file is too large. Manual files must be 25 MB or smaller.')
   }
 
   const base = process.env.NEXT_PUBLIC_SUPABASE_URL
   const bucket = process.env.SUPABASE_STORAGE_BUCKET
   const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
   if (!base || !bucket || !serviceKey) {
-    throw new StorageUnavailableError('Supabase Storage is not fully configured.')
+    throw new StorageUnavailableError('Supabase Storage is only partly configured.')
   }
 
-  const response = await fetch(`${base.replace(/\/$/, '')}/storage/v1/object/${bucket}/${key}`, {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${serviceKey}`,
-      apikey: serviceKey,
-      'Content-Type': file.type || 'application/octet-stream',
-      'x-upsert': 'false',
-    },
-    body: Buffer.from(await file.arrayBuffer()),
-  })
+  const endpoint = `${base.replace(/\/$/, '')}/storage/v1/object/${bucket}/${input.key}`
+  let response: Response
+  try {
+    response = await fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${serviceKey}`,
+        'Content-Type': input.contentType,
+        // The bucket may be public; an object under it need not be.
+        // Private uploads (a submitted manual nobody has approved) must
+        // not become fetchable the moment they land.
+        'x-upsert': 'false',
+        'cache-control': 'private, max-age=0, no-store',
+      },
+      body: Buffer.from(input.body),
+    })
+  } catch (error) {
+    throw new StorageUnavailableError(
+      `Could not reach Supabase Storage: ${error instanceof Error ? error.message : 'network error'}`
+    )
+  }
 
   if (!response.ok) {
-    throw new Error(`Storage rejected the upload (${response.status}). Try again or use a public source link.`)
+    const detail = await response.text().catch(() => '')
+    throw new StorageUnavailableError(
+      `Supabase Storage refused the upload (HTTP ${response.status}). ${detail}`.trim()
+    )
   }
 
-  return { key }
-}
-
-/**
- * Resolve a private contribution only for a short-lived admin review link.
- * Public manual pages must continue to use manualAccess(), never this
- * helper, so an uploaded file cannot become public by accident.
- */
-export async function createSignedFileUrl(key: string, expiresIn = 300): Promise<string | null> {
-  if (activeStorageBackend() !== 'supabase') return null
-  const base = process.env.NEXT_PUBLIC_SUPABASE_URL
-  const bucket = process.env.SUPABASE_STORAGE_BUCKET
-  const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
-  if (!base || !bucket || !serviceKey) return null
-
-  const response = await fetch(`${base.replace(/\/$/, '')}/storage/v1/object/sign/${bucket}/${key}`, {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${serviceKey}`,
-      apikey: serviceKey,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ expiresIn }),
-  })
-  if (!response.ok) return null
-
-  const body = (await response.json()) as { signedURL?: string }
-  if (!body.signedURL) return null
-  return body.signedURL.startsWith('http')
-    ? body.signedURL
-    : `${base.replace(/\/$/, '')}/storage/v1${body.signedURL}`
+  return { key: input.key }
 }
 
 export class StorageUnavailableError extends Error {
@@ -145,4 +126,38 @@ export class StorageUnavailableError extends Error {
 
 export function canUpload(): boolean {
   return activeStorageBackend() === 'supabase'
+}
+
+/**
+ * A short-lived URL for a file that is not public.
+ *
+ * Used for submitted manuals in the admin queue: a reviewer has to open
+ * the document to judge it, and the alternative — making the object
+ * public so the link works — would put every unapproved upload on the
+ * open internet.
+ *
+ * Returns null when storage cannot mint one, so callers render an
+ * honest "cannot preview" state rather than a dead link.
+ */
+export async function signedFileUrl(key: string, expiresInSeconds = 300): Promise<string | null> {
+  if (activeStorageBackend() !== 'supabase') return null
+
+  const base = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const bucket = process.env.SUPABASE_STORAGE_BUCKET
+  const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
+  if (!base || !bucket || !serviceKey) return null
+
+  const root = base.replace(/\/$/, '')
+  try {
+    const response = await fetch(`${root}/storage/v1/object/sign/${bucket}/${key}`, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${serviceKey}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ expiresIn: expiresInSeconds }),
+    })
+    if (!response.ok) return null
+    const body = (await response.json()) as { signedURL?: string }
+    return body.signedURL ? `${root}/storage/v1${body.signedURL}` : null
+  } catch {
+    return null
+  }
 }
