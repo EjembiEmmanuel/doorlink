@@ -362,33 +362,34 @@ model User {
   notifications     Notification[]
   auditLogs         AuditLog[]
 
-  requestedLeads        Lead[]                    @relation("LeadCustomer")
-  quotes                Quote[]                   @relation("QuoteWorker")
-  workerJobs            Job[]                     @relation("JobWorker")
-  jobStatusEvents       JobStatusEvent[]
-  conversations         ConversationParticipant[]
-  messages              Message[]
-  reviewsWritten        WorkerReview[]            @relation("ReviewAuthor")
-  reviewsReceived       WorkerReview[]            @relation("ReviewSubject")
-  transactionsAsCustomer Transaction[]            @relation("TransactionCustomer")
-  transactionsAsWorker  Transaction[]             @relation("TransactionWorker")
-  payouts               Payout[]                  @relation("PayoutWorker")
-  subscriptions         Subscription[]
-  savedManuals          SavedManual[]
-  doorConfigurations    DoorConfiguration[]
-  disputesRaised        Dispute[]                 @relation("DisputeRaiser")
-  reportsFiled          Report[]                  @relation("ReportAuthor")
-  complianceProfile     ComplianceProfile?
-  compliancePurchases   CompliancePackPurchase[]
-  reportsReviewed       Report[]                  @relation("ReportReviewer")
+  requestedLeads         Lead[]                    @relation("LeadCustomer")
+  quotes                 Quote[]                   @relation("QuoteWorker")
+  workerJobs             Job[]                     @relation("JobWorker")
+  jobStatusEvents        JobStatusEvent[]
+  conversations          ConversationParticipant[]
+  messages               Message[]
+  reviewsWritten         WorkerReview[]            @relation("ReviewAuthor")
+  reviewsReceived        WorkerReview[]            @relation("ReviewSubject")
+  transactionsAsCustomer Transaction[]             @relation("TransactionCustomer")
+  transactionsAsWorker   Transaction[]             @relation("TransactionWorker")
+  payouts                Payout[]                  @relation("PayoutWorker")
+  subscriptions          Subscription[]
+  savedManuals           SavedManual[]
+  doorConfigurations     DoorConfiguration[]
+  disputesRaised         Dispute[]                 @relation("DisputeRaiser")
+  reportsFiled           Report[]                  @relation("ReportAuthor")
+  complianceProfile      ComplianceProfile?
+  compliancePurchases    CompliancePackPurchase[]
+  reportsReviewed        Report[]                  @relation("ReportReviewer")
 
-  clientRecords         Client[]                  @relation("ClientUser")
-  inspections           Inspection[]              @relation("InspectionTechnician")
-  inspectionStatusEvents InspectionStatusEvent[]  @relation("InspectionStatusActor")
-  evidenceCaptured      InspectionEvidence[]      @relation("EvidenceCapturedBy")
-  actionsAssigned       CorrectiveAction[]        @relation("ActionAssignee")
-  actionsVerified       CorrectiveAction[]        @relation("ActionVerifier")
-  inspectionReports     InspectionReportVersion[] @relation("ReportGeneratedBy")
+  clientRecords          Client[]                  @relation("ClientUser")
+  inspections            Inspection[]              @relation("InspectionTechnician")
+  inspectionStatusEvents InspectionStatusEvent[]   @relation("InspectionStatusActor")
+  evidenceCaptured       InspectionEvidence[]      @relation("EvidenceCapturedBy")
+  actionsAssigned        CorrectiveAction[]        @relation("ActionAssignee")
+  actionsVerified        CorrectiveAction[]        @relation("ActionVerifier")
+  inspectionReports      InspectionReportVersion[] @relation("ReportGeneratedBy")
+  springCalculations     SpringCalculation[]       @relation("SpringCalculations")
 }
 
 model Organization {
@@ -434,38 +435,38 @@ model OrganizationMember {
 // verificationStatus field tracks where in that manual process a worker
 // sits.
 model TechnicianProfile {
-  id          String   @id @default(cuid())
-  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId      String   @unique
-  verified    Boolean  @default(false)
+  id                 String             @id @default(cuid())
+  user               User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId             String             @unique
+  verified           Boolean            @default(false)
   verificationStatus VerificationStatus @default(UNVERIFIED)
   verificationNote   String?
-  verifiedAt  DateTime?
+  verifiedAt         DateTime?
 
-  businessName String?
+  businessName    String?
   // The number a technician puts on the side of the van, which is often
   // not the number on their personal account record.
-  businessPhone String?
-  abn          String?
-  avatarUrl    String?
-  headline     String?
-  bio          String?
+  businessPhone   String?
+  abn             String?
+  avatarUrl       String?
+  headline        String?
+  bio             String?
   yearsExperience Int?
 
-  licenceNumber   String?
-  insurerName     String?
+  licenceNumber         String?
+  insurerName           String?
   insurancePolicyNumber String?
   insuranceExpiresAt    DateTime?
 
-  serviceArea String?
-  baseSuburb  String?
-  baseState   String?
-  basePostcode String?
+  serviceArea     String?
+  baseSuburb      String?
+  baseState       String?
+  basePostcode    String?
   serviceRadiusKm Int?
 
   hourlyRateCents Int?
   calloutFeeCents Int?
-  currency        String  @default("AUD")
+  currency        String @default("AUD")
 
   acceptingWork Boolean @default(true)
 
@@ -474,13 +475,13 @@ model TechnicianProfile {
   // aggregating every review per card on every browse page would not
   // hold up.
   ratingAvg     Float?
-  ratingCount   Int     @default(0)
-  jobsCompleted Int     @default(0)
+  ratingCount   Int    @default(0)
+  jobsCompleted Int    @default(0)
 
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  jobs           Job[] @relation("JobTechnician")
+  jobs           Job[]                 @relation("JobTechnician")
   services       WorkerService[]
   serviceAreas   WorkerServiceArea[]
   availability   WorkerAvailability[]
@@ -488,57 +489,57 @@ model TechnicianProfile {
 }
 
 model WorkerService {
-  id         String   @id @default(cuid())
-  worker     TechnicianProfile @relation(fields: [workerId], references: [id], onDelete: Cascade)
-  workerId   String
-  category   ServiceCategory   @relation(fields: [categoryId], references: [id], onDelete: Cascade)
-  categoryId String
+  id             String            @id @default(cuid())
+  worker         TechnicianProfile @relation(fields: [workerId], references: [id], onDelete: Cascade)
+  workerId       String
+  category       ServiceCategory   @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  categoryId     String
   fromPriceCents Int?
-  note       String?
-  createdAt  DateTime @default(now())
+  note           String?
+  createdAt      DateTime          @default(now())
 
   @@unique([workerId, categoryId])
 }
 
 model WorkerServiceArea {
-  id        String   @id @default(cuid())
+  id        String            @id @default(cuid())
   worker    TechnicianProfile @relation(fields: [workerId], references: [id], onDelete: Cascade)
   workerId  String
   suburb    String?
   state     String?
   postcode  String
-  createdAt DateTime @default(now())
+  createdAt DateTime          @default(now())
 
   @@unique([workerId, postcode])
   @@index([postcode])
 }
 
 model WorkerAvailability {
-  id        String   @id @default(cuid())
-  worker    TechnicianProfile @relation(fields: [workerId], references: [id], onDelete: Cascade)
-  workerId  String
+  id          String            @id @default(cuid())
+  worker      TechnicianProfile @relation(fields: [workerId], references: [id], onDelete: Cascade)
+  workerId    String
   // 0 = Sunday through 6 = Saturday, matching JS getDay().
-  dayOfWeek Int
+  dayOfWeek   Int
   startMinute Int
   endMinute   Int
-  createdAt DateTime @default(now())
+  createdAt   DateTime          @default(now())
 
   @@unique([workerId, dayOfWeek, startMinute])
 }
 
 model WorkerCertification {
-  id          String   @id @default(cuid())
-  worker      TechnicianProfile @relation(fields: [workerId], references: [id], onDelete: Cascade)
-  workerId    String
-  name        String
-  issuer      String?
-  reference   String?
-  fileKey     String?
-  issuedAt    DateTime?
-  expiresAt   DateTime?
+  id        String            @id @default(cuid())
+  worker    TechnicianProfile @relation(fields: [workerId], references: [id], onDelete: Cascade)
+  workerId  String
+  name      String
+  issuer    String?
+  reference String?
+  fileKey   String?
+  issuedAt  DateTime?
+  expiresAt DateTime?
   // Admin-reviewed, same honesty boundary as TechnicianProfile.verified.
-  verified    Boolean  @default(false)
-  createdAt   DateTime @default(now())
+  verified  Boolean           @default(false)
+  createdAt DateTime          @default(now())
 }
 
 model SupplierProfile {
@@ -568,9 +569,9 @@ model Manufacturer {
   // Where the company actually is, and where it publishes documents.
   // Recorded so a technician can tell an Australian B&D manual from a
   // same-named product sold elsewhere.
-  country      String?
-  website      String?
-  supportUrl   String?
+  country    String?
+  website    String?
+  supportUrl String?
 
   productLines ProductLine[]
   models       Model[]
@@ -629,8 +630,8 @@ model Model {
   specs          ModelSpec[]
   documents      Document[]
   listings       Listing[]
-  compatibleFrom Compatibility[] @relation("CompatFrom")
-  compatibleTo   Compatibility[] @relation("CompatTo")
+  compatibleFrom Compatibility[]     @relation("CompatFrom")
+  compatibleTo   Compatibility[]     @relation("CompatTo")
   favorites      Favorite[]
   jobs           Job[]
   leads          Lead[]
@@ -663,13 +664,13 @@ model ModelSpec {
 // record existing for them yet — requiring one would mean either
 // inventing model records or dropping usable documents.
 model Document {
-  id             String       @id @default(cuid())
-  slug           String       @unique
-  model          Model?       @relation(fields: [modelId], references: [id], onDelete: Cascade)
+  id             String        @id @default(cuid())
+  slug           String        @unique
+  model          Model?        @relation(fields: [modelId], references: [id], onDelete: Cascade)
   modelId        String?
   manufacturer   Manufacturer? @relation(fields: [manufacturerId], references: [id])
   manufacturerId String?
-  category       Category?    @relation(fields: [categoryId], references: [id])
+  category       Category?     @relation(fields: [categoryId], references: [id])
   categoryId     String?
   kind           DocumentKind
   title          String
@@ -680,18 +681,18 @@ model Document {
   // points at the manufacturer's own PDF and stores no file at all.
   // A required fileKey made that case impossible to express, which
   // meant the only way to list a manual was to copy it.
-  fileKey        String?
-  version        String       @default("1")
+  fileKey String?
+  version String  @default("1")
 
   // Printed on the document itself, not invented — a FAAC manual carries
   // a document code (732786) and a revision (Rev.C) which is how the
   // trade actually refers to a specific edition.
-  documentCode   String?
-  revision       String?
-  language       String       @default("en")
-  pageCount      Int?
-  fileSizeBytes  Int?
-  mimeType       String       @default("application/pdf")
+  documentCode     String?
+  revision         String?
+  language         String  @default("en")
+  pageCount        Int?
+  fileSizeBytes    Int?
+  mimeType         String  @default("application/pdf")
   originalFilename String?
 
   origin         DocumentOrigin @default(UNKNOWN)
@@ -702,25 +703,25 @@ model Document {
   // Text extracted from the file at ingest, used for full-text search.
   // Never edited by hand — it is a copy of what the document says, so
   // search results can never claim content the document doesn't contain.
-  searchText     String?
+  searchText String?
 
-  dataSource     DataSource   @default(DEMO)
-  isPublished    Boolean      @default(true)
-  downloadCount  Int          @default(0)
-  publishedAt    DateTime?
+  dataSource    DataSource @default(DEMO)
+  isPublished   Boolean    @default(true)
+  downloadCount Int        @default(0)
+  publishedAt   DateTime?
 
   // Where the manufacturer publishes this document for this market. A
   // US opener manual and its Australian equivalent are different
   // documents with different wiring and different compliance text, and
   // handing a technician the wrong one is worse than handing them none.
-  region         Region       @default(UNKNOWN)
+  region Region @default(UNKNOWN)
 
   // Whether Doorlink may host a copy, decided per document rather than
   // assumed. LINK_ONLY is the default because it is the assumption that
   // cannot infringe: publicly downloadable is not the same as free to
   // redistribute.
-  rights         DocumentRights @default(LINK_ONLY)
-  rightsNote     String?
+  rights     DocumentRights @default(LINK_ONLY)
+  rightsNote String?
 
   // The result of actually fetching the URL, never inferred. UNVERIFIED
   // means nobody has checked, which is different from checked-and-broken
@@ -731,17 +732,17 @@ model Document {
   // Set when a check fails. A document is flagged for review rather than
   // deleted: a manufacturer's site being down for an afternoon is not
   // evidence the manual no longer exists.
-  needsReview    Boolean      @default(false)
+  needsReview    Boolean           @default(false)
   reviewReason   String?
 
-  supersedes   Document?    @relation("DocumentRevision", fields: [supersedesId], references: [id])
-  supersedesId String?      @unique
-  supersededBy Document?    @relation("DocumentRevision")
-  createdAt    DateTime     @default(now())
-  updatedAt    DateTime     @updatedAt @default(now())
+  supersedes   Document? @relation("DocumentRevision", fields: [supersedesId], references: [id])
+  supersedesId String?   @unique
+  supersededBy Document? @relation("DocumentRevision")
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @default(now()) @updatedAt
 
-  savedBy      SavedManual[]
-  altSources   DocumentSource[]
+  savedBy              SavedManual[]
+  altSources           DocumentSource[]
   complianceReferences ComplianceReference[]
 
   @@index([manufacturerId])
@@ -791,22 +792,22 @@ model Compatibility {
 // the create/update actions rather than at the schema level (Prisma has
 // no native "exactly one of two nullable columns" constraint).
 model Listing {
-  id             String            @id @default(cuid())
-  organization   Organization?     @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  id             String           @id @default(cuid())
+  organization   Organization?    @relation(fields: [organizationId], references: [id], onDelete: Cascade)
   organizationId String?
-  seller         User?             @relation(fields: [sellerId], references: [id], onDelete: Cascade)
+  seller         User?            @relation(fields: [sellerId], references: [id], onDelete: Cascade)
   sellerId       String?
-  model          Model             @relation(fields: [modelId], references: [id])
+  model          Model            @relation(fields: [modelId], references: [id])
   modelId        String
   title          String
   priceCents     Int
-  currency       String            @default("AUD")
-  condition      ListingCondition  @default(NEW)
-  status         ListingStatus     @default(DRAFT)
-  stockQty       Int               @default(0)
-  dataSource     DataSource        @default(DEMO)
-  createdAt      DateTime          @default(now())
-  updatedAt      DateTime          @updatedAt
+  currency       String           @default("AUD")
+  condition      ListingCondition @default(NEW)
+  status         ListingStatus    @default(DRAFT)
+  stockQty       Int              @default(0)
+  dataSource     DataSource       @default(DEMO)
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
 
   cartItems  CartItem[]
   orderItems OrderItem[]
@@ -835,16 +836,16 @@ model CartItem {
 // OrderItem carries its own orgId and status so a multi-vendor basket
 // fulfils per seller instead of as one monolithic order.
 model Order {
-  id                 String      @id @default(cuid())
-  buyer              User        @relation("OrderBuyer", fields: [buyerId], references: [id])
-  buyerId            String
-  status             OrderStatus @default(PENDING_PAYMENT)
-  totalCents         Int
-  currency           String      @default("AUD")
-  shippingAddress    Address?    @relation(fields: [shippingAddressId], references: [id])
-  shippingAddressId  String?
-  createdAt          DateTime    @default(now())
-  updatedAt          DateTime    @updatedAt
+  id                String      @id @default(cuid())
+  buyer             User        @relation("OrderBuyer", fields: [buyerId], references: [id])
+  buyerId           String
+  status            OrderStatus @default(PENDING_PAYMENT)
+  totalCents        Int
+  currency          String      @default("AUD")
+  shippingAddress   Address?    @relation(fields: [shippingAddressId], references: [id])
+  shippingAddressId String?
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
 
   items OrderItem[]
 }
@@ -919,28 +920,28 @@ model Favorite {
 // signing up, and making it require one now would lose the low-friction
 // path that already works.
 model Lead {
-  id             String        @id @default(cuid())
-  reference      String        @unique
-  customer       User?         @relation("LeadCustomer", fields: [customerId], references: [id])
-  customerId     String?
-  name           String
-  email          String
-  phone          String?
-  title          String?
-  message        String
+  id         String  @id @default(cuid())
+  reference  String  @unique
+  customer   User?   @relation("LeadCustomer", fields: [customerId], references: [id])
+  customerId String?
+  name       String
+  email      String
+  phone      String?
+  title      String?
+  message    String
 
   serviceCategory   ServiceCategory? @relation(fields: [serviceCategoryId], references: [id])
   serviceCategoryId String?
 
-  suburb         String?
-  state          String?
-  postcode       String?
+  suburb   String?
+  state    String?
+  postcode String?
 
-  urgency        UrgencyLevel  @default(STANDARD)
+  urgency         UrgencyLevel @default(STANDARD)
   preferredTiming String?
-  budgetMinCents Int?
-  budgetMaxCents Int?
-  currency       String        @default("AUD")
+  budgetMinCents  Int?
+  budgetMaxCents  Int?
+  currency        String       @default("AUD")
 
   model          Model?        @relation(fields: [modelId], references: [id])
   modelId        String?
@@ -953,10 +954,10 @@ model Lead {
   createdAt      DateTime      @default(now())
   updatedAt      DateTime      @updatedAt
 
-  photos         LeadPhoto[]
-  quotes         Quote[]
-  jobs           Job[]
-  conversations  Conversation[]
+  photos        LeadPhoto[]
+  quotes        Quote[]
+  jobs          Job[]
+  conversations Conversation[]
 
   @@index([status])
   @@index([serviceCategoryId])
@@ -997,63 +998,63 @@ model ServiceCategory {
 // change to the platform commission rate can never silently rewrite the
 // economics of a job already agreed.
 model Quote {
-  id           String      @id @default(cuid())
-  lead         Lead        @relation(fields: [leadId], references: [id], onDelete: Cascade)
-  leadId       String
-  worker       User        @relation("QuoteWorker", fields: [workerId], references: [id], onDelete: Cascade)
-  workerId     String
-  amountCents  Int
-  currency     String      @default("AUD")
-  message      String
+  id                       String      @id @default(cuid())
+  lead                     Lead        @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  leadId                   String
+  worker                   User        @relation("QuoteWorker", fields: [workerId], references: [id], onDelete: Cascade)
+  workerId                 String
+  amountCents              Int
+  currency                 String      @default("AUD")
+  message                  String
   estimatedDurationMinutes Int?
-  availableFrom DateTime?
-  validUntil   DateTime?
-  status       QuoteStatus @default(PENDING)
-  respondedAt  DateTime?
-  createdAt    DateTime    @default(now())
-  updatedAt    DateTime    @updatedAt
+  availableFrom            DateTime?
+  validUntil               DateTime?
+  status                   QuoteStatus @default(PENDING)
+  respondedAt              DateTime?
+  createdAt                DateTime    @default(now())
+  updatedAt                DateTime    @updatedAt
 
-  job          Job?
+  job Job?
 
   @@unique([leadId, workerId])
   @@index([status])
 }
 
 model Job {
-  id             String             @id @default(cuid())
-  reference      String             @unique
-  lead           Lead?              @relation(fields: [leadId], references: [id])
-  leadId         String?
-  quote          Quote?             @relation(fields: [quoteId], references: [id])
-  quoteId        String?            @unique
-  technician     TechnicianProfile? @relation("JobTechnician", fields: [technicianId], references: [id])
-  technicianId   String?
-  worker         User?              @relation("JobWorker", fields: [workerId], references: [id])
-  workerId       String?
-  organization   Organization?      @relation("JobOrganization", fields: [organizationId], references: [id])
-  organizationId String?
-  customer       User?              @relation("JobCustomer", fields: [customerId], references: [id])
-  customerId     String?
-  model          Model?             @relation(fields: [modelId], references: [id])
-  modelId        String?
-  description    String
-  status         JobStatus          @default(REQUESTED)
-  agreedPriceCents Int?
-  currency       String             @default("AUD")
-  scheduledAt    DateTime?
-  startedAt      DateTime?
-  completedAt    DateTime?
-  cancelledAt    DateTime?
+  id                 String             @id @default(cuid())
+  reference          String             @unique
+  lead               Lead?              @relation(fields: [leadId], references: [id])
+  leadId             String?
+  quote              Quote?             @relation(fields: [quoteId], references: [id])
+  quoteId            String?            @unique
+  technician         TechnicianProfile? @relation("JobTechnician", fields: [technicianId], references: [id])
+  technicianId       String?
+  worker             User?              @relation("JobWorker", fields: [workerId], references: [id])
+  workerId           String?
+  organization       Organization?      @relation("JobOrganization", fields: [organizationId], references: [id])
+  organizationId     String?
+  customer           User?              @relation("JobCustomer", fields: [customerId], references: [id])
+  customerId         String?
+  model              Model?             @relation(fields: [modelId], references: [id])
+  modelId            String?
+  description        String
+  status             JobStatus          @default(REQUESTED)
+  agreedPriceCents   Int?
+  currency           String             @default("AUD")
+  scheduledAt        DateTime?
+  startedAt          DateTime?
+  completedAt        DateTime?
+  cancelledAt        DateTime?
   cancellationReason String?
-  createdAt      DateTime           @default(now())
-  updatedAt      DateTime           @updatedAt
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
 
-  statusEvents   JobStatusEvent[]
-  transactions   Transaction[]
-  workerReview   WorkerReview?
-  conversations  Conversation[]
-  disputes       Dispute[]
-  inspections    Inspection[]
+  statusEvents  JobStatusEvent[]
+  transactions  Transaction[]
+  workerReview  WorkerReview?
+  conversations Conversation[]
+  disputes      Dispute[]
+  inspections   Inspection[]
 
   @@index([status])
   @@index([customerId])
@@ -1065,15 +1066,15 @@ model Job {
 // and when" is answerable from data rather than inferred from timestamps
 // scattered across the Job row.
 model JobStatusEvent {
-  id         String    @id @default(cuid())
-  job        Job       @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  id         String     @id @default(cuid())
+  job        Job        @relation(fields: [jobId], references: [id], onDelete: Cascade)
   jobId      String
   fromStatus JobStatus?
   toStatus   JobStatus
-  actor      User?     @relation(fields: [actorId], references: [id])
+  actor      User?      @relation(fields: [actorId], references: [id])
   actorId    String?
   note       String?
-  createdAt  DateTime  @default(now())
+  createdAt  DateTime   @default(now())
 
   @@index([jobId])
 }
@@ -1186,16 +1187,16 @@ model WebhookEvent {
 // floating free — and so a job's whole paper trail can be pulled up in
 // one query during a dispute.
 model Conversation {
-  id        String   @id @default(cuid())
-  lead      Lead?    @relation(fields: [leadId], references: [id], onDelete: Cascade)
-  leadId    String?
-  job       Job?     @relation(fields: [jobId], references: [id], onDelete: Cascade)
-  jobId     String?
-  subject   String?
+  id            String    @id @default(cuid())
+  lead          Lead?     @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  leadId        String?
+  job           Job?      @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  jobId         String?
+  subject       String?
   lastMessageAt DateTime?
-  closedAt  DateTime?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  closedAt      DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
 
   participants ConversationParticipant[]
   messages     Message[]
@@ -1250,19 +1251,19 @@ model MessageAttachment {
 // actually COMPLETED — a review for work that never happened is the
 // single easiest way to make a marketplace's ratings meaningless.
 model WorkerReview {
-  id         String   @id @default(cuid())
-  job        Job      @relation(fields: [jobId], references: [id], onDelete: Cascade)
-  jobId      String   @unique
-  author     User     @relation("ReviewAuthor", fields: [authorId], references: [id], onDelete: Cascade)
-  authorId   String
-  worker     User     @relation("ReviewSubject", fields: [workerId], references: [id], onDelete: Cascade)
-  workerId   String
-  rating     Int
-  body       String?
-  workerReply String?
+  id              String    @id @default(cuid())
+  job             Job       @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  jobId           String    @unique
+  author          User      @relation("ReviewAuthor", fields: [authorId], references: [id], onDelete: Cascade)
+  authorId        String
+  worker          User      @relation("ReviewSubject", fields: [workerId], references: [id], onDelete: Cascade)
+  workerId        String
+  rating          Int
+  body            String?
+  workerReply     String?
   workerRepliedAt DateTime?
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
 
   @@index([workerId])
 }
@@ -1276,36 +1277,36 @@ model WorkerReview {
 // historical transactions keep reporting the split that was actually
 // agreed even after an admin changes the platform rate.
 model Transaction {
-  id                String            @id @default(cuid())
-  reference         String            @unique
-  job               Job?              @relation(fields: [jobId], references: [id])
-  jobId             String?
-  customer          User?             @relation("TransactionCustomer", fields: [customerId], references: [id])
-  customerId        String?
-  worker            User?             @relation("TransactionWorker", fields: [workerId], references: [id])
-  workerId          String?
+  id         String  @id @default(cuid())
+  reference  String  @unique
+  job        Job?    @relation(fields: [jobId], references: [id])
+  jobId      String?
+  customer   User?   @relation("TransactionCustomer", fields: [customerId], references: [id])
+  customerId String?
+  worker     User?   @relation("TransactionWorker", fields: [workerId], references: [id])
+  workerId   String?
 
   grossCents        Int
   commissionRateBps Int
   commissionCents   Int
   workerPayoutCents Int
-  refundedCents     Int               @default(0)
-  currency          String            @default("AUD")
+  refundedCents     Int    @default(0)
+  currency          String @default("AUD")
 
-  status            TransactionStatus @default(PENDING)
-  provider          String?
-  providerRef       String?
+  status        TransactionStatus @default(PENDING)
+  provider      String?
+  providerRef   String?
   // When the provider confirmed the money actually arrived. Null on
   // every transaction that has not been through a verified webhook,
   // which is the only thing that sets it.
-  paidAt            DateTime?
-  failureReason     String?
+  paidAt        DateTime?
+  failureReason String?
 
-  createdAt         DateTime          @default(now())
-  updatedAt         DateTime          @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  events            TransactionEvent[]
-  payout            Payout?
+  events TransactionEvent[]
+  payout Payout?
 
   @@index([status])
   @@index([jobId])
@@ -1374,21 +1375,21 @@ model SubscriptionPlan {
 }
 
 model Subscription {
-  id                   String             @id @default(cuid())
-  user                 User               @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId               String
-  plan                 SubscriptionPlan   @relation(fields: [planId], references: [id])
-  planId               String
-  status               SubscriptionStatus @default(INCOMPLETE)
-  currentPeriodStart   DateTime?
-  currentPeriodEnd     DateTime?
-  cancelAtPeriodEnd    Boolean            @default(false)
-  cancelledAt          DateTime?
-  provider             String?
-  providerCustomerId   String?
+  id                     String             @id @default(cuid())
+  user                   User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId                 String
+  plan                   SubscriptionPlan   @relation(fields: [planId], references: [id])
+  planId                 String
+  status                 SubscriptionStatus @default(INCOMPLETE)
+  currentPeriodStart     DateTime?
+  currentPeriodEnd       DateTime?
+  cancelAtPeriodEnd      Boolean            @default(false)
+  cancelledAt            DateTime?
+  provider               String?
+  providerCustomerId     String?
   providerSubscriptionId String?
-  createdAt            DateTime           @default(now())
-  updatedAt            DateTime           @updatedAt
+  createdAt              DateTime           @default(now())
+  updatedAt              DateTime           @updatedAt
 
   @@index([userId])
   @@index([status])
@@ -1422,35 +1423,35 @@ model DoorConfiguration {
 // ---------------------------------------------------------------------
 
 model Dispute {
-  id          String        @id @default(cuid())
-  job         Job           @relation(fields: [jobId], references: [id], onDelete: Cascade)
-  jobId       String
-  raisedBy    User          @relation("DisputeRaiser", fields: [raisedById], references: [id])
-  raisedById  String
-  reason      String
-  detail      String?
-  status      DisputeStatus @default(OPEN)
-  resolution  String?
-  resolvedAt  DateTime?
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
+  id         String        @id @default(cuid())
+  job        Job           @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  jobId      String
+  raisedBy   User          @relation("DisputeRaiser", fields: [raisedById], references: [id])
+  raisedById String
+  reason     String
+  detail     String?
+  status     DisputeStatus @default(OPEN)
+  resolution String?
+  resolvedAt DateTime?
+  createdAt  DateTime      @default(now())
+  updatedAt  DateTime      @updatedAt
 
   @@index([status])
 }
 
 model Report {
-  id          String           @id @default(cuid())
-  reporter    User             @relation("ReportAuthor", fields: [reporterId], references: [id], onDelete: Cascade)
-  reporterId  String
-  targetType  ReportTargetType
-  targetId    String
-  reason      String
-  detail      String?
-  status      ReportStatus     @default(OPEN)
-  reviewedBy  User?            @relation("ReportReviewer", fields: [reviewedById], references: [id])
+  id           String           @id @default(cuid())
+  reporter     User             @relation("ReportAuthor", fields: [reporterId], references: [id], onDelete: Cascade)
+  reporterId   String
+  targetType   ReportTargetType
+  targetId     String
+  reason       String
+  detail       String?
+  status       ReportStatus     @default(OPEN)
+  reviewedBy   User?            @relation("ReportReviewer", fields: [reviewedById], references: [id])
   reviewedById String?
-  reviewedAt  DateTime?
-  createdAt   DateTime         @default(now())
+  reviewedAt   DateTime?
+  createdAt    DateTime         @default(now())
 
   @@index([status])
   @@index([targetType, targetId])
@@ -1752,14 +1753,14 @@ model Site {
   client         Client       @relation(fields: [clientId], references: [id], onDelete: Cascade)
   clientId       String
 
-  name        String
-  addressLine String?
-  suburb      String?
-  state       String?
-  postcode    String?
-  contactName String?
+  name         String
+  addressLine  String?
+  suburb       String?
+  state        String?
+  postcode     String?
+  contactName  String?
   contactPhone String?
-  notes       String?
+  notes        String?
 
   archivedAt DateTime?
   createdAt  DateTime  @default(now())
@@ -1817,8 +1818,9 @@ model Asset {
   createdAt  DateTime  @default(now())
   updatedAt  DateTime  @updatedAt
 
-  inspections Inspection[]
-  actions     CorrectiveAction[]
+  inspections        Inspection[]
+  actions            CorrectiveAction[]
+  springCalculations SpringCalculation[]
 
   @@index([organizationId])
   @@index([siteId])
@@ -1900,10 +1902,10 @@ model TemplateQuestion {
   // detection keys on — never the row id, which changes on republish.
   code String
 
-  prompt   String
-  helpText String?
-  type     QuestionType @default(PASS_FAIL_NA)
-  sortOrder Int         @default(0)
+  prompt    String
+  helpText  String?
+  type      QuestionType @default(PASS_FAIL_NA)
+  sortOrder Int          @default(0)
 
   required Boolean @default(true)
 
@@ -1951,13 +1953,13 @@ model QuestionRule {
   // Fires when the recorded value matches, for select/text answers.
   whenValue  String?
 
-  severity       FindingSeverity @default(MEDIUM)
-  flag           Boolean         @default(true)
-  requireNote    Boolean         @default(true)
-  requirePhoto   Boolean         @default(false)
+  severity             FindingSeverity @default(MEDIUM)
+  flag                 Boolean         @default(true)
+  requireNote          Boolean         @default(true)
+  requirePhoto         Boolean         @default(false)
   // Offered to the technician as a starting point, never written into
   // the report unless they accept or edit it.
-  recommendation String?
+  recommendation       String?
   suggestedActionTitle String?
 
   createdAt DateTime @default(now())
@@ -2047,20 +2049,20 @@ model Inspection {
   asset    Asset  @relation(fields: [assetId], references: [id], onDelete: Cascade)
   assetId  String
 
-  template   InspectionTemplate @relation(fields: [templateId], references: [id])
-  templateId String
+  template        InspectionTemplate @relation(fields: [templateId], references: [id])
+  templateId      String
   // The template version this was carried out against. Stored, not
   // joined, so republishing a template never changes what an existing
   // report says was asked.
-  templateVersion Int @default(1)
+  templateVersion Int                @default(1)
 
   // Free text ("Preventative maintenance", "6-monthly service") rather
   // than an enum: companies name their own inspection rounds and a
   // closed list would force them into someone else's vocabulary.
   inspectionType String
 
-  technician   User   @relation("InspectionTechnician", fields: [technicianId], references: [id])
-  technicianId String
+  technician        User    @relation("InspectionTechnician", fields: [technicianId], references: [id])
+  technicianId      String
   // Licence or qualification as the technician states it. Recorded as
   // supplied and labelled that way — Doorlink does not check it against
   // any register, and the report must not imply otherwise.
@@ -2070,15 +2072,15 @@ model Inspection {
   job   Job?    @relation(fields: [jobId], references: [id])
   jobId String?
 
-  jobNumber     String?
-  siteContact   String?
-  contactPhone  String?
-  scheduledFor  DateTime?
-  startedAt     DateTime?
-  submittedAt   DateTime?
-  notes         String?
+  jobNumber    String?
+  siteContact  String?
+  contactPhone String?
+  scheduledFor DateTime?
+  startedAt    DateTime?
+  submittedAt  DateTime?
+  notes        String?
 
-  status InspectionStatus @default(DRAFT)
+  status InspectionStatus  @default(DRAFT)
   // Derived by the engine from the answers, recomputed on submit rather
   // than typed in. Null until there is enough answered to derive one.
   result InspectionResult?
@@ -2086,10 +2088,10 @@ model Inspection {
   // The technician's statement that the record reflects what they did.
   // Without it an inspection cannot leave AWAITING_REVIEW, because a
   // report nobody stands behind is worse than no report.
-  reviewedAt          DateTime?
-  reviewStatement     String?
-  customerAckName     String?
-  customerAckAt       DateTime?
+  reviewedAt      DateTime?
+  reviewStatement String?
+  customerAckName String?
+  customerAckAt   DateTime?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -2108,8 +2110,8 @@ model Inspection {
 }
 
 model InspectionAnswer {
-  id           String     @id @default(cuid())
-  inspection   Inspection @relation(fields: [inspectionId], references: [id], onDelete: Cascade)
+  id           String           @id @default(cuid())
+  inspection   Inspection       @relation(fields: [inspectionId], references: [id], onDelete: Cascade)
   inspectionId String
   question     TemplateQuestion @relation(fields: [questionId], references: [id])
   questionId   String
@@ -2124,9 +2126,9 @@ model InspectionAnswer {
   // The non-pass/fail payload. One column per shape rather than a single
   // Json blob so a number stays a number for comparison between
   // inspections.
-  valueText   String?
-  valueNumber Float?
-  valueDate   DateTime?
+  valueText    String?
+  valueNumber  Float?
+  valueDate    DateTime?
   valueChoices String[]
 
   note String?
@@ -2157,16 +2159,16 @@ model InspectionAnswer {
 // Supabase Storage is configured, so the capture UI reports that
 // plainly rather than creating rows that point at nothing.
 model InspectionEvidence {
-  id           String     @id @default(cuid())
-  inspection   Inspection @relation(fields: [inspectionId], references: [id], onDelete: Cascade)
+  id           String            @id @default(cuid())
+  inspection   Inspection        @relation(fields: [inspectionId], references: [id], onDelete: Cascade)
   inspectionId String
   answer       InspectionAnswer? @relation(fields: [answerId], references: [id], onDelete: Cascade)
   answerId     String?
 
-  kind        EvidenceKind @default(PHOTO)
-  fileKey     String
-  caption     String?
-  mimeType    String?
+  kind          EvidenceKind @default(PHOTO)
+  fileKey       String
+  caption       String?
+  mimeType      String?
   fileSizeBytes Int?
 
   // When and by whom, recorded at capture. Printed under the image in
@@ -2186,16 +2188,16 @@ model InspectionEvidence {
 // later re-graded, dismissed with a reason, or carried forward — and
 // none of that should overwrite what the technician originally recorded.
 model InspectionFinding {
-  id           String     @id @default(cuid())
-  inspection   Inspection @relation(fields: [inspectionId], references: [id], onDelete: Cascade)
+  id           String            @id @default(cuid())
+  inspection   Inspection        @relation(fields: [inspectionId], references: [id], onDelete: Cascade)
   inspectionId String
   answer       InspectionAnswer? @relation(fields: [answerId], references: [id], onDelete: SetNull)
   answerId     String?
 
-  questionCode String?
-  title        String
+  questionCode   String?
+  title          String
   // What the technician saw. An observed condition, stated plainly.
-  observation  String?
+  observation    String?
   // What they suggest doing about it. Separate from the observation so
   // the report can show the difference between fact and advice.
   recommendation String?
@@ -2220,22 +2222,22 @@ model InspectionFinding {
 }
 
 model CorrectiveAction {
-  id           String     @id @default(cuid())
-  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  id             String       @id @default(cuid())
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
   organizationId String
 
-  inspection   Inspection? @relation(fields: [inspectionId], references: [id], onDelete: SetNull)
+  inspection   Inspection?        @relation(fields: [inspectionId], references: [id], onDelete: SetNull)
   inspectionId String?
   finding      InspectionFinding? @relation(fields: [findingId], references: [id], onDelete: SetNull)
   findingId    String?
   // Kept even when the inspection is deleted: an outstanding action on a
   // piece of equipment outlives the visit that found it.
-  asset        Asset  @relation(fields: [assetId], references: [id], onDelete: Cascade)
+  asset        Asset              @relation(fields: [assetId], references: [id], onDelete: Cascade)
   assetId      String
 
-  title       String
-  description String?
-  severity    FindingSeverity @default(MEDIUM)
+  title               String
+  description         String?
+  severity            FindingSeverity @default(MEDIUM)
   recommendedSolution String?
 
   status     ActionStatus @default(OPEN)
@@ -2243,11 +2245,11 @@ model CorrectiveAction {
   assigneeId String?
   dueAt      DateTime?
 
-  completedAt DateTime?
-  verifiedAt  DateTime?
-  verifiedBy  User?    @relation("ActionVerifier", fields: [verifiedById], references: [id])
+  completedAt  DateTime?
+  verifiedAt   DateTime?
+  verifiedBy   User?     @relation("ActionVerifier", fields: [verifiedById], references: [id])
   verifiedById String?
-  closingNote String?
+  closingNote  String?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -2276,9 +2278,9 @@ model InspectionReportVersion {
 
   result InspectionResult
 
-  generatedAt   DateTime @default(now())
-  generatedBy   User?    @relation("ReportGeneratedBy", fields: [generatedById], references: [id])
-  generatedById String?
+  generatedAt     DateTime @default(now())
+  generatedBy     User?    @relation("ReportGeneratedBy", fields: [generatedById], references: [id])
+  generatedById   String?
   supersedeReason String?
 
   @@unique([inspectionId, version])
@@ -2289,15 +2291,85 @@ model InspectionReportVersion {
 // "who moved this to completed, and when" answered from data rather
 // than inferred from timestamps.
 model InspectionStatusEvent {
-  id           String     @id @default(cuid())
-  inspection   Inspection @relation(fields: [inspectionId], references: [id], onDelete: Cascade)
+  id           String            @id @default(cuid())
+  inspection   Inspection        @relation(fields: [inspectionId], references: [id], onDelete: Cascade)
   inspectionId String
   fromStatus   InspectionStatus?
   toStatus     InspectionStatus
-  actor        User?      @relation("InspectionStatusActor", fields: [actorId], references: [id])
+  actor        User?             @relation("InspectionStatusActor", fields: [actorId], references: [id])
   actorId      String?
   note         String?
-  createdAt    DateTime   @default(now())
+  createdAt    DateTime          @default(now())
 
   @@index([inspectionId])
+}
+
+// ---------------------------------------------------------------------
+// Spring calculator
+// ---------------------------------------------------------------------
+
+enum SpringSystemType {
+  TORSION
+  EXTENSION
+}
+
+enum SpringCalcMethod {
+  DOOR_WEIGHT
+  EXISTING_SPRING
+  EXTENSION
+}
+
+// A saved spring calculation, optionally pinned to an asset.
+//
+// Deliberately stores the *inputs* alongside the result rather than the
+// result alone. A number on its own ages badly: six months later nobody
+// can tell whether 24.2 came from a weighed door or a guessed one. The
+// warnings are stored for the same reason — a result that was flagged at
+// the time should still look flagged when it is read back.
+model SpringCalculation {
+  id        String @id @default(cuid())
+  reference String @unique
+
+  // Who ran it. Kept even if the asset link is later cleared, because
+  // the audit question is "who calculated this", not "what was it for".
+  performedBy   User   @relation("SpringCalculations", fields: [performedById], references: [id], onDelete: Cascade)
+  performedById String
+
+  // Optional: the calculator is a public tool and most runs are not
+  // against a recorded asset. Saving to one is an extra a signed-in
+  // technician with an organisation can do.
+  asset     Asset?  @relation(fields: [assetId], references: [id], onDelete: SetNull)
+  assetId   String?
+  // Free text when there is no Asset row to point at.
+  doorLabel String?
+
+  springType SpringSystemType
+  method     SpringCalcMethod
+
+  // Inputs, stored in the calculator's internal units (pounds, inches)
+  // so a stored row means one thing regardless of which toggle the
+  // person was using when they typed it.
+  doorWeightLb     Float?
+  doorHeightIn     Float?
+  drumDiameterIn   Float?
+  wireDiameterIn   Float?
+  insideDiameterIn Float?
+  bodyLengthIn     Float?
+  springCount      Int
+  liftType         String?
+  preloadTurns     Float?
+
+  // Results.
+  ipptPerSpring   Float?
+  turns           Float?
+  pullPerSpringLb Float?
+  lifeYears       Float?
+
+  // Warning codes and messages as shown at the time.
+  warnings Json?
+
+  createdAt DateTime @default(now())
+
+  @@index([performedById])
+  @@index([assetId])
 }
