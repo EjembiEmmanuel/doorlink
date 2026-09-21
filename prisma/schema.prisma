@@ -1642,6 +1642,7 @@ model ManualSubmission {
   description  String?
   notes        String?
   sourceUrl    String?
+  version      String?
 
   originalFilename String?
   mimeType         String?
