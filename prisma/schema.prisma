@@ -1653,6 +1653,9 @@ model ManualSubmission {
   verificationResult ManualVerificationResult @default(NOT_RUN)
   verificationScore  Int?
   verificationNotes  String?
+  rights             DocumentRights           @default(LINK_ONLY)
+  rightsAcknowledged Boolean                  @default(false)
+  rightsNote         String?
   duplicateOf        Document?                @relation("ManualSubmissionDuplicate", fields: [duplicateOfId], references: [id])
   duplicateOfId      String?
   document           Document?                @relation("ManualSubmissionDocument", fields: [documentId], references: [id])
