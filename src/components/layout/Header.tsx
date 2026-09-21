@@ -19,6 +19,7 @@ const NAV_LINKS = [
   { href: '/configure', label: 'Design a door' },
   { href: '/find', label: 'Door systems' },
   { href: '/manuals/finder', label: 'Manuals' },
+  { href: '/tools', label: 'Tools' },
   { href: '/marketplace', label: 'Parts' },
   { href: '/compliance', label: 'Compliance' },
 ]
