@@ -48,6 +48,10 @@ export function SubmitManualForm() {
         </Field>
       </div>
 
+      <Field label="Version or revision" htmlFor="version" hint="Optional, exactly as printed on the document.">
+        <Input id="version" name="version" maxLength={80} />
+      </Field>
+
       <Field
         label="Public document link"
         htmlFor="sourceUrl"

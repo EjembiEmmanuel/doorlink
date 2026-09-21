@@ -88,6 +88,7 @@ export default async function ManualSubmissionDetailPage({ params }: PageProps) 
             <Detail label="Model or document code" value={submission.modelCode} />
             <Detail label="Product" value={submission.productName} />
             <Detail label="Product type" value={submission.productType} />
+            <Detail label="Version or revision" value={submission.version} />
             <Detail label="Filename" value={submission.originalFilename} />
             <Detail label="File type" value={submission.mimeType} />
           </dl>

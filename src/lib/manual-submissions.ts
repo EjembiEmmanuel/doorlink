@@ -11,6 +11,7 @@ export const manualSubmissionMetadataSchema = z.object({
   productName: z.string().trim().max(160).optional(),
   productType: z.string().trim().max(120).optional(),
   modelCode: z.string().trim().max(120).optional(),
+  version: z.string().trim().max(80).optional(),
   description: z.string().trim().max(1000).optional(),
   notes: z.string().trim().max(2000).optional(),
   sourceUrl: z.string().trim().optional(),
