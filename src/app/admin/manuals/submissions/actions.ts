@@ -79,7 +79,7 @@ export async function decideManualSubmissionAction(
               select: { id: true },
             })
           : null
-        const sourceKey = submission.sourceUrl ?? `submission:${submission.id}`
+        const sourceKey = `${submission.sourceUrl ?? 'submission'}:${submission.id}`
         const document = await tx.document.create({
           data: {
             slug: documentSlug(submission.title, sourceKey),
