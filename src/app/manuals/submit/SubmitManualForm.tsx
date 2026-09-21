@@ -14,7 +14,7 @@ export function SubmitManualForm() {
   const [state, formAction, isPending] = useActionState(submitManualAction, initialState)
 
   return (
-    <form action={formAction} className="flex flex-col gap-5">
+    <form action={formAction} encType="multipart/form-data" className="flex flex-col gap-5">
       <div className="grid gap-5 sm:grid-cols-2">
         <Field label="Document title" htmlFor="title">
           <Input id="title" name="title" required maxLength={160} placeholder="For example, BFT Deimos BT A user manual" />
@@ -39,12 +39,33 @@ export function SubmitManualForm() {
         </Field>
       </div>
 
+      <div className="grid gap-5 sm:grid-cols-2">
+        <Field label="Product name" htmlFor="productName" hint="Optional, if different from the model code.">
+          <Input id="productName" name="productName" maxLength={160} />
+        </Field>
+        <Field label="Product type" htmlFor="productType" hint="For example, sliding gate operator.">
+          <Input id="productType" name="productType" maxLength={120} />
+        </Field>
+      </div>
+
       <Field
         label="Public document link"
         htmlFor="sourceUrl"
-        hint="Link to a PDF or document page that reviewers can open without an account."
+        hint="Optional if you upload a file. Use a link reviewers can open without an account."
       >
-        <Input id="sourceUrl" name="sourceUrl" type="url" required placeholder="https://example.com/manual.pdf" />
+        <Input id="sourceUrl" name="sourceUrl" type="url" placeholder="https://example.com/manual.pdf" />
+      </Field>
+
+      <Field
+        label="Document file"
+        htmlFor="file"
+        hint="Optional if you provide a link. Uploads require connected document storage and are limited to 25 MB."
+      >
+        <Input id="file" name="file" type="file" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.webp" />
+      </Field>
+
+      <Field label="What should reviewers know?" htmlFor="description">
+        <Textarea id="description" name="description" rows={3} maxLength={1000} />
       </Field>
 
       <Field
@@ -55,6 +76,19 @@ export function SubmitManualForm() {
         <Textarea id="notes" name="notes" rows={5} maxLength={2000} />
       </Field>
 
+      <label className="flex items-start gap-3 rounded-md border border-line bg-rail p-4 text-sm text-graphite">
+        <input
+          type="checkbox"
+          name="rightsAcknowledged"
+          required
+          className="mt-0.5 h-4 w-4 accent-signal"
+        />
+        <span>
+          I have permission to share this document or link it for review, and I understand that approval
+          does not guarantee Doorlink will host a copy.
+        </span>
+      </label>
+
       {state.error && (
         <p role="alert" className="rounded-md border border-bad/30 bg-bad/5 p-3 text-sm text-bad">
           {state.error}
@@ -63,8 +97,7 @@ export function SubmitManualForm() {
 
       <div className="flex flex-col gap-3 rounded-lg border border-graphite bg-graphite p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
         <p className="max-w-prose text-sm text-paper/70">
-          Submissions are reviewed before they appear in the public library. A link is used here because
-          document storage uploads are not connected yet.
+          Submissions are checked and approved by an administrator before they appear in the public library.
         </p>
         <Button type="submit" size="lg" disabled={isPending}>
           {isPending ? 'Sending...' : 'Submit for review'}
